@@ -105,7 +105,7 @@ export function Footer() {
 
       {/* Deep-burgundy lower band */}
       <div className="bg-burgundy-900">
-        <div className="container-page flex flex-col gap-5 py-5 text-sm text-white/70">
+        <div className="container-page flex flex-col gap-5 pt-5 pb-24 text-sm text-white/70 lg:pb-5">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p>
               © {year} {siteConfig.brandName}. Tüm hakları saklıdır.
@@ -123,7 +123,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div className="flex justify-center border-t border-white/10 pt-5 md:justify-end">
+          <div className="flex justify-center border-t border-white/10 pt-5">
             <DevCredit />
           </div>
         </div>

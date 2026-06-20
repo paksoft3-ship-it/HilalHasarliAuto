@@ -1,49 +1,37 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { getService, serviceIconImage } from "@/config/services";
+import { services } from "@/config/services";
 import { routes } from "@/config/navigation";
 
+/**
+ * All vehicle services shown as badges (the current service excluded). Lets a
+ * visitor jump to any category from a service page.
+ */
 export function RelatedServices({
-  slugs,
-  title = "İlgili Hizmetler",
+  currentSlug,
+  title = "Diğer Araç Alım Hizmetleri",
 }: {
-  slugs: string[];
+  currentSlug?: string;
   title?: string;
 }) {
-  const items = slugs.map(getService).filter(Boolean);
+  const items = services.filter((s) => s.slug !== currentSlug);
   if (items.length === 0) return null;
 
   return (
     <Section tone="white">
       <SectionHeading title={title} align="left" />
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-6 flex flex-wrap gap-2.5">
         {items.map((s) => (
-          <Link
-            key={s!.slug}
-            href={routes.service(s!.slug)}
-            className="group flex items-center gap-4 rounded-[14px] border border-line bg-cream-50 p-4 transition-colors hover:border-burgundy-700"
-          >
-            <div className="relative h-14 w-24 shrink-0">
-              <Image
-                src={serviceIconImage(s!.slug)}
-                alt={s!.name}
-                fill
-                sizes="96px"
-                className="object-contain"
-              />
-            </div>
-            <div className="min-w-0">
-              <h3 className="truncate text-[15px] font-semibold text-ink">{s!.title}</h3>
-              <span className="mt-1 inline-flex items-center gap-1 text-[13px] font-semibold text-burgundy-700">
-                İncele
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-              </span>
-            </div>
-          </Link>
+          <li key={s.slug}>
+            <Link
+              href={routes.service(s.slug)}
+              className="inline-flex items-center rounded-full border border-line bg-cream-50 px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-burgundy-700 hover:text-burgundy-700"
+            >
+              {s.title}
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </Section>
   );
 }

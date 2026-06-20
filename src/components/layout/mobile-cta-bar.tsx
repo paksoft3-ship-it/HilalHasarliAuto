@@ -10,31 +10,31 @@ import { routes } from "@/config/navigation";
  */
 export function MobileCtaBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur pb-[env(safe-area-inset-bottom)] lg:hidden">
-      <div className="grid grid-cols-[1fr_1fr_1.4fr] gap-2 px-3 py-2.5">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_24px_rgba(22,27,31,0.12)] lg:hidden">
+      <div className="flex items-stretch gap-2 px-3 py-2.5">
         <a
           href={telLink()}
           data-track="phone_click"
-          className="flex h-12 items-center justify-center gap-1.5 rounded-[10px] bg-charcoal-950 text-sm font-semibold text-white"
+          aria-label="Ara"
+          className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-[12px] bg-charcoal-950 text-white"
         >
-          <Phone size={18} />
-          Ara
+          <Phone size={20} />
         </a>
         <a
           href={whatsappLink()}
           target="_blank"
           rel="noopener noreferrer"
           data-track="whatsapp_click"
-          className="flex h-12 items-center justify-center gap-1.5 rounded-[10px] bg-whatsapp text-sm font-semibold text-white"
+          className="flex h-12 flex-1 items-center justify-center gap-2 rounded-[12px] bg-whatsapp text-[15px] font-semibold text-white"
         >
-          <WhatsAppIcon size={18} />
+          <WhatsAppIcon size={20} />
           WhatsApp
         </a>
         <Link
           href={routes.getOffer}
-          className="flex h-12 items-center justify-center rounded-[10px] bg-burgundy-700 text-sm font-semibold text-white"
+          className="flex h-12 flex-[1.3] items-center justify-center rounded-[12px] bg-burgundy-700 text-[15px] font-bold text-white"
         >
-          Teklif Al
+          Hemen Teklif Al
         </Link>
       </div>
     </div>

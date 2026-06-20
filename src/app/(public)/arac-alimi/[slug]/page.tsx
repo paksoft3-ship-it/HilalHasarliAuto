@@ -190,7 +190,7 @@ export default async function ServicePage({
         </Section>
       )}
 
-      <RelatedServices slugs={content.related} />
+      <RelatedServices currentSlug={slug} />
 
       <QuoteSection
         source={`service:${slug}`}
