@@ -1,4 +1,4 @@
-# OTO NAKİT — Damaged-Vehicle Lead Platform
+# Hasarlı Araç Alan — Damaged-Vehicle Lead Platform
 
 Production-grade lead-generation + CRM/SEO/ads platform for a Turkish
 damaged-vehicle acquisition & broker business. Turkish public site, bilingual

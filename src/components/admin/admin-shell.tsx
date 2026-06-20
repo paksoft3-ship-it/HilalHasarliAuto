@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 import { logout } from "@/lib/auth/actions";
 import { setAdminLocale } from "@/lib/i18n/actions";
 import type { AdminLocale } from "@/lib/i18n/admin";
+import { siteConfig } from "@/config/site";
 
 const ICONS: Record<string, LucideIcon> = {
   dashboard: LayoutDashboard,
@@ -83,9 +84,9 @@ export function AdminShell({
     <div className="flex h-full flex-col">
       <div className="flex h-16 items-center gap-2.5 border-b border-white/10 px-5">
         <span className="grid h-8 w-8 place-items-center rounded-[8px] bg-burgundy-700 text-[13px] font-bold text-white">
-          ON
+          HA
         </span>
-        <span className="text-[15px] font-bold text-white">OTO NAKİT</span>
+        <span className="text-[15px] font-bold text-white">{siteConfig.brandName}</span>
         <span className="ml-1 rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-medium text-white/70">
           Yönetim
         </span>

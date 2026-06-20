@@ -58,8 +58,8 @@ async function main() {
   }
 
   console.log("→ Seeding super-admin user…");
-  const email = process.env.SEED_ADMIN_EMAIL ?? "admin@otonakit.local";
-  const password = process.env.SEED_ADMIN_PASSWORD ?? "OtoNakit!2026";
+  const email = process.env.SEED_ADMIN_EMAIL ?? "admin@hasarliaracalan.com";
+  const password = process.env.SEED_ADMIN_PASSWORD ?? "HasarliArac!2026";
   const passwordHash = await hashPassword(password);
   await db
     .insert(s.users)
@@ -80,10 +80,10 @@ async function main() {
   await db
     .insert(s.siteSettings)
     .values([
-      { key: "brand.name", value: "OTO NAKİT" },
+      { key: "brand.name", value: "Hasarlı Araç Alan" },
       { key: "brand.tagline", value: "Hasarlı Araç Alım Merkezi" },
       { key: "contact.phoneDisplay", value: "0850 302 16 16" },
-      { key: "contact.email", value: "info@example.com" },
+      { key: "contact.email", value: "info@hasarliaracalan.com" },
       { key: "contact.workingHours", value: "7/24 İletişim" },
     ])
     .onConflictDoNothing({ target: s.siteSettings.key });

@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# OTO NAKİT — Project guide
+# Hasarlı Araç Alan — Project guide
 
 Damaged-vehicle lead-generation + CRM/SEO/ads platform for Türkiye. Full spec
 lives in `design-source/CLAUDE_CODE_MASTER_PROMPT_DAMAGED_VEHICLE_PLATFORM.md`,
@@ -12,7 +12,7 @@ visual system in `design-source/design.md`, page prompts in
 - **Public site language: Turkish** (overrides the master prompt's English-launch
   note — explicit user instruction). Admin will be **bilingual TR + EN**.
   Keep architecture locale-ready.
-- **Brand: OTO NAKİT**, but never hardcode brand/contact — read from
+- **Brand: Hasarlı Araç Alan**, but never hardcode brand/contact — read from
   `src/config/site.ts` (env-backed, later DB-backed via `site_settings`).
 - Public routes use **Turkish slugs** (e.g. `/teklif-al`, `/arac-alimi/[slug]`).
 - Stack: **Next.js 16 (App Router, Turbopack), React 19, TS strict, Tailwind v4,

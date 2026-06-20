@@ -19,7 +19,7 @@ export default async function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
           <span className="grid h-12 w-12 place-items-center rounded-[12px] bg-burgundy-700 text-lg font-bold text-white">
-            ON
+            HA
           </span>
           <h1 className="mt-4 text-xl font-bold text-white">{t("login.title")}</h1>
           <p className="mt-1 text-sm text-white/55">{t("login.subtitle")}</p>

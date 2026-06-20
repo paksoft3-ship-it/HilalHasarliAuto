@@ -1,4 +1,4 @@
-# OTO NAKİT — Implementation Plan & Status
+# Hasarlı Araç Alan — Implementation Plan & Status
 
 Living document. Update after every phase. Source spec:
 `design-source/CLAUDE_CODE_MASTER_PROMPT_DAMAGED_VEHICLE_PLATFORM.md`.
@@ -6,7 +6,7 @@ Living document. Update after every phase. Source spec:
 ## Decisions
 - Public site **Turkish**; admin **TR+EN** (locale-ready). Build order:
   **public site first**, then CMS/SEO → CRM → comms → finance/ads → security → deploy.
-- Brand **OTO NAKİT**, configurable. Turkish public route slugs.
+- Brand **Hasarlı Araç Alan**, configurable. Turkish public route slugs.
 
 ## Asset inventory
 - `1.png` (root, moved to `design-source/`) = approved burgundy homepage mockup → source of truth.

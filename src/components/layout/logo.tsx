@@ -1,36 +1,36 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
-/** Text-based brand mark (design.md §14): Manrope semibold, compact mark. */
+/**
+ * Brand logo image. `surface` selects the matching artwork:
+ *  - "dark"  (charcoal header/footer) → dark-logo (light artwork on dark bg)
+ *  - "light" (cream/white surfaces)    → light-logo (dark artwork on light bg)
+ */
 export function Logo({
-  tone = "light",
+  surface = "dark",
   className,
 }: {
-  tone?: "light" | "dark";
+  surface?: "dark" | "light";
   className?: string;
 }) {
-  const textColor = tone === "light" ? "text-white" : "text-ink";
-  const subColor = tone === "light" ? "text-white/55" : "text-ink-muted";
+  const src = surface === "dark" ? "/images/logo/dark-logo.png" : "/images/logo/light-logo.png";
   return (
     <Link
       href="/"
       aria-label={`${siteConfig.brandName} ana sayfa`}
-      className={cn("group inline-flex items-center gap-2.5", className)}
+      className={cn("inline-flex items-center", className)}
     >
-      {/* Compact geometric mark — burgundy tile with gold corner accent */}
-      <span className="relative grid h-9 w-9 place-items-center rounded-[9px] bg-burgundy-700">
-        <span className="text-[15px] font-bold leading-none text-white">ON</span>
-        <span className="absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-gold-600" />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className={cn("text-[17px] font-bold tracking-tight", textColor)}>
-          {siteConfig.brandName}
-        </span>
-        <span className={cn("mt-1 text-[10px] font-medium tracking-wide", subColor)}>
-          {siteConfig.brandTagline}
-        </span>
-      </span>
+      <Image
+        src={src}
+        alt={siteConfig.brandName}
+        width={240}
+        height={60}
+        priority
+        sizes="(max-width: 768px) 150px, 190px"
+        className="h-8 w-auto md:h-9"
+      />
     </Link>
   );
 }

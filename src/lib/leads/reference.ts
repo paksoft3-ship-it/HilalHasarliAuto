@@ -1,8 +1,8 @@
 /**
  * Human-readable application reference, separate from the immutable DB id.
- * Format: ON-YYMMDD-XXXX (brand prefix · date · random base32).
+ * Format: HA-YYMMDD-XXXX (brand prefix · date · random base32).
  */
-export function generateReference(prefix = "ON"): string {
+export function generateReference(prefix = "HA"): string {
   const now = new Date();
   const yy = String(now.getFullYear()).slice(-2);
   const mm = String(now.getMonth() + 1).padStart(2, "0");

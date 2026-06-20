@@ -15,16 +15,16 @@ function env(key: string, fallback: string): string {
 }
 
 export const siteConfig = {
-  brandName: env("NEXT_PUBLIC_BRAND_NAME", "OTO NAKİT"),
+  brandName: env("NEXT_PUBLIC_BRAND_NAME", "Hasarlı Araç Alan"),
   brandTagline: "Hasarlı Araç Alım Merkezi",
-  domain: env("NEXT_PUBLIC_DOMAIN", "https://www.example.com"),
+  domain: env("NEXT_PUBLIC_DOMAIN", "https://hasarliaracalan.com"),
 
   // Contact — placeholders until confirmed. 0850 call number and WhatsApp
   // are intentionally separate settings (master prompt §2).
   phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "0850 302 16 16"),
   phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+908503021616"),
   whatsappE164: env("NEXT_PUBLIC_WHATSAPP_E164", "+905555555555"),
-  email: env("NEXT_PUBLIC_EMAIL", "info@example.com"),
+  email: env("NEXT_PUBLIC_EMAIL", "info@hasarliaracalan.com"),
   workingHours: env("NEXT_PUBLIC_WORKING_HOURS", "7/24 İletişim"),
 
   // Legal / company — shown only where real data exists.

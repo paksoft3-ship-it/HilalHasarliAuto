@@ -9,6 +9,7 @@ import {
   DEFAULT_DOCUMENTS,
 } from "@/config/service-content";
 import { routes } from "@/config/navigation";
+import { siteConfig } from "@/config/site";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -46,7 +47,7 @@ export async function generateMetadata({
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: `${service.title} | OTO NAKİT`,
+      title: `${service.title} | ${siteConfig.brandName}`,
       description,
       url,
       type: "website",

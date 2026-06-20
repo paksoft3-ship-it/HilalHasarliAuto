@@ -9,7 +9,7 @@ export default defineConfig({
   dialect: "postgresql",
   dbCredentials: {
     // Only used by push/migrate/studio; `generate` works offline.
-    url: process.env.DATABASE_URL ?? "postgresql://user:pass@localhost:5432/otonakit",
+    url: process.env.DATABASE_URL ?? "postgresql://user:pass@localhost:5432/hasarliaracalan",
   },
   verbose: true,
   strict: true,
