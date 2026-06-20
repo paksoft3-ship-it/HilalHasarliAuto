@@ -17,7 +17,9 @@ export async function createUser(formData: FormData): Promise<void> {
   const password = str(formData, "password");
   const roleId = str(formData, "roleId");
   const locale = str(formData, "locale") === "en" ? "en" : "tr";
-  if (!email || !name || password.length < 8) return;
+  if (!email || !name || password.length < 8 || !roleId) {
+    redirect(`/admin/users?error=${encodeURIComponent("Ad, e-posta, rol ve en az 8 karakterli şifre gerekli.")}`);
+  }
 
   const db = requireDb();
   const passwordHash = await hashPassword(password);
@@ -26,13 +28,14 @@ export async function createUser(formData: FormData): Promise<void> {
     .values({ email, name, passwordHash, locale })
     .onConflictDoNothing({ target: users.email })
     .returning({ id: users.id });
-  if (row && roleId) {
-    await db.insert(userRoles).values({ userId: row.id, roleId }).onConflictDoNothing();
+
+  if (!row) {
+    redirect(`/admin/users?error=${encodeURIComponent("Bu e-posta zaten kayıtlı.")}`);
   }
-  if (row) {
-    await db.insert(auditLogs).values({ actorUserId: actor.id, action: "user.create", entityType: "user", entityId: row.id });
-  }
-  redirect("/admin/users");
+  await db.insert(userRoles).values({ userId: row.id, roleId }).onConflictDoNothing();
+  await db.insert(auditLogs).values({ actorUserId: actor.id, action: "user.create", entityType: "user", entityId: row.id });
+  revalidatePath("/admin/users");
+  redirect(`/admin/users?ok=${encodeURIComponent("Kullanıcı oluşturuldu.")}`);
 }
 
 export async function toggleUser(formData: FormData): Promise<void> {

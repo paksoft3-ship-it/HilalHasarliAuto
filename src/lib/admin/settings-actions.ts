@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { sql } from "drizzle-orm";
 import { requireDb } from "@/db";
 import { siteSettings, auditLogs } from "@/db/schema";
@@ -24,4 +25,5 @@ export async function saveSiteSettings(formData: FormData): Promise<void> {
   }
   await db.insert(auditLogs).values({ actorUserId: actor.id, action: "settings.update", entityType: "site_settings" });
   revalidatePath("/admin/settings");
+  redirect(`/admin/settings?ok=${encodeURIComponent("Ayarlar kaydedildi.")}`);
 }

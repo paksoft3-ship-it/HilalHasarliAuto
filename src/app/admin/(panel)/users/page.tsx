@@ -3,13 +3,18 @@ import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
 import { getUsersWithRoles, listRoles } from "@/db/repo/admin-extra";
 import { createUser, toggleUser, setUserRole } from "@/lib/admin/user-actions";
-import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
 import { formatTrDate } from "@/lib/utils";
 
 const field = "h-10 rounded-md border border-line px-3 text-sm focus:border-burgundy-700 focus:outline-none";
 
-export default async function UsersPage() {
+export default async function UsersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ok?: string; error?: string }>;
+}) {
   await requirePermission("users.manage");
+  const sp = await searchParams;
   const locale = await getAdminLocale();
   const t = translator(locale);
 
@@ -22,6 +27,7 @@ export default async function UsersPage() {
   return (
     <>
       <PageTitle title={t("nav.users")} subtitle={`${users.length}`} />
+      <Flash ok={sp.ok} error={sp.error} />
 
       {/* New user */}
       <form action={createUser} className="mb-6 flex flex-wrap items-end gap-2 rounded-[14px] border border-line bg-white p-4">

@@ -1,4 +1,4 @@
-import { requireDb } from "@/db";
+import { requireDb, type Database } from "@/db";
 import {
   leads, vehicles, formSubmissions, leadNotes, attributionTouches, criticalEvents,
 } from "@/db/schema";
@@ -42,16 +42,19 @@ function touchValues(leadId: string, touchType: "first" | "last", t: Touch, sess
   };
 }
 
-/** Persist first/last attribution touches + the lead_created critical event. */
+/** Persist first/last attribution touches + the lead_created critical event.
+ *  Best-effort: the lead is already saved, so an attribution failure here must
+ *  never throw away the lead. */
 async function writeAttributionAndEvent(
-  tx: Parameters<Parameters<ReturnType<typeof requireDb>["transaction"]>[0]>[0],
+  db: Database,
   leadId: string,
   meta: RequestMeta,
 ) {
-  const a = meta.attribution;
-  if (a?.first) await tx.insert(attributionTouches).values(touchValues(leadId, "first", a.first, a.sessionId));
-  if (a?.last) await tx.insert(attributionTouches).values(touchValues(leadId, "last", a.last, a.sessionId));
-  await tx.insert(criticalEvents).values({
+  try {
+    const a = meta.attribution;
+    if (a?.first) await db.insert(attributionTouches).values(touchValues(leadId, "first", a.first, a.sessionId));
+    if (a?.last) await db.insert(attributionTouches).values(touchValues(leadId, "last", a.last, a.sessionId));
+    await db.insert(criticalEvents).values({
     name: "lead_created",
     leadId,
     dedupeId: meta.reference,
@@ -60,7 +63,10 @@ async function writeAttributionAndEvent(
     referrer: a?.last?.referrer,
     source: (a?.last ?? null) as Record<string, unknown> | null,
     payload: { source: meta.source ?? null },
-  });
+    });
+  } catch (err) {
+    console.error("[lead] attribution/event write failed", err instanceof Error ? err.message : err);
+  }
 }
 
 type Tri = "yes" | "no" | "unknown";
@@ -99,48 +105,46 @@ export async function persistQuickOffer(input: QuickOfferInput, meta: RequestMet
     photoCount: 0,
   });
 
-  return db.transaction(async (tx) => {
-    const [lead] = await tx
-      .insert(leads)
-      .values({
-        leadNumber: meta.reference,
-        source: "website_form",
-        fullName: input.fullName,
-        phone: input.phone,
-        phoneNormalized,
-        city: input.city,
-        score,
-        firstTouchAt: new Date(),
-      })
-      .returning({ id: leads.id });
+  const [lead] = await db
+    .insert(leads)
+    .values({
+      leadNumber: meta.reference,
+      source: "website_form",
+      fullName: input.fullName,
+      phone: input.phone,
+      phoneNormalized,
+      city: input.city,
+      score,
+      firstTouchAt: new Date(),
+    })
+    .returning({ id: leads.id });
 
-    await tx.insert(vehicles).values({
-      leadId: lead.id,
+  await db.insert(vehicles).values({
+    leadId: lead.id,
+    brand: input.brand,
+    model: input.model,
+    category: input.damage,
+  });
+
+  await db.insert(formSubmissions).values({
+    leadId: lead.id,
+    type: "quick_offer",
+    referenceNumber: meta.reference,
+    source: meta.source ?? input.source,
+    ip: meta.ip ?? undefined,
+    userAgent: meta.userAgent ?? undefined,
+    payload: {
+      fullName: input.fullName,
+      phone: input.phone,
       brand: input.brand,
       model: input.model,
-      category: input.damage,
-    });
-
-    await tx.insert(formSubmissions).values({
-      leadId: lead.id,
-      type: "quick_offer",
-      referenceNumber: meta.reference,
-      source: meta.source ?? input.source,
-      ip: meta.ip ?? undefined,
-      userAgent: meta.userAgent ?? undefined,
-      payload: {
-        fullName: input.fullName,
-        phone: input.phone,
-        brand: input.brand,
-        model: input.model,
-        damage: input.damage,
-        city: input.city,
-      },
-    });
-
-    await writeAttributionAndEvent(tx, lead.id, meta);
-    return lead.id;
+      damage: input.damage,
+      city: input.city,
+    },
   });
+
+  await writeAttributionAndEvent(db, lead.id, meta);
+  return lead.id;
 }
 
 /** Persist a full multi-step quote lead (lead + detailed vehicle + submission). */
@@ -155,63 +159,61 @@ export async function persistFullQuote(input: FullQuoteInput, meta: RequestMeta)
     photoCount,
   });
 
-  return db.transaction(async (tx) => {
-    const [lead] = await tx
-      .insert(leads)
-      .values({
-        leadNumber: meta.reference,
-        source: "website_form",
-        fullName: input.fullName,
-        phone: input.phone,
-        phoneNormalized,
-        email: input.email || null,
-        preferredContact: input.preferredContact,
-        city: input.city,
-        district: input.district || null,
-        score,
-        firstTouchAt: new Date(),
-      })
-      .returning({ id: leads.id });
+  const [lead] = await db
+    .insert(leads)
+    .values({
+      leadNumber: meta.reference,
+      source: "website_form",
+      fullName: input.fullName,
+      phone: input.phone,
+      phoneNormalized,
+      email: input.email || null,
+      preferredContact: input.preferredContact,
+      city: input.city,
+      district: input.district || null,
+      score,
+      firstTouchAt: new Date(),
+    })
+    .returning({ id: leads.id });
 
-    await tx.insert(vehicles).values({
-      leadId: lead.id,
+  await db.insert(vehicles).values({
+    leadId: lead.id,
+    brand: input.brand,
+    model: input.model,
+    year: toInt(input.year),
+    mileage: toInt(input.mileage),
+    fuel: input.fuel || null,
+    transmission: input.transmission || null,
+    category: input.category,
+    damageDescription: input.damageDescription,
+    running: tri(input.running),
+    starts: tri(input.starts),
+    registrationStatus: input.registrationStatus || null,
+    hasTowDoc: tri(input.hasTowDoc),
+    photoCount,
+  });
+
+  await db.insert(formSubmissions).values({
+    leadId: lead.id,
+    type: "full_quote",
+    referenceNumber: meta.reference,
+    source: meta.source ?? input.source,
+    ip: meta.ip ?? undefined,
+    userAgent: meta.userAgent ?? undefined,
+    payload: {
       brand: input.brand,
       model: input.model,
-      year: toInt(input.year),
-      mileage: toInt(input.mileage),
-      fuel: input.fuel || null,
-      transmission: input.transmission || null,
+      year: input.year,
       category: input.category,
-      damageDescription: input.damageDescription,
-      running: tri(input.running),
-      starts: tri(input.starts),
-      registrationStatus: input.registrationStatus || null,
-      hasTowDoc: tri(input.hasTowDoc),
+      running: input.running,
+      city: input.city,
+      district: input.district,
       photoCount,
-    });
-
-    await tx.insert(formSubmissions).values({
-      leadId: lead.id,
-      type: "full_quote",
-      referenceNumber: meta.reference,
-      source: meta.source ?? input.source,
-      ip: meta.ip ?? undefined,
-      userAgent: meta.userAgent ?? undefined,
-      payload: {
-        brand: input.brand,
-        model: input.model,
-        year: input.year,
-        category: input.category,
-        running: input.running,
-        city: input.city,
-        district: input.district,
-        photoCount,
-      },
-    });
-
-    await writeAttributionAndEvent(tx, lead.id, meta);
-    return lead.id;
+    },
   });
+
+  await writeAttributionAndEvent(db, lead.id, meta);
+  return lead.id;
 }
 
 interface ContactInput {
@@ -228,37 +230,35 @@ export async function persistContact(input: ContactInput, meta: RequestMeta) {
   const db = requireDb();
   const phoneNormalized = normalizePhone(input.phone);
 
-  return db.transaction(async (tx) => {
-    const [lead] = await tx
-      .insert(leads)
-      .values({
-        leadNumber: meta.reference,
-        source: "website_form",
-        fullName: input.fullName,
-        phone: input.phone,
-        phoneNormalized,
-        email: input.email || null,
-        preferredContact: input.preferredContact,
-        firstTouchAt: new Date(),
-      })
-      .returning({ id: leads.id });
+  const [lead] = await db
+    .insert(leads)
+    .values({
+      leadNumber: meta.reference,
+      source: "website_form",
+      fullName: input.fullName,
+      phone: input.phone,
+      phoneNormalized,
+      email: input.email || null,
+      preferredContact: input.preferredContact,
+      firstTouchAt: new Date(),
+    })
+    .returning({ id: leads.id });
 
-    await tx.insert(leadNotes).values({
-      leadId: lead.id,
-      body: `Konu: ${input.subject}\n\n${input.message}`,
-    });
-
-    await tx.insert(formSubmissions).values({
-      leadId: lead.id,
-      type: "contact",
-      referenceNumber: meta.reference,
-      source: meta.source,
-      ip: meta.ip ?? undefined,
-      userAgent: meta.userAgent ?? undefined,
-      payload: { subject: input.subject, preferredContact: input.preferredContact },
-    });
-
-    await writeAttributionAndEvent(tx, lead.id, meta);
-    return lead.id;
+  await db.insert(leadNotes).values({
+    leadId: lead.id,
+    body: `Konu: ${input.subject}\n\n${input.message}`,
   });
+
+  await db.insert(formSubmissions).values({
+    leadId: lead.id,
+    type: "contact",
+    referenceNumber: meta.reference,
+    source: meta.source,
+    ip: meta.ip ?? undefined,
+    userAgent: meta.userAgent ?? undefined,
+    payload: { subject: input.subject, preferredContact: input.preferredContact },
+  });
+
+  await writeAttributionAndEvent(db, lead.id, meta);
+  return lead.id;
 }

@@ -52,6 +52,23 @@ export function NotConfigured({ message }: { message: string }) {
   );
 }
 
+/** Success/error flash banner driven by ?ok= / ?error= query params. */
+export function Flash({ ok, error }: { ok?: string; error?: string }) {
+  if (!ok && !error) return null;
+  return (
+    <div
+      className={cn(
+        "mb-4 rounded-[12px] border px-4 py-3 text-sm font-medium",
+        error
+          ? "border-error/30 bg-error-surface text-error"
+          : "border-success/30 bg-success-surface text-success",
+      )}
+    >
+      {error ?? ok}
+    </div>
+  );
+}
+
 export function PageTitle({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="mb-6">

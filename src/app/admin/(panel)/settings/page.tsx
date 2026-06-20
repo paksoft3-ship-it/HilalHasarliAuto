@@ -4,7 +4,7 @@ import { getAdminLocale, translator } from "@/lib/i18n/admin";
 import { getSiteSettings, getIntegrations } from "@/db/repo/admin-extra";
 import { saveSiteSettings } from "@/lib/admin/settings-actions";
 import { SETTING_KEYS } from "@/lib/admin/settings-keys";
-import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
 
 const LABELS: Record<string, string> = {
   "brand.name": "Marka adı",
@@ -17,8 +17,13 @@ const LABELS: Record<string, string> = {
 
 const field = "h-10 w-full rounded-md border border-line px-3 text-sm focus:border-burgundy-700 focus:outline-none";
 
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ok?: string; error?: string }>;
+}) {
   await requirePermission("settings.manage");
+  const sp = await searchParams;
   const locale = await getAdminLocale();
   const t = translator(locale);
 
@@ -32,6 +37,7 @@ export default async function SettingsPage() {
   return (
     <>
       <PageTitle title={t("nav.settings")} />
+      <Flash ok={sp.ok} error={sp.error} />
       <p className="mb-5 text-xs text-ink-muted">{t("settings.note")}</p>
 
       <div className="grid gap-6 lg:grid-cols-2">
