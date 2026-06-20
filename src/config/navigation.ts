@@ -37,7 +37,6 @@ export const mainNav: NavItem[] = [
   { label: "Hangi Araçları Alıyoruz?", href: routes.vehiclesWeBuy },
   { label: "Nasıl Çalışır?", href: routes.howItWorks },
   { label: "Hakkımızda", href: routes.about },
-  { label: "Sık Sorulan Sorular", href: routes.faq },
   { label: "İletişim", href: routes.contact },
 ];
 

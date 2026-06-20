@@ -25,11 +25,11 @@ export function Logo({
       <Image
         src={src}
         alt={siteConfig.brandName}
-        width={240}
-        height={60}
+        width={318}
+        height={50}
         priority
-        sizes="(max-width: 768px) 150px, 190px"
-        className="h-8 w-auto md:h-9"
+        sizes="(max-width: 768px) 210px, 260px"
+        className="h-10 w-auto md:h-12"
       />
     </Link>
   );
