@@ -26,10 +26,11 @@ const NAV: { key: string; href: string; perm: PermissionCode }[] = [
 // Authenticated pages must always evaluate the session at request time.
 export const dynamic = "force-dynamic";
 
-// Modules implemented; others render as "coming soon".
+// All admin modules implemented.
 const IMPLEMENTED = new Set([
-  "dashboard", "leads", "funnel", "calls", "whatsapp",
-  "buyers", "deals", "finance", "adspend", "analytics", "content", "media",
+  "dashboard", "leads", "funnel", "calls", "whatsapp", "buyers", "offers",
+  "deals", "finance", "adspend", "analytics", "seo", "content", "media",
+  "users", "settings", "audit",
 ]);
 
 export default async function PanelLayout({
