@@ -3,13 +3,19 @@ import { isDbConfigured } from "@/db";
 import { requirePermission, can } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
 import { listMedia } from "@/db/repo/media";
-import { registerMedia } from "@/lib/admin/media-actions";
-import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { registerMedia, deleteMedia } from "@/lib/admin/media-actions";
+import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
+import { DeleteButton } from "@/components/admin/delete-button";
 
 const field = "h-10 rounded-md border border-line px-3 text-sm focus:border-burgundy-700 focus:outline-none";
 
-export default async function MediaPage() {
+export default async function MediaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ok?: string; error?: string }>;
+}) {
   const user = await requirePermission("media.read");
+  const sp = await searchParams;
   const locale = await getAdminLocale();
   const t = translator(locale);
 
@@ -23,6 +29,7 @@ export default async function MediaPage() {
   return (
     <>
       <PageTitle title={t("media.title")} subtitle={`${rows.length}`} />
+      <Flash ok={sp.ok} error={sp.error} />
 
       {canWrite && (
         <form action={registerMedia} className="mb-5 flex flex-wrap items-end gap-2 rounded-[14px] border border-line bg-white p-4">
@@ -47,9 +54,12 @@ export default async function MediaPage() {
               <div className="relative aspect-square bg-cream-100">
                 <Image src={m.url} alt={m.alt ?? ""} fill sizes="200px" className="object-cover" unoptimized />
               </div>
-              <div className="p-2">
-                <p className="truncate text-xs font-medium text-ink">{m.filename ?? m.url}</p>
-                {m.folder && <p className="text-[11px] text-ink-muted">{m.folder}</p>}
+              <div className="flex items-center justify-between gap-1 p-2">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-medium text-ink">{m.filename ?? m.url}</p>
+                  {m.folder && <p className="text-[11px] text-ink-muted">{m.folder}</p>}
+                </div>
+                {canWrite && <DeleteButton action={deleteMedia} id={m.id} confirmText="Bu medyayı silmek istediğinize emin misiniz?" />}
               </div>
             </div>
           ))}

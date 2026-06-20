@@ -2,8 +2,9 @@ import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
 import { getUsersWithRoles, listRoles } from "@/db/repo/admin-extra";
-import { createUser, toggleUser, setUserRole } from "@/lib/admin/user-actions";
+import { createUser, toggleUser, setUserRole, deleteUser } from "@/lib/admin/user-actions";
 import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
+import { DeleteButton } from "@/components/admin/delete-button";
 import { formatTrDate } from "@/lib/utils";
 
 const field = "h-10 rounded-md border border-line px-3 text-sm focus:border-burgundy-700 focus:outline-none";
@@ -82,14 +83,17 @@ export default async function UsersPage({
                   </span>
                 </td>
                 <td className="px-4 py-3 text-ink-muted">{u.lastLoginAt ? formatTrDate(u.lastLoginAt.toISOString()) : "—"}</td>
-                <td className="px-4 py-3 text-right">
-                  <form action={toggleUser}>
-                    <input type="hidden" name="id" value={u.id} />
-                    <input type="hidden" name="active" value={String(u.isActive)} />
-                    <button type="submit" className="text-xs font-medium text-ink-muted hover:text-burgundy-700">
-                      {u.isActive ? t("users.inactive") : t("users.active")}
-                    </button>
-                  </form>
+                <td className="px-4 py-3">
+                  <div className="flex items-center justify-end gap-3">
+                    <form action={toggleUser}>
+                      <input type="hidden" name="id" value={u.id} />
+                      <input type="hidden" name="active" value={String(u.isActive)} />
+                      <button type="submit" className="text-xs font-medium text-ink-muted hover:text-burgundy-700">
+                        {u.isActive ? t("users.inactive") : t("users.active")}
+                      </button>
+                    </form>
+                    <DeleteButton action={deleteUser} id={u.id} confirmText={`"${u.name}" kullanıcısını silmek istediğinize emin misiniz?`} />
+                  </div>
                 </td>
               </tr>
             ))}

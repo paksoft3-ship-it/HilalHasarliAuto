@@ -4,7 +4,9 @@ import { isDbConfigured } from "@/db";
 import { requirePermission, can } from "@/lib/auth/guard";
 import { getAdminLocale, translator, stageLabels } from "@/lib/i18n/admin";
 import { listLeads, type QuickView } from "@/db/repo/crm-queries";
-import { StageBadge, NotConfigured, PageTitle } from "@/components/admin/bits";
+import { StageBadge, NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
+import { DeleteButton } from "@/components/admin/delete-button";
+import { deleteLead } from "@/lib/admin/lead-actions";
 import { formatTrDate, cn } from "@/lib/utils";
 
 const VIEWS: QuickView[] = ["all", "mine", "unassigned", "high", "followup", "stale", "won", "lost"];
@@ -12,7 +14,7 @@ const VIEWS: QuickView[] = ["all", "mine", "unassigned", "high", "followup", "st
 export default async function LeadsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ stage?: string; q?: string; page?: string; view?: string }>;
+  searchParams: Promise<{ stage?: string; q?: string; page?: string; view?: string; ok?: string; error?: string }>;
 }) {
   const user = await requirePermission("leads.read");
   const sp = await searchParams;
@@ -39,6 +41,7 @@ export default async function LeadsPage({
 
   const stageOpts = Object.entries(stageLabels[locale]);
   const canExport = can(user, "export.data");
+  const canDelete = can(user, "leads.delete");
 
   const buildHref = (over: Record<string, string | undefined>) => {
     const params = new URLSearchParams();
@@ -61,6 +64,8 @@ export default async function LeadsPage({
           </a>
         )}
       </div>
+
+      <Flash ok={sp.ok} error={sp.error} />
 
       {/* Quick views */}
       <div className="mb-4 flex flex-wrap gap-2">
@@ -110,11 +115,12 @@ export default async function LeadsPage({
               <th className="px-4 py-3 font-semibold">{t("common.city")}</th>
               <th className="px-4 py-3 font-semibold">{t("leads.score")}</th>
               <th className="px-4 py-3 font-semibold">{t("common.created")}</th>
+              {canDelete && <th className="px-4 py-3"></th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
             {data.rows.length === 0 ? (
-              <tr><td colSpan={7} className="px-4 py-10 text-center text-ink-muted">{t("common.noResults")}</td></tr>
+              <tr><td colSpan={canDelete ? 8 : 7} className="px-4 py-10 text-center text-ink-muted">{t("common.noResults")}</td></tr>
             ) : (
               data.rows.map((l) => (
                 <tr key={l.id} className="hover:bg-cream-50">
@@ -130,6 +136,11 @@ export default async function LeadsPage({
                   <td className="px-4 py-3 text-ink-secondary">{l.city ?? "—"}</td>
                   <td className="px-4 py-3 text-ink-secondary">{l.score}</td>
                   <td className="px-4 py-3 text-ink-muted">{formatTrDate(l.createdAt.toISOString())}</td>
+                  {canDelete && (
+                    <td className="px-4 py-3 text-right">
+                      <DeleteButton action={deleteLead} id={l.id} confirmText={`"${l.fullName}" talebini silmek istediğinize emin misiniz?`} />
+                    </td>
+                  )}
                 </tr>
               ))
             )}

@@ -3,11 +3,18 @@ import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
 import { getOffersOverview } from "@/db/repo/admin-extra";
-import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { deleteBuyerOffer, deleteCustomerOffer } from "@/lib/admin/commerce-actions";
+import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
+import { DeleteButton } from "@/components/admin/delete-button";
 import { formatTRY, formatTrDate, cn } from "@/lib/utils";
 
-export default async function OffersPage() {
+export default async function OffersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ok?: string; error?: string }>;
+}) {
   await requirePermission("offers.read");
+  const sp = await searchParams;
   const locale = await getAdminLocale();
   const t = translator(locale);
 
@@ -20,6 +27,7 @@ export default async function OffersPage() {
   return (
     <>
       <PageTitle title={t("nav.offers")} />
+      <Flash ok={sp.ok} error={sp.error} />
 
       <h2 className="mb-3 text-sm font-bold text-ink">{t("offers.buyer")}</h2>
       <div className="mb-8 overflow-x-auto rounded-[14px] border border-line bg-white">
@@ -31,11 +39,12 @@ export default async function OffersPage() {
               <th className="px-4 py-3 text-right font-semibold">Tutar</th>
               <th className="px-4 py-3 font-semibold">Seçili</th>
               <th className="px-4 py-3 font-semibold">{t("common.created")}</th>
+              <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
             {buyerOffers.length === 0 ? (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-ink-muted">{t("common.noResults")}</td></tr>
+              <tr><td colSpan={6} className="px-4 py-8 text-center text-ink-muted">{t("common.noResults")}</td></tr>
             ) : buyerOffers.map((o) => (
               <tr key={o.id} className="hover:bg-cream-50">
                 <td className="px-4 py-3">
@@ -47,6 +56,7 @@ export default async function OffersPage() {
                   {o.selected && <span className="rounded-full bg-success-surface px-2 py-0.5 text-xs font-semibold text-success">Seçili</span>}
                 </td>
                 <td className="px-4 py-3 text-ink-muted">{formatTrDate(o.createdAt.toISOString())}</td>
+                <td className="px-4 py-3 text-right"><DeleteButton action={deleteBuyerOffer} id={o.id} confirmText="Bu alıcı teklifini silmek istediğinize emin misiniz?" /></td>
               </tr>
             ))}
           </tbody>
@@ -62,11 +72,12 @@ export default async function OffersPage() {
               <th className="px-4 py-3 text-right font-semibold">Tutar</th>
               <th className="px-4 py-3 font-semibold">{t("common.status")}</th>
               <th className="px-4 py-3 font-semibold">{t("common.created")}</th>
+              <th className="px-4 py-3"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
             {customerOffers.length === 0 ? (
-              <tr><td colSpan={4} className="px-4 py-8 text-center text-ink-muted">{t("common.noResults")}</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-ink-muted">{t("common.noResults")}</td></tr>
             ) : customerOffers.map((o) => (
               <tr key={o.id} className={cn("hover:bg-cream-50")}>
                 <td className="px-4 py-3">
@@ -75,6 +86,7 @@ export default async function OffersPage() {
                 <td className="px-4 py-3 text-right font-medium text-ink">{formatTRY(o.amount)}</td>
                 <td className="px-4 py-3 text-ink-secondary">{o.status}</td>
                 <td className="px-4 py-3 text-ink-muted">{formatTrDate(o.createdAt.toISOString())}</td>
+                <td className="px-4 py-3 text-right"><DeleteButton action={deleteCustomerOffer} id={o.id} confirmText="Bu müşteri teklifini silmek istediğinize emin misiniz?" /></td>
               </tr>
             ))}
           </tbody>

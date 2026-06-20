@@ -48,6 +48,17 @@ export async function toggleUser(formData: FormData): Promise<void> {
   revalidatePath("/admin/users");
 }
 
+export async function deleteUser(formData: FormData): Promise<void> {
+  const actor = await requirePermission("users.manage");
+  const id = str(formData, "id");
+  if (!id || id === actor.id) {
+    redirect(`/admin/users?error=${encodeURIComponent("Kendi hesabınızı silemezsiniz.")}`);
+  }
+  await requireDb().update(users).set({ deletedAt: new Date(), isActive: false, updatedAt: new Date() }).where(eq(users.id, id));
+  await requireDb().insert(auditLogs).values({ actorUserId: actor.id, action: "user.delete", entityType: "user", entityId: id });
+  redirect(`/admin/users?ok=${encodeURIComponent("Kullanıcı silindi.")}`);
+}
+
 export async function setUserRole(formData: FormData): Promise<void> {
   const actor = await requirePermission("users.manage");
   const userId = str(formData, "userId");

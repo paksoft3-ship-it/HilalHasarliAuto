@@ -117,3 +117,13 @@ export async function addContentComment(formData: FormData): Promise<void> {
   });
   revalidatePath(`/admin/content/${id}`);
 }
+
+export async function deleteContent(formData: FormData): Promise<void> {
+  const user = await requirePermission("content.write");
+  const id = str(formData, "id");
+  if (!id) return;
+  await requireDb().update(contentItems).set({ deletedAt: new Date(), updatedAt: new Date() }).where(eq(contentItems.id, id));
+  await requireDb().insert(auditLogs).values({ actorUserId: user.id, action: "content.delete", entityType: "content_item", entityId: id });
+  revalidatePath("/admin/content");
+  redirect(`/admin/content?ok=${encodeURIComponent("İçerik silindi.")}`);
+}

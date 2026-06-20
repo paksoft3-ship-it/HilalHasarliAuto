@@ -216,3 +216,49 @@ export async function addAdSpend(formData: FormData): Promise<void> {
   await audit(user.id, "adspend.add", "ad_spend", undefined, platform);
   revalidatePath("/admin/adspend");
 }
+
+// ---- Deletes ----
+export async function deleteBuyer(formData: FormData): Promise<void> {
+  const user = await requirePermission("buyers.write");
+  const id = str(formData, "id");
+  if (!id) return;
+  await requireDb().update(buyers).set({ deletedAt: new Date() }).where(eq(buyers.id, id));
+  await audit(user.id, "buyer.delete", "buyer", id);
+  revalidatePath("/admin/buyers");
+  redirect(`/admin/buyers?ok=${encodeURIComponent("Alıcı silindi.")}`);
+}
+
+export async function deleteBuyerOffer(formData: FormData): Promise<void> {
+  const user = await requirePermission("offers.write");
+  const id = str(formData, "id");
+  if (!id) return;
+  const [row] = await requireDb().select({ leadId: buyerOffers.leadId }).from(buyerOffers).where(eq(buyerOffers.id, id)).limit(1);
+  await requireDb().delete(buyerOffers).where(eq(buyerOffers.id, id));
+  await audit(user.id, "offer.buyer.delete", "buyer_offer", id);
+  if (row?.leadId) revalidatePath(`/admin/leads/${row.leadId}`);
+  revalidatePath("/admin/offers");
+  redirect(`/admin/offers?ok=${encodeURIComponent("Teklif silindi.")}`);
+}
+
+export async function deleteCustomerOffer(formData: FormData): Promise<void> {
+  const user = await requirePermission("offers.write");
+  const id = str(formData, "id");
+  if (!id) return;
+  const [row] = await requireDb().select({ leadId: customerOffers.leadId }).from(customerOffers).where(eq(customerOffers.id, id)).limit(1);
+  await requireDb().delete(customerOffers).where(eq(customerOffers.id, id));
+  await audit(user.id, "offer.customer.delete", "customer_offer", id);
+  if (row?.leadId) revalidatePath(`/admin/leads/${row.leadId}`);
+  revalidatePath("/admin/offers");
+  redirect(`/admin/offers?ok=${encodeURIComponent("Teklif silindi.")}`);
+}
+
+export async function deleteDeal(formData: FormData): Promise<void> {
+  const user = await requirePermission("deals.write");
+  const id = str(formData, "id");
+  if (!id) return;
+  await requireDb().delete(dealExpenses).where(eq(dealExpenses.dealId, id));
+  await requireDb().delete(deals).where(eq(deals.id, id));
+  await audit(user.id, "deal.delete", "deal", id);
+  revalidatePath("/admin/deals");
+  redirect(`/admin/deals?ok=${encodeURIComponent("Anlaşma silindi.")}`);
+}

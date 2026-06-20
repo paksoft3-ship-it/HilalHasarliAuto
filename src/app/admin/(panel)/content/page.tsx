@@ -4,7 +4,10 @@ import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator, contentStatusLabels, contentTypeLabels } from "@/lib/i18n/admin";
 import { listContent } from "@/db/repo/content";
-import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { deleteContent } from "@/lib/admin/content-actions";
+import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
+import { DeleteButton } from "@/components/admin/delete-button";
+import { can } from "@/lib/auth/guard";
 import { formatTrDate, cn } from "@/lib/utils";
 
 const STATUS_TONE: Record<string, string> = {
@@ -20,9 +23,9 @@ const STATUS_TONE: Record<string, string> = {
 export default async function ContentPage({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string; status?: string }>;
+  searchParams: Promise<{ type?: string; status?: string; ok?: string; error?: string }>;
 }) {
-  await requirePermission("content.read");
+  const user = await requirePermission("content.read");
   const sp = await searchParams;
   const locale = await getAdminLocale();
   const t = translator(locale);
@@ -32,6 +35,7 @@ export default async function ContentPage({
   }
 
   const rows = await listContent({ type: sp.type, status: sp.status });
+  const canWrite = can(user, "content.write");
 
   return (
     <>
@@ -41,6 +45,8 @@ export default async function ContentPage({
           <Plus size={16} /> {t("content.new")}
         </Link>
       </div>
+
+      <Flash ok={sp.ok} error={sp.error} />
 
       <div className="mb-4 flex flex-wrap gap-2">
         {["", "blog_post", "guide", "page", "service", "faq"].map((type) => (
@@ -65,11 +71,12 @@ export default async function ContentPage({
               <th className="px-4 py-3 font-semibold">{t("content.type")}</th>
               <th className="px-4 py-3 font-semibold">{t("common.status")}</th>
               <th className="px-4 py-3 font-semibold">{t("common.created")}</th>
+              {canWrite && <th className="px-4 py-3"></th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
             {rows.length === 0 ? (
-              <tr><td colSpan={4} className="px-4 py-10 text-center text-ink-muted">{t("common.noResults")}</td></tr>
+              <tr><td colSpan={canWrite ? 5 : 4} className="px-4 py-10 text-center text-ink-muted">{t("common.noResults")}</td></tr>
             ) : (
               rows.map((c) => (
                 <tr key={c.id} className="hover:bg-cream-50">
@@ -84,6 +91,11 @@ export default async function ContentPage({
                     </span>
                   </td>
                   <td className="px-4 py-3 text-ink-muted">{formatTrDate(c.updatedAt.toISOString())}</td>
+                  {canWrite && (
+                    <td className="px-4 py-3 text-right">
+                      <DeleteButton action={deleteContent} id={c.id} confirmText={`"${c.title}" içeriğini silmek istediğinize emin misiniz?`} />
+                    </td>
+                  )}
                 </tr>
               ))
             )}

@@ -4,11 +4,17 @@ import { isDbConfigured } from "@/db";
 import { requirePermission, can } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
 import { listBuyers } from "@/db/repo/commerce";
-import { toggleBuyer } from "@/lib/admin/commerce-actions";
-import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { toggleBuyer, deleteBuyer } from "@/lib/admin/commerce-actions";
+import { NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
+import { DeleteButton } from "@/components/admin/delete-button";
 
-export default async function BuyersPage() {
+export default async function BuyersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ ok?: string; error?: string }>;
+}) {
   const user = await requirePermission("buyers.read");
+  const sp = await searchParams;
   const locale = await getAdminLocale();
   const t = translator(locale);
 
@@ -29,6 +35,8 @@ export default async function BuyersPage() {
           </Link>
         )}
       </div>
+
+      <Flash ok={sp.ok} error={sp.error} />
 
       <div className="overflow-x-auto rounded-[14px] border border-line bg-white">
         <table className="w-full min-w-[720px] text-sm">
@@ -72,6 +80,7 @@ export default async function BuyersPage() {
                       <Link href={`/admin/buyers/${b.id}`} className="text-xs font-semibold text-burgundy-700 hover:underline">
                         {t("common.view")}
                       </Link>
+                      {canWrite && <DeleteButton action={deleteBuyer} id={b.id} confirmText={`"${b.name}" alıcısını silmek istediğinize emin misiniz?`} />}
                     </div>
                   </td>
                 </tr>

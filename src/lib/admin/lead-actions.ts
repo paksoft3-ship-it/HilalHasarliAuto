@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { requireDb } from "@/db";
 import {
@@ -27,6 +28,17 @@ function revalidateLead(leadId: string) {
   revalidatePath(`/admin/leads/${leadId}`);
   revalidatePath("/admin/leads");
   revalidatePath("/admin/funnel");
+}
+
+export async function deleteLead(formData: FormData): Promise<void> {
+  const user = await requirePermission("leads.delete");
+  const id = String(formData.get("id") ?? "").trim();
+  if (!id) return;
+  await requireDb().update(leads).set({ deletedAt: new Date(), updatedAt: new Date() }).where(eq(leads.id, id));
+  await requireDb().insert(auditLogs).values({ actorUserId: user.id, action: "lead.delete", entityType: "lead", entityId: id });
+  revalidatePath("/admin/leads");
+  revalidatePath("/admin/funnel");
+  redirect(`/admin/leads?ok=${encodeURIComponent("Talep silindi.")}`);
 }
 
 export async function changeLeadStage(formData: FormData): Promise<void> {
