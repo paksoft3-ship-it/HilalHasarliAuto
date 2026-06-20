@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { siteConfig } from "@/config/site";
+import { routes } from "@/config/navigation";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { CtaGroup } from "@/components/sections/cta-buttons";
 import { TrustStrip } from "@/components/sections/trust-strip";
@@ -14,6 +17,21 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { homepageFaqs } from "@/config/faq";
 import { organizationLd, websiteLd, faqPageLd } from "@/lib/seo/jsonld";
+
+const homeDescription =
+  "Hasarlı, kazalı, pert, ağır hasarlı, motor/mekanik arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçlarınız için Türkiye geneli ücretsiz ve hızlı değerlendirme. Fotoğraf gönderin, teklifinizi alın.";
+
+export const metadata: Metadata = {
+  title: { absolute: `${siteConfig.brandName} — Hasarlı, Kazalı ve Hurda Araç Alımı` },
+  description: homeDescription,
+  alternates: { canonical: routes.home },
+  openGraph: {
+    title: `${siteConfig.brandName} — Hasarlı, Kazalı ve Hurda Araç Alımı`,
+    description: homeDescription,
+    url: routes.home,
+    type: "website",
+  },
+};
 
 const heroTrust = [
   "Ücretsiz değerlendirme",

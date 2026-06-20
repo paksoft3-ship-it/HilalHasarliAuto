@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { getCity } from "@/config/cities";
 import { districts, getDistrict, districtsOfCity } from "@/config/districts";
+import { siteConfig } from "@/config/site";
+import { districtTitle, districtDescription, districtH1 } from "@/lib/seo/local-copy";
 import { featuredServices } from "@/config/services";
 import { routes } from "@/config/navigation";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -34,10 +36,14 @@ export async function generateMetadata({
   const city = getCity(citySlug);
   const district = getDistrict(citySlug, districtSlug);
   if (!city || !district) return {};
+  const title = districtTitle(district, city.name);
+  const description = districtDescription(district, city.name);
+  const url = routes.district(citySlug, districtSlug);
   return {
-    title: `${district.name} Hasarlı Araç Alımı (${city.name})`,
-    description: `${city.name} ${district.name} bölgesinde hasarlı, kazalı ve çalışmayan araçlar için değerlendirme talebi oluşturun.`,
-    alternates: { canonical: routes.district(citySlug, districtSlug) },
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },
   };
 }
 
@@ -73,11 +79,10 @@ export default async function DistrictPage({
           <div className="lg:col-span-7">
             <p className="eyebrow mb-4">{district.name} Araç Alım Hizmeti</p>
             <h1 className="text-[28px] font-bold leading-[1.12] text-ink md:text-[38px]">
-              {district.name}’de Hasarlı ve Çalışmayan Araçlar İçin Teklif Alın
+              {districtH1(district)}
             </h1>
             <p className="mt-5 max-w-[560px] text-[16px] leading-relaxed text-ink-secondary md:text-[18px]">
-              {city.name} {district.name} ve çevresindeki araçlar için
-              değerlendirme talebi oluşturabilirsiniz. Süreç konuma göre planlanır.
+              {districtDescription(district, city.name)}
             </p>
           </div>
           <div className="lg:col-span-5">

@@ -7,7 +7,9 @@ import { publishedCities, getCity, featuredCities } from "@/config/cities";
 import { districtsOfCity } from "@/config/districts";
 import { services, serviceIconImage } from "@/config/services";
 import { routes } from "@/config/navigation";
+import { siteConfig } from "@/config/site";
 import { DEFAULT_EVALUATED } from "@/config/service-content";
+import { cityTitle, cityDescription, cityH1, cityIntro } from "@/lib/seo/local-copy";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -35,10 +37,14 @@ export async function generateMetadata({
   const { citySlug } = await params;
   const city = getCity(citySlug);
   if (!city) return {};
+  const title = cityTitle(city);
+  const description = cityDescription(city, districtsOfCity(citySlug).map((d) => d.name));
+  const url = routes.city(citySlug);
   return {
-    title: `${city.name} Hasarlı Araç Alımı`,
-    description: `${city.locative} hasarlı, kazalı, arızalı ve çalışmayan araçlar için değerlendirme talebi oluşturun. Konum ve araç durumuna göre süreç planlanır.`,
-    alternates: { canonical: routes.city(citySlug) },
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },
   };
 }
 
@@ -72,8 +78,8 @@ export default async function CityPage({
       <PageHero
         image="/images/heroes/5.png"
         eyebrow={`${city.name} Geneli Araç Alım Hizmeti`}
-        title={`${city.locative} Hasarlı ve Çalışmayan Araçlar İçin Teklif Alın`}
-        description={`${city.name} ve çevresindeki araçlar için değerlendirme talebi oluşturabilirsiniz. Konum ve araç durumuna göre hizmet planlaması yapılır.`}
+        title={cityH1(city)}
+        description={cityIntro(city)}
       >
         <CtaGroup
           whatsappMessage={`Merhaba, ${city.locative} bir aracım var, değerlendirme talep etmek istiyorum.`}

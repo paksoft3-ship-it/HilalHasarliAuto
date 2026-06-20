@@ -20,6 +20,13 @@ export const metadata: Metadata = {
     "Hasarlı, kazalı, pert, arızalı, yanmış, sel hasarlı ve hurda araçlarınız için Türkiye geneli hızlı ve güvenilir değerlendirme.",
   applicationName: siteConfig.brandName,
   formatDetection: { telephone: true },
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    siteName: siteConfig.brandName,
+    url: siteConfig.domain,
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
