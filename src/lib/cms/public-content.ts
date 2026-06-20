@@ -30,19 +30,29 @@ function mapItem(item: DbItem): BlogPost {
   };
 }
 
-/** Published blog posts from the CMS, merged with config seeds (DB wins). */
+/** Published blog posts from the CMS, merged with config seeds (DB wins).
+ *  Falls back to seeds if the DB is unreachable / not migrated (build-safe). */
 export async function getPublicBlogPosts(): Promise<BlogPost[]> {
   if (!isDbConfigured) return seedPosts;
-  const dbPosts = (await listPublishedByType("blog_post")).map((i) => mapItem(i as DbItem));
-  const dbSlugs = new Set(dbPosts.map((p) => p.slug));
-  const merged = [...dbPosts, ...seedPosts.filter((p) => !dbSlugs.has(p.slug))];
-  return merged.sort((a, b) => b.date.localeCompare(a.date));
+  try {
+    const dbPosts = (await listPublishedByType("blog_post")).map((i) => mapItem(i as DbItem));
+    const dbSlugs = new Set(dbPosts.map((p) => p.slug));
+    const merged = [...dbPosts, ...seedPosts.filter((p) => !dbSlugs.has(p.slug))];
+    return merged.sort((a, b) => b.date.localeCompare(a.date));
+  } catch (err) {
+    console.error("[blog] DB read failed, falling back to seeds:", err instanceof Error ? err.message : err);
+    return seedPosts;
+  }
 }
 
 export async function getPublicBlogPost(slug: string): Promise<BlogPost | undefined> {
   if (isDbConfigured) {
-    const item = await getPublishedByTypeSlug("blog_post", slug);
-    if (item) return mapItem(item as DbItem);
+    try {
+      const item = await getPublishedByTypeSlug("blog_post", slug);
+      if (item) return mapItem(item as DbItem);
+    } catch (err) {
+      console.error("[blog] DB read failed, falling back to seeds:", err instanceof Error ? err.message : err);
+    }
   }
   return getSeedPost(slug);
 }
