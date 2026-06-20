@@ -1,15 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { services } from "@/config/services";
+import { services, serviceIconImage } from "@/config/services";
 import { routes } from "@/config/navigation";
 
 /**
- * All vehicle services shown as badges (the current service excluded). Lets a
- * visitor jump to any category from a service page.
+ * All vehicle services as cards (the current service excluded). Same card
+ * design as before — just shows every option.
  */
 export function RelatedServices({
   currentSlug,
-  title = "Diğer Araç Alım Hizmetleri",
+  title = "İlgili Hizmetler",
 }: {
   currentSlug?: string;
   title?: string;
@@ -20,18 +22,32 @@ export function RelatedServices({
   return (
     <Section tone="white">
       <SectionHeading title={title} align="left" />
-      <ul className="mt-6 flex flex-wrap gap-2.5">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((s) => (
-          <li key={s.slug}>
-            <Link
-              href={routes.service(s.slug)}
-              className="inline-flex items-center rounded-full border border-line bg-cream-50 px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-burgundy-700 hover:text-burgundy-700"
-            >
-              {s.title}
-            </Link>
-          </li>
+          <Link
+            key={s.slug}
+            href={routes.service(s.slug)}
+            className="group flex items-center gap-4 rounded-[14px] border border-line bg-cream-50 p-4 transition-colors hover:border-burgundy-700"
+          >
+            <div className="relative h-14 w-24 shrink-0">
+              <Image
+                src={serviceIconImage(s.slug)}
+                alt={s.name}
+                fill
+                sizes="96px"
+                className="object-contain"
+              />
+            </div>
+            <div className="min-w-0">
+              <h3 className="truncate text-[15px] font-semibold text-ink">{s.title}</h3>
+              <span className="mt-1 inline-flex items-center gap-1 text-[13px] font-semibold text-burgundy-700">
+                İncele
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </Section>
   );
 }
