@@ -1,19 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { telLink, whatsappLink } from "@/config/site";
 import { routes } from "@/config/navigation";
+import { useSettings } from "@/components/providers/settings-provider";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 
 /**
  * Mobile sticky action bar (design.md §20). Priority: Teklif Al (burgundy,
  * largest) · WhatsApp (green) · Ara (charcoal). Hidden on lg+.
  */
 export function MobileCtaBar() {
+  const settings = useSettings();
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_24px_rgba(22,27,31,0.12)] lg:hidden">
       <div className="flex items-stretch gap-2 px-3 py-2.5">
         <a
-          href={telLink()}
+          href={telHref(settings)}
           data-track="phone_click"
           aria-label="Ara"
           className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-[12px] bg-charcoal-950 text-white"
@@ -21,7 +25,7 @@ export function MobileCtaBar() {
           <Phone size={20} />
         </a>
         <a
-          href={whatsappLink()}
+          href={whatsappHref(settings)}
           target="_blank"
           rel="noopener noreferrer"
           data-track="whatsapp_click"

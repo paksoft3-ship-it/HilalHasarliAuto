@@ -1,14 +1,15 @@
-import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { whatsappLink } from "@/config/site";
+"use client";
 
-/**
- * Floating WhatsApp action. Sits above the mobile sticky bar
- * (bottom offset accounts for the 64px bar + safe area on small screens).
- */
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { useSettings } from "@/components/providers/settings-provider";
+import { whatsappHref } from "@/lib/settings/shared";
+
+/** Floating WhatsApp action (desktop only — mobile uses the sticky bar). */
 export function FloatingWhatsApp() {
+  const settings = useSettings();
   return (
     <a
-      href={whatsappLink()}
+      href={whatsappHref(settings)}
       target="_blank"
       rel="noopener noreferrer"
       data-track="whatsapp_click"

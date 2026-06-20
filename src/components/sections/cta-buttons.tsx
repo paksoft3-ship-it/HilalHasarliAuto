@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { buttonClasses } from "@/components/ui/button";
 import { routes } from "@/config/navigation";
-import { whatsappLink, telLink, siteConfig } from "@/config/site";
+import { useSettings } from "@/components/providers/settings-provider";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { cn } from "@/lib/utils";
 
 /**
@@ -21,13 +24,14 @@ export function CtaGroup({
   whatsappMessage?: string;
   className?: string;
 }) {
+  const settings = useSettings();
   return (
     <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", className)}>
       <Link href={routes.getOffer} className={buttonClasses({ variant: "primary", size })}>
         Hemen Teklif Al
       </Link>
       <a
-        href={whatsappLink(whatsappMessage)}
+        href={whatsappHref(settings, whatsappMessage)}
         target="_blank"
         rel="noopener noreferrer"
         data-track="whatsapp_click"
@@ -37,9 +41,9 @@ export function CtaGroup({
         WhatsApp’tan Fotoğraf Gönder
       </a>
       {showPhone && (
-        <a href={telLink()} data-track="phone_click" className={buttonClasses({ variant: "dark", size })}>
+        <a href={telHref(settings)} data-track="phone_click" className={buttonClasses({ variant: "dark", size })}>
           <Phone size={18} />
-          {siteConfig.phoneDisplay}
+          {settings.phoneDisplay}
         </a>
       )}
     </div>

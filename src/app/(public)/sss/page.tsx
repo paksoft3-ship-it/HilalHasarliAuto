@@ -4,7 +4,8 @@ import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { routes } from "@/config/navigation";
 import { faqCategories } from "@/config/faq";
-import { siteConfig, telLink, whatsappLink } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings/server";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { Section } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -23,7 +24,8 @@ export const metadata: Metadata = {
 
 const allFaqs = faqCategories.flatMap((c) => c.items);
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const settings = await getPublicSettings();
   return (
     <>
       <Breadcrumb items={[{ label: "Sık Sorulan Sorular", href: routes.faq }]} />
@@ -49,7 +51,7 @@ export default function FaqPage() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href={whatsappLink()}
+              href={whatsappHref(settings)}
               target="_blank"
               rel="noopener noreferrer"
               className={buttonClasses({ variant: "whatsapp" })}
@@ -57,9 +59,9 @@ export default function FaqPage() {
               <WhatsAppIcon size={18} />
               WhatsApp’tan Yazın
             </a>
-            <a href={telLink()} className={buttonClasses({ variant: "dark" })}>
+            <a href={telHref(settings)} className={buttonClasses({ variant: "dark" })}>
               <Phone size={18} />
-              {siteConfig.phoneDisplay}
+              {settings.phoneDisplay}
             </a>
             <Link href={routes.contact} className={buttonClasses({ variant: "outline" })}>
               İletişim Sayfası

@@ -5,15 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { siteConfig, telLink } from "@/config/site";
 import { mainNav, routes } from "@/config/navigation";
 import { buttonClasses } from "@/components/ui/button";
+import { useSettings } from "@/components/providers/settings-provider";
+import { telHref } from "@/lib/settings/shared";
 import { Logo } from "./logo";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const settings = useSettings();
+  const tel = telHref(settings);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -34,7 +37,7 @@ export function Header() {
       )}
     >
       <div className="container-page flex h-16 items-center justify-between md:h-20">
-        <Logo />
+        <Logo brandName={settings.brandName} />
 
         {/* Desktop nav */}
         <nav aria-label="Ana menü" className="hidden items-center gap-1 lg:flex">
@@ -62,7 +65,7 @@ export function Header() {
         {/* Desktop right: phone + CTA */}
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href={telLink()}
+            href={tel}
             data-track="phone_click"
             className="flex items-center gap-2.5 rounded-md px-2 py-1 transition-colors hover:bg-white/5"
           >
@@ -70,9 +73,9 @@ export function Header() {
               <Phone size={18} strokeWidth={2} />
             </span>
             <span className="flex flex-col leading-tight">
-              <span className="text-[15px] font-bold">{siteConfig.phoneDisplay}</span>
+              <span className="text-[15px] font-bold">{settings.phoneDisplay}</span>
               <span className="text-[11px] font-medium text-white/55">
-                {siteConfig.workingHours}
+                {settings.workingHours}
               </span>
             </span>
           </a>
@@ -84,7 +87,7 @@ export function Header() {
         {/* Mobile right: phone icon + menu */}
         <div className="flex items-center gap-1 lg:hidden">
           <a
-            href={telLink()}
+            href={tel}
             data-track="phone_click"
             aria-label="Bizi arayın"
             className="grid h-11 w-11 place-items-center rounded-full text-white hover:bg-white/8"

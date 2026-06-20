@@ -4,6 +4,8 @@ export const SETTING_KEYS = [
   "brand.name",
   "brand.tagline",
   "contact.phoneDisplay",
+  "contact.phoneE164",
+  "contact.whatsappE164",
   "contact.email",
   "contact.workingHours",
   "contact.address",

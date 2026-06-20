@@ -25,5 +25,6 @@ export async function saveSiteSettings(formData: FormData): Promise<void> {
   }
   await db.insert(auditLogs).values({ actorUserId: actor.id, action: "settings.update", entityType: "site_settings" });
   revalidatePath("/admin/settings");
+  revalidatePath("/", "layout"); // refresh public header/footer/contact across the site
   redirect(`/admin/settings?ok=${encodeURIComponent("Ayarlar kaydedildi.")}`);
 }

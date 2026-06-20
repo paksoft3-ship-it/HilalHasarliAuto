@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { ShieldCheck, Lock, MapPin, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { routes } from "@/config/navigation";
-import { siteConfig, telLink, whatsappLink } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings/server";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { Section } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -22,7 +23,8 @@ const trust = [
   { icon: MapPin, text: "Türkiye geneli başvuru kabul edilir" },
 ];
 
-export default function GetOfferPage() {
+export default async function GetOfferPage() {
+  const settings = await getPublicSettings();
   return (
     <>
       <Breadcrumb items={[{ label: "Teklif Al", href: routes.getOffer }]} />
@@ -65,11 +67,11 @@ export default function GetOfferPage() {
                   Formu doldurmadan da bize ulaşabilirsiniz.
                 </p>
                 <div className="mt-4 flex flex-col gap-3">
-                  <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={buttonClasses({ variant: "whatsapp", fullWidth: true })}>
+                  <a href={whatsappHref(settings)} target="_blank" rel="noopener noreferrer" className={buttonClasses({ variant: "whatsapp", fullWidth: true })}>
                     <WhatsAppIcon size={18} /> WhatsApp’tan Yazın
                   </a>
-                  <a href={telLink()} className={buttonClasses({ variant: "outline", fullWidth: true })}>
-                    <Phone size={18} /> {siteConfig.phoneDisplay}
+                  <a href={telHref(settings)} className={buttonClasses({ variant: "outline", fullWidth: true })}>
+                    <Phone size={18} /> {settings.phoneDisplay}
                   </a>
                 </div>
               </div>

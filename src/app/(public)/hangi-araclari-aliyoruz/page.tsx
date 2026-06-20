@@ -5,7 +5,8 @@ import { ArrowRight, HelpCircle } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { services, serviceIconImage } from "@/config/services";
 import { routes } from "@/config/navigation";
-import { whatsappLink } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings/server";
+import { whatsappHref } from "@/lib/settings/shared";
 import { DEFAULT_EVALUATED } from "@/config/service-content";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -24,7 +25,8 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.vehiclesWeBuy },
 };
 
-export default function VehiclesWeBuyPage() {
+export default async function VehiclesWeBuyPage() {
+  const settings = await getPublicSettings();
   return (
     <>
       <Breadcrumb items={[{ label: "Hangi Araçları Alıyoruz?", href: routes.vehiclesWeBuy }]} />
@@ -101,7 +103,7 @@ export default function VehiclesWeBuyPage() {
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <a
-              href={whatsappLink("Merhaba, aracımın durumu için yardım almak istiyorum.")}
+              href={whatsappHref(settings, "Merhaba, aracımın durumu için yardım almak istiyorum.")}
               target="_blank"
               rel="noopener noreferrer"
               className={buttonClasses({ variant: "whatsapp" })}

@@ -11,20 +11,22 @@ import { siteConfig } from "@/config/site";
 export function Logo({
   surface = "dark",
   className,
+  brandName = siteConfig.brandName,
 }: {
   surface?: "dark" | "light";
   className?: string;
+  brandName?: string;
 }) {
   const src = surface === "dark" ? "/images/logo/dark-logo.png" : "/images/logo/light-logo.png";
   return (
     <Link
       href="/"
-      aria-label={`${siteConfig.brandName} ana sayfa`}
+      aria-label={`${brandName} ana sayfa`}
       className={cn("inline-flex items-center", className)}
     >
       <Image
         src={src}
-        alt={siteConfig.brandName}
+        alt={brandName}
         width={318}
         height={50}
         priority

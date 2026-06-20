@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Phone, Mail, Clock } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { siteConfig, telLink, whatsappLink } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings/server";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { footerNav, routes } from "@/config/navigation";
 import { featuredServices } from "@/config/services";
 import { featuredCities } from "@/config/cities";
@@ -33,26 +34,27 @@ function FLink({ href, children }: { href: string; children: React.ReactNode }) 
   );
 }
 
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
+  const settings = await getPublicSettings();
   return (
     <footer className="bg-charcoal-950 text-white">
       <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
         {/* Brand */}
         <div className="lg:col-span-4">
-          <Logo />
+          <Logo brandName={settings.brandName} />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
             Hasarlı, kazalı, pert, arızalı, yanmış, sel hasarlı ve hurda
             araçlarınızı bulunduğunuz yerden değerlendiriyor; güvenli ve şeffaf
             bir süreç sunuyoruz.
           </p>
           <div className="mt-6 space-y-3 text-sm">
-            <a href={telLink()} className="flex items-center gap-3 text-white/80 hover:text-white">
+            <a href={telHref(settings)} className="flex items-center gap-3 text-white/80 hover:text-white">
               <Phone size={18} className="text-gold-600" />
-              {siteConfig.phoneDisplay}
+              {settings.phoneDisplay}
             </a>
             <a
-              href={whatsappLink()}
+              href={whatsappHref(settings)}
               className="flex items-center gap-3 text-white/80 hover:text-white"
               target="_blank"
               rel="noopener noreferrer"
@@ -60,13 +62,13 @@ export function Footer() {
               <WhatsAppIcon size={18} className="text-whatsapp" />
               WhatsApp ile yazın
             </a>
-            <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-3 text-white/80 hover:text-white">
+            <a href={`mailto:${settings.email}`} className="flex items-center gap-3 text-white/80 hover:text-white">
               <Mail size={18} className="text-gold-600" />
-              {siteConfig.email}
+              {settings.email}
             </a>
             <p className="flex items-center gap-3 text-white/60">
               <Clock size={18} className="text-gold-600" />
-              {siteConfig.workingHours}
+              {settings.workingHours}
             </p>
           </div>
         </div>
@@ -108,7 +110,7 @@ export function Footer() {
         <div className="container-page flex flex-col gap-5 pt-5 pb-24 text-sm text-white/70 lg:pb-5">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p>
-              © {year} {siteConfig.brandName}. Tüm hakları saklıdır.
+              © {year} {settings.brandName}. Tüm hakları saklıdır.
             </p>
             <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
               {footerNav.legal.map((l) => (

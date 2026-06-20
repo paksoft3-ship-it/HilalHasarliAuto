@@ -5,7 +5,8 @@ import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { Section } from "@/components/ui/section";
 import { buttonClasses } from "@/components/ui/button";
 import { routes } from "@/config/navigation";
-import { siteConfig, telLink, whatsappLink } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings/server";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 
 // Thank-you pages must not be indexed (master prompt §10 sitemap exclusions).
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default async function ThankYouPage({
   searchParams: Promise<{ ref?: string }>;
 }) {
   const { ref } = await searchParams;
+  const settings = await getPublicSettings();
 
   return (
     <Section tone="cream" className="min-h-[60vh]">
@@ -66,7 +68,8 @@ export default async function ThankYouPage({
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <a
-            href={whatsappLink(
+            href={whatsappHref(
+              settings,
               ref
                 ? `Merhaba, ${ref} numaralı başvurum hakkında bilgi vermek istiyorum.`
                 : undefined,
@@ -78,9 +81,9 @@ export default async function ThankYouPage({
             <WhatsAppIcon size={18} />
             WhatsApp’tan Yazın
           </a>
-          <a href={telLink()} className={buttonClasses({ variant: "dark" })}>
+          <a href={telHref(settings)} className={buttonClasses({ variant: "dark" })}>
             <Phone size={18} />
-            {siteConfig.phoneDisplay}
+            {settings.phoneDisplay}
           </a>
           <Link href={routes.home} className={buttonClasses({ variant: "outline" })}>
             <Home size={18} />

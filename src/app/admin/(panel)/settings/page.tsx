@@ -10,6 +10,8 @@ const LABELS: Record<string, string> = {
   "brand.name": "Marka adı",
   "brand.tagline": "Slogan",
   "contact.phoneDisplay": "Telefon (görünen)",
+  "contact.phoneE164": "Telefon (arama no, +90…)",
+  "contact.whatsappE164": "WhatsApp no (+90…)",
   "contact.email": "E-posta",
   "contact.workingHours": "Çalışma saatleri",
   "contact.address": "Adres",

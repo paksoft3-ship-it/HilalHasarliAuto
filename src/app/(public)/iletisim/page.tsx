@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Phone, Mail, Clock, ShieldAlert } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { routes } from "@/config/navigation";
-import { siteConfig, telLink, whatsappLink } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings/server";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
   alternates: { canonical: routes.contact },
 };
 
-const methods = [
-  { icon: Phone, label: "Telefon", value: siteConfig.phoneDisplay, href: telLink(), tone: "text-burgundy-700" },
-  { icon: WhatsAppIcon, label: "WhatsApp", value: "Fotoğraf gönderin", href: whatsappLink(), tone: "text-whatsapp", external: true },
-  { icon: Mail, label: "E-posta", value: siteConfig.email, href: `mailto:${siteConfig.email}`, tone: "text-burgundy-700" },
-];
-
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings = await getPublicSettings();
+  const methods = [
+    { icon: Phone, label: "Telefon", value: settings.phoneDisplay, href: telHref(settings), tone: "text-burgundy-700" },
+    { icon: WhatsAppIcon, label: "WhatsApp", value: "Fotoğraf gönderin", href: whatsappHref(settings), tone: "text-whatsapp", external: true },
+    { icon: Mail, label: "E-posta", value: settings.email, href: `mailto:${settings.email}`, tone: "text-burgundy-700" },
+  ];
   return (
     <>
       <Breadcrumb items={[{ label: "İletişim", href: routes.contact }]} />
@@ -60,7 +61,7 @@ export default function ContactPage() {
             </span>
             <span className="flex flex-col">
               <span className="text-sm font-semibold text-ink">Çalışma Saatleri</span>
-              <span className="text-[13px] text-ink-muted">{siteConfig.workingHours}</span>
+              <span className="text-[13px] text-ink-muted">{settings.workingHours}</span>
             </span>
           </div>
         </div>
