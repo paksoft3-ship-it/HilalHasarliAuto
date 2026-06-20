@@ -1,0 +1,133 @@
+import Link from "next/link";
+import { Phone, Mail, Clock } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { siteConfig, telLink, whatsappLink } from "@/config/site";
+import { footerNav, routes } from "@/config/navigation";
+import { featuredServices } from "@/config/services";
+import { featuredCities } from "@/config/cities";
+import { Logo } from "./logo";
+import { DevCredit } from "./dev-credit";
+import { CookiePreferencesButton } from "@/components/consent/cookie-preferences-button";
+
+function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h3 className="mb-4 text-sm font-bold uppercase tracking-wide text-white">
+        {title}
+      </h3>
+      <ul className="space-y-2.5 text-sm">{children}</ul>
+    </div>
+  );
+}
+
+function FLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <li>
+      <Link
+        href={href}
+        className="text-white/65 transition-colors hover:text-white"
+      >
+        {children}
+      </Link>
+    </li>
+  );
+}
+
+export function Footer() {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="bg-charcoal-950 text-white">
+      <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        {/* Brand */}
+        <div className="lg:col-span-4">
+          <Logo />
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
+            Hasarlı, kazalı, pert, arızalı, yanmış, sel hasarlı ve hurda
+            araçlarınızı bulunduğunuz yerden değerlendiriyor; güvenli ve şeffaf
+            bir süreç sunuyoruz.
+          </p>
+          <div className="mt-6 space-y-3 text-sm">
+            <a href={telLink()} className="flex items-center gap-3 text-white/80 hover:text-white">
+              <Phone size={18} className="text-gold-600" />
+              {siteConfig.phoneDisplay}
+            </a>
+            <a
+              href={whatsappLink()}
+              className="flex items-center gap-3 text-white/80 hover:text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon size={18} className="text-whatsapp" />
+              WhatsApp ile yazın
+            </a>
+            <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-3 text-white/80 hover:text-white">
+              <Mail size={18} className="text-gold-600" />
+              {siteConfig.email}
+            </a>
+            <p className="flex items-center gap-3 text-white/60">
+              <Clock size={18} className="text-gold-600" />
+              {siteConfig.workingHours}
+            </p>
+          </div>
+        </div>
+
+        <div className="lg:col-span-2">
+          <FooterCol title="Hızlı Bağlantılar">
+            {footerNav.quickLinks.map((l) => (
+              <FLink key={l.href} href={l.href}>
+                {l.label}
+              </FLink>
+            ))}
+          </FooterCol>
+        </div>
+
+        <div className="lg:col-span-3">
+          <FooterCol title="Hizmetlerimiz">
+            {featuredServices.slice(0, 7).map((s) => (
+              <FLink key={s.slug} href={routes.service(s.slug)}>
+                {s.title}
+              </FLink>
+            ))}
+          </FooterCol>
+        </div>
+
+        <div className="lg:col-span-3">
+          <FooterCol title="Hizmet Bölgeleri">
+            {featuredCities.slice(0, 8).map((c) => (
+              <FLink key={c.slug} href={routes.city(c.slug)}>
+                {c.name}
+              </FLink>
+            ))}
+            <FLink href={routes.serviceAreas}>Tüm Hizmet Bölgeleri</FLink>
+          </FooterCol>
+        </div>
+      </div>
+
+      {/* Deep-burgundy lower band */}
+      <div className="bg-burgundy-900">
+        <div className="container-page flex flex-col gap-5 py-5 text-sm text-white/70">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p>
+              © {year} {siteConfig.brandName}. Tüm hakları saklıdır.
+            </p>
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              {footerNav.legal.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-white">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <CookiePreferencesButton />
+              </li>
+            </ul>
+          </div>
+          <div className="flex justify-center border-t border-white/10 pt-5 md:justify-end">
+            <DevCredit />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

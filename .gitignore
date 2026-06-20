@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+
+# production / misc
+/coverage
+.vercel
+*.tsbuildinfo
+
+# env (never commit real secrets; .env.example is tracked)
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os / editor
+.DS_Store
+*.pem
+
+# design source material (originals, zip) — not needed to build/deploy
+/design-source/
