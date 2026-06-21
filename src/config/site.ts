@@ -27,6 +27,15 @@ export const siteConfig = {
   email: env("NEXT_PUBLIC_EMAIL", "info@hasarliaracalan.com"),
   workingHours: env("NEXT_PUBLIC_WORKING_HOURS", "7/24 İletişim"),
 
+  // Social profiles — empty string = not active yet (shown disabled in footer).
+  social: {
+    instagram: env("NEXT_PUBLIC_INSTAGRAM", "https://www.instagram.com/hasarliaracalan/"),
+    facebook: env("NEXT_PUBLIC_FACEBOOK", ""),
+    x: env("NEXT_PUBLIC_X", ""),
+    youtube: env("NEXT_PUBLIC_YOUTUBE", ""),
+    linkedin: env("NEXT_PUBLIC_LINKEDIN", ""),
+  },
+
   // Legal / company — shown only where real data exists.
   legalCompanyName: env("NEXT_PUBLIC_LEGAL_COMPANY_NAME", "[ŞİRKET ÜNVANI]"),
   companyAddress: env("NEXT_PUBLIC_COMPANY_ADDRESS", "[ŞİRKET ADRESİ]"),

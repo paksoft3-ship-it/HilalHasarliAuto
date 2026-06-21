@@ -1,9 +1,50 @@
 import Link from "next/link";
 import { Phone, Mail, Clock } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
+import { InstagramIcon, FacebookIcon, XIcon, YoutubeIcon, LinkedinIcon } from "@/components/ui/social-icons";
 import { getPublicSettings } from "@/lib/settings/server";
 import { telHref, whatsappHref } from "@/lib/settings/shared";
+import { siteConfig } from "@/config/site";
 import { footerNav, routes } from "@/config/navigation";
+
+const SOCIALS = [
+  { key: "instagram", label: "Instagram", icon: InstagramIcon, href: siteConfig.social.instagram },
+  { key: "facebook", label: "Facebook", icon: FacebookIcon, href: siteConfig.social.facebook },
+  { key: "x", label: "X", icon: XIcon, href: siteConfig.social.x },
+  { key: "youtube", label: "YouTube", icon: YoutubeIcon, href: siteConfig.social.youtube },
+  { key: "linkedin", label: "LinkedIn", icon: LinkedinIcon, href: siteConfig.social.linkedin },
+] as const;
+
+function SocialLinks() {
+  return (
+    <div className="mt-6 flex items-center gap-2.5">
+      {SOCIALS.map(({ key, label, icon: Icon, href }) =>
+        href ? (
+          <a
+            key={key}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            title={label}
+            className="grid h-9 w-9 place-items-center rounded-full bg-white/8 text-white transition-colors hover:bg-gold-600 hover:text-charcoal-950"
+          >
+            <Icon size={17} />
+          </a>
+        ) : (
+          <span
+            key={key}
+            aria-disabled="true"
+            title={`${label} — Yakında`}
+            className="grid h-9 w-9 cursor-not-allowed place-items-center rounded-full bg-white/5 text-white/25"
+          >
+            <Icon size={17} />
+          </span>
+        ),
+      )}
+    </div>
+  );
+}
 import { featuredServices } from "@/config/services";
 import { featuredCities } from "@/config/cities";
 import { Logo } from "./logo";
@@ -71,6 +112,7 @@ export async function Footer() {
               {settings.workingHours}
             </p>
           </div>
+          <SocialLinks />
         </div>
 
         <div className="lg:col-span-2">
