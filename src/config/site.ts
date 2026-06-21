@@ -21,9 +21,9 @@ export const siteConfig = {
 
   // Contact — placeholders until confirmed. 0850 call number and WhatsApp
   // are intentionally separate settings (master prompt §2).
-  phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "0850 302 16 16"),
-  phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+908503021616"),
-  whatsappE164: env("NEXT_PUBLIC_WHATSAPP_E164", "+905555555555"),
+  phoneDisplay: env("NEXT_PUBLIC_PHONE_DISPLAY", "0555 198 06 40"),
+  phoneE164: env("NEXT_PUBLIC_PHONE_E164", "+905551980640"),
+  whatsappE164: env("NEXT_PUBLIC_WHATSAPP_E164", "+905551980640"),
   email: env("NEXT_PUBLIC_EMAIL", "info@hasarliaracalan.com"),
   workingHours: env("NEXT_PUBLIC_WORKING_HOURS", "7/24 İletişim"),
 

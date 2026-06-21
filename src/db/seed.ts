@@ -82,7 +82,9 @@ async function main() {
     .values([
       { key: "brand.name", value: "Hasarlı Araç Alan" },
       { key: "brand.tagline", value: "Hasarlı Araç Alım Merkezi" },
-      { key: "contact.phoneDisplay", value: "0850 302 16 16" },
+      { key: "contact.phoneDisplay", value: "0555 198 06 40" },
+      { key: "contact.phoneE164", value: "+905551980640" },
+      { key: "contact.whatsappE164", value: "+905551980640" },
       { key: "contact.email", value: "info@hasarliaracalan.com" },
       { key: "contact.workingHours", value: "7/24 İletişim" },
     ])
