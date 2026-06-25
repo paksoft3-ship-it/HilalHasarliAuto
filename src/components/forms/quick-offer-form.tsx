@@ -67,7 +67,7 @@ export function QuickOfferForm({
 
   useEffect(() => {
     if (state?.ok && state.reference) {
-      pushEvent("quote_form_submit", { reference: state.reference, source });
+      pushEvent("quote_form_submit", { reference: state.reference, source, value: 200, currency: "TRY" });
       router.push(`${routes.thankYou}?ref=${encodeURIComponent(state.reference)}`);
     }
   }, [state, router, source]);

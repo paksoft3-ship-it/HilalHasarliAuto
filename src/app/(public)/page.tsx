@@ -18,15 +18,18 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { homepageFaqs } from "@/config/faq";
 import { organizationLd, websiteLd, faqPageLd } from "@/lib/seo/jsonld";
 
+const homeTitle = "Hasarlı, Kazalı, Hurda Araç Alımı";
 const homeDescription =
-  "Hasarlı, kazalı, pert, ağır hasarlı, motor/mekanik arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçlarınız için Türkiye geneli ücretsiz ve hızlı değerlendirme. Fotoğraf gönderin, teklifinizi alın.";
+  "Hasarlı, kazalı, pert, ağır hasarlı, arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araç alımı. Türkiye geneli ücretsiz değerlendirme.";
 
 export const metadata: Metadata = {
-  title: { absolute: `${siteConfig.brandName} — Hasarlı, Kazalı ve Hurda Araç Alımı` },
+  title: homeTitle,
   description: homeDescription,
+  keywords:
+    "hasarlı araç alan, kazalı araç alan, pert araç alan, hurda araç alan, hasarlı araç alımı",
   alternates: { canonical: routes.home },
   openGraph: {
-    title: `${siteConfig.brandName} — Hasarlı, Kazalı ve Hurda Araç Alımı`,
+    title: `${homeTitle} | ${siteConfig.brandName}`,
     description: homeDescription,
     url: routes.home,
     type: "website",
@@ -79,7 +82,7 @@ function Hero() {
             ve ödeme süreci sunuyoruz.
           </p>
 
-          <CtaGroup className="mt-7" />
+          <CtaGroup className="mt-7" location="hero" />
 
           <ul className="mt-7 grid max-w-md grid-cols-2 gap-x-6 gap-y-3">
             {heroTrust.map((t) => (

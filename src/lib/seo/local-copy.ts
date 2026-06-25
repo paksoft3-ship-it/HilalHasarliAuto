@@ -73,3 +73,29 @@ export function districtH1(district: District): string {
     `${district.name}’de Kazalı, Arızalı ve Hurda Araç Alımı`,
   ]);
 }
+
+// ---- Location SEO meta (cities & districts share one optimized template) ----
+// These feed ONLY <title>/<meta description>/<meta keywords> — the on-page H1,
+// hero and lead copy keep the varied cityH1/cityIntro/districtH1/districtDescription
+// above. `name` is the display name (proper Turkish); `slug` is the ASCII key.
+
+/** SEO <title> without brand (the layout template appends " | <brand>"). */
+export function locationMetaTitle(name: string): string {
+  return `${name} Hasarlı Araç Alımı`;
+}
+
+/** SEO meta description — single conversion-focused template per location. */
+export function locationMetaDescription(name: string): string {
+  return `${name} ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.`;
+}
+
+/** SEO meta keywords — local seller-intent, keyed off the (diacritic-free) slug. */
+export function locationMetaKeywords(slug: string): string {
+  return [
+    `${slug} hasarlı araç alan`,
+    `${slug} kazalı araç alan`,
+    `${slug} pert araç alan`,
+    `${slug} hurda araç alımı`,
+    `${slug} araç alan`,
+  ].join(", ");
+}

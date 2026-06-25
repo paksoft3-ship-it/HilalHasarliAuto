@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Clock, ArrowRight } from "lucide-react";
 import { getPublicBlogPosts } from "@/lib/cms/public-content";
+import { blogMetaKeywords } from "@/config/blog";
 import { routes } from "@/config/navigation";
 import { formatTrDate } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   title: "Blog — Araç Değerleme ve Satış Rehberi",
   description:
     "Hasarlı araç satışı, pert ve ağır hasar, değerleme, noter ve devir konularında güncel yazılar.",
+  keywords: blogMetaKeywords,
   alternates: { canonical: routes.blog },
 };
 

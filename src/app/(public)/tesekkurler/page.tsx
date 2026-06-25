@@ -76,12 +76,14 @@ export default async function ThankYouPage({
             )}
             target="_blank"
             rel="noopener noreferrer"
+            data-track="whatsapp_click"
+            data-track-location="thank_you"
             className={buttonClasses({ variant: "whatsapp" })}
           >
             <WhatsAppIcon size={18} />
             WhatsApp’tan Yazın
           </a>
-          <a href={telHref(settings)} className={buttonClasses({ variant: "dark" })}>
+          <a href={telHref(settings)} data-track="phone_click" data-track-location="thank_you" className={buttonClasses({ variant: "dark" })}>
             <Phone size={18} />
             {settings.phoneDisplay}
           </a>

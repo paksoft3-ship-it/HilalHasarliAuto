@@ -13,9 +13,11 @@ import { FinalCta } from "@/components/sections/final-cta";
 import { getCity } from "@/config/cities";
 
 export const metadata: Metadata = {
-  title: "Türkiye Hizmet Bölgeleri",
+  title: "Hizmet Bölgeleri | Türkiye Geneli",
   description:
-    "Türkiye geneli araç alım hizmeti. Şehrinizi seçin; konum ve araç durumuna göre değerlendirme süreci planlanır.",
+    "Türkiye geneli hasarlı, kazalı, pert ve hurda araç alımı. İstanbul, Ankara, İzmir ve tüm illerde ücretsiz çekici ile bulunduğunuz yerden alım.",
+  keywords:
+    "hasarlı araç alan şehirler, türkiye geneli araç alımı, hasarlı araç alan iller",
   alternates: { canonical: routes.serviceAreas },
 };
 

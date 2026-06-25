@@ -13,7 +13,9 @@ import { FullQuoteForm } from "@/components/forms/full-quote-form";
 export const metadata: Metadata = {
   title: "Teklif Al — Ücretsiz Araç Değerlendirmesi",
   description:
-    "Aracınızın bilgilerini, durumunu ve fotoğraflarını paylaşarak ücretsiz değerlendirme talebi oluşturun. Teklif almak bağlayıcı değildir.",
+    "Aracınız için ücretsiz değerlendirme talebi oluşturun. Fotoğraf gönderin, 30 dakikada en yüksek fiyat teklifini alın. Aynı gün nakit ödeme.",
+  keywords:
+    "araç değerleme, ücretsiz araç teklifi, hasarlı araç fiyat teklifi, araç satmak",
   alternates: { canonical: routes.getOffer },
 };
 
@@ -67,10 +69,10 @@ export default async function GetOfferPage() {
                   Formu doldurmadan da bize ulaşabilirsiniz.
                 </p>
                 <div className="mt-4 flex flex-col gap-3">
-                  <a href={whatsappHref(settings)} target="_blank" rel="noopener noreferrer" className={buttonClasses({ variant: "whatsapp", fullWidth: true })}>
+                  <a href={whatsappHref(settings)} target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-track-location="offer_sidebar" className={buttonClasses({ variant: "whatsapp", fullWidth: true })}>
                     <WhatsAppIcon size={18} /> WhatsApp’tan Yazın
                   </a>
-                  <a href={telHref(settings)} className={buttonClasses({ variant: "outline", fullWidth: true })}>
+                  <a href={telHref(settings)} data-track="phone_click" data-track-location="offer_sidebar" className={buttonClasses({ variant: "outline", fullWidth: true })}>
                     <Phone size={18} /> {settings.phoneDisplay}
                   </a>
                 </div>

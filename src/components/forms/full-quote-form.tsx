@@ -94,7 +94,7 @@ export function FullQuoteForm() {
   // not yet model action results, so it is scoped-disabled here.)
   useEffect(() => {
     if (state?.ok && state.reference) {
-      pushEvent("quote_form_submit", { reference: state.reference, source: "get_offer" });
+      pushEvent("quote_form_submit", { reference: state.reference, source: "get_offer", value: 200, currency: "TRY" });
       router.push(`${routes.thankYou}?ref=${encodeURIComponent(state.reference)}`);
     } else if (state?.errors) {
       const bad = Object.keys(state.errors)[0];

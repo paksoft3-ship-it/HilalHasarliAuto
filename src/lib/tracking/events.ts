@@ -16,6 +16,12 @@ export type TrackEvent =
   | "service_page_engaged"
   | "guide_engaged";
 
+/** Conversion value (TRY) per click event — used by GTM for value-based bidding. */
+export const CLICK_EVENT_VALUE: Partial<Record<TrackEvent, number>> = {
+  phone_click: 150,
+  whatsapp_click: 120,
+};
+
 export function pushEvent(event: TrackEvent, params: Record<string, unknown> = {}): void {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer ?? [];

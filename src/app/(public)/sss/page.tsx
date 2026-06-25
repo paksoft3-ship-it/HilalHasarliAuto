@@ -18,7 +18,9 @@ import { faqPageLd } from "@/lib/seo/jsonld";
 export const metadata: Metadata = {
   title: "Sık Sorulan Sorular",
   description:
-    "Araç satış süreci, teklif ve değerlendirme, fotoğraf gönderme, noter, ödeme ve teslim hakkında sık sorulan sorular.",
+    "Hasarlı, kazalı, pert ve hurda araç satışı hakkında sık sorulan sorular: değerleme, ödeme, çekici, noter devri ve belge süreçleri hakkında bilgi alın.",
+  keywords:
+    "hasarlı araç satış soruları, pert araç satışı, hurda belgesi, noter devri",
   alternates: { canonical: routes.faq },
 };
 
@@ -54,12 +56,14 @@ export default async function FaqPage() {
               href={whatsappHref(settings)}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="whatsapp_click"
+              data-track-location="faq"
               className={buttonClasses({ variant: "whatsapp" })}
             >
               <WhatsAppIcon size={18} />
               WhatsApp’tan Yazın
             </a>
-            <a href={telHref(settings)} className={buttonClasses({ variant: "dark" })}>
+            <a href={telHref(settings)} data-track="phone_click" data-track-location="faq" className={buttonClasses({ variant: "dark" })}>
               <Phone size={18} />
               {settings.phoneDisplay}
             </a>

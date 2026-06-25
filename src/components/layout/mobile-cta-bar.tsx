@@ -19,6 +19,7 @@ export function MobileCtaBar() {
         <a
           href={telHref(settings)}
           data-track="phone_click"
+          data-track-location="mobile_bar"
           aria-label="Ara"
           className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-[12px] bg-charcoal-950 text-white"
         >
@@ -29,6 +30,7 @@ export function MobileCtaBar() {
           target="_blank"
           rel="noopener noreferrer"
           data-track="whatsapp_click"
+          data-track-location="mobile_bar"
           className="flex h-12 flex-1 items-center justify-center gap-2 rounded-[12px] bg-whatsapp text-[15px] font-semibold text-white"
         >
           <WhatsAppIcon size={20} />

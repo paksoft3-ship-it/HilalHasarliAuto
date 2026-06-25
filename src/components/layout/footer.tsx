@@ -90,12 +90,14 @@ export async function Footer() {
             bir süreç sunuyoruz.
           </p>
           <div className="mt-6 space-y-3 text-sm">
-            <a href={telHref(settings)} className="flex items-center gap-3 text-white/80 hover:text-white">
+            <a href={telHref(settings)} data-track="phone_click" data-track-location="footer" className="flex items-center gap-3 text-white/80 hover:text-white">
               <Phone size={18} className="text-gold-600" />
               {settings.phoneDisplay}
             </a>
             <a
               href={whatsappHref(settings)}
+              data-track="whatsapp_click"
+              data-track-location="footer"
               className="flex items-center gap-3 text-white/80 hover:text-white"
               target="_blank"
               rel="noopener noreferrer"

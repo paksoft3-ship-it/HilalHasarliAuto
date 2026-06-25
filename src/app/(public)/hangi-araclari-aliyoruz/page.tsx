@@ -21,7 +21,9 @@ import { FinalCta } from "@/components/sections/final-cta";
 export const metadata: Metadata = {
   title: "Hangi Araçları Alıyoruz?",
   description:
-    "Hasarlı, kazalı, pert, ağır hasarlı, motor ve mekanik arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçlar için değerlendirme.",
+    "Hasarlı, kazalı, pert, ağır hasarlı, motor ve mekanik arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçları alıyoruz.",
+  keywords:
+    "hasarlı araç alan, kazalı araç alan, pert araç alan, hurda araç alan, arızalı araç alan",
   alternates: { canonical: routes.vehiclesWeBuy },
 };
 
@@ -106,6 +108,8 @@ export default async function VehiclesWeBuyPage() {
               href={whatsappHref(settings, "Merhaba, aracımın durumu için yardım almak istiyorum.")}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="whatsapp_click"
+              data-track-location="vehicles_page"
               className={buttonClasses({ variant: "whatsapp" })}
             >
               <WhatsAppIcon size={18} />

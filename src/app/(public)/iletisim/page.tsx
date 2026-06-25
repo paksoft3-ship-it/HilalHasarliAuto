@@ -12,18 +12,20 @@ import { buttonClasses } from "@/components/ui/button";
 import { ContactForm } from "@/components/forms/contact-form";
 
 export const metadata: Metadata = {
-  title: "İletişim",
+  title: "İletişim | Hemen Teklif Alın",
   description:
-    "Aracınız veya satış süreci hakkında telefon, WhatsApp veya e-posta ile bizimle iletişime geçin.",
+    "Hasarlı, kazalı, pert ve hurda aracınız için bize ulaşın. Telefon veya WhatsApp ile 30 dakikada ücretsiz teklif. Türkiye geneli hizmet.",
+  keywords:
+    "hasarlı araç alan iletişim, araç satmak için iletişim, teklif al",
   alternates: { canonical: routes.contact },
 };
 
 export default async function ContactPage() {
   const settings = await getPublicSettings();
   const methods = [
-    { icon: Phone, label: "Telefon", value: settings.phoneDisplay, href: telHref(settings), tone: "text-burgundy-700" },
-    { icon: WhatsAppIcon, label: "WhatsApp", value: "Fotoğraf gönderin", href: whatsappHref(settings), tone: "text-whatsapp", external: true },
-    { icon: Mail, label: "E-posta", value: settings.email, href: `mailto:${settings.email}`, tone: "text-burgundy-700" },
+    { icon: Phone, label: "Telefon", value: settings.phoneDisplay, href: telHref(settings), tone: "text-burgundy-700", track: "phone_click" },
+    { icon: WhatsAppIcon, label: "WhatsApp", value: "Fotoğraf gönderin", href: whatsappHref(settings), tone: "text-whatsapp", external: true, track: "whatsapp_click" },
+    { icon: Mail, label: "E-posta", value: settings.email, href: `mailto:${settings.email}`, tone: "text-burgundy-700", track: undefined },
   ];
   return (
     <>
@@ -44,6 +46,7 @@ export default async function ContactPage() {
               key={m.label}
               href={m.href}
               {...(m.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {...(m.track ? { "data-track": m.track, "data-track-location": "contact_page" } : {})}
               className="flex items-center gap-4 rounded-[14px] border border-line bg-cream-50 p-5 transition-colors hover:border-burgundy-700"
             >
               <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-[12px] bg-white ${m.tone}`}>

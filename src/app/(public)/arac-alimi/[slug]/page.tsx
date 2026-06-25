@@ -40,14 +40,16 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
   const content = getServiceContent(slug);
-  const description = content.heroLead;
+  const title = service.metaTitle ?? service.title;
+  const description = service.metaDescription ?? content.heroLead;
   const url = routes.service(slug);
   return {
-    title: service.title,
+    title,
     description,
+    keywords: service.metaKeywords,
     alternates: { canonical: url },
     openGraph: {
-      title: `${service.title} | ${siteConfig.brandName}`,
+      title: `${title} | ${siteConfig.brandName}`,
       description,
       url,
       type: "website",

@@ -47,7 +47,7 @@ export function ContactForm() {
   }, []);
 
   useEffect(() => {
-    if (state?.ok) pushEvent("contact_form_submit", { reference: state.reference });
+    if (state?.ok) pushEvent("contact_form_submit", { reference: state.reference, value: 200, currency: "TRY" });
   }, [state]);
 
   if (state?.ok) {

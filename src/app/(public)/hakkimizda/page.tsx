@@ -13,7 +13,9 @@ import { FinalCta } from "@/components/sections/final-cta";
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description:
-    "Hasarlı, kazalı ve çalışmayan araçlar için şeffaf değerlendirme ve güvenli satın alma süreci sunan profesyonel araç alım hizmeti.",
+    "Hasarlı, kazalı, pert ve hurda araç alımında güvenilir çözüm ortağınız. Şeffaf değerlendirme, en yüksek fiyat, ücretsiz çekici ve anında nakit ödeme.",
+  keywords:
+    "hasarlı araç alan firma, güvenilir araç alımı, hasarlı araç alım merkezi",
   alternates: { canonical: routes.about },
 };
 

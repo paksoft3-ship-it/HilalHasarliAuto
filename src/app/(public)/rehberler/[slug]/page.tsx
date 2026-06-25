@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, Layers, BarChart3, CalendarCheck } from "lucide-react";
 import { guides, getGuide } from "@/config/guides";
+import { blogMetaKeywords } from "@/config/blog";
 import { routes } from "@/config/navigation";
 import { formatTrDate } from "@/lib/utils";
 import { Section } from "@/components/ui/section";
@@ -30,6 +31,7 @@ export async function generateMetadata({
   return {
     title: g.title,
     description: g.description,
+    keywords: blogMetaKeywords,
     alternates: { canonical: routes.guide(slug) },
     openGraph: { title: g.title, description: g.description, type: "article", images: [{ url: g.image }] },
   };

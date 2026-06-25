@@ -5,7 +5,13 @@ import { MapPin } from "lucide-react";
 import { getCity } from "@/config/cities";
 import { districts, getDistrict, districtsOfCity } from "@/config/districts";
 import { siteConfig } from "@/config/site";
-import { districtTitle, districtDescription, districtH1 } from "@/lib/seo/local-copy";
+import {
+  districtDescription,
+  districtH1,
+  locationMetaTitle,
+  locationMetaDescription,
+  locationMetaKeywords,
+} from "@/lib/seo/local-copy";
 import { featuredServices } from "@/config/services";
 import { routes } from "@/config/navigation";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -36,12 +42,13 @@ export async function generateMetadata({
   const city = getCity(citySlug);
   const district = getDistrict(citySlug, districtSlug);
   if (!city || !district) return {};
-  const title = districtTitle(district, city.name);
-  const description = districtDescription(district, city.name);
+  const title = locationMetaTitle(district.name);
+  const description = locationMetaDescription(district.name);
   const url = routes.district(citySlug, districtSlug);
   return {
     title,
     description,
+    keywords: locationMetaKeywords(district.slug),
     alternates: { canonical: url },
     openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },
   };

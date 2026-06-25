@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Clock } from "lucide-react";
-import { blogPosts } from "@/config/blog";
+import { blogPosts, blogMetaKeywords } from "@/config/blog";
 import { getPublicBlogPosts, getPublicBlogPost } from "@/lib/cms/public-content";
 import { routes } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
@@ -32,13 +32,15 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPublicBlogPost(slug);
   if (!post) return {};
+  const description = post.metaDescription ?? post.excerpt;
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
+    keywords: blogMetaKeywords,
     alternates: { canonical: routes.blogPost(slug) },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description,
       type: "article",
       url: routes.blogPost(slug),
       images: [{ url: post.image }],

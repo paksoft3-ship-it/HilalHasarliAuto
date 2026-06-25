@@ -9,7 +9,13 @@ import { services, serviceIconImage } from "@/config/services";
 import { routes } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { DEFAULT_EVALUATED } from "@/config/service-content";
-import { cityTitle, cityDescription, cityH1, cityIntro } from "@/lib/seo/local-copy";
+import {
+  cityH1,
+  cityIntro,
+  locationMetaTitle,
+  locationMetaDescription,
+  locationMetaKeywords,
+} from "@/lib/seo/local-copy";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -37,12 +43,13 @@ export async function generateMetadata({
   const { citySlug } = await params;
   const city = getCity(citySlug);
   if (!city) return {};
-  const title = cityTitle(city);
-  const description = cityDescription(city, districtsOfCity(citySlug).map((d) => d.name));
+  const title = locationMetaTitle(city.name);
+  const description = locationMetaDescription(city.name);
   const url = routes.city(citySlug);
   return {
     title,
     description,
+    keywords: locationMetaKeywords(city.slug),
     alternates: { canonical: url },
     openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },
   };

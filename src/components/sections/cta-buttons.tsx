@@ -18,11 +18,14 @@ export function CtaGroup({
   showPhone = false,
   whatsappMessage,
   className,
+  location = "cta",
 }: {
   size?: "md" | "lg";
   showPhone?: boolean;
   whatsappMessage?: string;
   className?: string;
+  /** Where this CTA group sits — reported to GTM as the click `location`. */
+  location?: string;
 }) {
   const settings = useSettings();
   return (
@@ -35,13 +38,14 @@ export function CtaGroup({
         target="_blank"
         rel="noopener noreferrer"
         data-track="whatsapp_click"
+        data-track-location={location}
         className={buttonClasses({ variant: "whatsapp", size })}
       >
         <WhatsAppIcon size={18} />
         WhatsApp’tan Fotoğraf Gönder
       </a>
       {showPhone && (
-        <a href={telHref(settings)} data-track="phone_click" className={buttonClasses({ variant: "dark", size })}>
+        <a href={telHref(settings)} data-track="phone_click" data-track-location={location} className={buttonClasses({ variant: "dark", size })}>
           <Phone size={18} />
           {settings.phoneDisplay}
         </a>

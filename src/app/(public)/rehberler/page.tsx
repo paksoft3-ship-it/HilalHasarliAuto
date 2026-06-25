@@ -12,7 +12,9 @@ import { FinalCta } from "@/components/sections/final-cta";
 export const metadata: Metadata = {
   title: "Araç Satış Rehberleri",
   description:
-    "Aracınızın durumuna uygun adım adım satış rehberleri: hazırlık, değerleme, noter ve teslim süreçleri.",
+    "Hasarlı, kazalı, pert ve hurda araç satışı hakkında rehberler: değerleme, noter devri, hasar kaydı sorgulama ve değer kaybı tazminatı.",
+  keywords:
+    "hasarlı araç satış rehberi, pert araç satışı, araç değer kaybı, hasar kaydı",
   alternates: { canonical: routes.guides },
 };
 

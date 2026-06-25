@@ -22,9 +22,11 @@ import { FinalCta } from "@/components/sections/final-cta";
 import { faqPageLd } from "@/lib/seo/jsonld";
 
 export const metadata: Metadata = {
-  title: "Nasıl Çalışır?",
+  title: "Nasıl Çalışır? | 3 Adımda Araç Satışı",
   description:
-    "Araç bilgilerini paylaşmaktan teslim ve ödemeye kadar tüm sürecin şeffaf ve güvenli şekilde nasıl ilerlediğini öğrenin.",
+    "Aracınızı 3 adımda satın: fotoğraf gönderin, ücretsiz teklifinizi alın, anlaşınca ücretsiz çekici ile alalım ve aynı gün nakit ödeyelim.",
+  keywords:
+    "araç nasıl satılır, hasarlı araç satış süreci, araç değerleme, ücretsiz çekici",
   alternates: { canonical: routes.howItWorks },
 };
 

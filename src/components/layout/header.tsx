@@ -67,6 +67,7 @@ export function Header() {
           <a
             href={tel}
             data-track="phone_click"
+            data-track-location="header"
             className="flex items-center gap-2.5 rounded-md px-2 py-1 transition-colors hover:bg-white/5"
           >
             <span className="grid h-9 w-9 place-items-center rounded-full bg-white/8 text-gold-600">
@@ -89,6 +90,7 @@ export function Header() {
           <a
             href={tel}
             data-track="phone_click"
+            data-track-location="header_mobile"
             aria-label="Bizi arayın"
             className="grid h-11 w-11 place-items-center rounded-full text-white hover:bg-white/8"
           >
