@@ -22,10 +22,24 @@ export const CLICK_EVENT_VALUE: Partial<Record<TrackEvent, number>> = {
   whatsapp_click: 120,
 };
 
+/** Events that count as a conversion for click-fraud lead-protection. */
+const CONVERSION_EVENTS = new Set<TrackEvent>([
+  "phone_click",
+  "whatsapp_click",
+  "quote_form_submit",
+  "contact_form_submit",
+]);
+
 export function pushEvent(event: TrackEvent, params: Record<string, unknown> = {}): void {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push({ event, ...params });
+
+  // Notify the click-protection tracker so it can flag the visit as converted
+  // (real-lead protection). Decoupled via a DOM event — no import cycle.
+  if (CONVERSION_EVENTS.has(event)) {
+    window.dispatchEvent(new CustomEvent("cp:conversion", { detail: { event } }));
+  }
 }
 
 export interface ConsentState {

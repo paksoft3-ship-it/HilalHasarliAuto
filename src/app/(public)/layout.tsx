@@ -5,6 +5,8 @@ import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { CookieConsent } from "@/components/consent/cookie-consent";
 import { AnalyticsScripts } from "@/components/tracking/analytics-scripts";
 import { TrackingProvider } from "@/components/tracking/tracking-provider";
+import { AdVisitCapture } from "@/components/tracking/ad-visit-capture";
+import { ClickProtectionTracker } from "@/components/tracking/click-protection-tracker";
 import { SettingsProvider } from "@/components/providers/settings-provider";
 import { getPublicSettings } from "@/lib/settings/server";
 
@@ -25,6 +27,8 @@ export default async function PublicLayout({
         <CookieConsent />
         <AnalyticsScripts />
         <TrackingProvider />
+        <ClickProtectionTracker />
+        <AdVisitCapture />
       </div>
     </SettingsProvider>
   );

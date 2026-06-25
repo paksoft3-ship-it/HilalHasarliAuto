@@ -7,3 +7,4 @@ export * from "./analytics";
 export * from "./comms";
 export * from "./cms";
 export * from "./audit";
+export * from "./click-protection";

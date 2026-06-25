@@ -14,6 +14,7 @@ const NAV: { key: string; href: string; perm: PermissionCode }[] = [
   { key: "deals", href: "/admin/deals", perm: "deals.read" },
   { key: "finance", href: "/admin/finance", perm: "finance.read" },
   { key: "adspend", href: "/admin/adspend", perm: "adspend.read" },
+  { key: "click-protection", href: "/admin/click-protection", perm: "adspend.read" },
   { key: "analytics", href: "/admin/analytics", perm: "analytics.view" },
   { key: "seo", href: "/admin/seo", perm: "seo.read" },
   { key: "content", href: "/admin/content", perm: "content.read" },
@@ -29,8 +30,8 @@ export const dynamic = "force-dynamic";
 // All admin modules implemented.
 const IMPLEMENTED = new Set([
   "dashboard", "leads", "funnel", "calls", "whatsapp", "buyers", "offers",
-  "deals", "finance", "adspend", "analytics", "seo", "content", "media",
-  "users", "settings", "audit",
+  "deals", "finance", "adspend", "click-protection", "analytics", "seo",
+  "content", "media", "users", "settings", "audit",
 ]);
 
 export default async function PanelLayout({

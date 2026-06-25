@@ -155,3 +155,12 @@ export const contentStatus = pgEnum("content_status", [
 ]);
 
 export const mediaVisibility = pgEnum("media_visibility", ["public", "private"]);
+
+/** Click-fraud protection: lifecycle of a tracked IP. `whitelisted` = real-lead
+ *  IP that must never be flagged/excluded. */
+export const flaggedIpStatus = pgEnum("flagged_ip_status", [
+  "watching",
+  "flagged",
+  "excluded",
+  "whitelisted",
+]);

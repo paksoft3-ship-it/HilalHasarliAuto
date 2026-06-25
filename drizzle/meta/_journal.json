@@ -36,6 +36,20 @@
       "when": 1781970303635,
       "tag": "0004_skinny_screwball",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1782419287831,
+      "tag": "0005_simple_multiple_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1782420891468,
+      "tag": "0006_famous_wither",
+      "breakpoints": true
     }
   ]
 }
