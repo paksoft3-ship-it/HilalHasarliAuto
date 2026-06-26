@@ -7,7 +7,9 @@ import {
   getClicksByHour,
   getTopFlaggedIps,
   getAvgCpc,
+  getLastDetectionRun,
 } from "@/db/repo/click-protection";
+import { formatTrDateTime } from "@/lib/utils";
 import { saveAvgCpc, runJobNow } from "@/lib/admin/click-protection-actions";
 import { ClickProtectionTabs } from "./_tabs";
 
@@ -35,11 +37,12 @@ export default async function ClickProtectionDashboard({
   }
 
   const avgCpc = await getAvgCpc();
-  const [stats, series, byHour, top] = await Promise.all([
+  const [stats, series, byHour, top, lastRun] = await Promise.all([
     getDashboardStats(avgCpc),
     getClicksVsFlaggedSeries(14),
     getClicksByHour(7),
     getTopFlaggedIps(10),
+    getLastDetectionRun(),
   ]);
 
   const maxDay = Math.max(1, ...series.map((s) => s.clicks));
@@ -89,13 +92,17 @@ export default async function ClickProtectionDashboard({
           <div className="rounded-[14px] border border-line bg-white p-5">
             <p className="text-sm font-semibold text-ink">Analizi şimdi çalıştır</p>
             <p className="mt-1 text-xs text-ink-muted">
-              Tespit motoru saatte bir otomatik çalışır. Manuel tetiklemek için:
+              Tespit motoru günde bir otomatik çalışır (Vercel Hobby planı). Daha sık
+              çalıştırmak için Pro planına geçin veya aşağıdan manuel tetikleyin:
             </p>
             <form action={runJobNow} className="mt-3">
               <button className="rounded-md border border-line bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-cream-100">
                 Şimdi çalıştır
               </button>
             </form>
+            <p className="mt-3 text-xs text-ink-muted">
+              Son çalışma: <span className="font-medium text-ink-secondary">{lastRun ? formatTrDateTime(lastRun.toISOString()) : "henüz çalışmadı"}</span>
+            </p>
           </div>
         )}
       </div>

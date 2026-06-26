@@ -10,8 +10,11 @@
  */
 import { sql } from "drizzle-orm";
 import { isDbConfigured, requireDb, type Database } from "@/db";
-import { adVisits, flaggedIps } from "@/db/schema";
+import { adVisits, flaggedIps, backgroundJobs } from "@/db/schema";
 import { scoreIpAggregate, scoreVisit } from "./scoring";
+
+/** Job type used to record detection-run heartbeats (dashboard freshness). */
+export const DETECTION_JOB_TYPE = "click_protection_detection";
 import { lookupIp } from "./ip-intel";
 import { SIGNAL_PARAMS } from "./config";
 import type { IpIntel } from "./types";
@@ -283,5 +286,11 @@ export async function runAggregateJob(): Promise<{ rescored: number; ipsEvaluate
   const rescored = await rescoreRecentVisits(db);
   const ipsEvaluated = await evaluateIps(db);
   await purgeOldVisits(db);
+  // Heartbeat so the dashboard can show when detection last ran (now daily on Hobby).
+  await db.insert(backgroundJobs).values({
+    type: DETECTION_JOB_TYPE,
+    status: "succeeded",
+    payload: { rescored, ipsEvaluated },
+  });
   return { rescored, ipsEvaluated };
 }

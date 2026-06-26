@@ -15,7 +15,8 @@ import {
   sql,
 } from "drizzle-orm";
 import { isDbConfigured, requireDb } from "@/db";
-import { adVisits, flaggedIps, siteSettings } from "@/db/schema";
+import { adVisits, flaggedIps, siteSettings, backgroundJobs } from "@/db/schema";
+import { DETECTION_JOB_TYPE } from "@/lib/click-protection/aggregate";
 import { FRAUD_THRESHOLDS } from "@/lib/click-protection/config";
 import type { FlaggedStatus } from "@/lib/click-protection/types";
 
@@ -411,6 +412,18 @@ export async function setAvgCpc(value: number, userId: string): Promise<void> {
       target: siteSettings.key,
       set: { value, updatedBy: userId, updatedAt: new Date() },
     });
+}
+
+/** Timestamp of the most recent detection run, for dashboard freshness. */
+export async function getLastDetectionRun(): Promise<Date | null> {
+  if (!isDbConfigured) return null;
+  const [row] = await requireDb()
+    .select({ at: backgroundJobs.createdAt })
+    .from(backgroundJobs)
+    .where(eq(backgroundJobs.type, DETECTION_JOB_TYPE))
+    .orderBy(desc(backgroundJobs.createdAt))
+    .limit(1);
+  return row?.at ?? null;
 }
 
 export { adClick, FLAGGED, isNull };

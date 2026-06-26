@@ -15,6 +15,18 @@ export function formatTrDate(iso: string): string {
   });
 }
 
+/** Format an ISO date+time in Turkish, Europe/Istanbul (e.g. "12 May 2026 14:30"). */
+export function formatTrDateTime(iso: string): string {
+  return new Date(iso).toLocaleString("tr-TR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "Europe/Istanbul",
+  });
+}
+
 /** Format a whole-TRY integer as Turkish currency (e.g. "₺125.000"). */
 export function formatTRY(amount: number | null | undefined): string {
   if (amount == null) return "—";
