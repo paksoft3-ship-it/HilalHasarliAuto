@@ -3,7 +3,7 @@ import { Download } from "lucide-react";
 import { isDbConfigured } from "@/db";
 import { requirePermission, can } from "@/lib/auth/guard";
 import { getAdminLocale, translator, stageLabels } from "@/lib/i18n/admin";
-import { listLeads, type QuickView } from "@/db/repo/crm-queries";
+import { listLeads, getStageCounts, type QuickView } from "@/db/repo/crm-queries";
 import { StageBadge, NotConfigured, PageTitle, Flash } from "@/components/admin/bits";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { deleteLead } from "@/lib/admin/lead-actions";
@@ -31,15 +31,21 @@ export default async function LeadsPage({
   }
 
   const view = (VIEWS.includes(sp.view as QuickView) ? sp.view : "all") as QuickView;
-  const data = await listLeads({
-    stage: sp.stage,
-    q: sp.q,
-    view,
-    currentUserId: user.id,
-    page: sp.page ? parseInt(sp.page, 10) : 1,
-  });
+  const [data, stageCounts] = await Promise.all([
+    listLeads({
+      stage: sp.stage,
+      q: sp.q,
+      view,
+      currentUserId: user.id,
+      page: sp.page ? parseInt(sp.page, 10) : 1,
+    }),
+    getStageCounts(),
+  ]);
 
   const stageOpts = Object.entries(stageLabels[locale]);
+  const pipeline = stageOpts
+    .map(([code, label]) => ({ code, label, n: stageCounts[code] ?? 0 }))
+    .filter((s) => s.n > 0);
   const canExport = can(user, "export.data");
   const canDelete = can(user, "leads.delete");
 
@@ -82,6 +88,28 @@ export default async function LeadsPage({
           </Link>
         ))}
       </div>
+
+      {/* Pipeline overview */}
+      {pipeline.length > 0 && (
+        <div className="mb-4 flex gap-2 overflow-x-auto pb-1">
+          {pipeline.map((s) => {
+            const active = sp.stage === s.code;
+            return (
+              <Link
+                key={s.code}
+                href={`/admin/leads${buildHref({ stage: active ? undefined : s.code, page: undefined })}`}
+                className={cn(
+                  "flex shrink-0 flex-col rounded-[12px] border px-3.5 py-2 transition-colors",
+                  active ? "border-burgundy-700 bg-cream-100" : "border-line bg-white hover:border-burgundy-700",
+                )}
+              >
+                <span className="text-lg font-bold leading-none text-ink">{s.n}</span>
+                <span className="mt-1 whitespace-nowrap text-[11px] font-medium text-ink-muted">{s.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
 
       {/* Filters */}
       <form method="get" className="mb-5 flex flex-wrap items-end gap-3 rounded-[14px] border border-line bg-white p-4">

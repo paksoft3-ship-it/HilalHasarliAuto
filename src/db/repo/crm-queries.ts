@@ -178,6 +178,17 @@ export async function listLeads(params: LeadFilters & { page?: number }) {
   };
 }
 
+/** Active-lead counts per stage, for the pipeline overview strip. */
+export async function getStageCounts(): Promise<Record<string, number>> {
+  const db = requireDb();
+  const rows = await db
+    .select({ stage: leads.stage, v: count() })
+    .from(leads)
+    .where(isNull(leads.deletedAt))
+    .groupBy(leads.stage);
+  return Object.fromEntries(rows.map((r) => [r.stage, Number(r.v)]));
+}
+
 export async function getLeadsByStage() {
   const db = requireDb();
   const rows = await db
