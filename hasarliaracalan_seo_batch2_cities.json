@@ -1,0 +1,260 @@
+{
+  "batch": "2_cities",
+  "site": "hasarliaracalan",
+  "canonical_note": "Canonicals auto-absolute from metadataBase. DO NOT change.",
+  "apply_notes": "Update city data by slug. metaTitle_raw (template adds brand, keep raw<=40). meta_description<=160. ADD meta_keywords (local seller-intent). Trim any desc>160. Do NOT touch canonical. Preserve Turkish.",
+  "pages": [
+    {
+      "route": "/hizmet-bolgeleri/istanbul",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> istanbul",
+      "metaTitle_raw": "İstanbul Hasarlı Araç Alımı",
+      "rendered_len": 47,
+      "meta_description": "İstanbul ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın",
+      "desc_len": 158,
+      "meta_keywords": "istanbul hasarlı araç alan, istanbul kazalı araç alan, istanbul pert araç alan, istanbul hurda araç alımı, istanbul araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/ankara",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> ankara",
+      "metaTitle_raw": "Ankara Hasarlı Araç Alımı",
+      "rendered_len": 45,
+      "meta_description": "Ankara ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 157,
+      "meta_keywords": "ankara hasarlı araç alan, ankara kazalı araç alan, ankara pert araç alan, ankara hurda araç alımı, ankara araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/izmir",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> izmir",
+      "metaTitle_raw": "İzmir Hasarlı Araç Alımı",
+      "rendered_len": 44,
+      "meta_description": "İzmir ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 156,
+      "meta_keywords": "izmir hasarlı araç alan, izmir kazalı araç alan, izmir pert araç alan, izmir hurda araç alımı, izmir araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/bursa",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> bursa",
+      "metaTitle_raw": "Bursa Hasarlı Araç Alımı",
+      "rendered_len": 44,
+      "meta_description": "Bursa ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 156,
+      "meta_keywords": "bursa hasarlı araç alan, bursa kazalı araç alan, bursa pert araç alan, bursa hurda araç alımı, bursa araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/antalya",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> antalya",
+      "metaTitle_raw": "Antalya Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Antalya ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "antalya hasarlı araç alan, antalya kazalı araç alan, antalya pert araç alan, antalya hurda araç alımı, antalya araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/adana",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> adana",
+      "metaTitle_raw": "Adana Hasarlı Araç Alımı",
+      "rendered_len": 44,
+      "meta_description": "Adana ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 156,
+      "meta_keywords": "adana hasarlı araç alan, adana kazalı araç alan, adana pert araç alan, adana hurda araç alımı, adana araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/konya",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> konya",
+      "metaTitle_raw": "Konya Hasarlı Araç Alımı",
+      "rendered_len": 44,
+      "meta_description": "Konya ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 156,
+      "meta_keywords": "konya hasarlı araç alan, konya kazalı araç alan, konya pert araç alan, konya hurda araç alımı, konya araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/gaziantep",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> gaziantep",
+      "metaTitle_raw": "Gaziantep Hasarlı Araç Alımı",
+      "rendered_len": 48,
+      "meta_description": "Gaziantep ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alı",
+      "desc_len": 158,
+      "meta_keywords": "gaziantep hasarlı araç alan, gaziantep kazalı araç alan, gaziantep pert araç alan, gaziantep hurda araç alımı, gaziantep araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/kocaeli",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> kocaeli",
+      "metaTitle_raw": "Kocaeli Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Kocaeli ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "kocaeli hasarlı araç alan, kocaeli kazalı araç alan, kocaeli pert araç alan, kocaeli hurda araç alımı, kocaeli araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/mersin",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> mersin",
+      "metaTitle_raw": "Mersin Hasarlı Araç Alımı",
+      "rendered_len": 45,
+      "meta_description": "Mersin ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 157,
+      "meta_keywords": "mersin hasarlı araç alan, mersin kazalı araç alan, mersin pert araç alan, mersin hurda araç alımı, mersin araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/kayseri",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> kayseri",
+      "metaTitle_raw": "Kayseri Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Kayseri ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "kayseri hasarlı araç alan, kayseri kazalı araç alan, kayseri pert araç alan, kayseri hurda araç alımı, kayseri araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/samsun",
+      "data_source": "src/lib/seo/local-copy.ts -> cityTitle/cityDescription/cityH1/cityIntro (deterministic pick by slug). City data: src/config/cities.ts -> samsun",
+      "metaTitle_raw": "Samsun Hasarlı Araç Alımı",
+      "rendered_len": 45,
+      "meta_description": "Samsun ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 157,
+      "meta_keywords": "samsun hasarlı araç alan, samsun kazalı araç alan, samsun pert araç alan, samsun hurda araç alımı, samsun araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/istanbul/kadikoy",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> kadikoy",
+      "metaTitle_raw": "Kadikoy Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Kadikoy ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "kadikoy hasarlı araç alan, kadikoy kazalı araç alan, kadikoy pert araç alan, kadikoy hurda araç alımı, kadikoy araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/istanbul/umraniye",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> umraniye",
+      "metaTitle_raw": "Umraniye Hasarlı Araç Alımı",
+      "rendered_len": 47,
+      "meta_description": "Umraniye ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın",
+      "desc_len": 158,
+      "meta_keywords": "umraniye hasarlı araç alan, umraniye kazalı araç alan, umraniye pert araç alan, umraniye hurda araç alımı, umraniye araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/istanbul/basaksehir",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> basaksehir",
+      "metaTitle_raw": "Basaksehir Hasarlı Araç Alımı",
+      "rendered_len": 49,
+      "meta_description": "Basaksehir ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif al",
+      "desc_len": 158,
+      "meta_keywords": "basaksehir hasarlı araç alan, basaksehir kazalı araç alan, basaksehir pert araç alan, basaksehir hurda araç alımı, basaksehir araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/istanbul/pendik",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> pendik",
+      "metaTitle_raw": "Pendik Hasarlı Araç Alımı",
+      "rendered_len": 45,
+      "meta_description": "Pendik ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 157,
+      "meta_keywords": "pendik hasarlı araç alan, pendik kazalı araç alan, pendik pert araç alan, pendik hurda araç alımı, pendik araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/istanbul/bagcilar",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> bagcilar",
+      "metaTitle_raw": "Bagcilar Hasarlı Araç Alımı",
+      "rendered_len": 47,
+      "meta_description": "Bagcilar ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın",
+      "desc_len": 158,
+      "meta_keywords": "bagcilar hasarlı araç alan, bagcilar kazalı araç alan, bagcilar pert araç alan, bagcilar hurda araç alımı, bagcilar araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/istanbul/esenyurt",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> esenyurt",
+      "metaTitle_raw": "Esenyurt Hasarlı Araç Alımı",
+      "rendered_len": 47,
+      "meta_description": "Esenyurt ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın",
+      "desc_len": 158,
+      "meta_keywords": "esenyurt hasarlı araç alan, esenyurt kazalı araç alan, esenyurt pert araç alan, esenyurt hurda araç alımı, esenyurt araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/ankara/cankaya",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> cankaya",
+      "metaTitle_raw": "Cankaya Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Cankaya ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "cankaya hasarlı araç alan, cankaya kazalı araç alan, cankaya pert araç alan, cankaya hurda araç alımı, cankaya araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/ankara/kecioren",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> kecioren",
+      "metaTitle_raw": "Kecioren Hasarlı Araç Alımı",
+      "rendered_len": 47,
+      "meta_description": "Kecioren ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın",
+      "desc_len": 158,
+      "meta_keywords": "kecioren hasarlı araç alan, kecioren kazalı araç alan, kecioren pert araç alan, kecioren hurda araç alımı, kecioren araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/ankara/yenimahalle",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> yenimahalle",
+      "metaTitle_raw": "Yenimahalle Hasarlı Araç Alımı",
+      "rendered_len": 50,
+      "meta_description": "Yenimahalle ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif a",
+      "desc_len": 158,
+      "meta_keywords": "yenimahalle hasarlı araç alan, yenimahalle kazalı araç alan, yenimahalle pert araç alan, yenimahalle hurda araç alımı, yenimahalle araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/ankara/etimesgut",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> etimesgut",
+      "metaTitle_raw": "Etimesgut Hasarlı Araç Alımı",
+      "rendered_len": 48,
+      "meta_description": "Etimesgut ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alı",
+      "desc_len": 158,
+      "meta_keywords": "etimesgut hasarlı araç alan, etimesgut kazalı araç alan, etimesgut pert araç alan, etimesgut hurda araç alımı, etimesgut araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/izmir/bornova",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> bornova",
+      "metaTitle_raw": "Bornova Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Bornova ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "bornova hasarlı araç alan, bornova kazalı araç alan, bornova pert araç alan, bornova hurda araç alımı, bornova araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/izmir/karsiyaka",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> karsiyaka",
+      "metaTitle_raw": "Karsiyaka Hasarlı Araç Alımı",
+      "rendered_len": 48,
+      "meta_description": "Karsiyaka ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alı",
+      "desc_len": 158,
+      "meta_keywords": "karsiyaka hasarlı araç alan, karsiyaka kazalı araç alan, karsiyaka pert araç alan, karsiyaka hurda araç alımı, karsiyaka araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/izmir/buca",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> buca",
+      "metaTitle_raw": "Buca Hasarlı Araç Alımı",
+      "rendered_len": 43,
+      "meta_description": "Buca ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 155,
+      "meta_keywords": "buca hasarlı araç alan, buca kazalı araç alan, buca pert araç alan, buca hurda araç alımı, buca araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/izmir/konak",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> konak",
+      "metaTitle_raw": "Konak Hasarlı Araç Alımı",
+      "rendered_len": 44,
+      "meta_description": "Konak ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 156,
+      "meta_keywords": "konak hasarlı araç alan, konak kazalı araç alan, konak pert araç alan, konak hurda araç alımı, konak araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/bursa/nilufer",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> nilufer",
+      "metaTitle_raw": "Nilufer Hasarlı Araç Alımı",
+      "rendered_len": 46,
+      "meta_description": "Nilufer ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alın.",
+      "desc_len": 158,
+      "meta_keywords": "nilufer hasarlı araç alan, nilufer kazalı araç alan, nilufer pert araç alan, nilufer hurda araç alımı, nilufer araç alan"
+    },
+    {
+      "route": "/hizmet-bolgeleri/bursa/osmangazi",
+      "data_source": "src/lib/seo/local-copy.ts -> districtTitle/districtDescription/districtH1 (deterministic pick by slug). District data: src/config/districts.ts -> osmangazi",
+      "metaTitle_raw": "Osmangazi Hasarlı Araç Alımı",
+      "rendered_len": 48,
+      "meta_description": "Osmangazi ve çevresinde hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, aynı gün nakit ödeme, 30 dakikada ücretsiz değerlendirme. Hemen teklif alı",
+      "desc_len": 158,
+      "meta_keywords": "osmangazi hasarlı araç alan, osmangazi kazalı araç alan, osmangazi pert araç alan, osmangazi hurda araç alımı, osmangazi araç alan"
+    }
+  ]
+}

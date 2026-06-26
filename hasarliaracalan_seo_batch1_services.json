@@ -1,0 +1,119 @@
+{
+  "batch": "1_services",
+  "site": "hasarliaracalan",
+  "canonical_note": "Canonicals auto-absolute from metadataBase. DO NOT change - leave relative as-is.",
+  "title_template_note": "Template adds ' | Hasarlı Araç Alan' (+20 chars). metaTitle_raw is WITHOUT brand. Titles tightened so rendered <=60.",
+  "apply_notes": "Per slug: services.ts title-> use metaTitle_raw value (template adds brand). service-content.ts heroLead/description-> meta_description. ADD meta_keywords. Do NOT touch canonical/ogUrl. Preserve Turkish (İ ı ş ğ ü ö ç).",
+  "pages": [
+    {
+      "route": "/arac-alimi/hasarli-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> hasarli-arac-alimi",
+      "metaTitle_raw": "Hasarlı Araç Alımı | En Yüksek Fiyat",
+      "rendered_title": "Hasarlı Araç Alımı | En Yüksek Fiyat | Hasarlı Araç Alan",
+      "rendered_len": 56,
+      "meta_description": "Hasarlı aracınızı her durumda alıyoruz. Ücretsiz ekspertiz, aynı gün nakit ödeme, ücretsiz çekici. Fotoğraf gönderin, 30 dakikada teklif alın.",
+      "desc_len": 142,
+      "meta_keywords": "hasarlı araç alan, hasarlı araç alımı, hasarlı araba alan, hasarlı oto alım, hasarlı araç satmak"
+    },
+    {
+      "route": "/arac-alimi/kazali-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> kazali-arac-alimi",
+      "metaTitle_raw": "Kazalı Araç Alımı | Anında Nakit",
+      "rendered_title": "Kazalı Araç Alımı | Anında Nakit | Hasarlı Araç Alan",
+      "rendered_len": 52,
+      "meta_description": "Kaza geçirmiş aracınızı değerinde alıyoruz. Hızlı ve şeffaf değerlendirme, ücretsiz çekici, aynı gün nakit ödeme. Hemen ücretsiz teklif alın.",
+      "desc_len": 141,
+      "meta_keywords": "kazalı araç alan, kazalı araç alımı, kazalı araba alan, kaza yapmış araç alan, kazalı oto satmak"
+    },
+    {
+      "route": "/arac-alimi/pert-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> pert-arac-alimi",
+      "metaTitle_raw": "Pert Araç Alımı | En İyi Fiyat",
+      "rendered_title": "Pert Araç Alımı | En İyi Fiyat | Hasarlı Araç Alan",
+      "rendered_len": 50,
+      "meta_description": "Pert kayıtlı veya pert muhtemel araçlarınız için özel değerlendirme. En yüksek fiyat, hızlı işlem, ücretsiz çekici, anında ödeme. Teklif alın.",
+      "desc_len": 142,
+      "meta_keywords": "pert araç alan, pert araç alımı, pert kayıtlı araç, sigorta pertli araç, pert oto satmak"
+    },
+    {
+      "route": "/arac-alimi/agir-hasarli-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> agir-hasarli-arac-alimi",
+      "metaTitle_raw": "Ağır Hasarlı Araç Alımı | Nakit",
+      "rendered_title": "Ağır Hasarlı Araç Alımı | Nakit | Hasarlı Araç Alan",
+      "rendered_len": 51,
+      "meta_description": "Ağır hasarlı aracınızı bulunduğu yerden değerlendiriyoruz. Ücretsiz çekici, en yüksek fiyat, aynı gün nakit ödeme. Hemen ücretsiz teklif alın.",
+      "desc_len": 142,
+      "meta_keywords": "ağır hasarlı araç alan, ağır hasarlı araç alımı, ağır hasarlı araba alan, pert araç alan"
+    },
+    {
+      "route": "/arac-alimi/motor-arizali-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> motor-arizali-arac-alimi",
+      "metaTitle_raw": "Motor Arızalı Araç Alımı",
+      "rendered_title": "Motor Arızalı Araç Alımı | Hasarlı Araç Alan",
+      "rendered_len": 44,
+      "meta_description": "Motor arızası bulunan aracınızı değerinde alıyoruz. Ücretsiz ekspertiz, ücretsiz çekici, aynı gün nakit ödeme. Fotoğraf gönderin, teklif alın.",
+      "desc_len": 142,
+      "meta_keywords": "motor arızalı araç alan, motor arızalı araç alımı, motoru arızalı araba alan, arızalı araç alan"
+    },
+    {
+      "route": "/arac-alimi/mekanik-arizali-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> mekanik-arizali-arac-alimi",
+      "metaTitle_raw": "Mekanik Arızalı Araç Alımı",
+      "rendered_title": "Mekanik Arızalı Araç Alımı | Hasarlı Araç Alan",
+      "rendered_len": 46,
+      "meta_description": "Mekanik arızalı, ekonomik onarımı zor araçlar için değerlendirme alın. Ücretsiz çekici, en yüksek fiyat, anında nakit ödeme. Hemen arayın.",
+      "desc_len": 138,
+      "meta_keywords": "mekanik arızalı araç alan, mekanik arızalı araç alımı, arızalı araç alan, çalışmayan araç alan"
+    },
+    {
+      "route": "/arac-alimi/calismayan-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> calismayan-arac-alimi",
+      "metaTitle_raw": "Çalışmayan Araç Alımı | Nakit",
+      "rendered_title": "Çalışmayan Araç Alımı | Nakit | Hasarlı Araç Alan",
+      "rendered_len": 49,
+      "meta_description": "Çalışmayan veya marş almayan aracınız için teklif alın. Ücretsiz çekici ile bulunduğu yerden alım, aynı gün nakit ödeme. Hemen teklif alın.",
+      "desc_len": 139,
+      "meta_keywords": "çalışmayan araç alan, çalışmayan araç alımı, marş almayan araç alan, hareket etmeyen araç alan"
+    },
+    {
+      "route": "/arac-alimi/yanmis-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> yanmis-arac-alimi",
+      "metaTitle_raw": "Yanmış Araç Alımı | Nakit Ödeme",
+      "rendered_title": "Yanmış Araç Alımı | Nakit Ödeme | Hasarlı Araç Alan",
+      "rendered_len": 51,
+      "meta_description": "Yangın hasarı görmüş aracınızı değerlendiriyoruz. Ücretsiz çekici, en yüksek fiyat, aynı gün nakit ödeme. Fotoğraf gönderin, teklif alın.",
+      "desc_len": 137,
+      "meta_keywords": "yanmış araç alan, yanmış araç alımı, yangın hasarlı araç alan, yanık araç alan"
+    },
+    {
+      "route": "/arac-alimi/sel-hasarli-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> sel-hasarli-arac-alimi",
+      "metaTitle_raw": "Sel Hasarlı Araç Alımı | Teklif",
+      "rendered_title": "Sel Hasarlı Araç Alımı | Teklif | Hasarlı Araç Alan",
+      "rendered_len": 51,
+      "meta_description": "Sel ve su hasarı görmüş aracınız için süreç desteği ve değerlendirme. Ücretsiz çekici, en yüksek fiyat, anında nakit ödeme. Hemen arayın.",
+      "desc_len": 137,
+      "meta_keywords": "sel hasarlı araç alan, sel hasarlı araç alımı, su basmış araç alan, suya giren araç alan"
+    },
+    {
+      "route": "/arac-alimi/hurda-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> hurda-arac-alimi",
+      "metaTitle_raw": "Hurda Araç Alımı | Hurda Belgeli",
+      "rendered_title": "Hurda Araç Alımı | Hurda Belgeli | Hasarlı Araç Alan",
+      "rendered_len": 52,
+      "meta_description": "Hurda ve ekonomik ömrünü tamamlamış aracınızı alıyoruz. Hurda belgeli işlem, ücretsiz çekici, anında nakit ödeme. Hemen ücretsiz teklif alın.",
+      "desc_len": 141,
+      "meta_keywords": "hurda araç alan, hurda araç alımı, hurda belgeli araç, hurdaya araç satmak, hurda oto alan"
+    },
+    {
+      "route": "/arac-alimi/cekme-belgeli-arac-alimi",
+      "data_source": "services.ts + service-content.ts -> cekme-belgeli-arac-alimi",
+      "metaTitle_raw": "Çekme Belgeli Araç Alımı",
+      "rendered_title": "Çekme Belgeli Araç Alımı | Hasarlı Araç Alan",
+      "rendered_len": 44,
+      "meta_description": "Çekme belgeli ve trafikten çekilmiş aracınız için teklif alın. Ücretsiz çekici, en yüksek fiyat, aynı gün nakit ödeme. Hemen ücretsiz teklif.",
+      "desc_len": 141,
+      "meta_keywords": "çekme belgeli araç alan, çekme belgeli araç alımı, trafikten çekik araç alan, çekme belgeli oto"
+    }
+  ]
+}

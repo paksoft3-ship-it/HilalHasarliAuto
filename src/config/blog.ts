@@ -15,6 +15,8 @@ export interface BlogPost {
   excerpt: string;
   /** SEO meta description override (trimmed for SERPs). Falls back to `excerpt`. */
   metaDescription?: string;
+  /** Per-post SEO keywords override. Falls back to shared `blogMetaKeywords`. */
+  metaKeywords?: string;
   category: string;
   /** ISO date — editable; sample content for development. */
   date: string;
@@ -42,6 +44,121 @@ export const blogMetaKeywords =
   "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi";
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "hasarli-aracimi-nasil-satarim",
+    title: "Hasarlı Aracımı Nasıl Satarım? Adım Adım Rehber",
+    excerpt:
+      "Hasarlı aracınızı en yüksek fiyata nasıl satarsınız? Değerleme, ücretsiz çekici, noter devri ve ödeme süreci adım adım bu rehberde.",
+    metaDescription:
+      "Hasarlı aracınızı en yüksek fiyata nasıl satarsınız? Değerleme, ücretsiz çekici, noter devri ve ödeme süreci adım adım bu rehberde.",
+    metaKeywords:
+      "hasarlı araç satmak, hasarlı araç nasıl satılır, hasarlı araç alan, hasarlı araç değerleme, araç satış rehberi",
+    category: "Hasarlı Araç",
+    date: "2026-06-26",
+    readingMinutes: 7,
+    image: "/images/blog/az-hasarli-arac.jpg",
+    imageAlt: "Satışa hazırlanan, ön tamponu hafif hasarlı beyaz otomobil",
+    body: [
+      { type: "p", text: "Hasarlı bir aracı satmak, ilk bakışta karmaşık görünebilir. Ekspertiz, değer kaybı, noter devri, hasar kaydı… Aklınızda birçok soru olması çok normal. Bu rehberde, hasarlı aracınızı en yüksek fiyata ve sorunsuz bir şekilde nasıl satabileceğinizi adım adım anlatıyoruz." },
+      { type: "h2", text: "Hasarlı Araç Satışında İlk Adım: Doğru Değerlendirme" },
+      { type: "p", text: "Hasarlı araç satmadan önce yapmanız gereken ilk şey, aracınızın gerçek değerini öğrenmektir. Birçok kişi hasarlı aracının değerini olduğundan düşük tahmin eder ve bu yüzden hak ettiğinden az fiyata satar." },
+      { type: "p", text: "Aracınızın değerini etkileyen başlıca faktörler şunlardır:" },
+      { type: "ul", items: [
+        "Marka, model ve yaşı — Daha yeni ve talep gören modeller, hasarlı olsa bile yüksek değer korur.",
+        "Hasarın türü ve boyutu — Ön, arka, yan hasar veya motor hasarı; her biri değeri farklı etkiler.",
+        "Aracın çalışır durumda olup olmadığı — Çalışan bir araç, çalışmayana göre daha değerlidir.",
+        "Belgelerin durumu — Ruhsat, hasar kaydı ve varsa ekspertiz raporu süreci hızlandırır.",
+      ] },
+      { type: "p", text: "En sağlıklı yöntem, aracınızın fotoğraflarını çekip profesyonel bir değerlendirme almaktır. Böylece pazarlık masasına gerçek bir rakamla oturursunuz." },
+      { type: "h2", text: "Adım Adım Hasarlı Araç Satış Süreci" },
+      { type: "h3", text: "1. Aracınızın Fotoğraflarını Çekin" },
+      { type: "p", text: "Hasarlı araç alımında ilk değerlendirme genellikle fotoğraf üzerinden yapılır. Aracın dört bir yanını, hasarlı bölgeleri, iç mekânı ve kilometre göstergesini net bir şekilde çekin. İyi çekilmiş fotoğraflar, daha doğru ve daha yüksek bir teklif almanızı sağlar." },
+      { type: "h3", text: "2. Ücretsiz Değerlendirme Talep Edin" },
+      { type: "p", text: "Fotoğraflarınızı gönderdikten sonra, aracınız için ücretsiz bir değerlendirme alın. Güvenilir bir alıcı, aracınızı görmeden önce bile size yaklaşık bir fiyat aralığı sunabilir." },
+      { type: "h3", text: "3. Teklifi Değerlendirin" },
+      { type: "p", text: "Gelen teklifi acele etmeden değerlendirin. Şeffaf bir alıcı, fiyatın nasıl belirlendiğini açıklar ve gizli kesintiler içermez. Aklınıza takılan her soruyu sormaktan çekinmeyin." },
+      { type: "h3", text: "4. Anlaşma ve Çekici" },
+      { type: "p", text: "Anlaşma sağlandığında, çalışmayan veya ağır hasarlı araçlar için ücretsiz çekici hizmetinden yararlanabilirsiniz. Aracınızın bulunduğu yerden alınması, sizi ekstra masraftan ve uğraştan kurtarır." },
+      { type: "h3", text: "5. Noter Devri ve Ödeme" },
+      { type: "p", text: "Son adım, noterde resmi satış işlemidir. Devir tamamlandığında ödemenizi alırsınız. Güvenilir alıcılar, devir işlemiyle eş zamanlı olarak nakit veya banka havalesiyle ödeme yapar." },
+      { type: "h2", text: "Hasarlı Araç Satarken Dikkat Edilmesi Gerekenler" },
+      { type: "ul", items: [
+        "Acele etmeyin, ama oyalanmayın. Aracın değeri zamanla düşebilir; özellikle açık alanda bekleyen hasarlı araçlar daha da yıpranır.",
+        "Birden fazla teklif almak mantıklıdır, ancak çok düşük tekliflere de itibar etmeyin.",
+        "Belgelerinizi hazır bulundurun. Ruhsat ve kimlik, devir işlemi için gereklidir.",
+        "Ödeme almadan aracı teslim etmeyin. Güvenilir işlemlerde ödeme ve devir aynı anda yapılır.",
+      ] },
+      { type: "h2", text: "Hangi Hasarlı Araçlar Alınır?" },
+      { type: "p", text: "Çoğu kişi yalnızca hafif hasarlı araçların alındığını düşünür, ama durum böyle değildir. Ağır hasarlı, motor arızalı, çalışmayan, yanmış, sel hasarlı, pert kayıtlı ve hurda belgeli araçlar dahil olmak üzere her durumdaki araç için değerlendirme yapılabilir. Aracınız ne durumda olursa olsun, bir değerleme almadan \"satılmaz\" diye düşünmeyin." },
+      { type: "h2", text: "Sonuç" },
+      { type: "p", text: "Hasarlı aracınızı satmak, doğru adımlarla hem hızlı hem de kârlı bir süreç olabilir. Özetle: aracınızın fotoğraflarını çekin, ücretsiz bir değerlendirme alın, teklifi şeffaf bir şekilde inceleyin ve noter güvencesiyle satışı tamamlayın." },
+      { type: "p", text: "Aracınızın değerini merak ediyorsanız, fotoğraflarını göndererek 30 dakika içinde ücretsiz teklifinizi alabilirsiniz. Hasarlı aracınız, düşündüğünüzden daha değerli olabilir." },
+    ],
+    sample: false,
+  },
+  {
+    slug: "pert-arac-nedir",
+    title: "Pert Araç Nedir? Pert Kayıtlı Aracın Satışı",
+    excerpt:
+      "Pert araç ne demek, pert kayıtlı araç satılır mı, değeri ne olur? Pert total ve pert muhtemel farkı ile satış süreci bu yazıda.",
+    metaDescription:
+      "Pert araç ne demek, pert kayıtlı araç satılır mı, değeri ne olur? Pert total ve pert muhtemel farkı ile satış süreci bu yazıda.",
+    metaKeywords:
+      "pert araç nedir, pert araç satılır mı, pert kayıtlı araç, pert araç alan, pert total pert muhtemel",
+    category: "Pert ve Ağır Hasar",
+    date: "2026-06-26",
+    readingMinutes: 7,
+    image: "/images/blog/pert-arac.jpg",
+    imageAlt: "Pert kayıtlı, ön tarafı ağır hasarlı otomobil",
+    body: [
+      { type: "p", text: "Aracınız bir kaza sonrası \"pert\" olarak kaydedildiyse veya sigorta şirketiniz size \"pert\" kelimesini söylediyse, kafanızda birçok soru oluşmuş olabilir. Pert ne demek? Pert araç satılır mı? Değeri ne olur? Bu yazıda, pert araçlarla ilgili merak ettiğiniz her şeyi sade bir dille açıklıyoruz." },
+      { type: "h2", text: "Pert Araç Ne Demek?" },
+      { type: "p", text: "\"Pert\", bir aracın onarım maliyetinin, aracın piyasa değerine yaklaşması veya onu aşması durumunda kullanılan bir terimdir. Yani sigorta şirketi, aracı onarmanın ekonomik olmadığına karar verdiğinde araç \"pert\" olarak kaydedilir." },
+      { type: "p", text: "Pert kavramı genellikle ikiye ayrılır:" },
+      { type: "ul", items: [
+        "Pert Total (Tam Pert): Aracın onarımı teknik veya ekonomik olarak mümkün değildir. Bu araçlar genellikle hurdaya ayrılır veya parça değeri için alınır.",
+        "Pert Muhtemel (Ekonomik Pert): Onarım mümkündür, ancak maliyeti aracın değerine çok yakındır. Bu araçlar onarılıp tekrar trafiğe çıkabilir veya olduğu gibi satılabilir.",
+      ] },
+      { type: "h2", text: "Pert Kaydı Aracın Değerini Nasıl Etkiler?" },
+      { type: "p", text: "Pert kaydı, aracın ruhsatına ve tramer kaydına işlenir. Bu kayıt, aracın ikinci el piyasa değerini düşürür çünkü gelecekteki alıcılar aracın ciddi bir hasar geçmişi olduğunu görür." },
+      { type: "p", text: "Ancak şunu unutmamak gerekir: pert kaydı, aracın değersiz olduğu anlamına gelmez. Pert bir aracın bile;" },
+      { type: "ul", items: [
+        "Sağlam parçaları,",
+        "Motoru ve şanzımanı,",
+        "Elektronik aksamı,",
+        "Lastikleri ve iç donanımı",
+      ] },
+      { type: "p", text: "hâlâ ciddi bir değer taşıyabilir. Bu yüzden pert aracınızı \"nasılsa hurda\" diye düşünüp yok pahasına elden çıkarmamalısınız." },
+      { type: "h2", text: "Pert Araç Satılır mı?" },
+      { type: "p", text: "Evet, pert kayıtlı araçlar satılabilir. Üstelik bu tür araçlar için özel olarak değerlendirme yapan alıcılar vardır. Pert bir aracı satmanın birkaç yolu vardır:" },
+      { type: "ol", items: [
+        "Olduğu gibi satmak: Aracı onarmadan, mevcut durumuyla satarsınız. En hızlı ve en pratik yöntemdir.",
+        "Onarıp satmak: Pert muhtemel araçlarda, onarım maliyeti düşükse araç onarılıp satılabilir. Ancak bu, zaman ve sermaye gerektirir.",
+        "Parça değeri için satmak: Pert total araçlarda, aracın sağlam parçaları ayrı ayrı değer taşır.",
+      ] },
+      { type: "p", text: "Çoğu kişi için en mantıklı seçenek, aracı olduğu gibi, tek seferde ve nakit ödemeyle satmaktır. Böylece onarım riskine ve uzun bekleme sürecine girmeden aracınızı nakde çevirirsiniz." },
+      { type: "h2", text: "Pert Araç Satışında Süreç Nasıl İşler?" },
+      { type: "p", text: "Pert aracınızı satarken süreç, diğer hasarlı araçlarla benzerdir:" },
+      { type: "ol", items: [
+        "Fotoğraf gönderin: Aracın hasarlı bölgelerini ve genel durumunu net bir şekilde fotoğraflayın.",
+        "Pert raporunu paylaşın: Varsa sigorta ekspertiz raporu ve pert kaydı bilgisi, daha doğru bir teklif almanızı sağlar.",
+        "Ücretsiz değerlendirme alın: Aracınız için şeffaf ve gerçekçi bir fiyat teklifi alın.",
+        "Anlaşıp teslim edin: Çalışmayan pert araçlar için ücretsiz çekici ile aracınız bulunduğu yerden alınır.",
+        "Noter devri ve ödeme: Resmi devir işlemiyle birlikte ödemenizi anında alırsınız.",
+      ] },
+      { type: "h2", text: "Pert Araç Satarken Nelere Dikkat Etmelisiniz?" },
+      { type: "ul", items: [
+        "Pert kaydını gizlemeyin. Şeffaf bir satış, hem yasal açıdan doğru hem de güvenilir bir süreç sağlar.",
+        "Aracın gerçek değerini öğrenin. Pert olması, aracı bedavaya vermeniz gerektiği anlamına gelmez.",
+        "Belgelerinizi hazırlayın. Ruhsat ve pert/ekspertiz raporu, süreci hızlandırır.",
+        "Güvenilir bir alıcı seçin. Ödemeyi devir ile aynı anda yapan, gizli kesinti uygulamayan alıcılarla çalışın.",
+      ] },
+      { type: "h2", text: "Sonuç" },
+      { type: "p", text: "Pert araç, onarımı ekonomik olmayan ancak hâlâ ciddi bir değer taşıyan bir araçtır. Pert kaydı aracınızın değerini düşürse de, doğru alıcıyla aracınızı hak ettiği fiyata satabilirsiniz." },
+      { type: "p", text: "Pert kayıtlı aracınızın güncel değerini merak ediyorsanız, fotoğraflarını ve varsa pert raporunu göndererek ücretsiz bir teklif alabilirsiniz. Aracınızı olduğu gibi, ücretsiz çekici ve anında nakit ödeme ile satmak mümkün." },
+    ],
+    sample: false,
+  },
   {
     slug: "hasarli-arac-noter-devri-gerekli-belgeler",
     title: "Hasarlı Araç Noter Devri: Adım Adım Gerekli Belgeler (2026)",

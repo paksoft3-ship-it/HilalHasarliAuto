@@ -36,7 +36,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description,
-    keywords: blogMetaKeywords,
+    keywords: post.metaKeywords ?? blogMetaKeywords,
     alternates: { canonical: routes.blogPost(slug) },
     openGraph: {
       title: post.title,

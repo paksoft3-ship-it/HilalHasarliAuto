@@ -1,0 +1,116 @@
+{
+  "batch": "4_blog",
+  "site": "hasarliaracalan",
+  "canonical_note": "Canonicals auto-absolute. DO NOT change.",
+  "apply_notes": "LIGHT touch. KEEP titles. TRIM descriptions >160 to <=160 (preserve meaning). ADD meta_keywords. Do NOT touch canonical. Preserve Turkish.",
+  "pages": [
+    {
+      "route": "/blog/hasarli-arac-noter-devri-gerekli-belgeler",
+      "data_source": "src/config/blog.ts -> blogPosts[hasarli-arac-noter-devri-gerekli-belgeler] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Hasarlı Araç Noter Devri: Adım Adım Gerekli Belgeler (2026) | Hasarlı Araç Alan",
+      "meta_description": "Hasarlı bir aracın satışı da sağlam araçlar gibi noterde tek işlemde tamamlanır. Devir öncesi hazırlamanız gereken belgeleri, borç sorgusunu ve sürecin...",
+      "desc_len": 154,
+      "was_long": true,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/arac-hasar-kaydi-sorgulama-edevlet-tramer",
+      "data_source": "src/config/blog.ts -> blogPosts[arac-hasar-kaydi-sorgulama-edevlet-tramer] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Araç Hasar Kaydı Nasıl Sorgulanır? e-Devlet ve TRAMER Rehberi | Hasarlı Araç Alan",
+      "meta_description": "Bir aracın geçmiş hasar kayıtlarını e-Devlet (SBM/TRAMER) üzerinden nasıl sorgularsınız? Hasar kaydı ile hasar/değer kaybının farkını ve sorgu adımlarını...",
+      "desc_len": 156,
+      "was_long": true,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/pert-kayitli-arac-nasil-satilir",
+      "data_source": "src/config/blog.ts -> blogPosts[pert-kayitli-arac-nasil-satilir] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Pert Kayıtlı (Ağır Hasarlı) Araç Nasıl Satılır? | Hasarlı Araç Alan",
+      "meta_description": "Pert ile ağır hasar kaydı arasındaki fark nedir, hangi araç tekrar trafiğe çıkabilir ve pert kayıtlı bir araç satarken nelere dikkat etmelisiniz? Süreci...",
+      "desc_len": 155,
+      "was_long": true,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/cekme-belgesi-nedir-nasil-alinir",
+      "data_source": "src/config/blog.ts -> blogPosts[cekme-belgesi-nedir-nasil-alinir] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Çekme Belgesi Nedir, Nasıl Alınır? Trafiğe Çıkamayan Araçlar | Hasarlı Araç Alan",
+      "meta_description": "Çalışmayan veya trafiğe çıkamayacak durumdaki araçlar için çekme belgesi nasıl alınır, plakalar ne olur ve bu araç nasıl satılır? Tüm süreci özetledik.",
+      "desc_len": 151,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/hasarli-arac-degerleme-faktorleri",
+      "data_source": "src/config/blog.ts -> blogPosts[hasarli-arac-degerleme-faktorleri] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Hasarlı Araç Değerini Belirleyen 7 Faktör | Hasarlı Araç Alan",
+      "meta_description": "Hasarlı bir aracın gerçek değeri neye göre belirlenir? Marka-modelden hasarın kapsamına, pert kaydından parça değerine kadar fiyatı etkileyen 7 ana faktörü...",
+      "desc_len": 158,
+      "was_long": true,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/trafik-kazasi-deger-kaybi-tazminati",
+      "data_source": "src/config/blog.ts -> blogPosts[trafik-kazasi-deger-kaybi-tazminati] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Trafik Kazası Sonrası Değer Kaybı Tazminatı Nasıl Alınır? | Hasarlı Araç Alan",
+      "meta_description": "Kusurlu olmadığınız bir kazada aracınız onarılsa bile ikinci el değeri düşer. Bu 'değer kaybını' karşı tarafın sigortasından nasıl talep edebileceğinizi ve...",
+      "desc_len": 158,
+      "was_long": true,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/hasarli-arac-satarken-dikkat-edilmesi-gerekenler",
+      "data_source": "src/config/blog.ts -> blogPosts[hasarli-arac-satarken-dikkat-edilmesi-gerekenler] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Hasarlı Araç Satarken Nelere Dikkat Edilmelidir? | Hasarlı Araç Alan",
+      "meta_description": "Hasarlı aracınızı satmadan önce bilmeniz gereken hazırlık, değerleme ve devir adımlarını derledik.",
+      "desc_len": 98,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/pert-arac-nedir-nasil-degerlenir",
+      "data_source": "src/config/blog.ts -> blogPosts[pert-arac-nedir-nasil-degerlenir] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Pert Araç Nedir ve Nasıl Değerlenir? | Hasarlı Araç Alan",
+      "meta_description": "Pert kaydı, ağır hasarlı araçların değerlemesini nasıl etkiler? Pert araç satışında dikkat edilmesi gerekenler.",
+      "desc_len": 111,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog/calismayan-araci-satmanin-yollari",
+      "data_source": "src/config/blog.ts -> blogPosts[calismayan-araci-satmanin-yollari] (title, excerpt). Metadata in src/app/(public)/blog/[slug]/page.tsx (also served from CMS via getPublicBlogPost)",
+      "title_KEEP": "Çalışmayan Aracı Satmanın Yolları | Hasarlı Araç Alan",
+      "meta_description": "Marş almayan veya uzun süredir çalışmayan aracınızı değerlendirmek için izleyebileceğiniz adımlar.",
+      "desc_len": 98,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/blog",
+      "data_source": "src/app/(public)/blog/page.tsx -> metadata",
+      "title_KEEP": "Blog — Araç Değerleme ve Satış Rehberi | Hasarlı Araç Alan",
+      "meta_description": "Hasarlı araç satışı, pert ve ağır hasar, değerleme, noter ve devir konularında güncel yazılar.",
+      "desc_len": 94,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/rehberler/hasarli-arac-satisi-bastan-sona",
+      "data_source": "src/config/guides.ts -> guides[hasarli-arac-satisi-bastan-sona] (title, description). Metadata in src/app/(public)/rehberler/[slug]/page.tsx",
+      "title_KEEP": "Hasarlı Araç Satışı: Başvurudan Teslime Kadar Tüm Süreç | Hasarlı Araç Alan",
+      "meta_description": "Hasarlı aracınızı satarken izleyeceğiniz adımları başvurudan teslime kadar adım adım anlatan kapsamlı rehber.",
+      "desc_len": 109,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    },
+    {
+      "route": "/rehberler/arac-fotografi-nasil-cekilir",
+      "data_source": "src/config/guides.ts -> guides[arac-fotografi-nasil-cekilir] (title, description). Metadata in src/app/(public)/rehberler/[slug]/page.tsx",
+      "title_KEEP": "Değerlendirme İçin Araç Fotoğrafı Nasıl Çekilir? | Hasarlı Araç Alan",
+      "meta_description": "Aracınızın değerini doğru yansıtan fotoğraflar çekmek için pratik bir kontrol listesi.",
+      "desc_len": 86,
+      "was_long": false,
+      "meta_keywords_ADD": "hasarlı araç, kazalı araç satışı, pert araç, hurda araç, araç satış rehberi"
+    }
+  ]
+}

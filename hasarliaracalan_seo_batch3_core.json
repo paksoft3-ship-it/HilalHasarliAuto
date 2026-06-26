@@ -1,0 +1,110 @@
+{
+  "batch": "3_core",
+  "site": "hasarliaracalan",
+  "canonical_note": "Canonicals auto-absolute. DO NOT change. /arama + /tesekkurler stay noindex.",
+  "apply_notes": "Per-page metaTitle_raw (template adds brand) + meta_description (<=160, TRIM long ones) + ADD meta_keywords. HOME description currently 217 chars MUST be trimmed. Do NOT touch canonical/noindex. Preserve Turkish.",
+  "pages": [
+    {
+      "route": "/",
+      "data_source": "src/app/(public)/page.tsx -> metadata (uses siteConfig.brandName)",
+      "metaTitle_raw": "Hasarlı, Kazalı, Hurda Araç Alımı",
+      "meta_description": "Hasarlı, kazalı, pert, ağır hasarlı, arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araç alımı. Türkiye geneli ücretsiz değerlendirme.",
+      "desc_len": 152,
+      "meta_keywords": "hasarlı araç alan, kazalı araç alan, pert araç alan, hurda araç alan, hasarlı araç alımı"
+    },
+    {
+      "route": "/teklif-al",
+      "data_source": "src/app/(public)/teklif-al/page.tsx -> metadata",
+      "metaTitle_raw": "Teklif Al — Ücretsiz Araç Değerlendirmesi",
+      "meta_description": "Aracınız için ücretsiz değerlendirme talebi oluşturun. Fotoğraf gönderin, 30 dakikada en yüksek fiyat teklifini alın. Aynı gün nakit ödeme.",
+      "desc_len": 139,
+      "meta_keywords": "araç değerleme, ücretsiz araç teklifi, hasarlı araç fiyat teklifi, araç satmak"
+    },
+    {
+      "route": "/hangi-araclari-aliyoruz",
+      "data_source": "src/app/(public)/hangi-araclari-aliyoruz/page.tsx -> metadata",
+      "metaTitle_raw": "Hangi Araçları Alıyoruz?",
+      "meta_description": "Hasarlı, kazalı, pert, ağır hasarlı, motor ve mekanik arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçları alıyoruz.",
+      "desc_len": 137,
+      "meta_keywords": "hasarlı araç alan, kazalı araç alan, pert araç alan, hurda araç alan, arızalı araç alan"
+    },
+    {
+      "route": "/nasil-calisir",
+      "data_source": "src/app/(public)/nasil-calisir/page.tsx -> metadata",
+      "metaTitle_raw": "Nasıl Çalışır? | 3 Adımda Araç Satışı",
+      "meta_description": "Aracınızı 3 adımda satın: fotoğraf gönderin, ücretsiz teklifinizi alın, anlaşınca ücretsiz çekici ile alalım ve aynı gün nakit ödeyelim.",
+      "desc_len": 136,
+      "meta_keywords": "araç nasıl satılır, hasarlı araç satış süreci, araç değerleme, ücretsiz çekici"
+    },
+    {
+      "route": "/hakkimizda",
+      "data_source": "src/app/(public)/hakkimizda/page.tsx -> metadata (H1 uses siteConfig.brandName)",
+      "metaTitle_raw": "Hakkımızda",
+      "meta_description": "Hasarlı, kazalı, pert ve hurda araç alımında güvenilir çözüm ortağınız. Şeffaf değerlendirme, en yüksek fiyat, ücretsiz çekici ve anında nakit ödeme.",
+      "desc_len": 149,
+      "meta_keywords": "hasarlı araç alan firma, güvenilir araç alımı, hasarlı araç alım merkezi"
+    },
+    {
+      "route": "/sss",
+      "data_source": "src/app/(public)/sss/page.tsx -> metadata",
+      "metaTitle_raw": "Sık Sorulan Sorular",
+      "meta_description": "Hasarlı, kazalı, pert ve hurda araç satışı hakkında sık sorulan sorular: değerleme, ödeme, çekici, noter devri ve belge süreçleri hakkında bilgi alın.",
+      "desc_len": 150,
+      "meta_keywords": "hasarlı araç satış soruları, pert araç satışı, hurda belgesi, noter devri"
+    },
+    {
+      "route": "/iletisim",
+      "data_source": "src/app/(public)/iletisim/page.tsx -> metadata",
+      "metaTitle_raw": "İletişim | Hemen Teklif Alın",
+      "meta_description": "Hasarlı, kazalı, pert ve hurda aracınız için bize ulaşın. Telefon veya WhatsApp ile 30 dakikada ücretsiz teklif. Türkiye geneli hizmet.",
+      "desc_len": 135,
+      "meta_keywords": "hasarlı araç alan iletişim, araç satmak için iletişim, teklif al"
+    },
+    {
+      "route": "/rehberler",
+      "data_source": "src/app/(public)/rehberler/page.tsx -> metadata",
+      "metaTitle_raw": "Araç Satış Rehberleri",
+      "meta_description": "Hasarlı, kazalı, pert ve hurda araç satışı hakkında rehberler: değerleme, noter devri, hasar kaydı sorgulama ve değer kaybı tazminatı.",
+      "desc_len": 134,
+      "meta_keywords": "hasarlı araç satış rehberi, pert araç satışı, araç değer kaybı, hasar kaydı"
+    },
+    {
+      "route": "/hizmet-bolgeleri",
+      "data_source": "src/app/(public)/hizmet-bolgeleri/page.tsx -> metadata",
+      "metaTitle_raw": "Hizmet Bölgeleri | Türkiye Geneli",
+      "meta_description": "Türkiye geneli hasarlı, kazalı, pert ve hurda araç alımı. İstanbul, Ankara, İzmir ve tüm illerde ücretsiz çekici ile bulunduğunuz yerden alım.",
+      "desc_len": 142,
+      "meta_keywords": "hasarlı araç alan şehirler, türkiye geneli araç alımı, hasarlı araç alan iller"
+    },
+    {
+      "route": "/gizlilik-politikasi",
+      "data_source": "legal",
+      "keep_title": true,
+      "note": "Keep title/desc as-is, legal page. No changes needed."
+    },
+    {
+      "route": "/kvkk-aydinlatma-metni",
+      "data_source": "legal",
+      "keep_title": true,
+      "note": "Keep title/desc as-is, legal page. No changes needed."
+    },
+    {
+      "route": "/cerez-politikasi",
+      "data_source": "legal",
+      "keep_title": true,
+      "note": "Keep title/desc as-is, legal page. No changes needed."
+    },
+    {
+      "route": "/kullanim-kosullari",
+      "data_source": "legal",
+      "keep_title": true,
+      "note": "Keep title/desc as-is, legal page. No changes needed."
+    },
+    {
+      "route": "/yasal-uyari",
+      "data_source": "legal",
+      "keep_title": true,
+      "note": "Keep title/desc as-is, legal page. No changes needed."
+    }
+  ]
+}
