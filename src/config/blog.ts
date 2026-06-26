@@ -17,6 +17,14 @@ export interface BlogPost {
   metaDescription?: string;
   /** Per-post SEO keywords override. Falls back to shared `blogMetaKeywords`. */
   metaKeywords?: string;
+  /** SEO `<title>` override. Falls back to `title`. */
+  seoTitle?: string;
+  /** Canonical URL override. Falls back to the auto-generated route. */
+  canonical?: string;
+  /** Robots directive override (e.g. "noindex, follow"). */
+  robots?: string;
+  /** Open Graph image override. Falls back to `image`. */
+  ogImage?: string;
   category: string;
   /** ISO date — editable; sample content for development. */
   date: string;

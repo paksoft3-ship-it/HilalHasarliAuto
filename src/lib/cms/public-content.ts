@@ -11,8 +11,12 @@ interface DbItem {
   body: Block[];
   imageUrl: string | null;
   imageAlt: string | null;
+  seoTitle: string | null;
   seoDescription: string | null;
   seoKeywords: string | null;
+  canonical: string | null;
+  robots: string | null;
+  ogImage: string | null;
   faqs: BlogPost["faqs"];
   publishedAt: Date | null;
   updatedAt: Date;
@@ -25,6 +29,10 @@ function mapItem(item: DbItem): BlogPost {
     excerpt: item.excerpt ?? "",
     metaDescription: item.seoDescription ?? undefined,
     metaKeywords: item.seoKeywords ?? undefined,
+    seoTitle: item.seoTitle ?? undefined,
+    canonical: item.canonical ?? undefined,
+    robots: item.robots ?? undefined,
+    ogImage: item.ogImage ?? undefined,
     category: item.category ?? "Genel",
     date: (item.publishedAt ?? item.updatedAt).toISOString(),
     readingMinutes: readingMinutes(item.body),

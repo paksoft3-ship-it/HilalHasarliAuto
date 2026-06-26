@@ -7,6 +7,7 @@ import { requireDb } from "@/db";
 import { contentItems, contentVersions, contentApprovals, auditLogs } from "@/db/schema";
 import { requirePermission } from "@/lib/auth/guard";
 import { textToBlocks } from "@/lib/cms/blocks";
+import { textToFaqs } from "@/lib/cms/faqs";
 
 const TYPES = ["blog_post", "guide", "page", "service", "faq"] as const;
 
@@ -44,6 +45,11 @@ export async function saveContent(formData: FormData): Promise<void> {
     imageAlt: str(formData, "imageAlt") || null,
     seoTitle: str(formData, "seoTitle") || null,
     seoDescription: str(formData, "seoDescription") || null,
+    seoKeywords: str(formData, "seoKeywords") || null,
+    canonical: str(formData, "canonical") || null,
+    robots: str(formData, "robots") || null,
+    ogImage: str(formData, "ogImage") || null,
+    faqs: textToFaqs(str(formData, "faqsText")),
   };
 
   const db = requireDb();

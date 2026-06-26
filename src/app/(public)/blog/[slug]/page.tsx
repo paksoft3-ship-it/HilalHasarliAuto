@@ -33,17 +33,19 @@ export async function generateMetadata({
   const post = await getPublicBlogPost(slug);
   if (!post) return {};
   const description = post.metaDescription ?? post.excerpt;
+  const title = post.seoTitle ?? post.title;
   return {
-    title: post.title,
+    title,
     description,
     keywords: post.metaKeywords ?? blogMetaKeywords,
-    alternates: { canonical: routes.blogPost(slug) },
+    alternates: { canonical: post.canonical ?? routes.blogPost(slug) },
+    ...(post.robots ? { robots: post.robots } : {}),
     openGraph: {
-      title: post.title,
+      title,
       description,
       type: "article",
       url: routes.blogPost(slug),
-      images: [{ url: post.image }],
+      images: [{ url: post.ogImage ?? post.image }],
       publishedTime: post.date,
     },
   };
