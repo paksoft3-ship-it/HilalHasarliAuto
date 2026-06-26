@@ -12,6 +12,7 @@ import { pk, timestamps } from "./shared";
 import { users } from "./identity";
 import { contentType, contentStatus, mediaVisibility } from "./enums";
 import type { Block } from "@/config/blog";
+import type { FaqItem } from "@/config/faq";
 
 /** Structured CMS content with editorial workflow (master prompt §8). */
 export const contentItems = pgTable(
@@ -31,9 +32,12 @@ export const contentItems = pgTable(
     // SEO
     seoTitle: text("seo_title"),
     seoDescription: text("seo_description"),
+    seoKeywords: text("seo_keywords"),
     canonical: text("canonical"),
     robots: text("robots"),
     ogImage: text("og_image"),
+    // Inline FAQ accordion (rendered on blog/guide pages, feeds FAQPage schema).
+    faqs: jsonb("faqs").$type<FaqItem[]>().default([]).notNull(),
     // Workflow
     status: contentStatus("status").default("draft").notNull(),
     authorId: uuid("author_id").references(() => users.id, { onDelete: "set null" }),
