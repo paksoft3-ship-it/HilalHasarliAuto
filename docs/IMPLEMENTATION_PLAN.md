@@ -212,7 +212,9 @@ Build: 69 static pages + dynamic (llms/rss/tesekkurler). `pnpm lint`, `tsc`,
 - [x] Workflow: draft→in_review→(approved|changes_requested)→published / archived;
       RBAC (content.write vs content.publish), approval comments, audit trail.
 - [x] Admin: Content list (type filter), editor + workflow panel + approvals,
-      Media library (register-by-URL; Blob upload documented). Nav enabled.
+      Media library (direct Vercel Blob upload via `/api/admin/media/upload`
+      — perm-gated token handler + `registerUploadedMedia`; register-by-URL
+      kept as fallback). Nav enabled.
 - [x] Public blog reads published CMS posts merged with config seeds
       (`lib/cms/public-content.ts`); ISR + revalidate on publish.
 - [ ] Later: wire guides/pages/services to CMS, scheduled publish job, diff/
@@ -236,8 +238,8 @@ Build: 69 static pages + dynamic (llms/rss/tesekkurler). `pnpm lint`, `tsc`,
 Google Ads offline-conversion **upload adapter** (drain `conversion_exports`),
 enhanced conversions, GSC + GA4 + Ads reporting sync, PostHog EU load + masking,
 WhatsApp templates, guides/pages/services + FAQ/redirects
-into the CMS, scheduled-publish job. (Vercel Blob upload route — done for lead
-vehicle photos; CMS media upload-by-route still pending.)
+into the CMS, scheduled-publish job. (Vercel Blob upload — done for both lead
+vehicle photos and the admin Media library.)
 
 ## Build health
 `npx tsc --noEmit` clean · `pnpm build` passes · homepage/thank-you/404 verified via server render.
