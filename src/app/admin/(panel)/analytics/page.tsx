@@ -3,8 +3,10 @@ import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator, sourceLabels } from "@/lib/i18n/admin";
 import { getAnalyticsOverview, getAnalyticsDashboard } from "@/db/repo/analytics";
+import { resolveRange, type ResolvedRange } from "@/lib/admin/date-range";
 import { tracking } from "@/config/tracking";
 import { NotConfigured, PageTitle } from "@/components/admin/bits";
+import { RangeFilter } from "@/components/admin/range-filter";
 
 /** Human-readable labels for first-party event names (Kritik Olaylar). */
 const EVENT_LABELS: Record<string, string> = {
@@ -59,19 +61,26 @@ function BarRow({ label, value, max, sub }: { label: string; value: number; max:
   );
 }
 
-export default async function AnalyticsPage() {
+export default async function AnalyticsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ range?: string; from?: string; to?: string }>;
+}) {
   await requirePermission("analytics.view");
   const locale = await getAdminLocale();
   const t = translator(locale);
+  const range = resolveRange(await searchParams);
 
   return (
     <>
-      <PageTitle title={t("nav.analytics")} subtitle="Son 30 gün · birinci taraf veriler" />
+      <PageTitle title={t("nav.analytics")} subtitle={`${range.label} · birinci taraf veriler`} />
+
+      <RangeFilter preset={range.preset} fromStr={range.fromStr} toStr={range.toStr} />
 
       {!isDbConfigured ? (
         <div className="mt-5"><NotConfigured message={t("common.notConfigured")} /></div>
       ) : (
-        <Dashboard locale={locale} />
+        <Dashboard locale={locale} range={range} />
       )}
 
       <div className="mt-6 rounded-[14px] border border-line bg-white p-5">
@@ -90,8 +99,8 @@ export default async function AnalyticsPage() {
   );
 }
 
-async function Dashboard({ locale }: { locale: "tr" | "en" }) {
-  const [d, overview] = await Promise.all([getAnalyticsDashboard(30), getAnalyticsOverview()]);
+async function Dashboard({ locale, range }: { locale: "tr" | "en"; range: ResolvedRange }) {
+  const [d, overview] = await Promise.all([getAnalyticsDashboard(range), getAnalyticsOverview(range)]);
   const maxVisits = Math.max(1, ...d.series.map((s) => s.visits));
   const maxPage = Math.max(1, ...d.topPages.map((p) => p.visits));
   const maxSource = Math.max(1, ...d.sources.map((s) => s.visits));
@@ -110,7 +119,7 @@ async function Dashboard({ locale }: { locale: "tr" | "en" }) {
 
       {/* 14-day visits chart */}
       <div className="rounded-[14px] border border-line bg-white p-5">
-        <h2 className="mb-4 text-sm font-bold text-ink">Son 14 Gün — Ziyaret &amp; Dönüşüm</h2>
+        <h2 className="mb-4 text-sm font-bold text-ink">{range.label} — Ziyaret &amp; Dönüşüm</h2>
         {d.series.every((s) => s.visits === 0) ? (
           <p className="text-sm text-ink-muted">Henüz ziyaret verisi yok.</p>
         ) : (
@@ -152,7 +161,7 @@ async function Dashboard({ locale }: { locale: "tr" | "en" }) {
 
         <div className="rounded-[14px] border border-line bg-white p-5">
           <h2 className="mb-1 text-sm font-bold text-ink">Kritik Olaylar</h2>
-          <p className="mb-3 text-xs text-ink-muted">Buton tıklamaları ve dönüşümler — tüm zamanlar.</p>
+          <p className="mb-3 text-xs text-ink-muted">Buton tıklamaları ve dönüşümler — {range.label.toLocaleLowerCase("tr-TR")}.</p>
           {overview.eventCounts.length === 0 ? <p className="text-sm text-ink-muted">Henüz olay yok.</p> : overview.eventCounts.map((e) => (
             <BarRow key={e.name} label={EVENT_LABELS[e.name] ?? e.name} value={e.count} max={maxEvent} />
           ))}
