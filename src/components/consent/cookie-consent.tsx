@@ -67,7 +67,7 @@ export function CookieConsent() {
         <div
           role="dialog"
           aria-label="Çerez bilgilendirmesi"
-          className="fixed inset-x-0 bottom-0 z-[60] border-t border-line bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(22,27,31,0.12)]"
+          className="fixed inset-x-0 bottom-0 z-[60] border-t border-line/70 bg-white/70 backdrop-blur-md pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(22,27,31,0.10)]"
         >
           <div className="container-page flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-start gap-3">
@@ -81,15 +81,15 @@ export function CookieConsent() {
                 .
               </p>
             </div>
-            <div className="flex flex-col gap-2 sm:flex-row lg:shrink-0">
-              <button onClick={rejectAll} className={buttonClasses({ variant: "outline", size: "sm" })}>
-                Tümünü Reddet
+            <div className="flex flex-col gap-2 lg:w-64 lg:shrink-0">
+              <button onClick={acceptAll} className={buttonClasses({ variant: "primary", size: "sm" })}>
+                Tümünü Kabul Et
               </button>
               <button onClick={() => setPrefsOpen(true)} className={buttonClasses({ variant: "dark", size: "sm" })}>
                 Tercihleri Yönet
               </button>
-              <button onClick={acceptAll} className={buttonClasses({ variant: "primary", size: "sm" })}>
-                Tümünü Kabul Et
+              <button onClick={rejectAll} className={buttonClasses({ variant: "outline", size: "sm" })}>
+                Tümünü Reddet
               </button>
             </div>
           </div>
