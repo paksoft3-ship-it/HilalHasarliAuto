@@ -1,9 +1,9 @@
-import { Phone, FileText, Hand } from "lucide-react";
+import { Phone, FileText, Hand, Users, UserCheck, Network } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
-import { getClickBreakdown, type ClickBreakdownRow } from "@/db/repo/analytics";
+import { getClickBreakdown, getClickVisitorStats, type ClickBreakdownRow } from "@/db/repo/analytics";
 import { resolveRange } from "@/lib/admin/date-range";
 import { NotConfigured, PageTitle } from "@/components/admin/bits";
 import { RangeFilter } from "@/components/admin/range-filter";
@@ -37,6 +37,19 @@ function Kpi({ icon, label, value }: { icon: React.ReactNode; label: string; val
         <span className="text-xs font-semibold uppercase tracking-wide">{label}</span>
       </div>
       <div className="mt-2 text-[28px] font-bold leading-none text-ink">{value.toLocaleString("tr-TR")}</div>
+    </div>
+  );
+}
+
+function Stat({ icon, label, value, hint }: { icon?: React.ReactNode; label: string; value: number; hint?: string }) {
+  return (
+    <div className="rounded-[12px] border border-line bg-cream-50 p-4">
+      <div className="flex items-center gap-1.5 text-ink-muted">
+        {icon}
+        <span className="text-[11px] font-semibold uppercase tracking-wide">{label}</span>
+      </div>
+      <div className="mt-1.5 text-[22px] font-bold leading-none text-ink">{value.toLocaleString("tr-TR")}</div>
+      {hint && <div className="mt-1 text-[11px] text-ink-muted">{hint}</div>}
     </div>
   );
 }
@@ -113,7 +126,14 @@ export default async function ClicksPage({
 }
 
 async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
-  const { totals, byLocation, byPage } = await getClickBreakdown(range);
+  const [{ totals, byLocation, byPage }, visitors] = await Promise.all([
+    getClickBreakdown(range),
+    getClickVisitorStats(range),
+  ]);
+  const repeatPct =
+    visitors.uniqueVisitors > 0
+      ? Math.round((visitors.repeatVisitors / visitors.uniqueVisitors) * 100)
+      : 0;
 
   return (
     <div className="space-y-6">
@@ -121,6 +141,21 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
         <Kpi icon={<Phone size={15} />} label="Telefon (Ara)" value={totals.phone_click} />
         <Kpi icon={<WhatsAppIcon size={15} />} label="WhatsApp" value={totals.whatsapp_click} />
         <Kpi icon={<FileText size={15} />} label="Hemen Teklif Al" value={totals.quote_click} />
+      </div>
+
+      {/* Unique vs repeat visitors + same-IP signal */}
+      <div className="rounded-[14px] border border-line bg-white p-5">
+        <h2 className="text-sm font-bold text-ink">Ziyaretçi &amp; IP</h2>
+        <p className="mb-3 text-xs text-ink-muted">
+          Tıklamaların aynı ziyaretçi/IP&apos;den mi yoksa farklı kişilerden mi geldiğini gösterir.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <Stat icon={<Users size={14} />} label="Benzersiz ziyaretçi" value={visitors.uniqueVisitors} hint="farklı oturum" />
+          <Stat icon={<UserCheck size={14} />} label="Tekrar eden" value={visitors.repeatVisitors} hint={`birden çok tıklayan · %${repeatPct}`} />
+          <Stat icon={<Network size={14} />} label="Benzersiz IP" value={visitors.uniqueIps} hint="farklı IP adresi" />
+          <Stat icon={<Network size={14} />} label="Aynı IP'den tekrar" value={visitors.multiClickIps} hint={`${visitors.clicksFromMultiClickIps.toLocaleString("tr-TR")} tıklama`} />
+          <Stat label="Toplam tıklama" value={visitors.totalClicks} hint={visitors.identified < visitors.totalClicks ? `${(visitors.totalClicks - visitors.identified).toLocaleString("tr-TR")} kimliksiz` : "tümü tanımlı"} />
+        </div>
       </div>
 
       <BreakdownTable
@@ -137,8 +172,10 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
         labeler={(k) => k}
       />
 
-      <p className="flex items-center gap-1.5 text-xs text-ink-muted">
-        <Hand size={13} /> Sayımlar birinci taraf, anonimdir (IP/çerez saklanmaz) ve seçilen tarih aralığını yansıtır.
+      <p className="flex items-start gap-1.5 text-xs text-ink-muted">
+        <Hand size={13} className="mt-0.5 shrink-0" /> Sayımlar birinci taraftır ve seçilen tarih aralığını
+        yansıtır. Ziyaretçiler oturum kimliğiyle, IP&apos;ler ise geri döndürülemez bir özetle (ham IP
+        saklanmaz) sayılır. Ziyaretçi/IP verileri yalnızca bu özellik yayına alındıktan sonraki tıklamalar için mevcuttur.
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-import { and, desc, gte, inArray, isNull, lt, sql } from "drizzle-orm";
+import { and, desc, gte, inArray, isNotNull, isNull, lt, sql } from "drizzle-orm";
 import { requireDb } from "@/db";
 import { criticalEvents, leads, adVisits } from "@/db/schema";
 import type { ResolvedRange } from "@/lib/admin/date-range";
@@ -63,6 +63,62 @@ export async function getClickBreakdown(range: ResolvedRange) {
   );
 
   return { totals, byLocation, byPage: pivot(byPg) };
+}
+
+export interface ClickVisitorStats {
+  totalClicks: number;
+  identified: number; // clicks with a known visitor session
+  uniqueVisitors: number;
+  repeatVisitors: number;
+  uniqueIps: number;
+  multiClickIps: number;
+  clicksFromMultiClickIps: number;
+}
+
+/**
+ * Unique vs repeat visitors and same-IP signal for CTA clicks in a date range.
+ * Visitors are counted by the shared session id; IPs by a salted hash (the raw
+ * IP is never stored). Aggregated in JS over grouped rows — fine at click volume.
+ */
+export async function getClickVisitorStats(range: ResolvedRange): Promise<ClickVisitorStats> {
+  const db = requireDb();
+  const { from, to } = range;
+  const base = and(
+    inArray(criticalEvents.name, CLICK_EVENT_NAMES as unknown as string[]),
+    gte(criticalEvents.occurredAt, from),
+    lt(criticalEvents.occurredAt, to),
+  );
+  const ipExpr = sql<string>`${criticalEvents.payload} ->> 'ipHash'`;
+
+  const [totalRow, sessions, ips] = await Promise.all([
+    db.select({ c: sql<number>`count(*)::int` }).from(criticalEvents).where(base),
+    db
+      .select({ sid: criticalEvents.sessionId, c: sql<number>`count(*)::int` })
+      .from(criticalEvents)
+      .where(and(base, isNotNull(criticalEvents.sessionId)))
+      .groupBy(criticalEvents.sessionId),
+    db
+      .select({ h: ipExpr, c: sql<number>`count(*)::int` })
+      .from(criticalEvents)
+      .where(and(base, sql`${criticalEvents.payload} ->> 'ipHash' is not null`))
+      .groupBy(ipExpr),
+  ]);
+
+  const num = (v: unknown) => Number(v ?? 0);
+  const totalClicks = num(totalRow[0]?.c);
+  const identified = sessions.reduce((a, s) => a + num(s.c), 0);
+  const repeatVisitors = sessions.filter((s) => num(s.c) > 1).length;
+  const multi = ips.filter((i) => num(i.c) > 1);
+
+  return {
+    totalClicks,
+    identified,
+    uniqueVisitors: sessions.length,
+    repeatVisitors,
+    uniqueIps: ips.length,
+    multiClickIps: multi.length,
+    clicksFromMultiClickIps: multi.reduce((a, i) => a + num(i.c), 0),
+  };
 }
 
 export async function getAnalyticsOverview(range: ResolvedRange) {
