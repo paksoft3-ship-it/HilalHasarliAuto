@@ -10,11 +10,20 @@ declare global {
 export type TrackEvent =
   | "phone_click"
   | "whatsapp_click"
+  | "quote_click"
   | "quote_form_start"
   | "quote_form_submit"
   | "contact_form_submit"
   | "service_page_engaged"
   | "guide_engaged";
+
+/** Click events we also persist first-party (independent of GTM/GA4) so the
+ *  admin can see raw counts before the detailed analytics layer is wired. */
+export const FIRST_PARTY_CLICK_EVENTS = new Set<TrackEvent>([
+  "phone_click",
+  "whatsapp_click",
+  "quote_click",
+]);
 
 /** Conversion value (TRY) per click event — used by GTM for value-based bidding. */
 export const CLICK_EVENT_VALUE: Partial<Record<TrackEvent, number>> = {

@@ -6,6 +6,18 @@ import { getAnalyticsOverview, getAnalyticsDashboard } from "@/db/repo/analytics
 import { tracking } from "@/config/tracking";
 import { NotConfigured, PageTitle } from "@/components/admin/bits";
 
+/** Human-readable labels for first-party event names (Kritik Olaylar). */
+const EVENT_LABELS: Record<string, string> = {
+  phone_click: "Telefon (Ara) tıklaması",
+  whatsapp_click: "WhatsApp tıklaması",
+  quote_click: "“Hemen Teklif Al” tıklaması",
+  quote_form_submit: "Teklif formu gönderimi",
+  contact_form_submit: "İletişim formu gönderimi",
+  lead_created: "Yeni aday oluştu",
+  whatsapp_conversation_started: "WhatsApp görüşmesi başladı",
+  qualified_call: "Nitelikli arama",
+};
+
 function ConfigRow({ label, value }: { label: string; value: string }) {
   const ok = Boolean(value);
   return (
@@ -139,9 +151,10 @@ async function Dashboard({ locale }: { locale: "tr" | "en" }) {
         </div>
 
         <div className="rounded-[14px] border border-line bg-white p-5">
-          <h2 className="mb-3 text-sm font-bold text-ink">Kritik Olaylar</h2>
+          <h2 className="mb-1 text-sm font-bold text-ink">Kritik Olaylar</h2>
+          <p className="mb-3 text-xs text-ink-muted">Buton tıklamaları ve dönüşümler — tüm zamanlar.</p>
           {overview.eventCounts.length === 0 ? <p className="text-sm text-ink-muted">Henüz olay yok.</p> : overview.eventCounts.map((e) => (
-            <BarRow key={e.name} label={e.name} value={e.count} max={maxEvent} />
+            <BarRow key={e.name} label={EVENT_LABELS[e.name] ?? e.name} value={e.count} max={maxEvent} />
           ))}
         </div>
         <div className="rounded-[14px] border border-line bg-white p-5">

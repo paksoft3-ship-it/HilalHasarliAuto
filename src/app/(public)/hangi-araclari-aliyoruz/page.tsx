@@ -115,7 +115,7 @@ export default async function VehiclesWeBuyPage() {
               <WhatsAppIcon size={18} />
               WhatsApp’tan Sorun
             </a>
-            <Link href={routes.getOffer} className={buttonClasses({ variant: "primary" })}>
+            <Link href={routes.getOffer} data-track="quote_click" data-track-location="hangi_araclar" className={buttonClasses({ variant: "primary" })}>
               Teklif Al
             </Link>
           </div>

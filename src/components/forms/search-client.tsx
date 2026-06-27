@@ -68,7 +68,7 @@ export function SearchClient() {
             <p className="text-ink-secondary">
               {nq ? `“${query}” için sonuç bulunamadı.` : "Aramaya başlamak için yukarıya yazın."}
             </p>
-            <Link href={routes.getOffer} className={buttonClasses({ variant: "primary", className: "mt-5" })}>
+            <Link href={routes.getOffer} data-track="quote_click" data-track-location="arama" className={buttonClasses({ variant: "primary", className: "mt-5" })}>
               Hemen Teklif Al
             </Link>
           </div>

@@ -30,7 +30,12 @@ export function CtaGroup({
   const settings = useSettings();
   return (
     <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", className)}>
-      <Link href={routes.getOffer} className={buttonClasses({ variant: "primary", size })}>
+      <Link
+        href={routes.getOffer}
+        data-track="quote_click"
+        data-track-location={location}
+        className={buttonClasses({ variant: "primary", size })}
+      >
         Hemen Teklif Al
       </Link>
       <a

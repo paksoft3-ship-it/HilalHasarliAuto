@@ -89,6 +89,8 @@ export default async function ContactPage() {
               </p>
               <Link
                 href={routes.getOffer}
+                data-track="quote_click"
+                data-track-location="iletisim"
                 className={buttonClasses({ variant: "primary", fullWidth: true, className: "mt-4" })}
               >
                 Hemen Teklif Al

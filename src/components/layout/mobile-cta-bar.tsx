@@ -38,6 +38,8 @@ export function MobileCtaBar() {
         </a>
         <Link
           href={routes.getOffer}
+          data-track="quote_click"
+          data-track-location="mobile_bar"
           className="flex h-12 flex-[1.3] items-center justify-center rounded-[12px] bg-burgundy-700 text-[15px] font-bold text-white"
         >
           Hemen Teklif Al

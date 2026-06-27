@@ -80,7 +80,7 @@ export function Header() {
               </span>
             </span>
           </a>
-          <Link href={routes.getOffer} className={buttonClasses({ size: "md" })}>
+          <Link href={routes.getOffer} data-track="quote_click" data-track-location="header" className={buttonClasses({ size: "md" })}>
             Hemen Teklif Al
           </Link>
         </div>
@@ -130,6 +130,8 @@ export function Header() {
             <Link
               href={routes.getOffer}
               onClick={() => setMenuOpen(false)}
+              data-track="quote_click"
+              data-track-location="mobile_menu"
               className={buttonClasses({ size: "lg", fullWidth: true, className: "mt-3" })}
             >
               Hemen Teklif Al

@@ -3,12 +3,25 @@
 import { useEffect } from "react";
 import { captureAttribution } from "@/lib/tracking/attribution";
 import { readConsent } from "@/lib/consent/consent";
-import { applyConsentMode, pushEvent, CLICK_EVENT_VALUE, type TrackEvent } from "@/lib/tracking/events";
+import { applyConsentMode, pushEvent, CLICK_EVENT_VALUE, FIRST_PARTY_CLICK_EVENTS, type TrackEvent } from "@/lib/tracking/events";
+
+/** Fire-and-forget first-party CTA-click count (survives navigation). */
+function beaconClick(event: TrackEvent, location: string | null) {
+  if (typeof navigator === "undefined") return;
+  const payload = JSON.stringify({ event, location, path: window.location.pathname });
+  try {
+    if (navigator.sendBeacon) navigator.sendBeacon("/api/track/click", payload);
+    else void fetch("/api/track/click", { method: "POST", body: payload, keepalive: true });
+  } catch {
+    /* never block the click */
+  }
+}
 
 /**
  * Public-site tracking bootstrap: capture attribution, re-apply stored consent
  * (Consent Mode), and delegate clicks on [data-track] elements to dataLayer
- * events (phone_click / whatsapp_click). Renders nothing.
+ * events (phone_click / whatsapp_click) + a first-party click counter.
+ * Renders nothing.
  */
 export function TrackingProvider() {
   useEffect(() => {
@@ -36,6 +49,9 @@ export function TrackingProvider() {
       const location = el?.getAttribute("data-track-location");
       if (location) params.location = location;
       pushEvent(ev, params);
+
+      // Persist a first-party count for the key CTAs, independent of GTM/GA4.
+      if (FIRST_PARTY_CLICK_EVENTS.has(ev)) beaconClick(ev, location ?? null);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
