@@ -22,8 +22,10 @@ export const fullQuoteSchema = z.object({
   registrationStatus: z.string().trim().optional().or(z.literal("")),
   hasTowDoc: z.enum(["yes", "no", "unknown"]).optional(),
 
-  // Step 3 — photos handled client-side / WhatsApp (no storage yet); count only.
+  // Step 3 — photos uploaded to Vercel Blob from the browser; the form submits
+  // a JSON array of { url, pathname, name?, size? }. `photoCount` is advisory.
   photoCount: z.string().optional(),
+  photos: z.string().optional(),
 
   // Step 4 — Konum ve İletişim
   city: z.string().trim().min(1, "İl seçin."),
@@ -52,7 +54,7 @@ export type FullQuoteInput = z.infer<typeof fullQuoteSchema>;
 export const stepFields: (keyof FullQuoteInput)[][] = [
   ["brand", "model", "year", "mileage", "fuel", "transmission"],
   ["category", "damageDescription", "running", "starts", "registrationStatus", "hasTowDoc"],
-  ["photoCount"],
+  ["photoCount", "photos"],
   ["city", "district", "fullName", "phone", "email", "preferredContact"],
   ["consent", "marketing"],
 ];

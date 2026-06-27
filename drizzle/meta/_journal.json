@@ -57,6 +57,13 @@
       "when": 1782496988756,
       "tag": "0007_closed_beyonder",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1782579976530,
+      "tag": "0008_rainy_the_fury",
+      "breakpoints": true
     }
   ]
 }

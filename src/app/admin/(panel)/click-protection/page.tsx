@@ -154,7 +154,7 @@ export default async function ClickProtectionDashboard({
 
       {/* Top flagged IPs */}
       <div className="mt-6 rounded-[14px] border border-line bg-white p-5">
-        <p className="mb-4 text-sm font-semibold text-ink">En yüksek skorlu IP'ler</p>
+        <p className="mb-4 text-sm font-semibold text-ink">En yüksek skorlu IP&apos;ler</p>
         {top.length === 0 ? (
           <p className="text-sm text-ink-muted">Henüz işaretli IP yok.</p>
         ) : (

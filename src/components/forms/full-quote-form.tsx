@@ -3,7 +3,8 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
-import { Loader2, ArrowLeft, ArrowRight, Camera, Check } from "lucide-react";
+import { upload } from "@vercel/blob/client";
+import { Loader2, ArrowLeft, ArrowRight, Camera, Check, X, AlertCircle } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import {
   submitFullQuote,
@@ -56,12 +57,12 @@ function Radio({ name, options, errored }: { name: string; options: readonly { v
   );
 }
 
-function SubmitButton() {
+function SubmitButton({ disabled }: { disabled?: boolean }) {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
-      disabled={pending}
+      disabled={pending || disabled}
       className="flex h-12 items-center justify-center gap-2 rounded-[10px] bg-burgundy-700 px-8 text-[15px] font-semibold text-white hover:bg-burgundy-800 disabled:opacity-70"
     >
       {pending ? <><Loader2 size={18} className="animate-spin" /> Gönderiliyor…</> : "Değerlendirme Talebi Gönder"}
@@ -69,12 +70,25 @@ function SubmitButton() {
   );
 }
 
+type PhotoItem = {
+  id: string;
+  name: string;
+  size: number;
+  previewUrl: string;
+  status: "uploading" | "done" | "error";
+  url?: string;
+  pathname?: string;
+};
+
+const MAX_PHOTOS = 12;
+const MAX_PHOTO_BYTES = 15 * 1024 * 1024;
+
 export function FullQuoteForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [step, setStep] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [photos, setPhotos] = useState<{ url: string; name: string }[]>([]);
+  const [photos, setPhotos] = useState<PhotoItem[]>([]);
   const [summary, setSummary] = useState<Record<string, string>>({});
   const [attribution, setAttribution] = useState("");
 
@@ -138,10 +152,83 @@ export function FullQuoteForm() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function onPhotos(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(e.target.files ?? []).slice(0, 12);
-    setPhotos(files.map((f) => ({ url: URL.createObjectURL(f), name: f.name })));
+  async function onPhotos(e: React.ChangeEvent<HTMLInputElement>) {
+    const input = e.target;
+    const picked = Array.from(input.files ?? []);
+    input.value = ""; // allow re-selecting the same file after removal
+    if (picked.length === 0) return;
+
+    setErrors((prev) => {
+      if (!prev.photos) return prev;
+      const rest = { ...prev };
+      delete rest.photos;
+      return rest;
+    });
+
+    // Respect the overall cap and skip oversized / non-image files.
+    const room = MAX_PHOTOS - photos.length;
+    const accepted = picked
+      .filter((f) => f.type.startsWith("image/") && f.size <= MAX_PHOTO_BYTES)
+      .slice(0, Math.max(0, room));
+
+    if (accepted.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        photos:
+          picked.length > room
+            ? `En fazla ${MAX_PHOTOS} fotoğraf yükleyebilirsiniz.`
+            : "Yalnızca 15 MB'a kadar görsel dosyaları yükleyebilirsiniz.",
+      }));
+      return;
+    }
+
+    const items: PhotoItem[] = accepted.map((f) => ({
+      id: crypto.randomUUID(),
+      name: f.name,
+      size: f.size,
+      previewUrl: URL.createObjectURL(f),
+      status: "uploading",
+    }));
+    setPhotos((prev) => [...prev, ...items]);
+
+    await Promise.all(
+      accepted.map(async (file, i) => {
+        const item = items[i];
+        try {
+          const blob = await upload(`leads/${file.name}`, file, {
+            access: "public",
+            handleUploadUrl: "/api/upload",
+            contentType: file.type,
+          });
+          setPhotos((prev) =>
+            prev.map((p) =>
+              p.id === item.id
+                ? { ...p, status: "done", url: blob.url, pathname: blob.pathname }
+                : p,
+            ),
+          );
+        } catch {
+          setPhotos((prev) =>
+            prev.map((p) => (p.id === item.id ? { ...p, status: "error" } : p)),
+          );
+        }
+      }),
+    );
   }
+
+  function removePhoto(id: string) {
+    setPhotos((prev) => {
+      const target = prev.find((p) => p.id === id);
+      if (target) URL.revokeObjectURL(target.previewUrl);
+      return prev.filter((p) => p.id !== id);
+    });
+  }
+
+  const uploadedPhotos = photos.filter((p) => p.status === "done");
+  const uploading = photos.some((p) => p.status === "uploading");
+  const photosField = JSON.stringify(
+    uploadedPhotos.map((p) => ({ url: p.url, pathname: p.pathname, name: p.name, size: p.size })),
+  );
 
   return (
     <div>
@@ -177,7 +264,8 @@ export function FullQuoteForm() {
 
       <form ref={formRef} action={action} noValidate>
         <input type="hidden" name="source" value="get_offer" />
-        <input type="hidden" name="photoCount" value={photos.length} />
+        <input type="hidden" name="photoCount" value={uploadedPhotos.length} />
+        <input type="hidden" name="photos" value={photosField} />
         <input type="hidden" name="attribution" value={attribution} />
         <div aria-hidden className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
           <input name="company" tabIndex={-1} autoComplete="off" />
@@ -276,16 +364,52 @@ export function FullQuoteForm() {
           <label className="mt-5 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-[14px] border-2 border-dashed border-line-strong bg-cream-50 px-6 py-10 text-center hover:border-burgundy-700">
             <Camera size={28} className="text-burgundy-700" />
             <span className="text-sm font-semibold text-ink">Fotoğraf seçin veya çekin</span>
-            <span className="text-xs text-ink-muted">JPG / PNG · en fazla 12 fotoğraf</span>
+            <span className="text-xs text-ink-muted">JPG / PNG · en fazla {MAX_PHOTOS} fotoğraf · maks. 15 MB</span>
             <input type="file" accept="image/*" multiple capture="environment" onChange={onPhotos} className="hidden" />
           </label>
+          <Err msg={errors.photos} />
           {photos.length > 0 && (
             <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
               {photos.map((p) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={p.url} src={p.url} alt={p.name} className="aspect-square w-full rounded-[10px] object-cover" />
+                <div key={p.id} className="group relative aspect-square overflow-hidden rounded-[10px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.previewUrl} alt={p.name} className="h-full w-full object-cover" />
+                  {p.status !== "error" && (
+                    <button
+                      type="button"
+                      onClick={() => removePhoto(p.id)}
+                      aria-label="Fotoğrafı kaldır"
+                      className="absolute right-1 top-1 grid h-6 w-6 place-items-center rounded-full bg-black/55 text-white opacity-0 transition group-hover:opacity-100"
+                    >
+                      <X size={13} />
+                    </button>
+                  )}
+                  {p.status === "uploading" && (
+                    <div className="absolute inset-0 grid place-items-center bg-black/40">
+                      <Loader2 size={20} className="animate-spin text-white" />
+                    </div>
+                  )}
+                  {p.status === "done" && (
+                    <span className="absolute bottom-1 left-1 grid h-5 w-5 place-items-center rounded-full bg-success text-white">
+                      <Check size={12} />
+                    </span>
+                  )}
+                  {p.status === "error" && (
+                    <button
+                      type="button"
+                      onClick={() => removePhoto(p.id)}
+                      className="absolute inset-0 grid place-items-center gap-1 bg-error/80 text-white"
+                    >
+                      <AlertCircle size={18} />
+                      <span className="text-[10px] font-semibold">Tekrar dene</span>
+                    </button>
+                  )}
+                </div>
               ))}
             </div>
+          )}
+          {uploading && (
+            <p className="mt-2 text-xs font-medium text-ink-muted">Fotoğraflar yükleniyor…</p>
           )}
           <div className="mt-5 flex items-start gap-3 rounded-[12px] border border-info/30 bg-info-surface p-4">
             <WhatsAppIcon size={18} className="mt-0.5 shrink-0 text-whatsapp" />
@@ -350,7 +474,7 @@ export function FullQuoteForm() {
               ["Konum", [summary.city, summary.district].filter(Boolean).join(" / ")],
               ["Ad Soyad", summary.fullName],
               ["Telefon", summary.phone],
-              ["Fotoğraf", `${photos.length} adet`],
+              ["Fotoğraf", `${uploadedPhotos.length} adet`],
             ].map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 py-3">
                 <dt className="font-medium text-ink-muted">{k}</dt>
@@ -387,7 +511,7 @@ export function FullQuoteForm() {
             </button>
           ) : <span />}
           {isLast ? (
-            <SubmitButton />
+            <SubmitButton disabled={uploading} />
           ) : (
             <button type="button" onClick={goNext} className="inline-flex items-center gap-1.5 rounded-[10px] bg-burgundy-700 px-6 py-3 text-sm font-semibold text-white hover:bg-burgundy-800">
               Devam <ArrowRight size={16} />

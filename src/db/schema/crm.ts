@@ -67,6 +67,14 @@ export const leads = pgTable(
   ],
 );
 
+/** A photo uploaded to Vercel Blob for a vehicle. */
+export interface VehiclePhoto {
+  url: string;
+  pathname: string;
+  name?: string;
+  size?: number;
+}
+
 export const vehicles = pgTable(
   "vehicles",
   {
@@ -87,6 +95,8 @@ export const vehicles = pgTable(
     plate: text("plate"),
     vin: text("vin"), // restricted; access-controlled
     photoCount: integer("photo_count").default(0).notNull(),
+    // Uploaded vehicle photos (Vercel Blob). Each: { url, pathname, name?, size? }.
+    photos: jsonb("photos").$type<VehiclePhoto[]>().default([]).notNull(),
     documentCount: integer("document_count").default(0).notNull(),
     ...timestamps,
   },

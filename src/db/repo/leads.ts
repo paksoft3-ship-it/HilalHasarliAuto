@@ -2,6 +2,7 @@ import { requireDb, type Database } from "@/db";
 import {
   leads, vehicles, formSubmissions, leadNotes, attributionTouches, criticalEvents,
 } from "@/db/schema";
+import type { VehiclePhoto } from "@/db/schema/crm";
 import type { QuickOfferInput } from "@/lib/leads/schema";
 import type { FullQuoteInput } from "@/lib/leads/full-quote";
 import { normalizePhone } from "@/lib/leads/schema";
@@ -79,6 +80,32 @@ const toInt = (v: string | undefined): number | null => {
   return Number.isFinite(n) ? n : null;
 };
 
+/** Safely parse the form's `photos` JSON into trusted Blob photo records.
+ *  Only keeps entries with a Vercel Blob https URL + pathname; caps at 12. */
+function parsePhotos(raw: string | undefined): VehiclePhoto[] {
+  if (!raw) return [];
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return [];
+    return arr
+      .filter(
+        (p): p is VehiclePhoto =>
+          p && typeof p.url === "string" &&
+          /^https:\/\/[\w.-]*\.public\.blob\.vercel-storage\.com\//.test(p.url) &&
+          typeof p.pathname === "string",
+      )
+      .slice(0, 12)
+      .map((p) => ({
+        url: p.url,
+        pathname: p.pathname,
+        name: typeof p.name === "string" ? p.name.slice(0, 200) : undefined,
+        size: typeof p.size === "number" ? p.size : undefined,
+      }));
+  } catch {
+    return [];
+  }
+}
+
 /** Simple, explainable lead score (0–100). */
 function scoreLead(opts: {
   hasPhone: boolean;
@@ -151,7 +178,9 @@ export async function persistQuickOffer(input: QuickOfferInput, meta: RequestMet
 export async function persistFullQuote(input: FullQuoteInput, meta: RequestMeta) {
   const db = requireDb();
   const phoneNormalized = normalizePhone(input.phone);
-  const photoCount = toInt(input.photoCount) ?? 0;
+  const photos = parsePhotos(input.photos);
+  // Trust the actual uploaded photos over the client-sent count.
+  const photoCount = photos.length || (toInt(input.photoCount) ?? 0);
   const score = scoreLead({
     hasPhone: phoneNormalized.length === 10,
     vehicleFields: [input.brand, input.model, input.year, input.fuel, input.transmission, input.category].filter(Boolean).length,
@@ -191,6 +220,7 @@ export async function persistFullQuote(input: FullQuoteInput, meta: RequestMeta)
     registrationStatus: input.registrationStatus || null,
     hasTowDoc: tri(input.hasTowDoc),
     photoCount,
+    photos,
   });
 
   await db.insert(formSubmissions).values({

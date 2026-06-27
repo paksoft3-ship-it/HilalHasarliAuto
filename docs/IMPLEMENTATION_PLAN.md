@@ -63,7 +63,11 @@ Files inspected, assets inventoried & mapped, route map confirmed, plan written.
       (Organization/WebSite/Breadcrumb/Service/FAQ/BlogPosting/HowTo)
 - [x] Cookie consent UI (categories, accept/reject/save, reopenable; Consent Mode
       v2 wiring TODO Phase 6)
-- [ ] Forms: real DB persistence (Phase 4), Vercel Blob photo upload, Turnstile
+- [x] Vercel Blob photo upload — full quote form uploads vehicle photos
+      browser→Blob via `/api/upload` (client-upload token handler, image-only,
+      15 MB cap, `leads/` prefix); URLs persisted to `vehicles.photos` (jsonb,
+      migration 0008) + shown as thumbnails on the admin lead detail.
+- [ ] Forms: real DB persistence (Phase 4), Turnstile
 - [ ] OG image endpoints, a11y (axe) pass, Lighthouse/perf pass, e2e tests
 
 Build: 69 static pages + dynamic (llms/rss/tesekkurler). `pnpm lint`, `tsc`,
@@ -231,8 +235,9 @@ Build: 69 static pages + dynamic (llms/rss/tesekkurler). `pnpm lint`, `tsc`,
 ### Deferred cross-cutting (need external credentials)
 Google Ads offline-conversion **upload adapter** (drain `conversion_exports`),
 enhanced conversions, GSC + GA4 + Ads reporting sync, PostHog EU load + masking,
-WhatsApp templates, Vercel Blob upload route, guides/pages/services + FAQ/redirects
-into the CMS, scheduled-publish job.
+WhatsApp templates, guides/pages/services + FAQ/redirects
+into the CMS, scheduled-publish job. (Vercel Blob upload route — done for lead
+vehicle photos; CMS media upload-by-route still pending.)
 
 ## Build health
 `npx tsc --noEmit` clean · `pnpm build` passes · homepage/thank-you/404 verified via server render.

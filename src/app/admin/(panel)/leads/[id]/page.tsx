@@ -134,6 +134,23 @@ export default async function LeadDetailPage({
                 <Row label="Açıklama" value={vehicle.damageDescription} />
                 <Row label="Fotoğraf" value={vehicle.photoCount} />
               </dl>
+              {vehicle.photos?.length > 0 && (
+                <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-4">
+                  {vehicle.photos.map((p) => (
+                    <a
+                      key={p.pathname}
+                      href={p.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block aspect-square overflow-hidden rounded-md border border-line"
+                      title={p.name ?? p.pathname}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.url} alt={p.name ?? "Araç fotoğrafı"} className="h-full w-full object-cover transition hover:scale-105" />
+                    </a>
+                  ))}
+                </div>
+              )}
             </Card>
           )}
 
