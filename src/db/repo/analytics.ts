@@ -121,6 +121,62 @@ export async function getClickVisitorStats(range: ResolvedRange): Promise<ClickV
   };
 }
 
+export interface TopClickIp {
+  ipHash: string;
+  total: number;
+  phone_click: number;
+  whatsapp_click: number;
+  quote_click: number;
+  visitors: number; // distinct sessions on this IP
+  pages: number; // distinct pages clicked from this IP
+}
+
+/**
+ * IPs (salted-hash) with the most clicks in the range — to eyeball repeated
+ * clickers. Only IPs with >1 click are returned; `visitors` > 1 on a single IP
+ * is a classic shared-IP / automation signal.
+ */
+export async function getTopClickIps(range: ResolvedRange, limit = 10): Promise<TopClickIp[]> {
+  const db = requireDb();
+  const { from, to } = range;
+  const ipExpr = sql<string>`${criticalEvents.payload} ->> 'ipHash'`;
+  const filt = (name: ClickEventName) => sql<number>`count(*) filter (where ${criticalEvents.name} = ${name})::int`;
+
+  const rows = await db
+    .select({
+      ipHash: ipExpr,
+      total: sql<number>`count(*)::int`,
+      phone_click: filt("phone_click"),
+      whatsapp_click: filt("whatsapp_click"),
+      quote_click: filt("quote_click"),
+      visitors: sql<number>`count(distinct ${criticalEvents.sessionId})::int`,
+      pages: sql<number>`count(distinct ${criticalEvents.pageUrl})::int`,
+    })
+    .from(criticalEvents)
+    .where(
+      and(
+        inArray(criticalEvents.name, CLICK_EVENT_NAMES as unknown as string[]),
+        gte(criticalEvents.occurredAt, from),
+        lt(criticalEvents.occurredAt, to),
+        sql`${criticalEvents.payload} ->> 'ipHash' is not null`,
+      ),
+    )
+    .groupBy(ipExpr)
+    .having(sql`count(*) > 1`)
+    .orderBy(desc(sql`count(*)`))
+    .limit(limit);
+
+  return rows.map((r) => ({
+    ipHash: r.ipHash,
+    total: Number(r.total),
+    phone_click: Number(r.phone_click),
+    whatsapp_click: Number(r.whatsapp_click),
+    quote_click: Number(r.quote_click),
+    visitors: Number(r.visitors),
+    pages: Number(r.pages),
+  }));
+}
+
 export async function getAnalyticsOverview(range: ResolvedRange) {
   const db = requireDb();
   const { from, to } = range;

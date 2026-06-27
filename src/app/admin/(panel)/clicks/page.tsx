@@ -3,7 +3,7 @@ import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
-import { getClickBreakdown, getClickVisitorStats, type ClickBreakdownRow } from "@/db/repo/analytics";
+import { getClickBreakdown, getClickVisitorStats, getTopClickIps, type ClickBreakdownRow } from "@/db/repo/analytics";
 import { resolveRange } from "@/lib/admin/date-range";
 import { NotConfigured, PageTitle } from "@/components/admin/bits";
 import { RangeFilter } from "@/components/admin/range-filter";
@@ -126,9 +126,10 @@ export default async function ClicksPage({
 }
 
 async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
-  const [{ totals, byLocation, byPage }, visitors] = await Promise.all([
+  const [{ totals, byLocation, byPage }, visitors, topIps] = await Promise.all([
     getClickBreakdown(range),
     getClickVisitorStats(range),
+    getTopClickIps(range),
   ]);
   const repeatPct =
     visitors.uniqueVisitors > 0
@@ -156,6 +157,54 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
           <Stat icon={<Network size={14} />} label="Aynı IP'den tekrar" value={visitors.multiClickIps} hint={`${visitors.clicksFromMultiClickIps.toLocaleString("tr-TR")} tıklama`} />
           <Stat label="Toplam tıklama" value={visitors.totalClicks} hint={visitors.identified < visitors.totalClicks ? `${(visitors.totalClicks - visitors.identified).toLocaleString("tr-TR")} kimliksiz` : "tümü tanımlı"} />
         </div>
+      </div>
+
+      {/* Top repeated IPs */}
+      <div className="rounded-[14px] border border-line bg-white p-5">
+        <h2 className="text-sm font-bold text-ink">En Çok Tıklayan IP&apos;ler</h2>
+        <p className="mb-3 text-xs text-ink-muted">
+          Birden fazla tıklama yapan IP&apos;ler (özet). Tek bir IP&apos;de birden çok ziyaretçi
+          görmek, paylaşımlı bağlantı veya otomasyon işareti olabilir.
+        </p>
+        {topIps.length === 0 ? (
+          <p className="text-sm text-ink-muted">Bu aralıkta birden fazla tıklayan IP yok.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-ink-muted">
+                  <th className="py-2 pr-3 font-semibold">IP (özet)</th>
+                  <th className="py-2 px-2 text-right font-semibold">Telefon</th>
+                  <th className="py-2 px-2 text-right font-semibold">WhatsApp</th>
+                  <th className="py-2 px-2 text-right font-semibold">Teklif</th>
+                  <th className="py-2 px-2 text-right font-semibold">Ziyaretçi</th>
+                  <th className="py-2 px-2 text-right font-semibold">Sayfa</th>
+                  <th className="py-2 pl-2 text-right font-semibold">Toplam</th>
+                </tr>
+              </thead>
+              <tbody>
+                {topIps.map((r) => (
+                  <tr key={r.ipHash} className="border-b border-line last:border-0">
+                    <td className="py-2 pr-3 font-mono text-[12px] text-ink-secondary">
+                      {r.ipHash.slice(0, 10)}…
+                      {r.visitors > 1 && (
+                        <span className="ml-2 rounded bg-warning-surface px-1.5 py-0.5 text-[10px] font-semibold text-warning">
+                          {r.visitors} ziyaretçi
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.phone_click || "—"}</td>
+                    <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.whatsapp_click || "—"}</td>
+                    <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.quote_click || "—"}</td>
+                    <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.visitors}</td>
+                    <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.pages}</td>
+                    <td className="py-2 pl-2 text-right font-semibold tabular-nums text-ink">{r.total}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       <BreakdownTable
