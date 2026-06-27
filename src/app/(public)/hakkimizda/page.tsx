@@ -38,7 +38,7 @@ export default function AboutPage() {
         title={`${siteConfig.brandName} Hakkında`}
         description="Hasarlı, kazalı, arızalı ve çalışmayan araçların sahipleri için karmaşık bir süreci basitleştiriyoruz. Aracınızı birlikte değerlendirir; güvenli, şeffaf ve anlaşılır bir satın alma süreci sunarız."
       >
-        <CtaGroup />
+        <CtaGroup location="hero" />
       </PageHero>
 
       {/* Who we are / what we do */}

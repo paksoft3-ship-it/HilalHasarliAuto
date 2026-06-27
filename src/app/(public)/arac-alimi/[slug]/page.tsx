@@ -88,6 +88,7 @@ export default async function ServicePage({
         description={content.heroLead}
       >
         <CtaGroup
+          location="hero"
           whatsappMessage={`Merhaba, ${service.title.toLowerCase()} hakkında değerlendirme talep etmek istiyorum.`}
         />
       </PageHero>

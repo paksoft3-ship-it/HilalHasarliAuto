@@ -18,7 +18,7 @@ export function FinalCta({
           {subtitle}
         </p>
         <div className="mt-8 flex justify-center">
-          <CtaGroup size="lg" showPhone className="justify-center" />
+          <CtaGroup size="lg" showPhone location="cta_banner" className="justify-center" />
         </div>
       </div>
     </Section>

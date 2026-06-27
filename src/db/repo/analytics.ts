@@ -1,7 +1,69 @@
-import { and, desc, gte, isNull, lt, sql } from "drizzle-orm";
+import { and, desc, gte, inArray, isNull, lt, sql } from "drizzle-orm";
 import { requireDb } from "@/db";
 import { criticalEvents, leads, adVisits } from "@/db/schema";
 import type { ResolvedRange } from "@/lib/admin/date-range";
+
+/** The three CTA click events surfaced in the Button Clicks report. */
+export const CLICK_EVENT_NAMES = ["phone_click", "whatsapp_click", "quote_click"] as const;
+export type ClickEventName = (typeof CLICK_EVENT_NAMES)[number];
+
+export interface ClickBreakdownRow {
+  key: string;
+  phone_click: number;
+  whatsapp_click: number;
+  quote_click: number;
+  total: number;
+}
+
+/**
+ * Per-placement and per-page breakdown of CTA clicks (phone / WhatsApp / quote)
+ * within a date range, from first-party critical_events. No GA4 dependency.
+ */
+export async function getClickBreakdown(range: ResolvedRange) {
+  const db = requireDb();
+  const { from, to } = range;
+  const where = and(
+    inArray(criticalEvents.name, CLICK_EVENT_NAMES as unknown as string[]),
+    gte(criticalEvents.occurredAt, from),
+    lt(criticalEvents.occurredAt, to),
+  );
+  const locExpr = sql<string>`coalesce(nullif(${criticalEvents.payload} ->> 'location', ''), '—')`;
+  const pageExpr = sql<string>`coalesce(nullif(${criticalEvents.pageUrl}, ''), '/')`;
+
+  const [byLoc, byPg] = await Promise.all([
+    db
+      .select({ name: criticalEvents.name, key: locExpr, count: sql<number>`count(*)::int` })
+      .from(criticalEvents).where(where).groupBy(criticalEvents.name, locExpr),
+    db
+      .select({ name: criticalEvents.name, key: pageExpr, count: sql<number>`count(*)::int` })
+      .from(criticalEvents).where(where).groupBy(criticalEvents.name, pageExpr),
+  ]);
+
+  const pivot = (rows: { name: string; key: string; count: number }[]): ClickBreakdownRow[] => {
+    const map = new Map<string, ClickBreakdownRow>();
+    for (const r of rows) {
+      const row = map.get(r.key) ?? { key: r.key, phone_click: 0, whatsapp_click: 0, quote_click: 0, total: 0 };
+      if (r.name === "phone_click" || r.name === "whatsapp_click" || r.name === "quote_click") {
+        row[r.name] = Number(r.count);
+        row.total += Number(r.count);
+      }
+      map.set(r.key, row);
+    }
+    return [...map.values()].sort((a, b) => b.total - a.total);
+  };
+
+  const byLocation = pivot(byLoc);
+  const totals = byLocation.reduce(
+    (acc, r) => ({
+      phone_click: acc.phone_click + r.phone_click,
+      whatsapp_click: acc.whatsapp_click + r.whatsapp_click,
+      quote_click: acc.quote_click + r.quote_click,
+    }),
+    { phone_click: 0, whatsapp_click: 0, quote_click: 0 },
+  );
+
+  return { totals, byLocation, byPage: pivot(byPg) };
+}
 
 export async function getAnalyticsOverview(range: ResolvedRange) {
   const db = requireDb();

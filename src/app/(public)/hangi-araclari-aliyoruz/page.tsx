@@ -39,7 +39,7 @@ export default async function VehiclesWeBuyPage() {
         title="Farklı Durumdaki Araçlar İçin Değerlendirme"
         description="Aracınızın durumu ne olursa olsun değerini profesyonelce belirliyoruz. Aşağıdan kategorinizi seçerek sürece başlayın."
       >
-        <CtaGroup />
+        <CtaGroup location="hero" />
       </PageHero>
 
       <TrustStrip />

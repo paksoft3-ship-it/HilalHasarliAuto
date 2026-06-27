@@ -58,7 +58,7 @@ export default function HowItWorksPage() {
         title="Aracınızı Satma Süreci Nasıl İlerler?"
         description="Bilgilerinizi paylaşmaktan teslime kadar her adım açık ve anlaşılırdır. Süreç boyunca sizi bilgilendiririz."
       >
-        <CtaGroup />
+        <CtaGroup location="hero" />
       </PageHero>
 
       {/* Detailed timeline */}

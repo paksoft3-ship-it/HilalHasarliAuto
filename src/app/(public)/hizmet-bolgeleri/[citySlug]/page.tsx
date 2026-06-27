@@ -89,6 +89,7 @@ export default async function CityPage({
         description={cityIntro(city)}
       >
         <CtaGroup
+          location="hero"
           whatsappMessage={`Merhaba, ${city.locative} bir aracım var, değerlendirme talep etmek istiyorum.`}
         />
       </PageHero>

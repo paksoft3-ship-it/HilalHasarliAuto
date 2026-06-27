@@ -16,6 +16,7 @@ const NAV: { key: string; href: string; perm: PermissionCode }[] = [
   { key: "adspend", href: "/admin/adspend", perm: "adspend.read" },
   { key: "click-protection", href: "/admin/click-protection", perm: "adspend.read" },
   { key: "analytics", href: "/admin/analytics", perm: "analytics.view" },
+  { key: "clicks", href: "/admin/clicks", perm: "analytics.view" },
   { key: "seo", href: "/admin/seo", perm: "seo.read" },
   { key: "content", href: "/admin/content", perm: "content.read" },
   { key: "media", href: "/admin/media", perm: "media.read" },
@@ -30,7 +31,7 @@ export const dynamic = "force-dynamic";
 // All admin modules implemented.
 const IMPLEMENTED = new Set([
   "dashboard", "leads", "funnel", "calls", "whatsapp", "buyers", "offers",
-  "deals", "finance", "adspend", "click-protection", "analytics", "seo",
+  "deals", "finance", "adspend", "click-protection", "analytics", "clicks", "seo",
   "content", "media", "users", "settings", "audit",
 ]);
 
