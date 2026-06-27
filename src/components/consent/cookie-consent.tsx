@@ -67,7 +67,7 @@ export function CookieConsent() {
         <div
           role="dialog"
           aria-label="Çerez bilgilendirmesi"
-          className="fixed inset-x-0 bottom-0 z-[60] border-t border-line/70 bg-white/70 backdrop-blur-md pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(22,27,31,0.10)]"
+          className="fixed inset-x-0 bottom-0 z-[60] border-t border-line/70 bg-white/50 backdrop-blur-md pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_30px_rgba(22,27,31,0.10)]"
         >
           <div className="container-page flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-start gap-3">
