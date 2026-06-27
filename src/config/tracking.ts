@@ -3,8 +3,7 @@ export const tracking = {
   gtmId: process.env.NEXT_PUBLIC_GTM_ID ?? "",
   ga4Id: process.env.NEXT_PUBLIC_GA4_ID ?? "",
   googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "",
-  posthogKey: process.env.NEXT_PUBLIC_POSTHOG_KEY ?? "",
-  posthogHost: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.posthog.com",
+  clarityId: process.env.NEXT_PUBLIC_CLARITY_ID ?? "",
 } as const;
 
 /** GTM/GA4 layer is loaded only when an ID is configured. */

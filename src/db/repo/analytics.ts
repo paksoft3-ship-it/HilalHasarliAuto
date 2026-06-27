@@ -41,7 +41,7 @@ const DAY_MS = 86_400_000;
 
 /**
  * Real-traffic dashboard over a rolling window (default 30 days), built from
- * the first-party ad_visits table + leads. Independent of GA4/PostHog.
+ * the first-party ad_visits table + leads. Independent of GA4.
  */
 export async function getAnalyticsDashboard(windowDays = 30) {
   const db = requireDb();

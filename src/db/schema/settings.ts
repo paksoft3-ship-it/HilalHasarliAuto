@@ -13,7 +13,7 @@ export const siteSettings = pgTable("site_settings", {
 /** Per-provider integration config + test-mode flag (secrets referenced, not stored raw). */
 export const integrationSettings = pgTable("integration_settings", {
   id: pk(),
-  provider: text("provider").notNull().unique(), // gsc, google_ads, ga4, gtm, posthog, whatsapp, call_tracking, ...
+  provider: text("provider").notNull().unique(), // gsc, google_ads, ga4, gtm, clarity, whatsapp, call_tracking, ...
   enabled: boolean("enabled").default(false).notNull(),
   testMode: boolean("test_mode").default(true).notNull(),
   config: jsonb("config").$type<Record<string, unknown>>().default({}).notNull(),

@@ -1,11 +1,10 @@
-import { Suspense } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { CookieConsent } from "@/components/consent/cookie-consent";
 import { AnalyticsScripts } from "@/components/tracking/analytics-scripts";
-import { PostHogProvider } from "@/components/tracking/posthog-provider";
+import { ClarityProvider } from "@/components/tracking/clarity-provider";
 import { TrackingProvider } from "@/components/tracking/tracking-provider";
 import { AdVisitCapture } from "@/components/tracking/ad-visit-capture";
 import { ClickProtectionTracker } from "@/components/tracking/click-protection-tracker";
@@ -28,9 +27,7 @@ export default async function PublicLayout({
         <MobileCtaBar />
         <CookieConsent />
         <AnalyticsScripts />
-        <Suspense fallback={null}>
-          <PostHogProvider />
-        </Suspense>
+        <ClarityProvider />
         <TrackingProvider />
         <ClickProtectionTracker />
         <AdVisitCapture />

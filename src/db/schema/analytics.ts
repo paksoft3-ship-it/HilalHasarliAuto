@@ -14,7 +14,7 @@ import { deals } from "./finance";
 
 /**
  * First-party business-critical events (master prompt §12 event taxonomy).
- * The source of truth for funnel/revenue analytics, independent of GA4/PostHog.
+ * The source of truth for funnel/revenue analytics, independent of GA4.
  */
 export const criticalEvents = pgTable(
   "critical_events",

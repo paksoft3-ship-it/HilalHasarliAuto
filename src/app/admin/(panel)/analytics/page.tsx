@@ -67,11 +67,11 @@ export default async function AnalyticsPage() {
         <ConfigRow label="Google Tag Manager (GTM)" value={tracking.gtmId} />
         <ConfigRow label="Google Analytics 4 (GA4)" value={tracking.ga4Id} />
         <ConfigRow label="Google Ads" value={tracking.googleAdsId} />
-        <ConfigRow label="PostHog (ısı haritası)" value={tracking.posthogKey ? "Etkin" : ""} />
+        <ConfigRow label="Microsoft Clarity (ısı haritası)" value={tracking.clarityId ? "Etkin" : ""} />
         <p className="mt-3 text-xs leading-relaxed text-ink-muted">
           Consent Mode v2 varsayılan olarak reddedilir; ziyaretçi onayına göre güncellenir.
           GA4 ve Google Ads dönüşümleri GTM üzerinden yönetilir. Isı haritası ve oturum
-          kayıtları için PostHog onaydan sonra devreye girer.
+          kayıtları için Microsoft Clarity analitik onayından sonra devreye girer.
         </p>
       </div>
     </>
