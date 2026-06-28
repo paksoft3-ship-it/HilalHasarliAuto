@@ -365,7 +365,7 @@ export function FullQuoteForm() {
             <Camera size={28} className="text-burgundy-700" />
             <span className="text-sm font-semibold text-ink">Fotoğraf seçin veya çekin</span>
             <span className="text-xs text-ink-muted">JPG / PNG · en fazla {MAX_PHOTOS} fotoğraf · maks. 15 MB</span>
-            <input type="file" accept="image/*" multiple capture="environment" onChange={onPhotos} className="hidden" />
+            <input type="file" accept="image/*" multiple onChange={onPhotos} className="hidden" />
           </label>
           <Err msg={errors.photos} />
           {photos.length > 0 && (
