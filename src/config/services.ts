@@ -215,13 +215,13 @@ export function getService(slug: string): VehicleService | undefined {
  * (generated from icons-source by scripts/remove_checkerboard.py).
  */
 const ICON_IMG: Record<string, string> = {
-  "hasarli-arac-alimi": "hasarli",
+  "hasarli-arac-alimi": "hasarli-yeni",
   "kazali-arac-alimi": "kazali",
   "pert-arac-alimi": "agir-hasarli",
   "agir-hasarli-arac-alimi": "agir-hasarli",
-  "motor-arizali-arac-alimi": "motor-arizali",
-  "mekanik-arizali-arac-alimi": "motor-arizali",
-  "calismayan-arac-alimi": "motor-arizali",
+  "motor-arizali-arac-alimi": "motor-arizali-yeni",
+  "mekanik-arizali-arac-alimi": "mekanik-arizali",
+  "calismayan-arac-alimi": "calismayan-arac",
   "yanmis-arac-alimi": "yanmis",
   "sel-hasarli-arac-alimi": "sel-hasarli",
   "hurda-arac-alimi": "hurda",
