@@ -9,8 +9,12 @@ export const runtime = "nodejs";
 
 const NO_CONTENT = new Response(null, { status: 204 });
 
-/** CTA click events we count first-party. Mirrors FIRST_PARTY_CLICK_EVENTS. */
-const ALLOWED = new Set(["phone_click", "whatsapp_click", "quote_click"]);
+/** CTA click events we count first-party. Mirrors FIRST_PARTY_CLICK_EVENTS,
+ *  plus page_view so the admin can count ALL visitors (not just clickers). */
+const ALLOWED = new Set(["phone_click", "whatsapp_click", "quote_click", "page_view"]);
+
+/** Skip obvious bots/crawlers so visit counts reflect real people. */
+const BOT_RE = /bot|crawl|spider|slurp|bing|google|yandex|baidu|duckduck|facebook|embedly|headless|lighthouse|ahrefs|semrush|pingdom|uptime|monitor|preview/i;
 
 /** Pseudonymous IP fingerprint: salted HMAC, not the raw IP (KVKK-friendly).
  *  Equal IPs → equal hash (so the admin can count unique IPs and spot repeats)
@@ -39,6 +43,8 @@ export async function POST(req: NextRequest) {
 
   const event = String(body.event ?? "").trim();
   if (!ALLOWED.has(event)) return NO_CONTENT;
+
+  if (event === "page_view" && BOT_RE.test(req.headers.get("user-agent") || "")) return NO_CONTENT;
 
   const ip = clientIp((k) => req.headers.get(k));
   const ipHash = ip && ip !== "0.0.0.0" && !isInternalIp(ip) ? hashIp(ip) : null;

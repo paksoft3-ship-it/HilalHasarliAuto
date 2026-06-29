@@ -3,7 +3,7 @@ import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
-import { getClickBreakdown, getClickVisitorStats, getTopClickIps, getRecentClicks, type ClickBreakdownRow } from "@/db/repo/analytics";
+import { getClickBreakdown, getClickVisitorStats, getTopClickIps, getRecentClicks, getVisitSummary, type ClickBreakdownRow } from "@/db/repo/analytics";
 import { resolveRange } from "@/lib/admin/date-range";
 import { NotConfigured, PageTitle } from "@/components/admin/bits";
 import { RangeFilter } from "@/components/admin/range-filter";
@@ -140,11 +140,12 @@ export default async function ClicksPage({
 }
 
 async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
-  const [{ totals, byLocation, byPage }, visitors, topIps, recent] = await Promise.all([
+  const [{ totals, byLocation, byPage }, visitors, topIps, recent, visitSummary] = await Promise.all([
     getClickBreakdown(range),
     getClickVisitorStats(range),
     getTopClickIps(range),
     getRecentClicks(range),
+    getVisitSummary(range),
   ]);
   const repeatPct =
     visitors.uniqueVisitors > 0
@@ -153,6 +154,24 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
 
   return (
     <div className="space-y-6">
+      {/* All-traffic visit summary — everyone, not just clickers */}
+      <div className="rounded-[14px] border border-line bg-white p-5">
+        <h2 className="text-sm font-bold text-ink">Ziyaret Özeti</h2>
+        <p className="mb-3 text-xs text-ink-muted">
+          Siteyi ziyaret eden herkes sayılır (arama/form yapmasa bile) — organik, doğrudan ve reklam trafiği dahil.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Stat icon={<Users size={14} />} label="Toplam ziyaret" value={visitSummary.totalVisits} hint="sayfa görüntüleme" />
+          <Stat icon={<UserCheck size={14} />} label="Benzersiz ziyaretçi" value={visitSummary.uniqueVisitors} hint="farklı oturum" />
+          <Stat icon={<Network size={14} />} label="Benzersiz IP" value={visitSummary.uniqueIps} hint="farklı IP adresi" />
+        </div>
+        <p className="mt-3 text-xs text-ink-muted">
+          {visitSummary.totalVisits > 0
+            ? `Bu dönemde ${visitSummary.totalVisits.toLocaleString("tr-TR")} ziyaretin ${visitors.totalClicks.toLocaleString("tr-TR")} tanesi bir butona tıklamayla sonuçlandı (≈%${Math.round((visitors.totalClicks / visitSummary.totalVisits) * 100)} dönüşüm).`
+            : "Ziyaret verisi bu özellik yayına alındıktan sonraki ziyaretler için birikir."}
+        </p>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-3">
         <Kpi icon={<Phone size={15} />} label="Telefon (Ara)" value={totals.phone_click} />
         <Kpi icon={<WhatsAppIcon size={15} />} label="WhatsApp" value={totals.whatsapp_click} />

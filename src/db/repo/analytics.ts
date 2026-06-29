@@ -1,4 +1,4 @@
-import { and, desc, gte, inArray, isNotNull, isNull, lt, sql } from "drizzle-orm";
+import { and, desc, eq, gte, inArray, isNotNull, isNull, lt, sql } from "drizzle-orm";
 import { requireDb } from "@/db";
 import { criticalEvents, leads, adVisits } from "@/db/schema";
 import type { ResolvedRange } from "@/lib/admin/date-range";
@@ -225,6 +225,42 @@ export async function getRecentClicks(range: ResolvedRange, limit = 100): Promis
     ipHash: r.ipHash ?? null,
     occurredAt: r.occurredAt,
   }));
+}
+
+export interface VisitSummary {
+  totalVisits: number;
+  uniqueVisitors: number;
+  uniqueIps: number;
+}
+
+/**
+ * All-traffic visit summary from first-party `page_view` events — counts every
+ * visitor (organic + direct + ad), not just the ones who click a CTA. IP is the
+ * salted hash in payload; raw IP is never stored. Data accrues from when the
+ * page_view beacon went live.
+ */
+export async function getVisitSummary(range: ResolvedRange): Promise<VisitSummary> {
+  const db = requireDb();
+  const { from, to } = range;
+  const rows = await db
+    .select({
+      totalVisits: sql<number>`count(*)::int`,
+      uniqueVisitors: sql<number>`count(distinct ${criticalEvents.sessionId})::int`,
+      uniqueIps: sql<number>`count(distinct ${criticalEvents.payload} ->> 'ipHash')::int`,
+    })
+    .from(criticalEvents)
+    .where(
+      and(
+        eq(criticalEvents.name, "page_view"),
+        gte(criticalEvents.occurredAt, from),
+        lt(criticalEvents.occurredAt, to),
+      ),
+    );
+  return {
+    totalVisits: Number(rows[0]?.totalVisits ?? 0),
+    uniqueVisitors: Number(rows[0]?.uniqueVisitors ?? 0),
+    uniqueIps: Number(rows[0]?.uniqueIps ?? 0),
+  };
 }
 
 export async function getAnalyticsOverview(range: ResolvedRange) {

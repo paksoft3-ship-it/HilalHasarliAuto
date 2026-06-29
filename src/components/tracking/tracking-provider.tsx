@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { captureAttribution } from "@/lib/tracking/attribution";
 import { readConsent } from "@/lib/consent/consent";
 import { applyConsentMode, pushEvent, CLICK_EVENT_VALUE, FIRST_PARTY_CLICK_EVENTS, type TrackEvent } from "@/lib/tracking/events";
@@ -30,6 +31,18 @@ function beaconClick(event: TrackEvent, location: string | null) {
   }
 }
 
+/** First-party page-view count so the admin sees ALL visitors, not just clickers. */
+function beaconPageView() {
+  if (typeof navigator === "undefined") return;
+  const payload = JSON.stringify({ event: "page_view", path: window.location.pathname, sessionId: visitorId() });
+  try {
+    if (navigator.sendBeacon) navigator.sendBeacon("/api/track/click", payload);
+    else void fetch("/api/track/click", { method: "POST", body: payload, keepalive: true });
+  } catch {
+    /* never block navigation */
+  }
+}
+
 /**
  * Public-site tracking bootstrap: capture attribution, re-apply stored consent
  * (Consent Mode), and delegate clicks on [data-track] elements to dataLayer
@@ -37,6 +50,13 @@ function beaconClick(event: TrackEvent, location: string | null) {
  * Renders nothing.
  */
 export function TrackingProvider() {
+  const pathname = usePathname();
+
+  // Record a page view on first load and every client-side route change.
+  useEffect(() => {
+    beaconPageView();
+  }, [pathname]);
+
   useEffect(() => {
     captureAttribution();
 
