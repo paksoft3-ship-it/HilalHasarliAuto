@@ -3,7 +3,7 @@ import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
 import { getAdminLocale, translator } from "@/lib/i18n/admin";
-import { getClickBreakdown, getClickVisitorStats, getTopClickIps, type ClickBreakdownRow } from "@/db/repo/analytics";
+import { getClickBreakdown, getClickVisitorStats, getTopClickIps, getRecentClicks, type ClickBreakdownRow } from "@/db/repo/analytics";
 import { resolveRange } from "@/lib/admin/date-range";
 import { NotConfigured, PageTitle } from "@/components/admin/bits";
 import { RangeFilter } from "@/components/admin/range-filter";
@@ -28,6 +28,20 @@ const LOCATION_LABELS: Record<string, string> = {
   arama: "Arama sayfası",
   "—": "Belirtilmemiş",
 };
+
+/** Friendly Turkish names + colours for each click event type. */
+const EVENT_LABELS: Record<string, string> = {
+  phone_click: "Telefon",
+  whatsapp_click: "WhatsApp",
+  quote_click: "Teklif",
+};
+
+/** Exact click time, in Türkiye (Europe/Istanbul) time. */
+const CLICK_TIME_FMT = new Intl.DateTimeFormat("tr-TR", {
+  dateStyle: "medium",
+  timeStyle: "medium",
+  timeZone: "Europe/Istanbul",
+});
 
 function Kpi({ icon, label, value }: { icon: React.ReactNode; label: string; value: number }) {
   return (
@@ -126,10 +140,11 @@ export default async function ClicksPage({
 }
 
 async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
-  const [{ totals, byLocation, byPage }, visitors, topIps] = await Promise.all([
+  const [{ totals, byLocation, byPage }, visitors, topIps, recent] = await Promise.all([
     getClickBreakdown(range),
     getClickVisitorStats(range),
     getTopClickIps(range),
+    getRecentClicks(range),
   ]);
   const repeatPct =
     visitors.uniqueVisitors > 0
@@ -220,6 +235,45 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
         rows={byPage}
         labeler={(k) => k}
       />
+
+      {/* Per-click log with the exact time of each click */}
+      <div className="rounded-[14px] border border-line bg-white p-5">
+        <h2 className="text-sm font-bold text-ink">Son Tıklamalar</h2>
+        <p className="mb-3 text-xs text-ink-muted">
+          Her butona tam olarak ne zaman tıklandığı — yeri ve sayfasıyla birlikte (en yeni
+          üstte, Türkiye saati). En fazla {recent.length} kayıt gösterilir.
+        </p>
+        {recent.length === 0 ? (
+          <p className="text-sm text-ink-muted">Bu aralıkta tıklama yok.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-ink-muted">
+                  <th className="py-2 pr-3 font-semibold">Zaman</th>
+                  <th className="py-2 px-2 font-semibold">Buton</th>
+                  <th className="py-2 px-2 font-semibold">Yer</th>
+                  <th className="py-2 pl-2 font-semibold">Sayfa</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recent.map((r) => (
+                  <tr key={r.id} className="border-b border-line last:border-0">
+                    <td className="py-2 pr-3 whitespace-nowrap tabular-nums text-ink-secondary">
+                      {CLICK_TIME_FMT.format(r.occurredAt)}
+                    </td>
+                    <td className="py-2 px-2 text-ink">{EVENT_LABELS[r.name] ?? r.name}</td>
+                    <td className="py-2 px-2 text-ink-secondary" title={r.location}>
+                      {LOCATION_LABELS[r.location] ?? r.location}
+                    </td>
+                    <td className="py-2 pl-2 font-mono text-[12px] text-ink-secondary">{r.pageUrl}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
 
       <p className="flex items-start gap-1.5 text-xs text-ink-muted">
         <Hand size={13} className="mt-0.5 shrink-0" /> Sayımlar birinci taraftır ve seçilen tarih aralığını

@@ -177,6 +177,56 @@ export async function getTopClickIps(range: ResolvedRange, limit = 10): Promise<
   }));
 }
 
+export interface RecentClick {
+  id: string;
+  name: ClickEventName;
+  location: string; // button placement (payload.location) or '—'
+  pageUrl: string; // page the click happened on, '/' fallback
+  ipHash: string | null;
+  occurredAt: Date; // exact click time (UTC; render in Europe/Istanbul)
+}
+
+/**
+ * Individual CTA clicks in the range, newest first — a per-click log so the exact
+ * time of each button click is visible next to its placement and page.
+ */
+export async function getRecentClicks(range: ResolvedRange, limit = 100): Promise<RecentClick[]> {
+  const db = requireDb();
+  const { from, to } = range;
+  const locExpr = sql<string>`coalesce(nullif(${criticalEvents.payload} ->> 'location', ''), '—')`;
+  const pageExpr = sql<string>`coalesce(nullif(${criticalEvents.pageUrl}, ''), '/')`;
+  const ipExpr = sql<string | null>`${criticalEvents.payload} ->> 'ipHash'`;
+
+  const rows = await db
+    .select({
+      id: criticalEvents.id,
+      name: criticalEvents.name,
+      location: locExpr,
+      pageUrl: pageExpr,
+      ipHash: ipExpr,
+      occurredAt: criticalEvents.occurredAt,
+    })
+    .from(criticalEvents)
+    .where(
+      and(
+        inArray(criticalEvents.name, CLICK_EVENT_NAMES as unknown as string[]),
+        gte(criticalEvents.occurredAt, from),
+        lt(criticalEvents.occurredAt, to),
+      ),
+    )
+    .orderBy(desc(criticalEvents.occurredAt))
+    .limit(limit);
+
+  return rows.map((r) => ({
+    id: r.id,
+    name: r.name as ClickEventName,
+    location: r.location,
+    pageUrl: r.pageUrl,
+    ipHash: r.ipHash ?? null,
+    occurredAt: r.occurredAt,
+  }));
+}
+
 export async function getAnalyticsOverview(range: ResolvedRange) {
   const db = requireDb();
   const { from, to } = range;
