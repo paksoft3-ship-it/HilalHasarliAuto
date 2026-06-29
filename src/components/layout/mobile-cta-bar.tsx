@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { routes } from "@/config/navigation";
 import { useSettings } from "@/components/providers/settings-provider";
 import { telHref, whatsappHref } from "@/lib/settings/shared";
 
@@ -36,14 +34,15 @@ export function MobileCtaBar() {
           <WhatsAppIcon size={20} />
           WhatsApp
         </a>
-        <Link
-          href={routes.getOffer}
-          data-track="quote_click"
+        <a
+          href={telHref(settings)}
+          data-track="phone_click"
           data-track-location="mobile_bar"
-          className="flex h-12 flex-[1.3] items-center justify-center rounded-[12px] bg-burgundy-700 text-[15px] font-bold text-white"
+          className="flex h-12 flex-[1.3] items-center justify-center gap-2 rounded-[12px] bg-burgundy-700 text-[15px] font-bold text-white"
         >
-          Hemen Teklif Al
-        </Link>
+          <Phone size={18} />
+          Hemen Ara
+        </a>
       </div>
     </div>
   );

@@ -80,9 +80,10 @@ export function Header() {
               </span>
             </span>
           </a>
-          <Link href={routes.getOffer} data-track="quote_click" data-track-location="header" className={buttonClasses({ size: "md" })}>
-            Hemen Teklif Al
-          </Link>
+          <a href={tel} data-track="phone_click" data-track-location="header" className={buttonClasses({ size: "md" })}>
+            <Phone size={16} />
+            Hemen Ara
+          </a>
         </div>
 
         {/* Mobile right: phone icon + menu */}
@@ -127,15 +128,16 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={routes.getOffer}
+            <a
+              href={tel}
               onClick={() => setMenuOpen(false)}
-              data-track="quote_click"
+              data-track="phone_click"
               data-track-location="mobile_menu"
               className={buttonClasses({ size: "lg", fullWidth: true, className: "mt-3" })}
             >
-              Hemen Teklif Al
-            </Link>
+              <Phone size={18} />
+              Hemen Ara
+            </a>
           </nav>
         </div>
       )}

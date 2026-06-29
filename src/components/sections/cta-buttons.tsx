@@ -1,17 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { buttonClasses } from "@/components/ui/button";
-import { routes } from "@/config/navigation";
 import { useSettings } from "@/components/providers/settings-provider";
 import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { cn } from "@/lib/utils";
 
 /**
- * Primary conversion group, honoring the design hierarchy:
- * 1) Teklif Al (burgundy) 2) WhatsApp (green) 3) Ara (charcoal/outline).
+ * Primary conversion group. Calls convert better than the form here, so the
+ * lead CTA is a phone call:
+ * 1) Hemen Ara (burgundy, tel:) 2) WhatsApp (green) 3) Ara (charcoal/outline).
+ * The quote form stays reachable via the menu/footer.
  */
 export function CtaGroup({
   size = "lg",
@@ -30,14 +30,15 @@ export function CtaGroup({
   const settings = useSettings();
   return (
     <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", className)}>
-      <Link
-        href={routes.getOffer}
-        data-track="quote_click"
+      <a
+        href={telHref(settings)}
+        data-track="phone_click"
         data-track-location={location}
         className={buttonClasses({ variant: "primary", size })}
       >
-        Hemen Teklif Al
-      </Link>
+        <Phone size={18} />
+        Hemen Ara
+      </a>
       <a
         href={whatsappHref(settings, whatsappMessage)}
         target="_blank"

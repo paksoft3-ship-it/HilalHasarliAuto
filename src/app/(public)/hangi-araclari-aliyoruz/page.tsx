@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, HelpCircle } from "lucide-react";
+import { ArrowRight, HelpCircle, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { services, serviceIconImage } from "@/config/services";
 import { routes } from "@/config/navigation";
 import { getPublicSettings } from "@/lib/settings/server";
-import { whatsappHref } from "@/lib/settings/shared";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { DEFAULT_EVALUATED } from "@/config/service-content";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -115,9 +115,10 @@ export default async function VehiclesWeBuyPage() {
               <WhatsAppIcon size={18} />
               WhatsApp’tan Sorun
             </a>
-            <Link href={routes.getOffer} data-track="quote_click" data-track-location="hangi_araclar" className={buttonClasses({ variant: "primary" })}>
-              Teklif Al
-            </Link>
+            <a href={telHref(settings)} data-track="phone_click" data-track-location="hangi_araclar" className={buttonClasses({ variant: "primary" })}>
+              <Phone size={18} />
+              Hemen Ara
+            </a>
           </div>
         </div>
       </Section>
