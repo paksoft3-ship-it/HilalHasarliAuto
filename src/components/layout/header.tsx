@@ -7,8 +7,9 @@ import { Phone, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, routes } from "@/config/navigation";
 import { buttonClasses } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { useSettings } from "@/components/providers/settings-provider";
-import { telHref } from "@/lib/settings/shared";
+import { telHref, whatsappHref } from "@/lib/settings/shared";
 import { Logo } from "./logo";
 
 export function Header() {
@@ -65,18 +66,20 @@ export function Header() {
         {/* Desktop right: phone + CTA */}
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href={tel}
-            data-track="phone_click"
+            href={whatsappHref(settings)}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track="whatsapp_click"
             data-track-location="header"
             className="flex items-center gap-2.5 rounded-md px-2 py-1 transition-colors hover:bg-white/5"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-white/8 text-gold-600">
-              <Phone size={18} strokeWidth={2} />
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-whatsapp/15 text-whatsapp">
+              <WhatsAppIcon size={18} />
             </span>
             <span className="flex flex-col leading-tight">
               <span className="text-[15px] font-bold">{settings.phoneDisplay}</span>
               <span className="text-[11px] font-medium text-white/55">
-                {settings.workingHours}
+                WhatsApp · {settings.workingHours}
               </span>
             </span>
           </a>
