@@ -11,6 +11,7 @@ import { routes } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { getAttribution } from "@/lib/tracking/attribution";
 import { pushEvent } from "@/lib/tracking/events";
+import { beaconTrack } from "@/lib/tracking/beacon";
 import { Turnstile } from "@/components/forms/turnstile";
 
 const fieldBase =
@@ -68,6 +69,8 @@ export function QuickOfferForm({
   useEffect(() => {
     if (state?.ok && state.reference) {
       pushEvent("quote_form_submit", { reference: state.reference, source, value: 200, currency: "TRY" });
+      // First-party count for the admin Button-Clicks report (source = placement).
+      beaconTrack("quote_form_submit", { location: source });
       router.push(`${routes.thankYou}?ref=${encodeURIComponent(state.reference)}`);
     }
   }, [state, router, source]);

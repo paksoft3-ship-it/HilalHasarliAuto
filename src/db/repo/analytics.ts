@@ -3,8 +3,8 @@ import { requireDb } from "@/db";
 import { criticalEvents, leads, adVisits } from "@/db/schema";
 import type { ResolvedRange } from "@/lib/admin/date-range";
 
-/** The three CTA click events surfaced in the Button Clicks report. */
-export const CLICK_EVENT_NAMES = ["phone_click", "whatsapp_click", "quote_click"] as const;
+/** The CTA + form events surfaced in the Button Clicks report. */
+export const CLICK_EVENT_NAMES = ["phone_click", "whatsapp_click", "quote_click", "quote_form_submit"] as const;
 export type ClickEventName = (typeof CLICK_EVENT_NAMES)[number];
 
 export interface ClickBreakdownRow {
@@ -12,6 +12,7 @@ export interface ClickBreakdownRow {
   phone_click: number;
   whatsapp_click: number;
   quote_click: number;
+  quote_form_submit: number;
   total: number;
 }
 
@@ -42,8 +43,13 @@ export async function getClickBreakdown(range: ResolvedRange) {
   const pivot = (rows: { name: string; key: string; count: number }[]): ClickBreakdownRow[] => {
     const map = new Map<string, ClickBreakdownRow>();
     for (const r of rows) {
-      const row = map.get(r.key) ?? { key: r.key, phone_click: 0, whatsapp_click: 0, quote_click: 0, total: 0 };
-      if (r.name === "phone_click" || r.name === "whatsapp_click" || r.name === "quote_click") {
+      const row = map.get(r.key) ?? { key: r.key, phone_click: 0, whatsapp_click: 0, quote_click: 0, quote_form_submit: 0, total: 0 };
+      if (
+        r.name === "phone_click" ||
+        r.name === "whatsapp_click" ||
+        r.name === "quote_click" ||
+        r.name === "quote_form_submit"
+      ) {
         row[r.name] = Number(r.count);
         row.total += Number(r.count);
       }
@@ -58,8 +64,9 @@ export async function getClickBreakdown(range: ResolvedRange) {
       phone_click: acc.phone_click + r.phone_click,
       whatsapp_click: acc.whatsapp_click + r.whatsapp_click,
       quote_click: acc.quote_click + r.quote_click,
+      quote_form_submit: acc.quote_form_submit + r.quote_form_submit,
     }),
-    { phone_click: 0, whatsapp_click: 0, quote_click: 0 },
+    { phone_click: 0, whatsapp_click: 0, quote_click: 0, quote_form_submit: 0 },
   );
 
   return { totals, byLocation, byPage: pivot(byPg) };
@@ -127,6 +134,7 @@ export interface TopClickIp {
   phone_click: number;
   whatsapp_click: number;
   quote_click: number;
+  quote_form_submit: number;
   visitors: number; // distinct sessions on this IP
   pages: number; // distinct pages clicked from this IP
 }
@@ -149,6 +157,7 @@ export async function getTopClickIps(range: ResolvedRange, limit = 10): Promise<
       phone_click: filt("phone_click"),
       whatsapp_click: filt("whatsapp_click"),
       quote_click: filt("quote_click"),
+      quote_form_submit: filt("quote_form_submit"),
       visitors: sql<number>`count(distinct ${criticalEvents.sessionId})::int`,
       pages: sql<number>`count(distinct ${criticalEvents.pageUrl})::int`,
     })
@@ -172,6 +181,7 @@ export async function getTopClickIps(range: ResolvedRange, limit = 10): Promise<
     phone_click: Number(r.phone_click),
     whatsapp_click: Number(r.whatsapp_click),
     quote_click: Number(r.quote_click),
+    quote_form_submit: Number(r.quote_form_submit),
     visitors: Number(r.visitors),
     pages: Number(r.pages),
   }));

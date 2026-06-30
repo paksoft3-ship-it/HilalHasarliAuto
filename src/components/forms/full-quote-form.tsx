@@ -23,6 +23,7 @@ import { routes } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { getAttribution } from "@/lib/tracking/attribution";
 import { pushEvent } from "@/lib/tracking/events";
+import { beaconTrack } from "@/lib/tracking/beacon";
 
 const STEP_LABELS = ["Araç", "Hasar", "Fotoğraf", "İletişim", "Özet"];
 
@@ -109,6 +110,8 @@ export function FullQuoteForm() {
   useEffect(() => {
     if (state?.ok && state.reference) {
       pushEvent("quote_form_submit", { reference: state.reference, source: "get_offer", value: 200, currency: "TRY" });
+      // First-party count for the admin Button-Clicks report.
+      beaconTrack("quote_form_submit", { location: "get_offer" });
       router.push(`${routes.thankYou}?ref=${encodeURIComponent(state.reference)}`);
     } else if (state?.errors) {
       const bad = Object.keys(state.errors)[0];

@@ -1,4 +1,4 @@
-import { Phone, FileText, Hand, Users, UserCheck, Network } from "lucide-react";
+import { Phone, FileText, Hand, Users, UserCheck, Network, Send } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { isDbConfigured } from "@/db";
 import { requirePermission } from "@/lib/auth/guard";
@@ -26,6 +26,10 @@ const LOCATION_LABELS: Record<string, string> = {
   faq: "SSS sayfası",
   thank_you: "Teşekkürler sayfası",
   arama: "Arama sayfası",
+  // Form-submit placements (form `source` becomes the location).
+  homepage_hero: "Ana sayfa hero formu",
+  contact_page: "İletişim sayfası formu",
+  get_offer: "Detaylı teklif formu (/teklif-al)",
   "—": "Belirtilmemiş",
 };
 
@@ -34,6 +38,7 @@ const EVENT_LABELS: Record<string, string> = {
   phone_click: "Telefon",
   whatsapp_click: "WhatsApp",
   quote_click: "Teklif",
+  quote_form_submit: "Form Gönderimi",
 };
 
 /** Exact click time, in Türkiye (Europe/Istanbul) time. */
@@ -94,6 +99,7 @@ function BreakdownTable({
                 <th className="py-2 px-2 text-right font-semibold">Telefon</th>
                 <th className="py-2 px-2 text-right font-semibold">WhatsApp</th>
                 <th className="py-2 px-2 text-right font-semibold">Teklif</th>
+                <th className="py-2 px-2 text-right font-semibold">Form</th>
                 <th className="py-2 pl-2 text-right font-semibold">Toplam</th>
               </tr>
             </thead>
@@ -104,6 +110,7 @@ function BreakdownTable({
                   <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.phone_click || "—"}</td>
                   <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.whatsapp_click || "—"}</td>
                   <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.quote_click || "—"}</td>
+                  <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.quote_form_submit || "—"}</td>
                   <td className="py-2 pl-2 text-right font-semibold tabular-nums text-ink">{r.total}</td>
                 </tr>
               ))}
@@ -127,7 +134,7 @@ export default async function ClicksPage({
 
   return (
     <>
-      <PageTitle title={t("nav.clicks")} subtitle={`${range.label} · telefon, WhatsApp ve teklif butonu tıklamaları`} />
+      <PageTitle title={t("nav.clicks")} subtitle={`${range.label} · telefon, WhatsApp, teklif butonu ve form gönderimleri`} />
       <RangeFilter preset={range.preset} fromStr={range.fromStr} toStr={range.toStr} />
 
       {!isDbConfigured ? (
@@ -172,10 +179,11 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Kpi icon={<Phone size={15} />} label="Telefon (Ara)" value={totals.phone_click} />
         <Kpi icon={<WhatsAppIcon size={15} />} label="WhatsApp" value={totals.whatsapp_click} />
         <Kpi icon={<FileText size={15} />} label="Hemen Teklif Al" value={totals.quote_click} />
+        <Kpi icon={<Send size={15} />} label="Form Gönderimi" value={totals.quote_form_submit} />
       </div>
 
       {/* Unique vs repeat visitors + same-IP signal */}
@@ -211,6 +219,7 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
                   <th className="py-2 px-2 text-right font-semibold">Telefon</th>
                   <th className="py-2 px-2 text-right font-semibold">WhatsApp</th>
                   <th className="py-2 px-2 text-right font-semibold">Teklif</th>
+                  <th className="py-2 px-2 text-right font-semibold">Form</th>
                   <th className="py-2 px-2 text-right font-semibold">Ziyaretçi</th>
                   <th className="py-2 px-2 text-right font-semibold">Sayfa</th>
                   <th className="py-2 pl-2 text-right font-semibold">Toplam</th>
@@ -230,6 +239,7 @@ async function Report({ range }: { range: ReturnType<typeof resolveRange> }) {
                     <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.phone_click || "—"}</td>
                     <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.whatsapp_click || "—"}</td>
                     <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.quote_click || "—"}</td>
+                    <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.quote_form_submit || "—"}</td>
                     <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.visitors}</td>
                     <td className="py-2 px-2 text-right tabular-nums text-ink-secondary">{r.pages}</td>
                     <td className="py-2 pl-2 text-right font-semibold tabular-nums text-ink">{r.total}</td>
