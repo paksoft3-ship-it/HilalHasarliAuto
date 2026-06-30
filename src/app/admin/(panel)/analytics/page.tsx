@@ -14,7 +14,6 @@ const EVENT_LABELS: Record<string, string> = {
   whatsapp_click: "WhatsApp tıklaması",
   quote_click: "“Hemen Teklif Al” tıklaması",
   quote_form_submit: "Teklif formu gönderimi",
-  contact_form_submit: "İletişim formu gönderimi",
   lead_created: "Yeni aday oluştu",
   whatsapp_conversation_started: "WhatsApp görüşmesi başladı",
   qualified_call: "Nitelikli arama",

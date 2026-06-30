@@ -1,6 +1,6 @@
 import { requireDb, type Database } from "@/db";
 import {
-  leads, vehicles, formSubmissions, leadNotes, attributionTouches, criticalEvents,
+  leads, vehicles, formSubmissions, attributionTouches, criticalEvents,
 } from "@/db/schema";
 import type { VehiclePhoto } from "@/db/schema/crm";
 import type { QuickOfferInput } from "@/lib/leads/schema";
@@ -246,49 +246,3 @@ export async function persistFullQuote(input: FullQuoteInput, meta: RequestMeta)
   return lead.id;
 }
 
-interface ContactInput {
-  fullName: string;
-  phone: string;
-  email?: string;
-  subject: string;
-  message: string;
-  preferredContact?: "phone" | "whatsapp" | "email";
-}
-
-/** Persist a contact-form submission as a lead + note. */
-export async function persistContact(input: ContactInput, meta: RequestMeta) {
-  const db = requireDb();
-  const phoneNormalized = normalizePhone(input.phone);
-
-  const [lead] = await db
-    .insert(leads)
-    .values({
-      leadNumber: meta.reference,
-      source: "website_form",
-      fullName: input.fullName,
-      phone: input.phone,
-      phoneNormalized,
-      email: input.email || null,
-      preferredContact: input.preferredContact,
-      firstTouchAt: new Date(),
-    })
-    .returning({ id: leads.id });
-
-  await db.insert(leadNotes).values({
-    leadId: lead.id,
-    body: `Konu: ${input.subject}\n\n${input.message}`,
-  });
-
-  await db.insert(formSubmissions).values({
-    leadId: lead.id,
-    type: "contact",
-    referenceNumber: meta.reference,
-    source: meta.source,
-    ip: meta.ip ?? undefined,
-    userAgent: meta.userAgent ?? undefined,
-    payload: { subject: input.subject, preferredContact: input.preferredContact },
-  });
-
-  await writeAttributionAndEvent(db, lead.id, meta);
-  return lead.id;
-}

@@ -13,7 +13,6 @@ export type TrackEvent =
   | "quote_click"
   | "quote_form_start"
   | "quote_form_submit"
-  | "contact_form_submit"
   | "service_page_engaged"
   | "guide_engaged";
 
@@ -36,7 +35,6 @@ const CONVERSION_EVENTS = new Set<TrackEvent>([
   "phone_click",
   "whatsapp_click",
   "quote_form_submit",
-  "contact_form_submit",
 ]);
 
 export function pushEvent(event: TrackEvent, params: Record<string, unknown> = {}): void {

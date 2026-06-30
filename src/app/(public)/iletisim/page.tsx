@@ -9,7 +9,7 @@ import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
 import { buttonClasses } from "@/components/ui/button";
-import { ContactForm } from "@/components/forms/contact-form";
+import { QuickOfferForm } from "@/components/forms/quick-offer-form";
 
 export const metadata: Metadata = {
   title: "İletişim | Hemen Teklif Alın",
@@ -74,17 +74,18 @@ export default async function ContactPage() {
       <Section tone="white">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <SectionHeading title="Bize Mesaj Gönderin" align="left" />
+            <SectionHeading title="Aracınız İçin Teklif Alın" align="left" />
             <div className="mt-6">
-              <ContactForm />
+              <QuickOfferForm source="contact_page" />
             </div>
           </div>
 
           <aside className="lg:col-span-5">
             <div className="rounded-[18px] border border-line bg-cream-50 p-6">
-              <h2 className="text-lg font-bold text-ink">Aracınız İçin Teklif</h2>
+              <h2 className="text-lg font-bold text-ink">Detaylı Değerlendirme</h2>
               <p className="mt-2 text-[15px] leading-relaxed text-ink-secondary">
-                Doğrudan değerlendirme talebi oluşturmak isterseniz teklif
+                Aracınızın fotoğraflarını ekleyerek daha ayrıntılı bir
+                değerlendirme talebi oluşturmak isterseniz detaylı teklif
                 formunu kullanabilirsiniz.
               </p>
               <Link
@@ -93,7 +94,7 @@ export default async function ContactPage() {
                 data-track-location="iletisim"
                 className={buttonClasses({ variant: "primary", fullWidth: true, className: "mt-4" })}
               >
-                Hemen Teklif Al
+                Detaylı Teklif Formu
               </Link>
             </div>
 
