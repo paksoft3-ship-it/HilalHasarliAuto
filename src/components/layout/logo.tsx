@@ -30,8 +30,8 @@ export function Logo({
         width={318}
         height={50}
         priority
-        sizes="(max-width: 768px) 210px, 260px"
-        className="h-10 w-auto md:h-12"
+        sizes="(max-width: 768px) 170px, 260px"
+        className="h-8 w-auto sm:h-10 md:h-12"
       />
     </Link>
   );

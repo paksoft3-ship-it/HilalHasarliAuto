@@ -96,9 +96,9 @@ export function Header() {
             data-track="phone_click"
             data-track-location="header_mobile"
             aria-label="Bizi arayın"
-            className="grid h-11 w-11 place-items-center rounded-full text-white hover:bg-white/8"
+            className="grid h-11 w-11 place-items-center rounded-full bg-burgundy-700 text-white shadow-sm transition-colors hover:bg-burgundy-800"
           >
-            <Phone size={20} />
+            <Phone size={22} strokeWidth={2.5} />
           </a>
           <button
             type="button"
