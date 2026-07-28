@@ -26,6 +26,7 @@ function revalidatePublic(type: string, slug: string) {
     revalidatePath(`/blog/${slug}`);
     revalidatePath("/sitemap.xml");
     revalidatePath("/rss.xml");
+    revalidatePath("/llms.txt");
   }
   if (type === "guide") { revalidatePath("/rehberler"); revalidatePath(`/rehberler/${slug}`); }
 }
