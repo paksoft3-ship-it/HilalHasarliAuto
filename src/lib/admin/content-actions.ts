@@ -21,7 +21,12 @@ function slugify(s: string): string {
 function str(fd: FormData, k: string) { return String(fd.get(k) ?? "").trim(); }
 
 function revalidatePublic(type: string, slug: string) {
-  if (type === "blog_post") { revalidatePath("/blog"); revalidatePath(`/blog/${slug}`); }
+  if (type === "blog_post") {
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${slug}`);
+    revalidatePath("/sitemap.xml");
+    revalidatePath("/rss.xml");
+  }
   if (type === "guide") { revalidatePath("/rehberler"); revalidatePath(`/rehberler/${slug}`); }
 }
 

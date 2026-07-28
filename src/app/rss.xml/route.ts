@@ -1,6 +1,9 @@
 import { siteConfig } from "@/config/site";
 import { routes } from "@/config/navigation";
-import { blogPosts } from "@/config/blog";
+import { getPublicBlogPosts } from "@/lib/cms/public-content";
+
+// Cache the feed; CMS publish revalidates it explicitly.
+export const revalidate = 3600;
 
 function esc(s: string): string {
   return s
@@ -11,9 +14,9 @@ function esc(s: string): string {
 }
 
 /** RSS 2.0 feed for blog content. */
-export function GET() {
+export async function GET() {
   const base = siteConfig.domain;
-  const items = blogPosts
+  const items = (await getPublicBlogPosts())
     .map(
       (p) => `    <item>
       <title>${esc(p.title)}</title>
