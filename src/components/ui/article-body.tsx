@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Info } from "lucide-react";
 import type { Block } from "@/config/blog";
 
@@ -43,6 +44,19 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
                 <Info size={18} className="mt-0.5 shrink-0 text-info" />
                 <p className="text-[14px] leading-relaxed text-ink-secondary">{b.text}</p>
               </div>
+            );
+          case "img":
+            return (
+              <figure key={i} className="my-6 overflow-hidden rounded-[12px] border border-line">
+                <Image
+                  src={b.src}
+                  alt={b.alt}
+                  width={b.width ?? 1600}
+                  height={b.height ?? 1200}
+                  className="h-auto w-full"
+                  sizes="(max-width: 768px) 100vw, 720px"
+                />
+              </figure>
             );
         }
       })}

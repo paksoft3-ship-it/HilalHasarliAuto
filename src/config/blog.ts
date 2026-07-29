@@ -7,7 +7,8 @@ export type Block =
   | { type: "h3"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
-  | { type: "note"; text: string };
+  | { type: "note"; text: string }
+  | { type: "img"; src: string; alt: string; width?: number; height?: number };
 
 export interface BlogPost {
   slug: string;
