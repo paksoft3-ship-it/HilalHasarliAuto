@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, LifeBuoy } from "lucide-react";
 import { buttonClasses } from "@/components/ui/button";
 import { routes } from "@/config/navigation";
+
+export const metadata: Metadata = {
+  title: "Sayfa Bulunamadı",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (
