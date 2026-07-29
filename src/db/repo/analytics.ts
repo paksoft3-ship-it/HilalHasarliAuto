@@ -237,6 +237,172 @@ export async function getRecentClicks(range: ResolvedRange, limit = 100): Promis
   }));
 }
 
+export interface ButtonUniques {
+  total: number;
+  uniquePeople: number; // distinct ip_hash
+  uniqueSessions: number; // distinct session id
+}
+
+export interface ContactUniques {
+  phone: ButtonUniques;
+  whatsapp: ButtonUniques;
+  /** Distinct IPs across phone + WhatsApp combined — a person who used both counts ONCE. */
+  totalUniqueContacts: number;
+  onlyPhone: number;
+  onlyWhatsapp: number;
+  both: number;
+}
+
+/**
+ * Per-channel unique-people/session counts and the phone↔WhatsApp overlap.
+ * Totals alone mislead when one person clicks many times, so each channel also
+ * reports distinct IPs and sessions, and the preference split (only-phone /
+ * only-WhatsApp / both) always sums to `totalUniqueContacts`.
+ */
+export async function getContactUniques(range: ResolvedRange): Promise<ContactUniques> {
+  const db = requireDb();
+  const { from, to } = range;
+  const ipExpr = sql<string>`${criticalEvents.payload} ->> 'ipHash'`;
+  const contactWhere = and(
+    inArray(criticalEvents.name, ["phone_click", "whatsapp_click"]),
+    gte(criticalEvents.occurredAt, from),
+    lt(criticalEvents.occurredAt, to),
+  );
+
+  const [perButton, perIp] = await Promise.all([
+    db
+      .select({
+        name: criticalEvents.name,
+        total: sql<number>`count(*)::int`,
+        uniquePeople: sql<number>`count(distinct ${criticalEvents.payload} ->> 'ipHash')::int`,
+        uniqueSessions: sql<number>`count(distinct ${criticalEvents.sessionId})::int`,
+      })
+      .from(criticalEvents)
+      .where(contactWhere)
+      .groupBy(criticalEvents.name),
+    db
+      .select({
+        h: ipExpr,
+        phone: sql<number>`count(*) filter (where ${criticalEvents.name} = 'phone_click')::int`,
+        wa: sql<number>`count(*) filter (where ${criticalEvents.name} = 'whatsapp_click')::int`,
+      })
+      .from(criticalEvents)
+      .where(and(contactWhere, sql`${criticalEvents.payload} ->> 'ipHash' is not null`))
+      .groupBy(ipExpr),
+  ]);
+
+  const empty: ButtonUniques = { total: 0, uniquePeople: 0, uniqueSessions: 0 };
+  const pick = (name: string): ButtonUniques => {
+    const r = perButton.find((b) => b.name === name);
+    return r
+      ? { total: Number(r.total), uniquePeople: Number(r.uniquePeople), uniqueSessions: Number(r.uniqueSessions) }
+      : empty;
+  };
+
+  let onlyPhone = 0;
+  let onlyWhatsapp = 0;
+  let both = 0;
+  for (const r of perIp) {
+    const p = Number(r.phone) > 0;
+    const w = Number(r.wa) > 0;
+    if (p && w) both += 1;
+    else if (p) onlyPhone += 1;
+    else if (w) onlyWhatsapp += 1;
+  }
+
+  return {
+    phone: pick("phone_click"),
+    whatsapp: pick("whatsapp_click"),
+    totalUniqueContacts: perIp.length,
+    onlyPhone,
+    onlyWhatsapp,
+    both,
+  };
+}
+
+export interface PersonClickRow {
+  ipHash: string;
+  name: ClickEventName;
+  count: number;
+  firstAt: Date; // the moment this person first tried to make contact
+  lastAt: Date;
+  firstLocation: string; // placement of the FIRST click
+  firstPage: string; // page of the FIRST click
+}
+
+/**
+ * One row per unique visitor (IP) per button — GROUP BY ip_hash + event name.
+ * `firstAt` is min(occurred_at): the moment the person first tried to make
+ * contact; match it against the real phone call log / WhatsApp chat start times
+ * to find lost leads. The first click's placement/page comes from
+ * array_agg(... order by occurred_at) picking the first element.
+ */
+export async function getPerPersonClicks(range: ResolvedRange, limit = 100): Promise<PersonClickRow[]> {
+  const db = requireDb();
+  const { from, to } = range;
+  const ipExpr = sql<string>`${criticalEvents.payload} ->> 'ipHash'`;
+  const locExpr = sql`coalesce(nullif(${criticalEvents.payload} ->> 'location', ''), '—')`;
+  const pageExpr = sql`coalesce(nullif(${criticalEvents.pageUrl}, ''), '/')`;
+
+  const rows = await db
+    .select({
+      ipHash: ipExpr,
+      name: criticalEvents.name,
+      count: sql<number>`count(*)::int`,
+      firstAt: sql<Date>`min(${criticalEvents.occurredAt})`,
+      lastAt: sql<Date>`max(${criticalEvents.occurredAt})`,
+      firstLocation: sql<string>`(array_agg(${locExpr} order by ${criticalEvents.occurredAt}))[1]`,
+      firstPage: sql<string>`(array_agg(${pageExpr} order by ${criticalEvents.occurredAt}))[1]`,
+    })
+    .from(criticalEvents)
+    .where(
+      and(
+        inArray(criticalEvents.name, CLICK_EVENT_NAMES as unknown as string[]),
+        gte(criticalEvents.occurredAt, from),
+        lt(criticalEvents.occurredAt, to),
+        sql`${criticalEvents.payload} ->> 'ipHash' is not null`,
+      ),
+    )
+    .groupBy(ipExpr, criticalEvents.name)
+    .orderBy(desc(sql`min(${criticalEvents.occurredAt})`))
+    .limit(limit);
+
+  return rows.map((r) => ({
+    ipHash: r.ipHash,
+    name: r.name as ClickEventName,
+    count: Number(r.count),
+    firstAt: new Date(r.firstAt),
+    lastAt: new Date(r.lastAt),
+    firstLocation: r.firstLocation,
+    firstPage: r.firstPage,
+  }));
+}
+
+/**
+ * All clicking IPs in the range ranked by click volume (IP #1 = busiest).
+ * Drives the shared IP badge numbering across the per-person and raw tables.
+ */
+export async function getClickIpRanks(range: ResolvedRange, limit = 1000): Promise<{ ipHash: string; total: number }[]> {
+  const db = requireDb();
+  const { from, to } = range;
+  const ipExpr = sql<string>`${criticalEvents.payload} ->> 'ipHash'`;
+  const rows = await db
+    .select({ ipHash: ipExpr, total: sql<number>`count(*)::int` })
+    .from(criticalEvents)
+    .where(
+      and(
+        inArray(criticalEvents.name, CLICK_EVENT_NAMES as unknown as string[]),
+        gte(criticalEvents.occurredAt, from),
+        lt(criticalEvents.occurredAt, to),
+        sql`${criticalEvents.payload} ->> 'ipHash' is not null`,
+      ),
+    )
+    .groupBy(ipExpr)
+    .orderBy(desc(sql`count(*)`))
+    .limit(limit);
+  return rows.map((r) => ({ ipHash: r.ipHash, total: Number(r.total) }));
+}
+
 export interface VisitSummary {
   totalVisits: number;
   uniqueVisitors: number;
