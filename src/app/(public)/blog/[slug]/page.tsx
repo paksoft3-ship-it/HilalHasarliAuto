@@ -137,7 +137,7 @@ export default async function BlogDetailPage({
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {related.map((p) => (
               <Link key={p.slug} href={routes.blogPost(p.slug)} className="group flex flex-col overflow-hidden rounded-[14px] border border-line bg-white">
-                <div className="relative aspect-[16/10] bg-cream-100">
+                <div className="relative aspect-video bg-cream-100">
                   <Image src={p.image} alt={p.imageAlt} fill sizes="380px" className="object-cover" />
                 </div>
                 <div className="p-5">

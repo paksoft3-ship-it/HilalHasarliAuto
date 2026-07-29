@@ -45,7 +45,8 @@ export default async function BlogListingPage() {
             href={routes.blogPost(featured.slug)}
             className="group grid overflow-hidden rounded-[18px] border border-line bg-cream-50 md:grid-cols-2"
           >
-            <div className="relative aspect-[16/10] md:aspect-auto">
+            {/* aspect-video matches the 1600×900 covers exactly — no cropping */}
+            <div className="relative aspect-video w-full self-center">
               <Image src={featured.image} alt={featured.imageAlt} fill sizes="(max-width:768px) 100vw, 600px" className="object-cover" />
             </div>
             <div className="flex flex-col justify-center p-7 md:p-10">
@@ -78,7 +79,7 @@ export default async function BlogListingPage() {
               href={routes.blogPost(post.slug)}
               className="group flex flex-col overflow-hidden rounded-[14px] border border-line bg-white"
             >
-              <div className="relative aspect-[16/10] bg-cream-100">
+              <div className="relative aspect-video bg-cream-100">
                 <Image src={post.image} alt={post.imageAlt} fill sizes="(max-width:768px) 100vw, 380px" className="object-cover" />
               </div>
               <div className="flex flex-1 flex-col p-5">
