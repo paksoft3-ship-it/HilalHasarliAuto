@@ -8,7 +8,8 @@ export type Block =
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "note"; text: string }
-  | { type: "img"; src: string; alt: string; width?: number; height?: number };
+  | { type: "img"; src: string; alt: string; width?: number; height?: number }
+  | { type: "table"; header: string[]; rows: string[][] };
 
 export interface BlogPost {
   slug: string;

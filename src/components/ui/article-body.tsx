@@ -58,6 +58,31 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
                 />
               </figure>
             );
+          case "table":
+            return (
+              <div key={i} className="my-6 overflow-x-auto rounded-[12px] border border-line">
+                <table className="w-full text-[15px]">
+                  <thead>
+                    <tr className="border-b border-line bg-cream-50 text-left">
+                      {b.header.map((h, j) => (
+                        <th key={j} className="px-4 py-3 font-bold text-ink">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {b.rows.map((row, j) => (
+                      <tr key={j} className="border-b border-line last:border-0">
+                        {row.map((cell, k) => (
+                          <td key={k} className={`px-4 py-3 ${k === 0 ? "font-semibold text-ink" : "text-ink-secondary"}`}>
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
         }
       })}
     </div>
