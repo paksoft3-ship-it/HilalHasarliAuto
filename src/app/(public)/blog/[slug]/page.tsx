@@ -60,7 +60,12 @@ export default async function BlogDetailPage({
   const post = await getPublicBlogPost(slug);
   if (!post) notFound();
 
-  const related = (await getPublicBlogPosts()).filter((p) => p.slug !== slug).slice(0, 3);
+  // Same-category posts first (topic cluster), newest others fill the rest.
+  const others = (await getPublicBlogPosts()).filter((p) => p.slug !== slug);
+  const related = [
+    ...others.filter((p) => p.category === post.category),
+    ...others.filter((p) => p.category !== post.category),
+  ].slice(0, 3);
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -69,8 +74,13 @@ export default async function BlogDetailPage({
     description: post.excerpt,
     image: `${siteConfig.domain}${post.image}`,
     datePublished: post.date,
+    dateModified: post.modified ?? post.date,
     author: { "@type": "Organization", name: siteConfig.brandName },
-    publisher: { "@type": "Organization", name: siteConfig.brandName },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.brandName,
+      logo: { "@type": "ImageObject", url: `${siteConfig.domain}/icon.png` },
+    },
     mainEntityOfPage: `${siteConfig.domain}${routes.blogPost(slug)}`,
   };
 

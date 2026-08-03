@@ -35,6 +35,7 @@ function mapItem(item: DbItem): BlogPost {
     ogImage: item.ogImage ?? undefined,
     category: item.category ?? "Genel",
     date: (item.publishedAt ?? item.updatedAt).toISOString(),
+    modified: item.updatedAt.toISOString(),
     readingMinutes: readingMinutes(item.body),
     image: item.imageUrl ?? "/images/photos/2.png",
     imageAlt: item.imageAlt ?? item.title,

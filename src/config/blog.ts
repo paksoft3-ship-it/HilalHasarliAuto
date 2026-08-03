@@ -30,6 +30,8 @@ export interface BlogPost {
   category: string;
   /** ISO date — editable; sample content for development. */
   date: string;
+  /** ISO date of the last content edit (CMS updatedAt). Falls back to `date`. */
+  modified?: string;
   readingMinutes: number;
   image: string;
   imageAlt: string;
@@ -436,7 +438,7 @@ export const blogPosts: BlogPost[] = [
     image: "/images/blog/cekme-belgeli-arac.jpg",
     imageAlt: "Ön sol tarafı hasarlı gri otomobil",
     body: [
-      { type: "p", text: "Hasarlı bir aracı satmak, sağlam bir aracı satmaktan farklı bir süreçtir. Aracın gerçek durumunu doğru aktarmak hem değerlemeyi hem de devir sürecini hızlandırır." },
+      { type: "p", text: "[Hasarlı bir aracı satmak](/arac-alimi/hasarli-arac-alimi), sağlam bir aracı satmaktan farklı bir süreçtir. Aracın gerçek durumunu doğru aktarmak hem değerlemeyi hem de devir sürecini hızlandırır." },
       { type: "h2", text: "1. Aracın durumunu net belirleyin" },
       { type: "p", text: "Hasarın kapsamını, aracın çalışıp çalışmadığını ve varsa hasar kayıtlarını önceden netleştirin. Bu bilgiler değerlendirmenin temelini oluşturur." },
       { type: "h2", text: "2. Doğru fotoğrafları hazırlayın" },
@@ -468,7 +470,7 @@ export const blogPosts: BlogPost[] = [
     image: "/images/blog/pert-arac.jpg",
     imageAlt: "Lastikler arasında bekleyen, ön tarafı ağır hasarlı pert araç",
     body: [
-      { type: "p", text: "Pert araç, onarım maliyetinin aracın değerine yakın veya üzerinde olması nedeniyle ekonomik onarımı uygun görülmeyen araçtır." },
+      { type: "p", text: "[Pert araç](/arac-alimi/pert-arac-alimi), onarım maliyetinin aracın değerine yakın veya üzerinde olması nedeniyle ekonomik onarımı uygun görülmeyen araçtır." },
       { type: "h2", text: "Pert kaydının değerlemeye etkisi" },
       { type: "p", text: "Pert kaydı, aracın değerini etkileyen önemli bir faktördür. Ancak nihai değer, aracın bütünü ve kullanılabilir parçaları dikkate alınarak belirlenir." },
       { type: "h2", text: "Pert araç satışında belge süreci" },
@@ -487,7 +489,7 @@ export const blogPosts: BlogPost[] = [
     image: "/images/blog/motor-arizali-arac.jpg",
     imageAlt: "Motor arızası nedeniyle çalışmayan beyaz otomobil",
     body: [
-      { type: "p", text: "Çalışmayan araçlar da değerlendirilebilir. Önemli olan aracın mevcut durumunu doğru aktarmaktır." },
+      { type: "p", text: "[Çalışmayan araçlar](/arac-alimi/calismayan-arac-alimi) da değerlendirilebilir. Önemli olan aracın mevcut durumunu doğru aktarmaktır." },
       { type: "h2", text: "Arıza kaynağını bilmiyorsanız" },
       { type: "p", text: "Aracın neden çalışmadığını bilmeseniz dahi değerlendirme talebi oluşturabilirsiniz. Gerektiğinde taşıma seçenekleri planlanır." },
     ],
