@@ -24,9 +24,9 @@ import { faqPageLd } from "@/lib/seo/jsonld";
 export const metadata: Metadata = {
   title: "Nasıl Çalışır? | 3 Adımda Araç Satışı",
   description:
-    "Aracınızı 3 adımda satın: fotoğraf gönderin, ücretsiz teklifinizi alın, anlaşınca ücretsiz çekici ile alalım ve aynı gün nakit ödeyelim.",
+    "Fotoğraftan noter devrine kadar sekiz adımın tamamı: hangi aşamada ne oluyor, hangi belgeler gerekiyor ve ödeme tam olarak ne zaman yapılıyor?",
   keywords:
-    "araç nasıl satılır, hasarlı araç satış süreci, araç değerleme, ücretsiz çekici",
+    "hasarlı araç nasıl satılır, araç satış süreci adımları, noter devri, araç değerleme",
   alternates: { canonical: routes.howItWorks },
 };
 

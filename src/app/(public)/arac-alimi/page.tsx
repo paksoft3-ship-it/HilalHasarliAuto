@@ -16,7 +16,7 @@ import { FinalCta } from "@/components/sections/final-cta";
 export const metadata: Metadata = {
   title: "Araç Alımı",
   description:
-    "Hasarlı, kazalı, pert, arızalı, çalışmayan, hurda ve çekme belgeli araç alımı. Aracınızın durumuna uygun kategoriyi seçin, hızlı ve şeffaf değerlendirme alın.",
+    "Her hasar tipinin değerleme mantığı farklıdır. Aracınızın durumuna uyan kategoriyi seçin; o gruba özel süreci, belgeleri ve fiyat kriterlerini görün.",
   keywords:
     "araç alımı, hasarlı araç alımı, kazalı araç alımı, pert araç alımı, arızalı araç alımı, hurda araç alımı",
   // Consolidate ranking to the canonical overview to avoid duplicate content.

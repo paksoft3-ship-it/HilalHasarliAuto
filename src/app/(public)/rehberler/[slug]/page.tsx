@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, Layers, BarChart3, CalendarCheck } from "lucide-react";
 import { guides, getGuide } from "@/config/guides";
+import { siteConfig } from "@/config/site";
 import { blogMetaKeywords } from "@/config/blog";
 import { routes } from "@/config/navigation";
 import { formatTrDate } from "@/lib/utils";
@@ -48,6 +49,10 @@ export default async function GuideDetailPage({
   const g = getGuide(slug);
   if (!g) notFound();
 
+  // Google requires HowToStep.text — use the chapter's first paragraph.
+  const stepText = (blocks: { type: string; text?: string }[]) =>
+    blocks.find((b) => b.type === "p" && b.text)?.text ?? "";
+
   const howToLd = {
     "@context": "https://schema.org",
     "@type": "HowTo",
@@ -57,6 +62,8 @@ export default async function GuideDetailPage({
       "@type": "HowToStep",
       position: i + 1,
       name: c.title,
+      text: stepText(c.blocks),
+      url: `${siteConfig.domain}${routes.guide(slug)}#${anchor(i)}`,
     })),
   };
 

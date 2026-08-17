@@ -1,7 +1,8 @@
 import { siteConfig } from "@/config/site";
 import { routes } from "@/config/navigation";
 import { services } from "@/config/services";
-import { publishedCities } from "@/config/cities";
+import { publishedCities, getCity } from "@/config/cities";
+import { districts } from "@/config/districts";
 import { guides } from "@/config/guides";
 import { getPublicBlogPosts } from "@/lib/cms/public-content";
 import { getPublicSettings } from "@/lib/settings/server";
@@ -51,6 +52,12 @@ ${services.map((s) => line(s.title, routes.service(s.slug), s.short)).join("\n")
 
 ## Hizmet Bölgeleri
 ${publishedCities.map((c) => line(`${c.name} Hasarlı Araç Alımı`, routes.city(c.slug))).join("\n")}
+
+## İlçeler
+${districts
+  .filter((d) => getCity(d.citySlug)?.published)
+  .map((d) => line(`${d.name} (${getCity(d.citySlug)?.name}) Hasarlı Araç Alımı`, routes.district(d.citySlug, d.slug)))
+  .join("\n")}
 
 ## Rehberler
 ${guides.map((g) => line(g.title, routes.guide(g.slug), g.description)).join("\n")}

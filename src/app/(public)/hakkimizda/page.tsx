@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ShieldCheck, Eye, Zap, BadgeCheck, Scale } from "lucide-react";
-import { siteConfig } from "@/config/site";
+import { siteConfig, isPlaceholder } from "@/config/site";
 import { routes } from "@/config/navigation";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -13,18 +13,18 @@ import { FinalCta } from "@/components/sections/final-cta";
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description:
-    "Hasarlı, kazalı, pert ve hurda araç alımında güvenilir çözüm ortağınız. Şeffaf değerlendirme, en yüksek fiyat, ücretsiz çekici ve anında nakit ödeme.",
+    "81 ile hizmet veren hasarlı araç alım ağı. Nasıl çalıştığımızı, fiyatı neye göre belirlediğimizi ve süreçte hangi adımı kimin üstlendiğini anlatıyoruz.",
   keywords:
     "hasarlı araç alan firma, güvenilir araç alımı, hasarlı araç alım merkezi",
   alternates: { canonical: routes.about },
 };
 
 const values = [
-  { icon: ShieldCheck, title: "Güven", desc: "Kayıtlı ve resmi süreç; baskısız iletişim." },
-  { icon: Eye, title: "Şeffaflık", desc: "Değerlendirme ve teklif adımlarını açıkça paylaşırız." },
-  { icon: Zap, title: "Hızlı iletişim", desc: "Talebiniz ulaştığında en kısa sürede dönüş yapılır." },
-  { icon: BadgeCheck, title: "Profesyonellik", desc: "Her aracı durumuna göre uzmanca değerlendiririz." },
-  { icon: Scale, title: "Adil değerlendirme", desc: "Aracın gerçek durumuna dayalı gerçekçi değerleme." },
+  { icon: ShieldCheck, title: "Güven", desc: "Her işlem noter kayıtlıdır; sizi hiçbir aşamada sıkıştırmayız." },
+  { icon: Eye, title: "Şeffaflık", desc: "Teklifin nasıl oluştuğunu kalem kalem gösteririz." },
+  { icon: Zap, title: "Hızlı iletişim", desc: "Türkiye'nin her ilinden gelen başvurulara gün içinde dönüş." },
+  { icon: BadgeCheck, title: "Profesyonellik", desc: "Her araç, kendi hasar tipinin uzmanınca incelenir." },
+  { icon: Scale, title: "Adil değerlendirme", desc: "Fiyatı ülke genelindeki güncel pazar verisi belirler." },
 ];
 
 export default function AboutPage() {
@@ -98,22 +98,27 @@ export default function AboutPage() {
         <div className="mx-auto max-w-2xl rounded-[18px] border border-line bg-white p-7 md:p-9">
           <SectionHeading title="Kurumsal Bilgiler" align="left" />
           <p className="mt-3 text-sm text-ink-muted">
-            Yalnızca doğrulanmış kurumsal bilgiler yayımlanır. Aşağıdaki alanlar
-            resmi bilgiler tamamlandığında güncellenecektir.
+            Yalnızca doğrulanmış kurumsal bilgiler yayımlanır; tamamlanmamış
+            alanlar bu listede gösterilmez.
           </p>
           <dl className="mt-6 divide-y divide-line text-[15px]">
             {[
               ["Şirket Ünvanı", siteConfig.legalCompanyName],
               ["Adres", siteConfig.companyAddress],
+              ["Vergi Dairesi / No", siteConfig.taxInfo],
+              ["MERSİS No", siteConfig.mersisNumber],
+              ["KEP Adresi", siteConfig.kepAddress],
               ["Telefon", siteConfig.phoneDisplay],
               ["E-posta", siteConfig.email],
               ["Çalışma Saatleri", siteConfig.workingHours],
-            ].map(([k, v]) => (
-              <div key={k} className="flex flex-col gap-1 py-3 sm:flex-row sm:justify-between">
-                <dt className="font-medium text-ink">{k}</dt>
-                <dd className="text-ink-secondary">{v}</dd>
-              </div>
-            ))}
+            ]
+              .filter(([, v]) => v && !isPlaceholder(v))
+              .map(([k, v]) => (
+                <div key={k} className="flex flex-col gap-1 py-3 sm:flex-row sm:justify-between">
+                  <dt className="font-medium text-ink">{k}</dt>
+                  <dd className="text-ink-secondary">{v}</dd>
+                </div>
+              ))}
           </dl>
         </div>
       </Section>

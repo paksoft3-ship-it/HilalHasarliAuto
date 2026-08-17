@@ -1,5 +1,5 @@
 import type { LegalDoc } from "@/components/ui/legal-document";
-import { siteConfig } from "./site";
+import { siteConfig, isPlaceholder } from "./site";
 import { routes } from "./navigation";
 
 /**
@@ -9,7 +9,22 @@ import { routes } from "./navigation";
  * completed after legal review.
  */
 
-const controller = siteConfig.legalCompanyName;
+/**
+ * Company facts are shown only when real values exist; until then the text
+ * falls back to a neutral phrasing instead of printing "[ŞİRKET ÜNVANI]".
+ */
+const controller = isPlaceholder(siteConfig.legalCompanyName)
+  ? `${siteConfig.brandName} işletmesi`
+  : siteConfig.legalCompanyName;
+const addressLine = isPlaceholder(siteConfig.companyAddress)
+  ? ""
+  : ` Adres: ${siteConfig.companyAddress}.`;
+const kepLine = isPlaceholder(siteConfig.kepAddress)
+  ? ""
+  : ` KEP: ${siteConfig.kepAddress}.`;
+const writtenChannel = isPlaceholder(siteConfig.companyAddress)
+  ? `${siteConfig.email} adresine`
+  : `${siteConfig.email} adresine veya ${siteConfig.companyAddress} adresine yazılı olarak`;
 const UPDATED = "[TARİH]";
 
 export const privacyDoc: LegalDoc = {
@@ -52,7 +67,7 @@ export const kvkkDoc: LegalDoc = {
   href: routes.kvkk,
   breadcrumbLabel: "KVKK Aydınlatma Metni",
   sections: [
-    { id: "veri-sorumlusu", heading: "Veri Sorumlusunun Kimliği", blocks: [{ type: "p", text: `Bu aydınlatma metni, veri sorumlusu sıfatıyla ${controller} tarafından hazırlanmıştır. Adres: ${siteConfig.companyAddress}. KEP: ${siteConfig.kepAddress}.` }] },
+    { id: "veri-sorumlusu", heading: "Veri Sorumlusunun Kimliği", blocks: [{ type: "p", text: `Bu aydınlatma metni, veri sorumlusu sıfatıyla ${controller} tarafından hazırlanmıştır.${addressLine}${kepLine}` }] },
     { id: "kapsam", heading: "Kapsam ve Veri Sahibi Grupları", blocks: [{ type: "p", text: "Bu metin; site ziyaretçileri, başvuru sahipleri ve müşteri adaylarının kişisel verilerini kapsar." }] },
     { id: "kategoriler", heading: "Kişisel Veri Kategorileri", blocks: [{ type: "ul", items: ["Kimlik ve iletişim bilgileri", "Araç ve işlem bilgileri", "Görsel kayıtlar (araç fotoğrafları)", "İşlem güvenliği ve teknik veriler"] }] },
     { id: "amaclar", heading: "İşleme Amaçları", blocks: [{ type: "ul", items: ["Değerlendirme talebinin yürütülmesi", "İletişim faaliyetlerinin sürdürülmesi", "Sözleşmesel ve yasal yükümlülüklerin yerine getirilmesi", "Hizmetlerin iyileştirilmesi"] }] },
@@ -62,7 +77,7 @@ export const kvkkDoc: LegalDoc = {
     { id: "saklama", heading: "Saklama, Silme ve Yok Etme", blocks: [{ type: "p", text: "Veriler, ilgili mevzuat ve işleme amaçlarının gerektirdiği süre ([SAKLAMA SÜRESİ]) boyunca saklanır; sürenin sonunda silinir, yok edilir veya anonim hale getirilir." }] },
     { id: "guvenlik", heading: "Güvenlik Tedbirleri", blocks: [{ type: "p", text: "Verilerinizin korunması için uygun teknik ve idari tedbirler alınır." }] },
     { id: "haklar", heading: "İlgili Kişinin Hakları", blocks: [{ type: "p", text: "KVKK md. 11 kapsamında; verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini isteme gibi haklara sahipsiniz." }] },
-    { id: "basvuru", heading: "Başvuru Yöntemleri", blocks: [{ type: "p", text: `Taleplerinizi ${siteConfig.email} adresine veya ${siteConfig.companyAddress} adresine yazılı olarak iletebilirsiniz. WhatsApp tek başına resmi KVKK başvuru kanalı değildir.` }] },
+    { id: "basvuru", heading: "Başvuru Yöntemleri", blocks: [{ type: "p", text: `Taleplerinizi ${writtenChannel} iletebilirsiniz. WhatsApp tek başına resmi KVKK başvuru kanalı değildir.` }] },
     { id: "guncelleme", heading: "Güncellemeler", blocks: [{ type: "p", text: "Bu metin gerektiğinde güncellenebilir; güncel sürüm bu sayfada yayımlanır." }] },
   ],
 };

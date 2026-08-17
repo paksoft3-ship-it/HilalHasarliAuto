@@ -46,6 +46,15 @@ export const siteConfig = {
 
 export type SiteConfig = typeof siteConfig;
 
+/**
+ * True while a legal/company field still holds its "[PLACEHOLDER]" fallback.
+ * Public surfaces must hide these rather than print brackets — showing
+ * "[ŞİRKET ÜNVANI]" to visitors is both a trust and a compliance problem.
+ */
+export function isPlaceholder(value: string): boolean {
+  return /^\[.*\]$/.test(value.trim());
+}
+
 /** wa.me deep link with a prefilled, context-aware (non-sensitive) message. */
 export function whatsappLink(message?: string): string {
   const num = siteConfig.whatsappE164.replace(/[^\d]/g, "");

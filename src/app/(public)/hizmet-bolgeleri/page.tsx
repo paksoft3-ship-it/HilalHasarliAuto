@@ -97,9 +97,28 @@ export default function ServiceAreasPage() {
                 {list.map((c) => (
                   <li key={c.slug}>
                     {c.published ? (
-                      <Link href={routes.city(c.slug)} className="text-[15px] text-ink hover:text-burgundy-700">
-                        {c.name}
-                      </Link>
+                      <>
+                        <Link href={routes.city(c.slug)} className="text-[15px] text-ink hover:text-burgundy-700">
+                          {c.name}
+                        </Link>
+                        {districts.some((d) => d.citySlug === c.slug) && (
+                          <span className="ml-2 text-[13px] text-ink-muted">
+                            {districts
+                              .filter((d) => d.citySlug === c.slug)
+                              .map((d, i) => (
+                                <span key={d.slug}>
+                                  {i > 0 && " · "}
+                                  <Link
+                                    href={routes.district(c.slug, d.slug)}
+                                    className="hover:text-burgundy-700"
+                                  >
+                                    {d.name}
+                                  </Link>
+                                </span>
+                              ))}
+                          </span>
+                        )}
+                      </>
                     ) : (
                       <span className="text-[15px] text-ink-muted">
                         {c.name} <span className="text-xs">(yakında)</span>

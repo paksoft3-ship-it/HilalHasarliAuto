@@ -9,13 +9,8 @@ import { services, serviceIconImage } from "@/config/services";
 import { routes } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { DEFAULT_EVALUATED } from "@/config/service-content";
-import {
-  cityH1,
-  cityIntro,
-  locationMetaTitle,
-  locationMetaDescription,
-  locationMetaKeywords,
-} from "@/lib/seo/local-copy";
+import { getCityContent } from "@/config/local-data";
+import { cityMetaTitle, cityMetaDescription, locationMetaKeywords } from "@/lib/seo/local-copy";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
@@ -27,7 +22,7 @@ import { QuoteSection } from "@/components/sections/quote-section";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { FinalCta } from "@/components/sections/final-cta";
-import { faqPageLd } from "@/lib/seo/jsonld";
+import { faqPageLd, localBusinessLd } from "@/lib/seo/jsonld";
 
 export const dynamicParams = false;
 
@@ -43,13 +38,13 @@ export async function generateMetadata({
   const { citySlug } = await params;
   const city = getCity(citySlug);
   if (!city) return {};
-  const title = locationMetaTitle(city.name);
-  const description = locationMetaDescription(city.name);
+  const title = cityMetaTitle(city);
+  const description = cityMetaDescription(city);
   const url = routes.city(citySlug);
   return {
     title,
     description,
-    keywords: locationMetaKeywords(city.slug),
+    keywords: locationMetaKeywords(city.name),
     alternates: { canonical: url },
     openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },
   };
@@ -64,12 +59,12 @@ export default async function CityPage({
   const city = getCity(citySlug);
   if (!city || !city.published) notFound();
 
+  const content = getCityContent(citySlug);
   const cityDistricts = districtsOfCity(citySlug);
   const nearby = featuredCities.filter((c) => c.region === city.region && c.slug !== city.slug).slice(0, 5);
 
-  const cityFaqs = [
+  const cityFaqs = content?.faqs ?? [
     { q: `${city.locative} hangi araçlar değerlendiriliyor?`, a: `${city.locative} hasarlı, kazalı, pert, arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçlar için değerlendirme talebi oluşturabilirsiniz.` },
-    { q: `Aracım ${city.name} dışındaysa ne olur?`, a: `Çevre il ve ilçelerden de başvuru kabul edilir. Konuma göre teslim veya taşıma seçenekleri planlanır.` },
     { q: "Değerlendirme ücretli mi?", a: "Hayır. Değerlendirme talebi oluşturmak ücretsizdir ve sizi bağlamaz." },
   ];
 
@@ -83,10 +78,11 @@ export default async function CityPage({
       />
 
       <PageHero
-        image="/images/heroes/5.png"
+        image={`/images/heroes/${content?.heroImage ?? 5}.png`}
+        imageAlt={content?.heroAlt}
         eyebrow={`${city.name} Geneli Araç Alım Hizmeti`}
-        title={cityH1(city)}
-        description={cityIntro(city)}
+        title={content?.heroTitle ?? `${city.locative} Hasarlı Araç Alımı`}
+        description={content?.intro ?? `${city.name} genelinde hasarlı araçlar için ücretsiz değerlendirme ve yerinden alım hizmeti veriyoruz.`}
       >
         <CtaGroup
           location="hero"
@@ -95,6 +91,21 @@ export default async function CityPage({
       </PageHero>
 
       <TrustStrip />
+
+      {/* Unique local context */}
+      {content && (
+        <Section tone="white">
+          <div className="max-w-[760px]">
+            <SectionHeading eyebrow="Bölge Notları" title={`${city.locative} Hasarlı Araç Alımı Nasıl İşliyor?`} align="left" />
+            {content.about.map((p, i) => (
+              <p key={i} className="mt-4 text-[16px] leading-relaxed text-ink-secondary">
+                {p}
+              </p>
+            ))}
+            <IconList items={content.localPoints} className="mt-6" />
+          </div>
+        </Section>
+      )}
 
       {/* Services available */}
       <Section tone="cream">
@@ -159,6 +170,14 @@ export default async function CityPage({
         </div>
         <JsonLd data={faqPageLd(cityFaqs)} />
       </Section>
+
+      <JsonLd
+        data={localBusinessLd({
+          cityName: city.name,
+          citySlug,
+          districtNames: cityDistricts.map((d) => d.name),
+        })}
+      />
 
       <QuoteSection
         source={`city:${citySlug}`}

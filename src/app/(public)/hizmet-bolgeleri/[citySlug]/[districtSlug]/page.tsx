@@ -5,13 +5,8 @@ import { MapPin } from "lucide-react";
 import { getCity } from "@/config/cities";
 import { districts, getDistrict, districtsOfCity } from "@/config/districts";
 import { siteConfig } from "@/config/site";
-import {
-  districtDescription,
-  districtH1,
-  locationMetaTitle,
-  locationMetaDescription,
-  locationMetaKeywords,
-} from "@/lib/seo/local-copy";
+import { getDistrictContent } from "@/config/local-data";
+import { locationMetaKeywords } from "@/lib/seo/local-copy";
 import { featuredServices } from "@/config/services";
 import { routes } from "@/config/navigation";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -42,13 +37,16 @@ export async function generateMetadata({
   const city = getCity(citySlug);
   const district = getDistrict(citySlug, districtSlug);
   if (!city || !district) return {};
-  const title = locationMetaTitle(district.name);
-  const description = locationMetaDescription(district.name);
+  const content = getDistrictContent(citySlug, districtSlug);
+  const title = content?.metaTitle ?? `${district.name} Hasarlı Araç Alımı`;
+  const description =
+    content?.metaDescription ??
+    `${district.name} (${city.name}) bölgesinde hasarlı, kazalı ve çalışmayan araç alımı. Ücretsiz çekici ile yerinden alım, devirde nakit ödeme.`;
   const url = routes.district(citySlug, districtSlug);
   return {
     title,
     description,
-    keywords: locationMetaKeywords(district.slug),
+    keywords: locationMetaKeywords(district.name),
     alternates: { canonical: url },
     openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },
   };
@@ -64,11 +62,12 @@ export default async function DistrictPage({
   const district = getDistrict(citySlug, districtSlug);
   if (!city || !city.published || !district) notFound();
 
+  const content = getDistrictContent(citySlug, districtSlug);
   const nearbyDistricts = districtsOfCity(citySlug).filter((d) => d.slug !== districtSlug);
 
-  const faqs = [
+  const faqs = content?.faqs ?? [
     { q: `${district.name}'de hangi araçlar değerlendiriliyor?`, a: `${district.name} ve çevresinde hasarlı, kazalı, arızalı, çalışmayan ve hurda araçlar için değerlendirme talebi oluşturabilirsiniz.` },
-    { q: "Aracı bulunduğum yerden alıyor musunuz?", a: "Konum ve araç durumuna göre teslim veya taşıma seçenekleri planlanır." },
+    { q: "Aracı bulunduğum yerden alıyor musunuz?", a: "Teklif kabul edildiğinde araç bulunduğu noktadan ücretsiz çekici ile alınır." },
   ];
 
   return (
@@ -86,10 +85,11 @@ export default async function DistrictPage({
           <div className="lg:col-span-7">
             <p className="eyebrow mb-4">{district.name} Araç Alım Hizmeti</p>
             <h1 className="text-[28px] font-bold leading-[1.12] text-ink md:text-[38px]">
-              {districtH1(district)}
+              {content?.heroTitle ?? `${district.name}'de Hasarlı Araç Alımı`}
             </h1>
             <p className="mt-5 max-w-[560px] text-[16px] leading-relaxed text-ink-secondary md:text-[18px]">
-              {districtDescription(district, city.name)}
+              {content?.lead ??
+                `${district.name} (${city.name}) bölgesindeki hasarlı, kazalı veya çalışmayan aracınız yerinden değerlendirilir.`}
             </p>
           </div>
           <div className="lg:col-span-5">
@@ -108,20 +108,23 @@ export default async function DistrictPage({
       <Section tone="cream">
         <div className="max-w-[760px]">
           <SectionHeading title={`${district.name}’de Hizmet`} align="left" />
-          <p className="mt-4 text-[16px] leading-relaxed text-ink-secondary">
-            {district.name}, {city.name} içinde yoğun araç hareketliliğine sahip
-            bölgelerden biridir. Bölgedeki hasarlı, arızalı veya çalışmayan
-            araçlar için bilgilerinizi paylaşarak değerlendirme süreci
-            başlatabilirsiniz.
-          </p>
+          {(content?.body ?? [
+            `${district.name}, ${city.name} içindeki hizmet bölgelerimizden biridir. Bölgedeki hasarlı, arızalı veya çalışmayan araçlar için bilgilerinizi paylaşarak ücretsiz değerlendirme başlatabilirsiniz.`,
+          ]).map((p, i) => (
+            <p key={i} className="mt-4 text-[16px] leading-relaxed text-ink-secondary">
+              {p}
+            </p>
+          ))}
           <IconList
             className="mt-6"
-            items={[
-              "Bölgeden hızlı başvuru imkânı",
-              "Çalışmayan araçlar için süreç planlaması",
-              "Konuma göre teslim veya taşıma değerlendirmesi",
-              "Güvenli ve şeffaf devir süreci",
-            ]}
+            items={
+              content?.points ?? [
+                "Bölgeden hızlı başvuru imkânı",
+                "Çalışmayan araçlara ücretsiz çekici",
+                "Konuma göre teslim veya taşıma planlaması",
+                "Güvenli ve şeffaf devir süreci",
+              ]
+            }
           />
         </div>
       </Section>

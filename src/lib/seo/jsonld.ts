@@ -5,12 +5,24 @@ type Json = Record<string, unknown>;
 const abs = (path: string) =>
   path.startsWith("http") ? path : `${siteConfig.domain}${path}`;
 
+/** Social profiles that are actually configured (empty string = not active). */
+function sameAsLinks(): string[] {
+  return Object.values(siteConfig.social).filter((v): v is string => Boolean(v));
+}
+
 export function organizationLd(): Json {
+  const sameAs = sameAsLinks();
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteConfig.domain}/#organization`,
     name: siteConfig.brandName,
     url: siteConfig.domain,
+    logo: {
+      "@type": "ImageObject",
+      url: abs("/images/logo/BusinessLogoHasarliAracAlan.png"),
+    },
+    ...(sameAs.length ? { sameAs } : {}),
     contactPoint: {
       "@type": "ContactPoint",
       telephone: siteConfig.phoneE164,
@@ -18,6 +30,44 @@ export function organizationLd(): Json {
       areaServed: "TR",
       availableLanguage: ["Turkish"],
     },
+  };
+}
+
+/**
+ * City-scoped local-business entity for city landing pages. No self-serving
+ * aggregateRating (ignored by Google since 2019) and no fake street address —
+ * only fields we can state truthfully for a service-area business.
+ */
+export function localBusinessLd(opts: {
+  cityName: string;
+  citySlug: string;
+  districtNames?: string[];
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": ["AutoDealer", "LocalBusiness"],
+    "@id": `${siteConfig.domain}/hizmet-bolgeleri/${opts.citySlug}/#business`,
+    name: `${siteConfig.brandName} — ${opts.cityName}`,
+    url: abs(`/hizmet-bolgeleri/${opts.citySlug}`),
+    image: abs("/images/logo/BusinessLogoHasarliAracAlan.png"),
+    telephone: siteConfig.phoneE164,
+    email: siteConfig.email,
+    priceRange: "₺₺",
+    currenciesAccepted: "TRY",
+    areaServed: [
+      { "@type": "City", name: opts.cityName },
+      ...(opts.districtNames ?? []).map((d) => ({
+        "@type": "AdministrativeArea",
+        name: `${d}, ${opts.cityName}`,
+      })),
+    ],
+    parentOrganization: { "@id": `${siteConfig.domain}/#organization` },
+    knowsAbout: [
+      "Hasarlı araç alımı",
+      "Kazalı araç alımı",
+      "Pert araç alımı",
+      "Hurda araç alımı",
+    ],
   };
 }
 

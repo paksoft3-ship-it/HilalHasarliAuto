@@ -8,7 +8,7 @@ import { SearchClient } from "@/components/forms/search-client";
 // Internal search results must not be indexed (master prompt §10).
 export const metadata: Metadata = {
   title: "Arama",
-  description: "Sitede hizmet, şehir, rehber ve sık sorulan sorular arasında arama yapın.",
+  description: "Aradığınız hizmeti, ili, rehberi veya sorunun cevabını tek kutudan bulun.",
   robots: { index: false, follow: true },
   alternates: { canonical: routes.search },
 };

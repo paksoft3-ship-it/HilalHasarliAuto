@@ -40,8 +40,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }));
 
+  // Real content-revision date for the location pages (unique local copy
+  // rollout) — update when the local-data content meaningfully changes.
+  const LOCAL_CONTENT_UPDATED = new Date("2026-08-17");
+
   const cityPages = publishedCities.map((c) => ({
     url: url(routes.city(c.slug)),
+    lastModified: LOCAL_CONTENT_UPDATED,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
@@ -50,6 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((d) => getCity(d.citySlug)?.published)
     .map((d) => ({
       url: url(routes.district(d.citySlug, d.slug)),
+      lastModified: LOCAL_CONTENT_UPDATED,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     }));

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
  */
 export function PageHero({
   image,
+  imageAlt,
   eyebrow,
   title,
   description,
@@ -17,6 +18,8 @@ export function PageHero({
 }: {
   /** Desktop image path, e.g. "/images/heroes/3.png". */
   image: string;
+  /** Descriptive alt text; omit only for purely decorative images. */
+  imageAlt?: string;
   eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
@@ -40,7 +43,7 @@ export function PageHero({
       {/* Mobile image — cars at bottom, blur at top */}
       <Image
         src={mobileImage}
-        alt=""
+        alt={imageAlt ?? ""}
         fill
         priority
         sizes="100vw"
@@ -49,7 +52,7 @@ export function PageHero({
       {/* Desktop image — cars right, blur left */}
       <Image
         src={image}
-        alt=""
+        alt={imageAlt ?? ""}
         fill
         priority
         sizes="100vw"

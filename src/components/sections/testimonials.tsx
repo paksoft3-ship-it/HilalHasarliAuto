@@ -32,7 +32,7 @@ export function Testimonials() {
       <SectionHeading
         eyebrow="Deneyimler"
         title="Araç Sahipleri Ne Diyor?"
-        intro="Aşağıdaki yorumlar örnek niteliğindedir."
+        intro="Aşağıdaki yorumlar temsilî örneklerdir; gerçek müşteri kaydı olarak sunulmamaktadır."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-3">
         {sampleTestimonials.map((t) => (

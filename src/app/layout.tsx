@@ -35,6 +35,14 @@ export default function RootLayout({
   return (
     <html lang="tr" className={manrope.variable} suppressHydrationWarning>
       <body className="min-h-screen antialiased" suppressHydrationWarning>
+        {/* React hoists this into <head>; pages overriding metadata.alternates
+            (canonical) would otherwise drop a metadata-level RSS alternate. */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${siteConfig.brandName} Blog`}
+          href={`${siteConfig.domain}/rss.xml`}
+        />
         {children}
       </body>
     </html>

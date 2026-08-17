@@ -139,7 +139,7 @@ export async function Footer() {
 
         <div className="lg:col-span-3">
           <FooterCol title="Hizmet Bölgeleri">
-            {featuredCities.slice(0, 8).map((c) => (
+            {featuredCities.map((c) => (
               <FLink key={c.slug} href={routes.city(c.slug)}>
                 {c.name}
               </FLink>

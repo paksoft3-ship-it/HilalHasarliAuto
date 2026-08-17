@@ -11,9 +11,9 @@ import { buttonClasses } from "@/components/ui/button";
 import { FullQuoteForm } from "@/components/forms/full-quote-form";
 
 export const metadata: Metadata = {
-  title: "Teklif Al — Ücretsiz Araç Değerlendirmesi",
+  title: "Ücretsiz Teklif Al — Aracınızın Değerini Öğrenin",
   description:
-    "Aracınız için ücretsiz değerlendirme talebi oluşturun. Fotoğraf gönderin, 30 dakikada en yüksek fiyat teklifini alın. Aynı gün nakit ödeme.",
+    "Türkiye'nin her ilinden hasarlı araç teklifi: fotoğraflarınızı gönderin, ülke geneli alım ağımızın hazırladığı rakamı görün, aynı gün nakde çevirin.",
   keywords:
     "araç değerleme, ücretsiz araç teklifi, hasarlı araç fiyat teklifi, araç satmak",
   alternates: { canonical: routes.getOffer },
@@ -35,8 +35,8 @@ export default async function GetOfferPage() {
         image="/images/heroes/4.png"
         size="sm"
         eyebrow="Ücretsiz Araç Değerlendirmesi"
-        title="Aracınız İçin Değerlendirme Talebi Oluşturun"
-        description="Araç, hasar, konum ve iletişim bilgilerinizi adım adım paylaşın. Bilgileriniz yalnızca değerlendirme amacıyla kullanılır."
+        title="Aracınızın Gerçek Değerini Birkaç Dakikada Öğrenin"
+        description="Formu adım adım doldurun; verdiğiniz bilgiler yalnızca teklif hazırlamak için kullanılır, üçüncü taraflarla paylaşılmaz."
       />
 
       <Section tone="white">

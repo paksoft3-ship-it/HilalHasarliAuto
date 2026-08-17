@@ -172,7 +172,7 @@ export default async function ServicePage({
         <SectionHeading
           eyebrow="Şeffaf Süreç"
           title="İlk Değerlendirme ve Nihai Teklif"
-          intro="Beklentilerinizi en baştan netleştiriyoruz."
+          intro="Hangi rakamın neden çıktığını baştan açıklıyoruz."
         />
         <div className="mt-10">
           <OfferExplainer />

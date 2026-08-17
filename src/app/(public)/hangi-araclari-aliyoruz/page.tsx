@@ -21,7 +21,7 @@ import { FinalCta } from "@/components/sections/final-cta";
 export const metadata: Metadata = {
   title: "Hangi Araçları Alıyoruz?",
   description:
-    "Hasarlı, kazalı, pert, ağır hasarlı, motor ve mekanik arızalı, çalışmayan, yanmış, sel hasarlı, hurda ve çekme belgeli araçları alıyoruz.",
+    "Kaporta hasarından yanmış ve sel görmüş araçlara, motor arızasından hurda belgeliye kadar 11 ayrı araç durumu için ülke genelinde alım yapıyoruz.",
   keywords:
     "hasarlı araç alan, kazalı araç alan, pert araç alan, hurda araç alan, arızalı araç alan",
   alternates: { canonical: routes.vehiclesWeBuy },
@@ -36,7 +36,7 @@ export default async function VehiclesWeBuyPage() {
       <PageHero
         image="/images/heroes/3.png"
         eyebrow="Araç Türüne Göre Değerlendirme"
-        title="Farklı Durumdaki Araçlar İçin Değerlendirme"
+        title="Hangi Araç Durumları İçin Alım Yapıyoruz?"
         description="Aracınızın durumu ne olursa olsun değerini profesyonelce belirliyoruz. Aşağıdan kategorinizi seçerek sürece başlayın."
       >
         <CtaGroup location="hero" />
