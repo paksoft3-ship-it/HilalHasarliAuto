@@ -31,7 +31,17 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
-    formats: ["image/avif", "image/webp"],
+    // Vercel's Image Optimization quota for this account is exhausted, and the
+    // optimizer answers /_next/image with HTTP 402, which blanks every image on
+    // the site including the logo. Serving the files directly keeps the site
+    // visually intact and costs no quota.
+    //
+    // Trade-off: no automatic resizing or format conversion, so the source
+    // files are shipped as-is. Re-enable optimization (drop `unoptimized` and
+    // restore `formats`) once the plan is upgraded or the quota resets — and
+    // prefer webp alone over avif+webp, since each extra format multiplies the
+    // number of billable transformations.
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
