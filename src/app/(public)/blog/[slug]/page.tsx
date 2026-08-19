@@ -15,6 +15,7 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { FinalCta } from "@/components/sections/final-cta";
 import { faqPageLd } from "@/lib/seo/jsonld";
+import { seoTitle, seoDescription } from "@/lib/seo/title";
 
 // Allow CMS-published slugs (not known at build) to render on demand.
 export const dynamicParams = true;
@@ -35,8 +36,8 @@ export async function generateMetadata({
   const description = post.metaDescription ?? post.excerpt;
   const title = post.seoTitle ?? post.title;
   return {
-    title,
-    description,
+    title: seoTitle(title),
+    description: seoDescription(description),
     keywords: post.metaKeywords ?? blogMetaKeywords,
     alternates: { canonical: post.canonical ?? routes.blogPost(slug) },
     ...(post.robots ? { robots: post.robots } : {}),

@@ -24,6 +24,7 @@ import { OfferExplainer } from "@/components/sections/offer-explainer";
 import { RelatedServices } from "@/components/sections/related-services";
 import { FinalCta } from "@/components/sections/final-cta";
 import { serviceLd, faqPageLd } from "@/lib/seo/jsonld";
+import { seoTitle, seoDescription } from "@/lib/seo/title";
 
 export const dynamicParams = false;
 
@@ -44,8 +45,8 @@ export async function generateMetadata({
   const description = service.metaDescription ?? content.heroLead;
   const url = routes.service(slug);
   return {
-    title,
-    description,
+    title: seoTitle(title),
+    description: seoDescription(description),
     keywords: service.metaKeywords,
     alternates: { canonical: url },
     openGraph: {

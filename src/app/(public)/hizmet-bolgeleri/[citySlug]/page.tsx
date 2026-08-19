@@ -23,6 +23,7 @@ import { TrustStrip } from "@/components/sections/trust-strip";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { FinalCta } from "@/components/sections/final-cta";
 import { faqPageLd, localBusinessLd } from "@/lib/seo/jsonld";
+import { seoTitle, seoDescription } from "@/lib/seo/title";
 
 export const dynamicParams = false;
 
@@ -42,8 +43,8 @@ export async function generateMetadata({
   const description = cityMetaDescription(city);
   const url = routes.city(citySlug);
   return {
-    title,
-    description,
+    title: seoTitle(title),
+    description: seoDescription(description),
     keywords: locationMetaKeywords(city.name),
     alternates: { canonical: url },
     openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },

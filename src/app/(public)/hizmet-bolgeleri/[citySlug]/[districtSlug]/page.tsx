@@ -19,6 +19,7 @@ import { TrustStrip } from "@/components/sections/trust-strip";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { FinalCta } from "@/components/sections/final-cta";
 import { faqPageLd } from "@/lib/seo/jsonld";
+import { seoTitle, seoDescription } from "@/lib/seo/title";
 
 export const dynamicParams = false;
 
@@ -44,8 +45,8 @@ export async function generateMetadata({
     `${district.name} (${city.name}) bölgesinde hasarlı, kazalı ve çalışmayan araç alımı. Ücretsiz çekici ile yerinden alım, devirde nakit ödeme.`;
   const url = routes.district(citySlug, districtSlug);
   return {
-    title,
-    description,
+    title: seoTitle(title),
+    description: seoDescription(description),
     keywords: locationMetaKeywords(district.name),
     alternates: { canonical: url },
     openGraph: { title: `${title} | ${siteConfig.brandName}`, description, url, type: "website" },

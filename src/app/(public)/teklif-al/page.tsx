@@ -9,9 +9,10 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
 import { buttonClasses } from "@/components/ui/button";
 import { FullQuoteForm } from "@/components/forms/full-quote-form";
+import { seoTitle } from "@/lib/seo/title";
 
 export const metadata: Metadata = {
-  title: "Ücretsiz Teklif Al — Aracınızın Değerini Öğrenin",
+  title: seoTitle("Ücretsiz Teklif Al — Aracınızın Değerini Öğrenin"),
   description:
     "Türkiye'nin her ilinden hasarlı araç teklifi: fotoğraflarınızı gönderin, ülke geneli alım ağımızın hazırladığı rakamı görün, aynı gün nakde çevirin.",
   keywords:

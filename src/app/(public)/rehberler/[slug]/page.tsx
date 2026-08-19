@@ -14,6 +14,7 @@ import { ArticleBody } from "@/components/ui/article-body";
 import { JsonLd } from "@/components/ui/json-ld";
 import { buttonClasses } from "@/components/ui/button";
 import { FinalCta } from "@/components/sections/final-cta";
+import { seoTitle, seoDescription } from "@/lib/seo/title";
 
 export const dynamicParams = false;
 
@@ -30,8 +31,8 @@ export async function generateMetadata({
   const g = getGuide(slug);
   if (!g) return {};
   return {
-    title: g.title,
-    description: g.description,
+    title: seoTitle(g.title),
+    description: seoDescription(g.description),
     keywords: blogMetaKeywords,
     alternates: { canonical: routes.guide(slug) },
     openGraph: { title: g.title, description: g.description, type: "article", images: [{ url: g.image }] },
