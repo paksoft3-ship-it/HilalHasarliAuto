@@ -46,7 +46,8 @@ function SocialLinks() {
   );
 }
 import { featuredServices } from "@/config/services";
-import { featuredCities } from "@/config/cities";
+import { featuredCities, cities } from "@/config/cities";
+import { districts } from "@/config/districts";
 import { Logo } from "./logo";
 import { DevCredit } from "./dev-credit";
 import { CookiePreferencesButton } from "@/components/consent/cookie-preferences-button";
@@ -146,6 +147,40 @@ export async function Footer() {
             ))}
             <FLink href={routes.serviceAreas}>Tüm Hizmet Bölgeleri</FLink>
           </FooterCol>
+        </div>
+      </div>
+
+      {/* District strip.
+          District pages sat three clicks deep, reachable only from the
+          /hizmet-bolgeleri hub and their own city page. Search Console had 29
+          of them as "Discovered - currently not indexed", which is what that
+          status means: crawled the URL, decided it had not earned indexing.
+          Linking them from the footer puts a path to every district on every
+          page of the site so they accumulate internal link equity. Rendered as
+          a full-width strip rather than a 5th column so the 12-col grid above
+          keeps its balance. */}
+      <div className="border-t border-white/10">
+        <div className="container-page py-6">
+          <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-white">
+            Popüler İlçeler
+          </h3>
+          <ul className="flex flex-wrap gap-x-1 gap-y-2 text-sm">
+            {districts.map((d) => {
+              const city = cities.find((c) => c.slug === d.citySlug);
+              return (
+                <li key={`${d.citySlug}-${d.slug}`} className="flex items-center">
+                  <Link
+                    href={routes.district(d.citySlug, d.slug)}
+                    className="rounded px-2 py-1 text-white/60 transition-colors hover:text-white"
+                    title={`${d.name} hasarlı araç alımı${city ? ` — ${city.name}` : ""}`}
+                  >
+                    {d.name}
+                    {city ? <span className="text-white/35"> · {city.name}</span> : null}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
 
