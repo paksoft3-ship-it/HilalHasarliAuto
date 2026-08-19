@@ -46,7 +46,7 @@ export const services: VehicleService[] = [
     imageAlt: "Yan tarafı hasarlı gümüş renkli sedan otomobil",
     icon: "TriangleAlert",
     featured: true,
-    metaTitle: "Hasarlı Araç Alımı | En Yüksek Fiyat",
+    metaTitle: "Hasarlı Araç Alım Satım — Alan Yerler",
     metaDescription:
       "Hasarlı aracınızı her durumda alıyoruz. Ücretsiz ekspertiz, aynı gün nakit ödeme, ücretsiz çekici. Fotoğraf gönderin, 30 dakikada teklif alın.",
     metaKeywords:
@@ -61,7 +61,7 @@ export const services: VehicleService[] = [
     imageAlt: "Ön ve yan tarafı kaza nedeniyle hasar görmüş siyah sedan",
     icon: "CarFront",
     featured: true,
-    metaTitle: "Kazalı Araç Alımı | Anında Nakit",
+    metaTitle: "Kazalı Araç Alımı — Alan Yerler",
     metaDescription:
       "Kaza geçirmiş aracınızı değerinde alıyoruz. Hızlı ve şeffaf değerlendirme, ücretsiz çekici, aynı gün nakit ödeme. Hemen ücretsiz teklif alın.",
     metaKeywords:
@@ -76,7 +76,7 @@ export const services: VehicleService[] = [
     imageAlt: "Ön tarafı ağır hasarlı, pert durumundaki sedan",
     icon: "FileWarning",
     featured: true,
-    metaTitle: "Pert Araç Alımı | En İyi Fiyat",
+    metaTitle: "Pert Araç Alım Satım — Alan Yerler",
     metaDescription:
       "Pert kayıtlı veya pert muhtemel araçlarınız için özel değerlendirme. En yüksek fiyat, hızlı işlem, ücretsiz çekici, anında ödeme. Teklif alın.",
     metaKeywords:
@@ -91,7 +91,7 @@ export const services: VehicleService[] = [
     imageAlt: "Ön tarafı ağır hasarlı siyah SUV",
     icon: "AlertOctagon",
     featured: false,
-    metaTitle: "Ağır Hasarlı Araç Alımı | Nakit",
+    metaTitle: "Ağır Hasarlı Araç Alımı — Alan Yerler",
     metaDescription:
       "Ağır hasarlı aracınızı bulunduğu yerden değerlendiriyoruz. Ücretsiz çekici, en yüksek fiyat, aynı gün nakit ödeme. Hemen ücretsiz teklif alın.",
     metaKeywords:
@@ -106,7 +106,7 @@ export const services: VehicleService[] = [
     imageAlt: "Motor bölmesi kontrol edilen, motor kaputu açık araç",
     icon: "Wrench",
     featured: true,
-    metaTitle: "Motor Arızalı Araç Alımı",
+    metaTitle: "Motor Arızalı Araç Alan Yerler",
     metaDescription:
       "Motor arızası bulunan aracınızı değerinde alıyoruz. Ücretsiz ekspertiz, ücretsiz çekici, aynı gün nakit ödeme. Fotoğraf gönderin, teklif alın.",
     metaKeywords:
@@ -121,7 +121,7 @@ export const services: VehicleService[] = [
     imageAlt: "Lift üzerinde mekanik kontrolü yapılan araç",
     icon: "Settings",
     featured: false,
-    metaTitle: "Mekanik Arızalı Araç Alımı",
+    metaTitle: "Arızalı Araç Alım Satım — Alan Yerler",
     metaDescription:
       "Mekanik arızalı, ekonomik onarımı zor araçlar için değerlendirme alın. Ücretsiz çekici, en yüksek fiyat, anında nakit ödeme. Hemen arayın.",
     metaKeywords:
@@ -181,7 +181,7 @@ export const services: VehicleService[] = [
     imageAlt: "Hurda durumundaki eski, paslı beyaz araç",
     icon: "Recycle",
     featured: true,
-    metaTitle: "Hurda Araç Alımı | Hurda Belgeli",
+    metaTitle: "Hurda Araç Alım Satım — Alan Yerler",
     metaDescription:
       "Hurda ve ekonomik ömrünü tamamlamış aracınızı alıyoruz. Hurda belgeli işlem, ücretsiz çekici, anında nakit ödeme. Hemen ücretsiz teklif alın.",
     metaKeywords:
@@ -196,7 +196,7 @@ export const services: VehicleService[] = [
     imageAlt: "Çekici üzerinde taşınan çekme belgeli araç",
     icon: "FileText",
     featured: true,
-    metaTitle: "Çekme Belgeli Araç Alımı",
+    metaTitle: "Çekme Belgeli Araç Alan Yerler",
     metaDescription:
       "Çekme belgeli ve trafikten çekilmiş aracınız için teklif alın. Ücretsiz çekici, en yüksek fiyat, aynı gün nakit ödeme. Hemen ücretsiz teklif.",
     metaKeywords:

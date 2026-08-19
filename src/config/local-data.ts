@@ -42,7 +42,7 @@ export interface DistrictContent {
 export const cityContent: CityContent[] = [
   {
     citySlug: "istanbul",
-    metaTitle: "İstanbul Hasarlı Araç Alan — 39 İlçede Kazalı Araç Alımı",
+    metaTitle: "İstanbul Hasarlı ve Hurda Araç Alan — 39 İlçede Alım",
     metaDescription:
       "İstanbul'un iki yakasında, 39 ilçenin tamamında hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, 30 dakikada değerlendirme, aynı gün nakit ödeme.",
     heroTitle: "İstanbul'da Hasarlı Aracınız İki Yakada da Nakit Alınır",
@@ -77,7 +77,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "ankara",
-    metaTitle: "Ankara Hasarlı Araç Alan — Kazalı ve Pert Araç Alımı",
+    metaTitle: "Ankara Hurda ve Hasarlı Araç Alan Yerler — Kazalı Alımı",
     metaDescription:
       "Ankara'nın tüm ilçelerinde hasarlı, kazalı, pert ve hurda araç alımı. Kış buzlanması kazaları dahil ücretsiz çekici, hızlı değerlendirme, nakit ödeme.",
     heroTitle: "Ankara'da Hasarlı Araç Alımının Adresi",
@@ -112,7 +112,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "izmir",
-    metaTitle: "İzmir Hasarlı Araç Alan Yer — Kazalı ve Hurda Araç Alımı",
+    metaTitle: "İzmir Hurda ve Hasarlı Araç Alan Yerler — Kazalı Alımı",
     metaDescription:
       "İzmir'in 30 ilçesinde hasarlı, kazalı, pert ve hurda araç alımı. Türkiye geneli alım ağımızla en güçlü teklif, ücretsiz çekici ve nakit ödeme.",
     heroTitle: "İzmir'de Hasarlı Aracınıza Türkiye Ölçeğinde Teklif",
@@ -147,7 +147,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "bursa",
-    metaTitle: "Bursa Hasarlı Araç Alımı — Kazalı, Pert ve Arızalı Araçlar",
+    metaTitle: "Bursa Hurda ve Hasarlı Araç Alımı — Kazalı, Pert, Arızalı",
     metaDescription:
       "Otomotivin başkenti Bursa'da hasarlı, kazalı ve pert araç alımı. Sanayi bölgesi ticari araçları dahil ücretsiz çekici ve aynı gün nakit ödeme.",
     heroTitle: "Otomotivin Başkenti Bursa'da Hasarlı Araç Alımı",
@@ -182,7 +182,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "antalya",
-    metaTitle: "Antalya Hasarlı Araç Alımı — Kazalı ve Hurda Araç Alan",
+    metaTitle: "Antalya Hurda Araç Alan Yerler — Kazalı ve Hasarlı Alımı",
     metaDescription:
       "Antalya'da hasarlı, kazalı, pert ve hurda araç alımı. Türkiye geneli alım ağıyla güçlü teklif; ücretsiz çekici, hızlı değerlendirme, nakit ödeme.",
     heroTitle: "Antalya'da Hasarlı Araçlar Ülke Fiyatından Alınır",
@@ -217,7 +217,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "adana",
-    metaTitle: "Adana Hasarlı Araç Alan — Kazalı, Pert ve Sel Hasarlı",
+    metaTitle: "Adana Hurda ve Hasarlı Araç Alım Satım — Sel Hasarlı Dahil",
     metaDescription:
       "Adana'nın tüm ilçelerinde hasarlı, kazalı, pert ve sel hasarlı araç alımı. E-90 ve TAG otoyolu kazaları dahil ücretsiz çekici, nakit ödeme.",
     heroTitle: "Adana'da Her Durumdaki Hasarlı Araç Değerlendirilir",
@@ -252,7 +252,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "konya",
-    metaTitle: "Konya Hasarlı Araç Alımı — Kazalı ve Arızalı Araç Alan",
+    metaTitle: "Konya Hurda ve Hasarlı Araç Alan — Kazalı, Arızalı Alımı",
     metaDescription:
       "Konya ve tüm ilçelerinde hasarlı, kazalı, pert ve arızalı araç alımı. Uzun yol kazaları ve tarım araçları dahil ücretsiz çekici, nakit ödeme.",
     heroTitle: "Konya'da Hasarlı Araç Alımı",
@@ -287,7 +287,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "gaziantep",
-    metaTitle: "Gaziantep Hasarlı Araç Alımı — Ticari ve Kazalı Araçlar",
+    metaTitle: "Gaziantep Hurda Araç Alımı — Hasarlı ve Ticari Araç Alan",
     metaDescription:
       "Gaziantep'te hasarlı, kazalı, pert ve ticari araç alımı. Türkiye geneli ağımızla sanayi filolarına güçlü teklif; ücretsiz çekici, nakit ödeme.",
     heroTitle: "Gaziantep'te Hasarlı ve Ticari Araç Alımı",
@@ -322,7 +322,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "kocaeli",
-    metaTitle: "Kocaeli Hasarlı Araç Alan — Gebze ve İzmit Dahil",
+    metaTitle: "Kocaeli Hasarlı ve Hurda Araç Alan — Gebze, İzmit Dahil",
     metaDescription:
       "Kocaeli, İzmit ve Gebze'de hasarlı, kazalı ve pert araç alımı. TEM ve D-100 kazaları dahil ücretsiz çekici, hızlı değerlendirme, nakit ödeme.",
     heroTitle: "Kocaeli'nde Hasarlı Araç Alımı: Sanayinin Kalbinde",
@@ -357,7 +357,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "mersin",
-    metaTitle: "Mersin Hasarlı Araç Alan — Kazalı ve Ticari Araç Alımı",
+    metaTitle: "Mersin Hurda ve Hasarlı Araç Alan — Ticari Araç Alımı",
     metaDescription:
       "Mersin ve Tarsus'ta hasarlı, kazalı ve pert araç alımı. Türkiye geneli ağımızla liman kentinin araçlarına güçlü teklif, ücretsiz çekici, nakit ödeme.",
     heroTitle: "Mersin'de Hasarlı Aracınız Değerinde Nakde Dönsün",
@@ -392,7 +392,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "kayseri",
-    metaTitle: "Kayseri Hasarlı Araç Alımı — Kazalı ve Arızalı Araç Alan",
+    metaTitle: "Kayseri Hasarlı Araç Alan — Hurda ve Çekme Belgeli Alımı",
     metaDescription:
       "Kayseri'nin tüm ilçelerinde hasarlı, kazalı, pert ve arızalı araç alımı. Kış kazaları ve sanayi araçları dahil ücretsiz çekici, nakit ödeme.",
     heroTitle: "Kayseri'de Hasarlı Araç Alımı",
@@ -427,7 +427,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "samsun",
-    metaTitle: "Samsun Hasarlı Araç Alan — Karadeniz'de Kazalı Araç Alımı",
+    metaTitle: "Samsun Hasarlı ve Hurda Araç Alan — Karadeniz'de Alım",
     metaDescription:
       "Samsun ve tüm ilçelerinde hasarlı, kazalı, pert ve arızalı araç alımı. Sahil yolu kazaları ve yağışlı iklim hasarları dahil ücretsiz çekici, nakit ödeme.",
     heroTitle: "Samsun'da Hasarlı Araç Alımı: Karadeniz'in Merkezinde",
