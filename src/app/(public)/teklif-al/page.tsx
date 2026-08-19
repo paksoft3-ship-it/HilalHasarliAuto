@@ -32,7 +32,7 @@ export default async function GetOfferPage() {
       <Breadcrumb items={[{ label: "Teklif Al", href: routes.getOffer }]} />
 
       <PageHero
-        image="/images/heroes/4.png"
+        image="/images/heroes/4.webp"
         size="sm"
         eyebrow="Ücretsiz Araç Değerlendirmesi"
         title="Aracınızın Gerçek Değerini Birkaç Dakikada Öğrenin"

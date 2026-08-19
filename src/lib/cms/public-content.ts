@@ -37,7 +37,7 @@ function mapItem(item: DbItem): BlogPost {
     date: (item.publishedAt ?? item.updatedAt).toISOString(),
     modified: item.updatedAt.toISOString(),
     readingMinutes: readingMinutes(item.body),
-    image: item.imageUrl ?? "/images/photos/2.png",
+    image: item.imageUrl ?? "/images/photos/2.webp",
     imageAlt: item.imageAlt ?? item.title,
     body: item.body,
     faqs: item.faqs && item.faqs.length > 0 ? item.faqs : undefined,

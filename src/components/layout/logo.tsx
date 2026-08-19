@@ -17,7 +17,7 @@ export function Logo({
   className?: string;
   brandName?: string;
 }) {
-  const src = surface === "dark" ? "/images/logo/dark-logo.png" : "/images/logo/light-logo.png";
+  const src = surface === "dark" ? "/images/logo/dark-logo.webp" : "/images/logo/light-logo.webp";
   return (
     <Link
       href="/"

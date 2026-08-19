@@ -53,7 +53,7 @@ export default function HowItWorksPage() {
       <Breadcrumb items={[{ label: "Nasıl Çalışır?", href: routes.howItWorks }]} />
 
       <PageHero
-        image="/images/heroes/6.png"
+        image="/images/heroes/6.webp"
         eyebrow="Şeffaf ve Kolay Süreç"
         title="Aracınızı Satma Süreci Nasıl İlerler?"
         description="Bilgilerinizi paylaşmaktan teslime kadar her adım açık ve anlaşılırdır. Süreç boyunca sizi bilgilendiririz."

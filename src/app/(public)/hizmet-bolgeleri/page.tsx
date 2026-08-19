@@ -50,7 +50,7 @@ export default function ServiceAreasPage() {
       <Breadcrumb items={[{ label: "Hizmet Bölgeleri", href: routes.serviceAreas }]} />
 
       <PageHero
-        image="/images/heroes/5.png"
+        image="/images/heroes/5.webp"
         eyebrow="Türkiye Geneli Araç Alım Hizmeti"
         title="Aracınızın Bulunduğu Şehri Seçin"
         description="Türkiye genelinden başvuru kabul edilir. Hizmet uygunluğu, araç ve konum değerlendirmesinin ardından netleştirilir."

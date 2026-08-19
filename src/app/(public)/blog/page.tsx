@@ -31,7 +31,7 @@ export default async function BlogListingPage() {
       <Breadcrumb items={[{ label: "Blog", href: routes.blog }]} />
 
       <PageHero
-        image="/images/heroes/3.png"
+        image="/images/heroes/3.webp"
         size="sm"
         eyebrow="Araç Satış ve Değerleme Rehberi"
         title="Hasarlı Araç Satışı Hakkında Bilmeniz Gerekenler"

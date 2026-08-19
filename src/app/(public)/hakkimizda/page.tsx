@@ -33,7 +33,7 @@ export default function AboutPage() {
       <Breadcrumb items={[{ label: "Hakkımızda", href: routes.about }]} />
 
       <PageHero
-        image="/images/heroes/7.png"
+        image="/images/heroes/7.webp"
         eyebrow="Profesyonel Araç Değerlendirme"
         title={`${siteConfig.brandName} Hakkında`}
         description="Hasarlı, kazalı, arızalı ve çalışmayan araçların sahipleri için karmaşık bir süreci basitleştiriyoruz. Aracınızı birlikte değerlendirir; güvenli, şeffaf ve anlaşılır bir satın alma süreci sunarız."

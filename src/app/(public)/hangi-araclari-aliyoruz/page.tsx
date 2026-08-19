@@ -34,7 +34,7 @@ export default async function VehiclesWeBuyPage() {
       <Breadcrumb items={[{ label: "Hangi Araçları Alıyoruz?", href: routes.vehiclesWeBuy }]} />
 
       <PageHero
-        image="/images/heroes/3.png"
+        image="/images/heroes/3.webp"
         eyebrow="Araç Türüne Göre Değerlendirme"
         title="Hangi Araç Durumları İçin Alım Yapıyoruz?"
         description="Aracınızın durumu ne olursa olsun değerini profesyonelce belirliyoruz. Aşağıdan kategorinizi seçerek sürece başlayın."

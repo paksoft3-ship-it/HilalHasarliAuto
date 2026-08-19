@@ -24,7 +24,7 @@ export default function GuidesListingPage() {
       <Breadcrumb items={[{ label: "Araç Satış Rehberleri", href: routes.guides }]} />
 
       <PageHero
-        image="/images/heroes/6.png"
+        image="/images/heroes/6.webp"
         size="sm"
         eyebrow="Adım Adım Araç Satış Rehberleri"
         title="Aracınızın Durumuna Uygun Rehberi Bulun"

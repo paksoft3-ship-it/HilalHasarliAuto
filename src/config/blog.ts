@@ -68,7 +68,7 @@ export const blogPosts: BlogPost[] = [
     category: "Hasarlı Araç",
     date: "2026-06-26",
     readingMinutes: 7,
-    image: "/images/blog/az-hasarli-arac.jpg",
+    image: "/images/blog/az-hasarli-arac.webp",
     imageAlt: "Satışa hazırlanan, ön tamponu hafif hasarlı beyaz otomobil",
     body: [
       { type: "p", text: "Hasarlı bir aracı satmak, ilk bakışta karmaşık görünebilir. Ekspertiz, değer kaybı, noter devri, hasar kaydı… Aklınızda birçok soru olması çok normal. Bu rehberde, hasarlı aracınızı en yüksek fiyata ve sorunsuz bir şekilde nasıl satabileceğinizi adım adım anlatıyoruz." },
@@ -120,7 +120,7 @@ export const blogPosts: BlogPost[] = [
     category: "Pert ve Ağır Hasar",
     date: "2026-06-26",
     readingMinutes: 7,
-    image: "/images/blog/pert-arac.jpg",
+    image: "/images/blog/pert-arac.webp",
     imageAlt: "Pert kayıtlı, ön tarafı ağır hasarlı otomobil",
     body: [
       { type: "p", text: "Aracınız bir kaza sonrası \"pert\" olarak kaydedildiyse veya sigorta şirketiniz size \"pert\" kelimesini söylediyse, kafanızda birçok soru oluşmuş olabilir. Pert ne demek? Pert araç satılır mı? Değeri ne olur? Bu yazıda, pert araçlarla ilgili merak ettiğiniz her şeyi sade bir dille açıklıyoruz." },
@@ -181,7 +181,7 @@ export const blogPosts: BlogPost[] = [
     category: "Noter ve Devir",
     date: "2026-06-18",
     readingMinutes: 7,
-    image: "/images/blog/az-hasarli-arac.jpg",
+    image: "/images/blog/az-hasarli-arac.webp",
     imageAlt: "Devir için hazırlanan, ön tamponu hasarlı beyaz Renault",
     body: [
       { type: "p", text: "Türkiye'de araç satışı 2019'dan bu yana doğrudan noterde yapılıyor. Noter, satış sözleşmesini düzenlerken devri elektronik olarak tescil sistemine işler; ayrıca trafik tescil müdürlüğüne gitmenize gerek kalmaz. Bu kural hasarlı, pert kayıtlı veya çalışmayan araçlar için de aynıdır." },
@@ -232,7 +232,7 @@ export const blogPosts: BlogPost[] = [
     category: "Belgeler ve Sorgulama",
     date: "2026-06-05",
     readingMinutes: 6,
-    image: "/images/blog/kazali-arac-egea-on.jpg",
+    image: "/images/blog/kazali-arac-egea-on.webp",
     imageAlt: "Ön sol tarafı hasarlı gri sedan otomobil",
     body: [
       { type: "p", text: "Araç hasar kaydı, o araç için sigorta şirketlerince ödenmiş hasarların kayıt altına alındığı veridir. Bu kayıtlar Sigorta Bilgi ve Gözetim Merkezi (SBM) bünyesindeki TRAMER sisteminde tutulur ve hem alıcı hem satıcı için aracın geçmişini şeffaf hâle getirir." },
@@ -273,7 +273,7 @@ export const blogPosts: BlogPost[] = [
     category: "Pert ve Ağır Hasar",
     date: "2026-05-22",
     readingMinutes: 7,
-    image: "/images/blog/kazali-arac-agir-hasar.jpg",
+    image: "/images/blog/kazali-arac-agir-hasar.webp",
     imageAlt: "Ön tarafı ağır hasarlı beyaz sedan otomobil",
     body: [
       { type: "p", text: "Halk arasında 'pert' denilen kavram, onarım maliyetinin aracın rayiç (piyasa) değerine yaklaştığı veya geçtiği durumu ifade eder. Sigorta tekniği açısından iki ana durumu birbirinden ayırmak önemlidir." },
@@ -312,7 +312,7 @@ export const blogPosts: BlogPost[] = [
     category: "Hurda ve Çekme Belgeli",
     date: "2026-05-08",
     readingMinutes: 6,
-    image: "/images/blog/cekici-citroen-c4.jpg",
+    image: "/images/blog/cekici-citroen-c4.webp",
     imageAlt: "Çekici üzerine yüklenmiş, ön tarafı hasarlı kırmızı otomobil",
     body: [
       { type: "p", text: "Çekme belgesi; kendi gücüyle güvenli biçimde trafiğe çıkamayacak durumdaki araçlar için düzenlenen, aracın yalnızca çekici ile taşınabileceğini gösteren resmi belgedir. Ağır hasarlı, motor/şanzıman arızalı veya uzun süre kullanılmayacak araçlar için tercih edilir." },
@@ -357,7 +357,7 @@ export const blogPosts: BlogPost[] = [
     category: "Araç Değerleme",
     date: "2026-04-19",
     readingMinutes: 6,
-    image: "/images/blog/hasarli-arac-on-hasar.jpg",
+    image: "/images/blog/hasarli-arac-on-hasar.webp",
     imageAlt: "Ön tamponu ve farı hasarlı beyaz otomobil",
     body: [
       { type: "p", text: "Hasarlı araç değerlemesi, sağlam araç fiyatından belirli kalemlerin düşülmesiyle değil; aracın bütünü, onarım maliyeti ve kullanılabilir parça değeri birlikte değerlendirilerek yapılır. Aşağıdaki 7 faktör, teklifi en çok etkileyen unsurlardır." },
@@ -397,7 +397,7 @@ export const blogPosts: BlogPost[] = [
     category: "Sigorta ve Tazminat",
     date: "2026-03-27",
     readingMinutes: 7,
-    image: "/images/blog/yan-kaza-egea.jpg",
+    image: "/images/blog/yan-kaza-egea.webp",
     imageAlt: "Yan tarafı kaza geçirmiş gri sedan otomobil yol kenarında",
     body: [
       { type: "p", text: "Araç değer kaybı; kusurlu olmadığınız bir trafik kazasında aracınız onarılsa dahi, kaza ve onarım geçmişi nedeniyle ikinci el piyasasındaki değerinin düşmesidir. Bu kayıp, kusurlu tarafın Zorunlu Trafik Sigortası'ndan (ZMSS) talep edilebilir." },
@@ -435,7 +435,7 @@ export const blogPosts: BlogPost[] = [
     category: "Hasarlı Araç",
     date: "2026-05-12",
     readingMinutes: 6,
-    image: "/images/blog/cekme-belgeli-arac.jpg",
+    image: "/images/blog/cekme-belgeli-arac.webp",
     imageAlt: "Ön sol tarafı hasarlı gri otomobil",
     body: [
       { type: "p", text: "[Hasarlı bir aracı satmak](/arac-alimi/hasarli-arac-alimi), sağlam bir aracı satmaktan farklı bir süreçtir. Aracın gerçek durumunu doğru aktarmak hem değerlemeyi hem de devir sürecini hızlandırır." },
@@ -479,7 +479,7 @@ export const blogPosts: BlogPost[] = [
     category: "Pert ve Ağır Hasar",
     date: "2026-04-28",
     readingMinutes: 5,
-    image: "/images/blog/pert-arac.jpg",
+    image: "/images/blog/pert-arac.webp",
     imageAlt: "Lastikler arasında bekleyen, ön tarafı ağır hasarlı pert araç",
     body: [
       { type: "p", text: "[Pert araç](/arac-alimi/pert-arac-alimi), onarım maliyetinin aracın değerine yakın veya üzerinde olması nedeniyle ekonomik onarımı uygun görülmeyen araçtır." },
@@ -511,7 +511,7 @@ export const blogPosts: BlogPost[] = [
     category: "Araç Değerleme",
     date: "2026-04-10",
     readingMinutes: 4,
-    image: "/images/blog/motor-arizali-arac.jpg",
+    image: "/images/blog/motor-arizali-arac.webp",
     imageAlt: "Motor arızası nedeniyle çalışmayan beyaz otomobil",
     body: [
       { type: "p", text: "[Çalışmayan araçlar](/arac-alimi/calismayan-arac-alimi) da değerlendirilebilir. Önemli olan aracın mevcut durumunu doğru aktarmaktır." },

@@ -16,7 +16,7 @@ export function PageHero({
   children,
   size = "md",
 }: {
-  /** Desktop image path, e.g. "/images/heroes/3.png". */
+  /** Desktop image path, e.g. "/images/heroes/3.webp". */
   image: string;
   /** Descriptive alt text; omit only for purely decorative images. */
   imageAlt?: string;

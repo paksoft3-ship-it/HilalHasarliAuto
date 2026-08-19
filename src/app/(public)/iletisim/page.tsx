@@ -32,7 +32,7 @@ export default async function ContactPage() {
       <Breadcrumb items={[{ label: "İletişim", href: routes.contact }]} />
 
       <PageHero
-        image="/images/heroes/1.png"
+        image="/images/heroes/1.webp"
         eyebrow="Bize Ulaşın"
         title="Aracınızı Birlikte Değerlendirelim"
         description="Aracınız veya süreç hakkında her türlü sorunuz için aşağıdaki kanallardan bize ulaşabilirsiniz."

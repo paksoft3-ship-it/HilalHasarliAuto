@@ -70,7 +70,7 @@ export default async function ServicePage({
 
   // Rotate through the 7 hero images for variety across service pages.
   const heroIdx = Math.max(0, services.findIndex((s) => s.slug === slug));
-  const heroImage = `/images/heroes/${(heroIdx % 7) + 1}.png`;
+  const heroImage = `/images/heroes/${(heroIdx % 7) + 1}.webp`;
 
   return (
     <>

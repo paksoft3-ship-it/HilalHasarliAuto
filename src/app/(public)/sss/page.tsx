@@ -33,7 +33,7 @@ export default async function FaqPage() {
       <Breadcrumb items={[{ label: "Sık Sorulan Sorular", href: routes.faq }]} />
 
       <PageHero
-        image="/images/heroes/4.png"
+        image="/images/heroes/4.webp"
         eyebrow="Merak Ettikleriniz"
         title="Araç Satış Süreci Hakkında Sık Sorulan Sorular"
         description="Aradığınız cevabı bulamazsanız bizimle telefon veya WhatsApp üzerinden iletişime geçebilirsiniz."

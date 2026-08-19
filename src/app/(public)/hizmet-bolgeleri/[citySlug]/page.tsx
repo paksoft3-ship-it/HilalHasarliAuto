@@ -78,7 +78,7 @@ export default async function CityPage({
       />
 
       <PageHero
-        image={`/images/heroes/${content?.heroImage ?? 5}.png`}
+        image={`/images/heroes/${content?.heroImage ?? 5}.webp`}
         imageAlt={content?.heroAlt}
         eyebrow={`${city.name} Geneli Araç Alım Hizmeti`}
         title={content?.heroTitle ?? `${city.locative} Hasarlı Araç Alımı`}

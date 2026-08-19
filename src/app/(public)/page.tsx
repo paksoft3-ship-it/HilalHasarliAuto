@@ -48,7 +48,7 @@ function Hero() {
     <section className="relative isolate overflow-hidden bg-cream-50">
       {/* Mobile hero image: cars at bottom, blur at top */}
       <Image
-        src="/images/heroes/mobile/2.png"
+        src="/images/heroes/mobile/2.webp"
         alt=""
         fill
         priority
@@ -57,7 +57,7 @@ function Hero() {
       />
       {/* Desktop hero image: cars right, blur left */}
       <Image
-        src="/images/heroes/2.png"
+        src="/images/heroes/2.webp"
         alt=""
         fill
         priority

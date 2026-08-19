@@ -20,7 +20,7 @@ export function organizationLd(): Json {
     url: siteConfig.domain,
     logo: {
       "@type": "ImageObject",
-      url: abs("/images/logo/BusinessLogoHasarliAracAlan.png"),
+      url: abs("/images/logo/BusinessLogoHasarliAracAlan.webp"),
     },
     ...(sameAs.length ? { sameAs } : {}),
     contactPoint: {
@@ -49,7 +49,7 @@ export function localBusinessLd(opts: {
     "@id": `${siteConfig.domain}/hizmet-bolgeleri/${opts.citySlug}/#business`,
     name: `${siteConfig.brandName} — ${opts.cityName}`,
     url: abs(`/hizmet-bolgeleri/${opts.citySlug}`),
-    image: abs("/images/logo/BusinessLogoHasarliAracAlan.png"),
+    image: abs("/images/logo/BusinessLogoHasarliAracAlan.webp"),
     telephone: siteConfig.phoneE164,
     email: siteConfig.email,
     priceRange: "₺₺",

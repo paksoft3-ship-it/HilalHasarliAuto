@@ -36,7 +36,7 @@ export const guides: Guide[] = [
     estimatedTime: "10 dk",
     difficulty: "Kolay",
     lastReviewed: "2026-08-17",
-    image: "/images/photos/2.png",
+    image: "/images/photos/2.webp",
     imageAlt: "Değerlendirme için hazırlanmış hasarlı araç",
     chapters: [
       {
@@ -125,7 +125,7 @@ export const guides: Guide[] = [
     estimatedTime: "5 dk",
     difficulty: "Kolay",
     lastReviewed: "2026-08-17",
-    image: "/images/photos/22.png",
+    image: "/images/photos/22.webp",
     imageAlt: "Hasarlı aracın telefonla fotoğraflanması",
     chapters: [
       {

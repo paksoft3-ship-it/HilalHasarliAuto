@@ -29,7 +29,7 @@ export default function VehiclePurchaseHubPage() {
       <Breadcrumb items={[{ label: "Araç Alımı", href: "/arac-alimi" }]} />
 
       <PageHero
-        image="/images/heroes/2.png"
+        image="/images/heroes/2.webp"
         eyebrow="Araç Alımı"
         title="Her Durumdaki Araç İçin Alım Hizmeti"
         description="Hasarlı, kazalı, arızalı veya çalışmayan; aracınızın durumu ne olursa olsun değerlendiriyoruz. Aşağıdan kategorinizi seçerek sürece başlayın."
