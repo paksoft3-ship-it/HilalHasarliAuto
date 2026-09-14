@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, routes } from "@/config/navigation";
 import { buttonClasses } from "@/components/ui/button";
@@ -44,21 +44,60 @@ export function Header() {
         <nav aria-label="Ana menü" className="hidden items-center gap-1 lg:flex">
           {mainNav.map((item) => {
             const active = isActive(item.href);
+            if (!item.children) {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    active ? "text-white" : "text-white/70 hover:text-white",
+                  )}
+                >
+                  {item.label}
+                  {active && (
+                    <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-gold-600" />
+                  )}
+                </Link>
+              );
+            }
+            // Items with children: CSS-only dropdown (hover + keyboard
+            // focus-within), no JS state — closes itself when the mouse or
+            // focus leaves, works with Tab navigation.
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  active ? "text-white" : "text-white/70 hover:text-white",
-                )}
-              >
-                {item.label}
-                {active && (
-                  <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-gold-600" />
-                )}
-              </Link>
+              <div key={item.href} className="group relative">
+                <Link
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  aria-haspopup="true"
+                  className={cn(
+                    "relative flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    active ? "text-white" : "text-white/70 hover:text-white",
+                  )}
+                >
+                  {item.label}
+                  <ChevronDown size={14} className="transition-transform group-hover:rotate-180" />
+                  {active && (
+                    <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-gold-600" />
+                  )}
+                </Link>
+                <div
+                  className="invisible absolute left-0 top-full z-10 w-56 translate-y-1 rounded-xl border border-white/10 bg-charcoal-950 p-2 opacity-0 shadow-[0_16px_40px_rgba(22,27,31,0.35)] transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+                  role="menu"
+                >
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      role="menuitem"
+                      className="block rounded-lg px-3 py-2 text-sm font-medium text-white/75 transition-colors hover:bg-white/8 hover:text-white"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             );
           })}
         </nav>
@@ -117,19 +156,34 @@ export function Header() {
         <div className="border-t border-white/10 bg-charcoal-950 lg:hidden">
           <nav aria-label="Mobil menü" className="container-page flex flex-col py-3">
             {mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  "rounded-md px-3 py-3 text-[15px] font-medium",
-                  isActive(item.href)
-                    ? "bg-white/8 text-white"
-                    : "text-white/80 hover:bg-white/5",
+              <div key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={cn(
+                    "block rounded-md px-3 py-3 text-[15px] font-medium",
+                    isActive(item.href)
+                      ? "bg-white/8 text-white"
+                      : "text-white/80 hover:bg-white/5",
+                  )}
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <div className="ml-3 flex flex-col border-l border-white/10 pl-3">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="rounded-md px-3 py-2 text-[14px] font-medium text-white/65 hover:bg-white/5 hover:text-white"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
                 )}
-              >
-                {item.label}
-              </Link>
+              </div>
             ))}
             <a
               href={tel}

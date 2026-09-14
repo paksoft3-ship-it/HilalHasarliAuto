@@ -19,6 +19,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { CtaGroup } from "@/components/sections/cta-buttons";
 import { QuoteSection } from "@/components/sections/quote-section";
 import { TrustStrip } from "@/components/sections/trust-strip";
+import { ServiceCityContext } from "@/components/sections/service-city-context";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { OfferExplainer } from "@/components/sections/offer-explainer";
 import { RelatedServices } from "@/components/sections/related-services";
@@ -112,6 +113,8 @@ export default async function ServicePage({
         </Section>
       )}
 
+      <ServiceCityContext slug={slug} />
+
       {/* Who for + conditions */}
       <Section tone="white">
         <div className="grid gap-10 lg:grid-cols-2">
@@ -130,7 +133,7 @@ export default async function ServicePage({
         </div>
       </Section>
 
-      {/* What is evaluated */}
+      {/* What is evaluated — universal baseline + this damage type's own criteria */}
       <Section tone="cream">
         <div className="max-w-[760px]">
           <p className="eyebrow mb-3">
@@ -142,9 +145,25 @@ export default async function ServicePage({
             belirlenir. Bilgiler ne kadar eksiksiz olursa değerlendirme o kadar
             sağlıklı olur.
           </p>
-          <IconList items={DEFAULT_EVALUATED} columns className="mt-6" />
+          <IconList
+            items={[...DEFAULT_EVALUATED, ...content.assessedSpecific]}
+            columns
+            className="mt-6"
+          />
         </div>
       </Section>
+
+      {/* What drives the price — condition-specific, no fixed formula */}
+      {content.priceDrivers && (
+        <Section tone="alt">
+          <div className="max-w-[760px]">
+            <SectionHeading title="Fiyatı Ne Belirler?" align="left" />
+            <p className="mt-4 text-[15px] leading-relaxed text-ink-secondary">
+              {content.priceDrivers}
+            </p>
+          </div>
+        </Section>
+      )}
 
       <HowItWorks />
 
@@ -163,7 +182,10 @@ export default async function ServicePage({
               <FileText size={15} /> Belgeler
             </p>
             <SectionHeading title="Faydalı Belgeler" align="left" />
-            <IconList items={DEFAULT_DOCUMENTS} className="mt-6" />
+            <IconList
+              items={[...DEFAULT_DOCUMENTS, ...content.documentsSpecific]}
+              className="mt-6"
+            />
           </div>
         </div>
       </Section>

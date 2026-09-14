@@ -4,13 +4,33 @@ import { MapPin } from "lucide-react";
 import { cities, featuredCities, publishedCities } from "@/config/cities";
 import { districts } from "@/config/districts";
 import { routes } from "@/config/navigation";
+import { serviceAreasFaqs } from "@/config/faq";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHero } from "@/components/ui/page-hero";
 import { LocationSearch } from "@/components/forms/location-search";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { FinalCta } from "@/components/sections/final-cta";
+import { FaqAccordion } from "@/components/ui/faq-accordion";
+import { JsonLd } from "@/components/ui/json-ld";
+import { collectionPageLd, faqPageLd } from "@/lib/seo/jsonld";
 import { getCity } from "@/config/cities";
+
+/** Short, honest logistics note per region — no fabricated local-office claims. */
+const REGION_NOTES: Record<string, string> = {
+  Marmara:
+    "Yoğun nüfuslu ve sanayi ağırlıklı bir bölge olduğu için çekici ve teslim alma planlaması genellikle hızlı ilerler.",
+  "İç Anadolu":
+    "Şehir merkezleri arası mesafe daha uzun olabildiğinden, çekici süresi konuma göre değişkenlik gösterebilir.",
+  Ege:
+    "Kıyı ve iç kesim ilçeleri bir arada bulunduğu için teslim alma planı, aracın bulunduğu ilçeye göre netleştirilir.",
+  Akdeniz:
+    "Turizm ve tarım bölgelerinde mevsimsel yoğunluk olabileceğinden, çekici randevusu önceden planlanır.",
+  "Güneydoğu Anadolu":
+    "Şehirler arası mesafenin fazla olduğu bu bölgede teslim alma süresi konuma göre birlikte belirlenir.",
+  Karadeniz:
+    "Kıyı şeridine yayılan yerleşim nedeniyle çekici planlaması aracın bulunduğu ilçeye göre yapılır.",
+};
 
 export const metadata: Metadata = {
   title: "Hizmet Bölgeleri | Türkiye Geneli",
@@ -61,6 +81,20 @@ export default function ServiceAreasPage() {
       </PageHero>
 
       <TrustStrip />
+
+      {/* Intro / logistics copy */}
+      <Section tone="white" className="py-8 md:py-10">
+        <div className="max-w-[760px]">
+          <p className="text-[16px] leading-relaxed text-ink-secondary">
+            Hasarlı, kazalı, pert ve hurda araç değerlendirmesini Türkiye
+            genelinde aynı süreçle yürütüyoruz: aracın bulunduğu il ve ilçe
+            fark etmeksizin bilgi ve fotoğraf paylaşımı ile değerlendirme
+            başlar, ardından çekici veya teslim alma planlaması konuma göre
+            netleştirilir. Aşağıda önceliklendirdiğimiz iller ve bölgelere
+            göre gruplandırılmış tüm hizmet bölgelerini bulabilirsiniz.
+          </p>
+        </div>
+      </Section>
 
       {/* Featured cities */}
       <Section tone="cream">
@@ -136,7 +170,50 @@ export default function ServiceAreasPage() {
         </p>
       </Section>
 
+      {/* Region differences */}
+      <Section tone="alt">
+        <SectionHeading
+          eyebrow="Bölgeye Göre"
+          title="Teslim Alma Süreci Bölgeye Göre Nasıl Değişir?"
+          intro="Değerlendirme süreci her yerde aynıdır; farklılaşan tek şey çekici ve teslim alma için gereken planlamadır."
+        />
+        <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(REGION_NOTES).map(([region, note]) => (
+            <div key={region} className="rounded-[14px] border border-line bg-white p-5">
+              <h3 className="text-sm font-bold uppercase tracking-wide text-gold-700">
+                {region}
+              </h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-ink-secondary">{note}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Hub FAQ */}
+      <Section tone="white">
+        <SectionHeading
+          eyebrow="Sık Sorulan Sorular"
+          title="Hizmet Bölgeleri Hakkında"
+        />
+        <div className="mt-10">
+          <FaqAccordion items={serviceAreasFaqs} />
+        </div>
+      </Section>
+
       <FinalCta />
+
+      <JsonLd
+        data={[
+          collectionPageLd({
+            name: "Hizmet Bölgeleri",
+            description:
+              "Türkiye geneli hasarlı, kazalı, pert ve hurda araç alımı hizmeti verdiğimiz iller ve ilçeler.",
+            url: routes.serviceAreas,
+            items: publishedCities.map((c) => ({ name: c.name, url: routes.city(c.slug) })),
+          }),
+          faqPageLd(serviceAreasFaqs),
+        ]}
+      />
     </>
   );
 }

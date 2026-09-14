@@ -170,7 +170,7 @@ export const services: VehicleService[] = [
     metaDescription:
       "Sel ve su hasarı görmüş aracınız için süreç desteği ve değerlendirme. Ücretsiz çekici, en yüksek fiyat, anında nakit ödeme. Hemen arayın.",
     metaKeywords:
-      "sel hasarlı araç alan, sel hasarlı araç alımı, su basmış araç alan, suya giren araç alan",
+      "sel hasarlı araç alan, sel hasarlı araç alımı, su basmış araç alan, suya giren araç alan, sel mağduru araç alan",
   },
   {
     slug: "hurda-arac-alimi",
@@ -201,6 +201,21 @@ export const services: VehicleService[] = [
       "Çekme belgeli ve trafikten çekilmiş aracınız için teklif alın. Ücretsiz çekici, en yüksek fiyat, aynı gün nakit ödeme. Hemen ücretsiz teklif.",
     metaKeywords:
       "çekme belgeli araç alan, çekme belgeli araç alımı, trafikten çekik araç alan, çekme belgeli oto",
+  },
+  {
+    slug: "dolu-hasarli-arac-alimi",
+    name: "Dolu Hasarlı Araç",
+    title: "Dolu Hasarlı Araç Alımı",
+    short: "Dolu yağışı sonucu gövdesinde göçük oluşmuş araçlar değerlendirilir.",
+    image: `${P}/3.webp`,
+    imageAlt: "Gövdesi dolu yağışı nedeniyle göçüklerle kaplı otomobil",
+    icon: "CloudHail",
+    featured: false,
+    metaTitle: "Dolu Hasarlı Araç Alımı — Alan Yerler",
+    metaDescription:
+      "Dolu yağışı sonucu hasar gören aracınızı değerlendiriyoruz. Göçük sayısı ve yaygınlığına göre gerçekçi teklif, ücretsiz çekici, aynı gün ödeme.",
+    metaKeywords:
+      "dolu hasarlı araç alan, dolu hasarlı araç alımı, dolu yağışı hasarlı araç, göçüklü araç alan",
   },
 ];
 

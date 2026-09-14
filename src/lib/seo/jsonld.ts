@@ -119,6 +119,31 @@ export function serviceLd(opts: {
   };
 }
 
+/** Hub/directory pages that list a set of city/service links. */
+export function collectionPageLd(opts: {
+  name: string;
+  description: string;
+  url: string;
+  items: { name: string; url: string }[];
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: opts.name,
+    description: opts.description,
+    url: abs(opts.url),
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: opts.items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: it.name,
+        url: abs(it.url),
+      })),
+    },
+  };
+}
+
 /** Only emit when the FAQ content is actually visible on the page. */
 export function faqPageLd(faqs: { q: string; a: string }[]): Json {
   return {

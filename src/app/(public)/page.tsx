@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Check } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { routes } from "@/config/navigation";
@@ -16,7 +17,9 @@ import { QuoteSection } from "@/components/sections/quote-section";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { homepageFaqs } from "@/config/faq";
+import { clusterPages } from "@/config/cluster-content";
 import { organizationLd, websiteLd, faqPageLd } from "@/lib/seo/jsonld";
+import { ArrowRight } from "lucide-react";
 
 const homeTitle = "Hasarlı, Kazalı, Hurda Araç Alımı";
 const homeDescription =
@@ -107,10 +110,61 @@ export default function HomePage() {
       <Hero />
       <TrustStrip />
       <CategoryGrid />
+
+      {/* "Hasarlı araç alan", "alım yapan yerler" ve "alan firmalar" — bu
+          sayfa hasarlı kümesini karşılar; kazalı/pert/hurda için ayrı,
+          kendi kümesini kapsayan sayfalar var (master prompt Phase 3:
+          ifade başına değil, hasar türü başına tek sayfa). */}
+      <Section tone="cream">
+        <SectionHeading
+          eyebrow="Hasar Türüne Göre"
+          title="Hasarlı Araç Alan Firmalar ve Alım Yapan Yerler"
+          intro="“Hasarlı araç alan”, “hasarlı araç alımı”, “hasarlı araç alan firmalar” ve “hasarlı araç alım yapan yerler” ifadelerinin hepsi aynı hizmeti tarif eder: aracınızı doğrudan, ilan beklemeden değerlendirip almamız. Hasar türünüze özel sayfalarımız:"
+        />
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {clusterPages.map((c) => (
+            <Link
+              key={c.slug}
+              href={routes[c.routeKey]}
+              className="group flex items-center justify-between gap-3 rounded-[14px] border border-line bg-white p-5 transition-colors hover:border-burgundy-700"
+            >
+              <span className="text-[15px] font-semibold text-ink">{c.shortTitle}</span>
+              <ArrowRight size={16} className="shrink-0 text-burgundy-700 transition-transform group-hover:translate-x-1" />
+            </Link>
+          ))}
+        </div>
+      </Section>
+
       <QuoteSection source="homepage_hero" />
       <HowItWorks />
       <WhyUs />
       <Testimonials />
+
+      {/* Contextual links to the best-performing city pages (Search Console,
+          2026-09-14: izmir/samsun/antalya are indexed and already earning
+          impressions — they don't need more link equity, but a homepage
+          mention keeps them fresh and gives users a direct path in). */}
+      <Section tone="white" className="py-8 md:py-10">
+        <div className="max-w-[760px]">
+          <p className="text-[15px] leading-relaxed text-ink-secondary">
+            Türkiye genelinde hizmet veriyoruz;{" "}
+            <Link href={routes.city("izmir")} className="text-burgundy-700 underline hover:no-underline">
+              İzmir
+            </Link>
+            ,{" "}
+            <Link href={routes.city("samsun")} className="text-burgundy-700 underline hover:no-underline">
+              Samsun
+            </Link>{" "}
+            ve{" "}
+            <Link href={routes.city("antalya")} className="text-burgundy-700 underline hover:no-underline">
+              Antalya
+            </Link>{" "}
+            bölgelerinden gelen değerlendirme taleplerini de aynı gün içinde
+            yanıtlıyoruz.
+          </p>
+        </div>
+      </Section>
+
       <ServiceAreas />
       <Section tone="alt">
         <SectionHeading

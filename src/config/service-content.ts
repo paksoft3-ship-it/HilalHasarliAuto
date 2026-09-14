@@ -18,6 +18,22 @@ export interface ServiceContent {
   whoFor: string[];
   /** Typical vehicle conditions for this category. */
   conditions: string[];
+  /**
+   * What's specifically checked for THIS damage type, beyond the universal
+   * DEFAULT_EVALUATED baseline (master prompt Phase 4: "what is assessed").
+   */
+  assessedSpecific: string[];
+  /**
+   * Honest, non-formulaic explanation of what drives the price for this
+   * damage type (master prompt Phase 4: "what drives the price" — new
+   * section, no prior equivalent existed).
+   */
+  priceDrivers: string;
+  /**
+   * Documents needed beyond the universal DEFAULT_DOCUMENTS baseline
+   * (master prompt Phase 4: "what documents are needed").
+   */
+  documentsSpecific: string[];
   /** Service-specific FAQ. */
   faqs: FaqItem[];
   /** Related service slugs. */
@@ -76,6 +92,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Onarımı ekonomik görünmeyen araçlar",
       "Hasar kayıtlı araçlar",
     ],
+    assessedSpecific: [
+      "Hasarın gövdede mi yoksa şase / taşıyıcı yapıda mı olduğu",
+      "Güvenlik donanımlarının (hava yastığı, ABS, fren sistemi) hasardan etkilenip etkilenmediği",
+      "Varsa önceki onarımların kalitesi",
+    ],
+    priceDrivers:
+      "Fiyatı en çok hasarın kapsamı ve onarım maliyeti belirler; aynı hasar seviyesindeki iki araç bile marka, model yılı ve genel bakım durumuna göre farklı teklif alabilir. Sabit bir yüzde veya formül kullanılmaz, her araç kendi durumuna göre değerlendirilir.",
+    documentsSpecific: [],
     faqs: [
       {
         q: "Az hasarlı aracımı da değerlendiriyor musunuz?",
@@ -109,6 +133,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Şase / karoser deformasyonu",
       "Çoklu bölge hasarı",
     ],
+    assessedSpecific: [
+      "Hava yastığının açılıp açılmadığı",
+      "Kaza kaydının TRAMER sistemine yansıyıp yansımadığı",
+      "Şase ölçüm/hizalama durumu (varsa ekspertiz raporu)",
+    ],
+    priceDrivers:
+      "Kazalı araçlarda fiyatı, hasarın bölgesi (ön/arka/yan), hava yastığının açılıp açılmadığı ve şase hizalamasının bozulup bozulmadığı belirler. Kaza kaydının TRAMER'de görünmesi tek başına fiyatı değil, aracın genel durumuyla birlikte değerlendirilir.",
+    documentsSpecific: ["Varsa kaza tespit tutanağı"],
     faqs: [
       {
         q: "Hava yastığı açılan aracı alıyor musunuz?",
@@ -142,6 +174,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Pert belgeli araçlar",
       "Sular altında kalmış veya yanmış pert araçlar",
     ],
+    assessedSpecific: [
+      "Sigorta pert kararının kapsamı ve tarihi",
+      "Araç mülkiyetinin netleşmiş olup olmadığı",
+      "Sovtaj bedeli düşülerek ödeme yapılıp yapılmadığı",
+    ],
+    priceDrivers:
+      "Pert araçlarda fiyatı, sigorta pert kaydındaki hasar kapsamı ve aracın kullanılabilir parça/mekanik değeri belirler. Sovtaj bedeli düşülerek sigortadan ödeme almış araçlar da bu kapsamda değerlendirilir.",
+    documentsSpecific: ["Sigorta pert tutanağı veya eksper raporu (varsa)"],
     faqs: [
       {
         q: "Pert belgeli aracın devri nasıl yapılır?",
@@ -175,6 +215,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Ana mekanik aksamı zarar görmüş araçlar",
       "Parça bütünlüğü bozulmuş araçlar",
     ],
+    assessedSpecific: [
+      "Şase veya karoser deformasyon derecesi",
+      "Aracın sürülebilir olup olmadığı",
+      "Taşıma / çekici ihtiyacı",
+    ],
+    priceDrivers:
+      "Ağır hasarlı araçlarda fiyatı, hasarın şase veya ana taşıyıcı yapıya ulaşıp ulaşmadığı ve aracın sürülüp sürülemediği belirler. Taşıma gerektiren araçlarda çekici planlaması değerlendirmeye dahil edilir; olası ek maliyet varsa süreç öncesinde açıkça belirtilir.",
+    documentsSpecific: [],
     faqs: [
       {
         q: "Sürülemeyen aracı nasıl teslim ederim?",
@@ -204,6 +252,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Motor sesi veya performans kaybı",
       "Motor revizyonu gereken araçlar",
     ],
+    assessedSpecific: [
+      "Arızanın motor bloğunda mı yoksa yardımcı sistemlerde (turbo, enjeksiyon, yağlama) mi olduğu",
+      "Aşırı ısınma veya yağ kaçağı gibi ikincil belirtilerin bulunup bulunmadığı",
+      "Motorun tamamen çalışmaz mı yoksa tutuk mu çalıştığı",
+    ],
+    priceDrivers:
+      "Motor arızalı araçlarda fiyatı, arızanın kapsamı (parça değişimi mi, motor revizyonu mu gerektirdiği) ve aracın diğer bölümlerinin durumu birlikte belirler. Motor dışı donanımı sağlam araçlar, arızanın büyüklüğüne rağmen daha iyi değerlendirilebilir.",
+    documentsSpecific: ["Varsa servis / motor bakım kayıtları"],
     faqs: [
       {
         q: "Motoru hiç çalışmayan aracı değerlendiriyor musunuz?",
@@ -233,6 +289,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Elektronik sistem arızaları",
       "Çoklu mekanik sorun",
     ],
+    assessedSpecific: [
+      "Arızanın şanzıman, debriyaj veya aktarma organlarından hangisinde olduğu",
+      "Birden fazla mekanik arızanın bir arada bulunup bulunmadığı",
+      "Elektronik sistemlerin arızadan etkilenip etkilenmediği",
+    ],
+    priceDrivers:
+      "Mekanik arızalı araçlarda fiyatı, arızanın kapsamı ve kaç farklı sistemi etkilediği belirler. Tek bir mekanik arıza ile çoklu arıza durumu farklı değerlendirilir; hangi sistemlerin etkilendiği başvuru sırasında netleştirilir.",
+    documentsSpecific: [],
     faqs: [
       {
         q: "Birden fazla arızası olan aracı alıyor musunuz?",
@@ -262,6 +326,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Motor kaynaklı çalışmama",
       "Hareket etmeyen araçlar",
     ],
+    assessedSpecific: [
+      "Arızanın elektriksel mi (akü, marş motoru) yoksa mekanik mi (yakıt sistemi, motor) olduğu",
+      "Aracın ne kadar süredir hareketsiz beklediği",
+      "Uzun bekleme nedeniyle oluşmuş ikincil sorunlar (lastik, akü, yakıt bozulması)",
+    ],
+    priceDrivers:
+      "Çalışmayan araçlarda fiyatı, arızanın kaynağı ve aracın ne kadar süredir beklediği belirler. Kısa süreli akü kaynaklı arızalar ile uzun süre atıl bekleyip ikincil sorunlar biriktiren araçlar farklı değerlendirilir.",
+    documentsSpecific: [],
     faqs: [
       {
         q: "Aracımın neden çalışmadığını bilmiyorum, sorun olur mu?",
@@ -291,6 +363,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Tam yanmış (kullanılamaz) araçlar",
       "Yangın sonrası pert kayıtlı araçlar",
     ],
+    assessedSpecific: [
+      "Yangının kaynağı (motor bölmesi, kabin veya dış gövde)",
+      "Yangının şase üzerindeki ısı etkisi",
+      "Yangının sigorta hasar kaydına yansıyıp yansımadığı",
+    ],
+    priceDrivers:
+      "Yanmış araçlarda fiyatı, yangının kapsamı (kısmi mi tam mı) ve şase üzerindeki ısı etkisi belirler. Kısmi yangın geçirmiş, şasesi etkilenmemiş araçlar ile tamamen yanmış araçlar farklı değerlendirilir.",
+    documentsSpecific: ["Varsa itfaiye raporu veya sigorta hasar dosyası"],
     faqs: [
       {
         q: "Tamamen yanmış aracı da değerlendiriyor musunuz?",
@@ -305,7 +385,7 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Sel ve su hasarı görmüş aracınız için süreç desteği alın.",
     definition: [
       "Sel hasarlı araç; sel, su baskını veya yoğun su teması sonucu motoru, elektroniği veya iç donanımı zarar görmüş araçtır. Su hasarı sonradan ortaya çıkan elektronik ve mekanik sorunlara yol açabilir.",
-      "Su hasarının kapsamına göre aracınızın durumu değerlendirilir; nem ve elektronik etkileri dikkate alınarak gerçekçi bir değerlendirme yapılır.",
+      "Su hasarının kapsamına göre aracınızın durumu değerlendirilir; nem ve elektronik etkileri dikkate alınarak gerçekçi bir değerlendirme yapılır. Aracı sel sırasında otoparkta veya yolda su basmış, kısacası sel mağduru olmuş araç sahipleri için de aynı süreç geçerlidir.",
     ],
     whoFor: [
       "Sel veya su baskınından etkilenen araç sahipleri",
@@ -320,10 +400,22 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Nem ve korozyon oluşmuş araçlar",
       "Su baskını sonrası çalışmayan araçlar",
     ],
+    assessedSpecific: [
+      "Suyun seviyesi ve motor bloğuna ulaşıp ulaşmadığı",
+      "Elektronik modüllerin su hasarından etkilenip etkilenmediği",
+      "İç döşemede küf veya korozyon oluşup oluşmadığı",
+    ],
+    priceDrivers:
+      "Sel hasarlı araçlarda fiyatı, suyun ulaştığı seviye ve elektronik sistemlerin etkilenme derecesi belirler. Yalnızca iç mekânı su alan araçlar ile motoruna su giren araçlar farklı değerlendirilir.",
+    documentsSpecific: ["Varsa sigorta hasar dosyası veya ekspertiz raporu"],
     faqs: [
       {
         q: "Su hasarı sonradan sorun çıkarır mı?",
         a: "Su hasarı zamanla elektronik ve mekanik sorunlara yol açabilir. Bu nedenle değerlendirme, mevcut ve olası etkiler göz önünde tutularak yapılır.",
+      },
+      {
+        q: "Sel mağduruyum, aracım otoparkta suyun altında kaldı; değerlendiriyor musunuz?",
+        a: "Evet. Sel mağduru araç sahipleri için de aynı süreç geçerlidir; suyun ulaştığı seviye ve aracın mevcut durumu paylaştığınız bilgi ve fotoğraflara göre değerlendirilir.",
       },
     ],
     related: ["pert-arac-alimi", "motor-arizali-arac-alimi", "hasarli-arac-alimi"],
@@ -349,10 +441,22 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Parçalanmış veya eksik araçlar",
       "Atıl durumda bekleyen araçlar",
     ],
+    assessedSpecific: [
+      "Aracın parça ve metal değeri",
+      "MTV (Motorlu Taşıtlar Vergisi) borcu ve trafik cezası durumu",
+      "Hurda belgesi düzenlenmesi için gereken kayıt durumu",
+    ],
+    priceDrivers:
+      "Hurda araçlarda fiyatı en çok kullanılabilir parça ve metal değeri belirler; marka, model ve ağırlık bu değeri doğrudan etkiler. Hurdaya ayırmadan önce aracın MTV borcunun ve varsa trafik cezalarının kapatılmış olması gerekir.",
+    documentsSpecific: ["MTV borcu yok yazısı (hurda işlemi öncesi gerekir)"],
     faqs: [
       {
         q: "Hurda aracın trafikten çıkışı yapılıyor mu?",
         a: "Hurda ve trafikten çıkış işlemlerinin resmi süreci, aracın durumuna ve belgelerine göre değerlendirme sırasında açıklanır.",
+      },
+      {
+        q: "Hurdaya ayırmadan önce ne yapmalıyım?",
+        a: "Aracın MTV borcunun ve varsa trafik cezalarının kapatılmış olması gerekir. Bu adım tamamlanmadan hurda devri resmi olarak sonuçlandırılamaz.",
       },
     ],
     related: ["pert-arac-alimi", "cekme-belgeli-arac-alimi", "yanmis-arac-alimi"],
@@ -378,6 +482,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       "Uzun süredir kullanılmayan çekme belgeli araçlar",
       "Belge / kayıt durumu özel araçlar",
     ],
+    assessedSpecific: [
+      "Çekme belgesinin düzenlenme nedeni (hasar mı, arıza mı, kayıt sorunu mu)",
+      "Belgenin düzenlenme tarihi ve aracın o günden bu yana bekleme süresi",
+      "Aracın bulunduğu yer (otopark, açık alan) ve teslim koşulları",
+    ],
+    priceDrivers:
+      "Çekme belgeli araçlarda fiyatı, belgenin düzenlenme nedeni ve aracın genel durumu belirler. Hasar nedeniyle çekme belgesi düzenlenmiş araçlarla, kayıt/muayene kaynaklı düzenlenmiş araçlar farklı değerlendirilir.",
+    documentsSpecific: ["Çekme belgesinin kendisi"],
     faqs: [
       {
         q: "Çekme belgeli aracın devri nasıl yapılır?",
@@ -385,6 +497,46 @@ export const serviceContent: Record<string, ServiceContent> = {
       },
     ],
     related: ["hurda-arac-alimi", "pert-arac-alimi", "agir-hasarli-arac-alimi"],
+  },
+
+  "dolu-hasarli-arac-alimi": {
+    heroLead:
+      "Dolu yağışı sonucu hasar görmüş aracınız için değerlendirme talebi oluşturun.",
+    definition: [
+      "Dolu hasarlı araç; büyük taneli dolu yağışı sonucu tavanında, kaputunda, bagajında ve gövde panellerinde çok sayıda küçük göçük oluşmuş araçtır. Hasar geniş bir alana yayılır ancak çoğunlukla yüzeyseldir; şase veya mekanik aksam nadiren etkilenir.",
+      "Dolu hasarı, tek bir büyük darbeden çok, gövde yüzeyine yayılmış çok sayıda küçük göçükten oluşur. Onarımı özel işçilik gerektirebileceğinden, satmayı tercih eden araç sahipleri için değerlendirme talebi oluşturuyoruz.",
+    ],
+    whoFor: [
+      "Dolu yağışından gövdesi çok sayıda göçük almış araç sahipleri",
+      "Sigorta sürecini beklemeden değerlendirme isteyenler",
+      "Onarım yerine satışı tercih edenler",
+      "Dolu hasarı sigorta kaydına yansımış araç sahipleri",
+    ],
+    conditions: [
+      "Tavan, kaput ve bagajda yaygın göçükler",
+      "Yan panellerde dolu izleri",
+      "Cam çatlağı veya kırığı eşlik eden hasar",
+      "Boya yüzeyinde çatlama",
+    ],
+    assessedSpecific: [
+      "Göçüklerin sayısı ve gövdeye yayılma genişliği",
+      "Cam hasarının eşlik edip etmediği",
+      "Boya yüzeyinin çatlayıp çatlamadığı",
+    ],
+    priceDrivers:
+      "Dolu hasarlı araçlarda fiyatı, göçük sayısı ve gövdeye yayılma genişliği belirler; birkaç küçük göçük ile tüm yüzeye yayılmış yoğun hasar farklı değerlendirilir. Mekanik aksam genellikle etkilenmediği için değer kaybı büyük ölçüde kozmetik onarım maliyetine bağlıdır.",
+    documentsSpecific: ["Varsa sigorta hasar dosyası (dolu hasarı sigorta kapsamındaysa)"],
+    faqs: [
+      {
+        q: "Dolu hasarı sadece kozmetik mi, yoksa aracın değerini ciddi şekilde etkiler mi?",
+        a: "Dolu hasarı çoğunlukla yüzeyseldir ve mekanik aksamı etkilemez, ancak gövdeye yayılmış çok sayıda göçük ikinci el değerini belirgin şekilde düşürebilir. Değerlendirme, göçük sayısı ve yaygınlığına göre yapılır.",
+      },
+      {
+        q: "Dolu hasarlı aracımı sigorta süreci bitmeden satabilir miyim?",
+        a: "Evet. Sigorta süreciyle ilgisiz olarak değerlendirme talebi oluşturabilirsiniz; sigorta kaydı varsa süreç buna göre planlanır.",
+      },
+    ],
+    related: ["hasarli-arac-alimi", "kazali-arac-alimi", "agir-hasarli-arac-alimi"],
   },
 };
 
@@ -395,6 +547,9 @@ export function getServiceContent(slug: string): ServiceContent {
       definition: [],
       whoFor: [],
       conditions: [],
+      assessedSpecific: [],
+      priceDrivers: "",
+      documentsSpecific: [],
       faqs: [],
       related: RELATED_FALLBACK,
     }

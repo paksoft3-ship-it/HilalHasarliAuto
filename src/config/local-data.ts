@@ -10,6 +10,8 @@
 
 export interface CityContent {
   citySlug: string;
+  /** ISO date this entry's content was last meaningfully edited — drives sitemap lastmod. */
+  lastUpdated: string;
   /** SEO <title> without brand (layout template appends " | <brand>"). */
   metaTitle: string;
   metaDescription: string;
@@ -29,6 +31,8 @@ export interface CityContent {
 export interface DistrictContent {
   districtSlug: string;
   citySlug: string;
+  /** ISO date this entry's content was last meaningfully edited — drives sitemap lastmod. */
+  lastUpdated: string;
   metaTitle: string;
   metaDescription: string;
   heroTitle: string;
@@ -42,6 +46,7 @@ export interface DistrictContent {
 export const cityContent: CityContent[] = [
   {
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "İstanbul Hasarlı Araç Alan Yerler — 39 İlçede Kazalı Alımı",
     metaDescription:
       "İstanbul'un iki yakasında, 39 ilçenin tamamında hasarlı, kazalı, pert ve hurda araç alımı. Ücretsiz çekici, 30 dakikada değerlendirme, aynı gün nakit ödeme.",
@@ -77,6 +82,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "ankara",
+    lastUpdated: "2026-08-19",
     metaTitle: "Ankara Hasarlı ve Kazalı Araç Alan Yerler — Hurda Alımı",
     metaDescription:
       "Ankara'nın tüm ilçelerinde hasarlı, kazalı, pert ve hurda araç alımı. Kış buzlanması kazaları dahil ücretsiz çekici, hızlı değerlendirme, nakit ödeme.",
@@ -112,6 +118,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "izmir",
+    lastUpdated: "2026-08-19",
     metaTitle: "İzmir Hasarlı ve Kazalı Araç Alan Yerler — Hurda Alımı",
     metaDescription:
       "İzmir'in 30 ilçesinde hasarlı, kazalı, pert ve hurda araç alımı. Türkiye geneli alım ağımızla en güçlü teklif, ücretsiz çekici ve nakit ödeme.",
@@ -147,6 +154,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "bursa",
+    lastUpdated: "2026-08-19",
     metaTitle: "Bursa Hasarlı Araç Alımı — Kazalı, Pert ve Hurda Alan",
     metaDescription:
       "Otomotivin başkenti Bursa'da hasarlı, kazalı ve pert araç alımı. Sanayi bölgesi ticari araçları dahil ücretsiz çekici ve aynı gün nakit ödeme.",
@@ -182,6 +190,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "antalya",
+    lastUpdated: "2026-08-19",
     metaTitle: "Antalya Kazalı ve Hasarlı Araç Alan Yerler — Hurda Alımı",
     metaDescription:
       "Antalya'da hasarlı, kazalı, pert ve hurda araç alımı. Türkiye geneli alım ağıyla güçlü teklif; ücretsiz çekici, hızlı değerlendirme, nakit ödeme.",
@@ -217,6 +226,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "adana",
+    lastUpdated: "2026-08-19",
     metaTitle: "Adana Hasarlı Araç Alım Satım — Kazalı, Sel ve Hurda",
     metaDescription:
       "Adana'nın tüm ilçelerinde hasarlı, kazalı, pert ve sel hasarlı araç alımı. E-90 ve TAG otoyolu kazaları dahil ücretsiz çekici, nakit ödeme.",
@@ -252,6 +262,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "konya",
+    lastUpdated: "2026-08-19",
     metaTitle: "Konya Hasarlı ve Kazalı Araç Alan — Arızalı, Hurda Alımı",
     metaDescription:
       "Konya ve tüm ilçelerinde hasarlı, kazalı, pert ve arızalı araç alımı. Uzun yol kazaları ve tarım araçları dahil ücretsiz çekici, nakit ödeme.",
@@ -287,6 +298,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "gaziantep",
+    lastUpdated: "2026-08-19",
     metaTitle: "Gaziantep Hasarlı Araç Alımı — Ticari, Kazalı ve Hurda",
     metaDescription:
       "Gaziantep'te hasarlı, kazalı, pert ve ticari araç alımı. Türkiye geneli ağımızla sanayi filolarına güçlü teklif; ücretsiz çekici, nakit ödeme.",
@@ -322,6 +334,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "kocaeli",
+    lastUpdated: "2026-08-19",
     metaTitle: "Kocaeli Hasarlı Araç Alan — Gebze, İzmit, Hurda Dahil",
     metaDescription:
       "Kocaeli, İzmit ve Gebze'de hasarlı, kazalı ve pert araç alımı. TEM ve D-100 kazaları dahil ücretsiz çekici, hızlı değerlendirme, nakit ödeme.",
@@ -357,6 +370,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "mersin",
+    lastUpdated: "2026-08-19",
     metaTitle: "Mersin Hasarlı ve Kazalı Araç Alan — Ticari, Hurda Alımı",
     metaDescription:
       "Mersin ve Tarsus'ta hasarlı, kazalı ve pert araç alımı. Türkiye geneli ağımızla liman kentinin araçlarına güçlü teklif, ücretsiz çekici, nakit ödeme.",
@@ -392,6 +406,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "kayseri",
+    lastUpdated: "2026-08-19",
     metaTitle: "Kayseri Hasarlı Araç Alan — Kazalı, Çekme Belgeli, Hurda",
     metaDescription:
       "Kayseri'nin tüm ilçelerinde hasarlı, kazalı, pert ve arızalı araç alımı. Kış kazaları ve sanayi araçları dahil ücretsiz çekici, nakit ödeme.",
@@ -427,6 +442,7 @@ export const cityContent: CityContent[] = [
   },
   {
     citySlug: "samsun",
+    lastUpdated: "2026-08-19",
     metaTitle: "Samsun Hasarlı Araç Alan — Karadeniz'de Kazalı ve Hurda",
     metaDescription:
       "Samsun ve tüm ilçelerinde hasarlı, kazalı, pert ve arızalı araç alımı. Sahil yolu kazaları ve yağışlı iklim hasarları dahil ücretsiz çekici, nakit ödeme.",
@@ -467,6 +483,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "kadikoy",
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "Kadıköy Hasarlı Araç Alan — Anadolu Yakası Araç Alımı",
     metaDescription:
       "Kadıköy'de hasarlı, kazalı ve park hasarlı araç alımı. Dar sokaklardan kapalı otoparklara ücretsiz çekici ile yerinden alım, aynı gün nakit ödeme.",
@@ -496,6 +513,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "umraniye",
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "Ümraniye Hasarlı Araç Alımı — TEM Hattında Araç Alan",
     metaDescription:
       "Ümraniye'de hasarlı, kazalı ve ticari araç alımı. TEM bağlantı kazaları ve Dudullu sanayi araçları dahil ücretsiz çekici, nakit ödeme.",
@@ -525,6 +543,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "basaksehir",
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "Başakşehir Hasarlı Araç Alan — Kazalı Araç Alımı",
     metaDescription:
       "Başakşehir ve Kayaşehir'de hasarlı, kazalı ve arızalı araç alımı. Site otoparklarından ücretsiz çekici ile alım, hızlı değerlendirme, nakit ödeme.",
@@ -554,6 +573,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "pendik",
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "Pendik Hasarlı Araç Alımı — E-5 ve Sahil Hattında Araç Alan",
     metaDescription:
       "Pendik'te hasarlı, kazalı ve arızalı araç alımı. E-5 kazaları ve Sabiha Gökçen çevresi dahil ücretsiz çekici ile yerinden alım, nakit ödeme.",
@@ -583,6 +603,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "bagcilar",
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "Bağcılar Hasarlı Araç Alan — Ticari Araç ve Kazalı Alımı",
     metaDescription:
       "Bağcılar'da hasarlı, kazalı ve ticari araç alımı. Tekstil atölyelerinin kamyonetleri dahil ücretsiz çekici ile yerinden alım ve nakit ödeme.",
@@ -612,6 +633,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "esenyurt",
     citySlug: "istanbul",
+    lastUpdated: "2026-08-19",
     metaTitle: "Esenyurt Hasarlı Araç Alımı — Kazalı Araç Alan",
     metaDescription:
       "Türkiye'nin en kalabalık ilçesi Esenyurt'ta hasarlı, kazalı ve arızalı araç alımı. Site otoparkları dahil ücretsiz çekici, hızlı nakit ödeme.",
@@ -642,6 +664,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "cankaya",
     citySlug: "ankara",
+    lastUpdated: "2026-08-19",
     metaTitle: "Çankaya Hasarlı Araç Alan — Ankara Merkez Araç Alımı",
     metaDescription:
       "Çankaya'da hasarlı, kazalı ve az kullanılmış araç alımı. Bakımlı memur araçları ve site otoparkları dahil ücretsiz çekici, nakit ödeme.",
@@ -671,6 +694,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "kecioren",
     citySlug: "ankara",
+    lastUpdated: "2026-08-19",
     metaTitle: "Keçiören Hasarlı Araç Alımı — Kazalı Araç Alan",
     metaDescription:
       "Keçiören'de hasarlı, kazalı ve park hasarlı araç alımı. Yokuşlu dar sokaklardan ücretsiz çekici ile alım, hızlı değerlendirme, nakit ödeme.",
@@ -700,6 +724,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "yenimahalle",
     citySlug: "ankara",
+    lastUpdated: "2026-08-19",
     metaTitle: "Yenimahalle Hasarlı Araç Alan — Ostim Çevresi Araç Alımı",
     metaDescription:
       "Yenimahalle'de hasarlı, kazalı ve ticari araç alımı. Ostim–İvedik sanayi araçları dahil ücretsiz çekici ile yerinden alım, nakit ödeme.",
@@ -729,6 +754,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "etimesgut",
     citySlug: "ankara",
+    lastUpdated: "2026-08-19",
     metaTitle: "Etimesgut Hasarlı Araç Alımı — Eryaman Çevresi Araç Alan",
     metaDescription:
       "Etimesgut ve Eryaman'da hasarlı, kazalı ve arızalı araç alımı. Site otoparklarından ücretsiz çekici ile alım, hızlı değerlendirme, nakit ödeme.",
@@ -759,6 +785,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "bornova",
     citySlug: "izmir",
+    lastUpdated: "2026-08-19",
     metaTitle: "Bornova Hasarlı Araç Alımı — İzmir'in Doğu Kapısında",
     metaDescription:
       "Bornova'da hasarlı, kazalı ve arızalı araç alımı. Türkiye geneli ağımızla güçlü teklif; otoyol kavşağı kazaları dahil ücretsiz çekici, nakit ödeme.",
@@ -788,6 +815,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "karsiyaka",
     citySlug: "izmir",
+    lastUpdated: "2026-08-19",
     metaTitle: "Karşıyaka Hasarlı Araç Alan — Körfezin Kuzeyinde Alım",
     metaDescription:
       "Karşıyaka'da hasarlı, kazalı ve az kullanılmış araç alımı. Türkiye geneli alıcı ağıyla güçlü teklif; ücretsiz çekici ve nakit ödeme.",
@@ -817,6 +845,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "buca",
     citySlug: "izmir",
+    lastUpdated: "2026-08-19",
     metaTitle: "Buca Hasarlı Araç Alımı — İzmir'in En Kalabalık İlçesi",
     metaDescription:
       "Buca'da hasarlı, kazalı ve çalışmayan araç alımı. Türkiye geneli ağla güçlü teklif; yokuşlu sokaklardan ücretsiz çekici, nakit ödeme.",
@@ -846,6 +875,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "konak",
     citySlug: "izmir",
+    lastUpdated: "2026-08-19",
     metaTitle: "Konak Hasarlı Araç Alan — İzmir Merkezde Araç Alımı",
     metaDescription:
       "Konak'ta hasarlı, kazalı ve esnaf aracı alımı. Kemeraltı ticaretinin ticari araçları dahil ücretsiz çekici ile yerinden alım, nakit ödeme.",
@@ -876,6 +906,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "nilufer",
     citySlug: "bursa",
+    lastUpdated: "2026-08-19",
     metaTitle: "Nilüfer Hasarlı Araç Alımı — Bursa'nın Modern Yüzünde",
     metaDescription:
       "Nilüfer'de hasarlı, kazalı ve arızalı araç alımı. OSB filoları ve site otoparkları dahil ücretsiz çekici ile yerinden alım, nakit ödeme.",
@@ -905,6 +936,7 @@ export const districtContent: DistrictContent[] = [
   {
     districtSlug: "osmangazi",
     citySlug: "bursa",
+    lastUpdated: "2026-08-19",
     metaTitle: "Osmangazi Hasarlı Araç Alan — Bursa Merkez Araç Alımı",
     metaDescription:
       "Osmangazi'de hasarlı, kazalı ve esnaf aracı alımı. Tarihi merkezin dar sokakları dahil ücretsiz çekici ile yerinden alım ve nakit ödeme.",

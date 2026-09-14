@@ -98,4 +98,32 @@ export const homepageFaqs: FaqItem[] = [
     q: "Fotoğraf göndererek teklif alabilir miyim?",
     a: "Evet. Aracınızın güncel fotoğraflarını WhatsApp üzerinden veya teklif formundaki yükleme alanından paylaşarak değerlendirme sürecini hızlandırabilirsiniz.",
   },
+  {
+    q: "Hasarlı araçlar alınır mı?",
+    a: "Evet. Hasar seviyesi ne olursa olsun aracınızı değerlendiriyoruz; hafif bir kaporta hasarından ağır hasarlı ve pert araçlara kadar geniş bir aralık kapsam dahilindedir.",
+  },
+  {
+    q: "Ağır hasarlı bir aracı nereden inceletebilirim?",
+    a: "Ayrı bir ekspertiz merkezine götürmenize gerek yok. Fotoğraf ve bilgi paylaşımının ardından ücretsiz değerlendirmeyi biz yapıyor, aracın bulunduğu yerden süreci başlatıyoruz.",
+  },
+];
+
+/** Hizmet Bölgeleri hub-page FAQ — geography/logistics questions specific to that page. */
+export const serviceAreasFaqs: FaqItem[] = [
+  {
+    q: "Şehrim listede yok, yine de başvurabilir miyim?",
+    a: "Evet. Öncelikli olarak listelediğimiz il ve ilçeler dışından da başvuru kabul edilir; konum ve araç durumuna göre süreç birlikte planlanır.",
+  },
+  {
+    q: "İlçe sayfası olmayan bir bölgede aracım varsa ne olur?",
+    a: "İlçe bazında ayrı bir sayfamız olmasa bile, bağlı olduğunuz ilin sayfasındaki süreç ilçenizi de kapsar. Teklif formundan konumunuzu belirtmeniz yeterlidir.",
+  },
+  {
+    q: "Şehir dışına çekici göndermek ek ücretli mi?",
+    a: "Çekici ve teslim alma planlaması konum ve araç durumuna göre yapılır; olası ek maliyetler varsa değerlendirme aşamasında açıkça belirtilir.",
+  },
+  {
+    q: "Büyük şehirler dışında değerlendirme süresi değişiyor mu?",
+    a: "Süreç aynı şekilde ilerler; yalnızca çekici veya teslim alma için gereken ulaşım süresi bulunduğunuz konuma göre farklılık gösterebilir.",
+  },
 ];
