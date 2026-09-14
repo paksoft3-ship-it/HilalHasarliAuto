@@ -41,7 +41,7 @@ export function Header() {
         <Logo brandName={settings.brandName} />
 
         {/* Desktop nav */}
-        <nav aria-label="Ana menü" className="hidden items-center gap-1 xl:flex">
+        <nav aria-label="Ana menü" className="hidden items-center gap-1 min-[1440px]:flex">
           {mainNav.map((item) => {
             const active = isActive(item.href);
             if (!item.children) {
@@ -103,7 +103,7 @@ export function Header() {
         </nav>
 
         {/* Desktop right: phone + CTA */}
-        <div className="hidden items-center gap-4 xl:flex">
+        <div className="hidden items-center gap-4 min-[1440px]:flex">
           <a
             href={whatsappHref(settings)}
             target="_blank"
@@ -129,7 +129,7 @@ export function Header() {
         </div>
 
         {/* Mobile right: phone icon + menu */}
-        <div className="flex items-center gap-1 xl:hidden">
+        <div className="flex items-center gap-1 min-[1440px]:hidden">
           <a
             href={tel}
             data-track="phone_click"
@@ -153,7 +153,7 @@ export function Header() {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="border-t border-white/10 bg-charcoal-950 xl:hidden">
+        <div className="border-t border-white/10 bg-charcoal-950 min-[1440px]:hidden">
           <nav aria-label="Mobil menü" className="container-page flex flex-col py-3">
             {mainNav.map((item) => (
               <div key={item.href}>
