@@ -55,14 +55,18 @@ const headerCities: NavItem[] = [
   { label: "Tüm Hizmet Bölgeleri", href: routes.serviceAreas },
 ];
 
-/** Primary header navigation (design.md §13). */
+/**
+ * Primary header navigation (design.md §13). "İletişim" lives in the footer
+ * instead — the header already surfaces the phone number and WhatsApp CTA
+ * directly, so a dedicated nav item was redundant weight competing for the
+ * same limited header width as the other 5 items.
+ */
 export const mainNav: NavItem[] = [
   { label: "Ana Sayfa", href: routes.home },
   { label: "Hangi Araçları Alıyoruz?", href: routes.vehiclesWeBuy },
   { label: "Nasıl Çalışır?", href: routes.howItWorks },
   { label: "Hizmet Bölgeleri", href: routes.serviceAreas, children: headerCities },
   { label: "Hakkımızda", href: routes.about },
-  { label: "İletişim", href: routes.contact },
 ];
 
 export const footerNav = {
@@ -71,6 +75,7 @@ export const footerNav = {
     { label: "Teklif Al", href: routes.getOffer },
     { label: "Nasıl Çalışır?", href: routes.howItWorks },
     { label: "Hakkımızda", href: routes.about },
+    { label: "İletişim", href: routes.contact },
     { label: "Sık Sorulan Sorular", href: routes.faq },
     { label: "Blog", href: routes.blog },
     { label: "Araç Satış Rehberleri", href: routes.guides },

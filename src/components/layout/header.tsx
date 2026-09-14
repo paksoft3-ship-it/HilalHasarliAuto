@@ -41,7 +41,7 @@ export function Header() {
         <Logo brandName={settings.brandName} />
 
         {/* Desktop nav */}
-        <nav aria-label="Ana menü" className="hidden items-center gap-1 min-[1440px]:flex">
+        <nav aria-label="Ana menü" className="hidden shrink-0 items-center gap-1 2xl:flex">
           {mainNav.map((item) => {
             const active = isActive(item.href);
             if (!item.children) {
@@ -51,7 +51,7 @@ export function Header() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "relative whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     active ? "text-white" : "text-white/70 hover:text-white",
                   )}
                 >
@@ -72,7 +72,7 @@ export function Header() {
                   aria-current={active ? "page" : undefined}
                   aria-haspopup="true"
                   className={cn(
-                    "relative flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "relative flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors",
                     active ? "text-white" : "text-white/70 hover:text-white",
                   )}
                 >
@@ -103,7 +103,7 @@ export function Header() {
         </nav>
 
         {/* Desktop right: phone + CTA */}
-        <div className="hidden items-center gap-4 min-[1440px]:flex">
+        <div className="hidden shrink-0 items-center gap-4 2xl:flex">
           <a
             href={whatsappHref(settings)}
             target="_blank"
@@ -129,7 +129,7 @@ export function Header() {
         </div>
 
         {/* Mobile right: phone icon + menu */}
-        <div className="flex items-center gap-1 min-[1440px]:hidden">
+        <div className="flex items-center gap-1 2xl:hidden">
           <a
             href={tel}
             data-track="phone_click"
@@ -153,7 +153,7 @@ export function Header() {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="border-t border-white/10 bg-charcoal-950 min-[1440px]:hidden">
+        <div className="border-t border-white/10 bg-charcoal-950 2xl:hidden">
           <nav aria-label="Mobil menü" className="container-page flex flex-col py-3">
             {mainNav.map((item) => (
               <div key={item.href}>
