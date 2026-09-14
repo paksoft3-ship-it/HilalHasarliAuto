@@ -7,7 +7,8 @@ import { districts, getDistrict, districtsOfCity } from "@/config/districts";
 import { siteConfig } from "@/config/site";
 import { getDistrictContent } from "@/config/local-data";
 import { locationMetaKeywords } from "@/lib/seo/local-copy";
-import { featuredServices } from "@/config/services";
+import { services } from "@/config/services";
+import { clusterPages } from "@/config/cluster-content";
 import { routes } from "@/config/navigation";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -133,7 +134,7 @@ export default async function DistrictPage({
       <Section tone="white">
         <SectionHeading title="Değerlendirilen Araç Türleri" align="left" />
         <div className="mt-6 flex flex-wrap gap-2.5">
-          {featuredServices.map((s) => (
+          {services.map((s) => (
             <Link key={s.slug} href={routes.service(s.slug)} className="rounded-full border border-line bg-cream-50 px-4 py-2 text-sm font-medium text-ink hover:border-burgundy-700 hover:text-burgundy-700">
               {s.name}
             </Link>
@@ -156,6 +157,22 @@ export default async function DistrictPage({
           </div>
         </Section>
       )}
+
+      {/* Hasar türüne göre ulusal sayfalar — ilçe sayfaları taranırken
+          kümeleme sayfalarının da keşfedilmesini sağlar (crawl cascade). */}
+      <Section tone="white">
+        <SectionHeading eyebrow="Hasar Türüne Göre" title="Türkiye Geneli Değerlendirme" align="left" />
+        <div className="mt-6 flex flex-wrap gap-2.5">
+          <Link href={routes.home} className="rounded-full border border-line bg-cream-50 px-4 py-2 text-sm font-medium text-ink hover:border-burgundy-700 hover:text-burgundy-700">
+            Hasarlı Araç Alan
+          </Link>
+          {clusterPages.map((c) => (
+            <Link key={c.slug} href={routes[c.routeKey]} className="rounded-full border border-line bg-cream-50 px-4 py-2 text-sm font-medium text-ink hover:border-burgundy-700 hover:text-burgundy-700">
+              {c.shortTitle}
+            </Link>
+          ))}
+        </div>
+      </Section>
 
       <Section tone="alt">
         <SectionHeading eyebrow="Sık Sorulan Sorular" title={`${district.name} Hakkında Sorular`} />

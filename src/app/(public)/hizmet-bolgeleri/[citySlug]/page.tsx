@@ -6,6 +6,7 @@ import { MapPin, ArrowRight } from "lucide-react";
 import { publishedCities, getCity, featuredCities } from "@/config/cities";
 import { districtsOfCity } from "@/config/districts";
 import { services, serviceIconImage } from "@/config/services";
+import { clusterPages } from "@/config/cluster-content";
 import { routes } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { DEFAULT_EVALUATED } from "@/config/service-content";
@@ -162,6 +163,23 @@ export default async function CityPage({
           </div>
         </Section>
       )}
+
+      {/* Hasar türüne göre ulusal sayfalar — her şehir sayfasından erişilebilir
+          olması, bu sayfalar taranırken kümeleme sayfalarının da keşfedilmesini
+          sağlar (crawl cascade). */}
+      <Section tone="cream">
+        <SectionHeading eyebrow="Hasar Türüne Göre" title="Türkiye Geneli Değerlendirme" align="left" />
+        <div className="mt-6 flex flex-wrap gap-2.5">
+          <Link href={routes.home} className="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink hover:border-burgundy-700 hover:text-burgundy-700">
+            Hasarlı Araç Alan
+          </Link>
+          {clusterPages.map((c) => (
+            <Link key={c.slug} href={routes[c.routeKey]} className="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink hover:border-burgundy-700 hover:text-burgundy-700">
+              {c.shortTitle}
+            </Link>
+          ))}
+        </div>
+      </Section>
 
       {/* Local FAQ */}
       <Section tone="alt">
