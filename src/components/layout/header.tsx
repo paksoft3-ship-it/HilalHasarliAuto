@@ -37,11 +37,18 @@ export function Header() {
         scrolled && "shadow-[0_8px_30px_rgba(22,27,31,0.25)]",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between md:h-20">
+      {/*
+        The header uses its own wider, lighter-padded container instead of
+        the sitewide `.container-page` (max-width 1480px, up to 88px side
+        padding at desktop) — that padding was eating into the room the nav
+        needs, and the header doesn't need to line up edge-for-edge with the
+        hero/content sections below it.
+      */}
+      <div className="mx-auto flex h-16 w-full max-w-[1760px] items-center justify-between px-6 md:h-20 md:px-8 lg:px-10">
         <Logo brandName={settings.brandName} />
 
         {/* Desktop nav */}
-        <nav aria-label="Ana menü" className="hidden shrink-0 items-center gap-1 2xl:flex">
+        <nav aria-label="Ana menü" className="hidden shrink-0 items-center gap-1 min-[1320px]:flex">
           {mainNav.map((item) => {
             const active = isActive(item.href);
             if (!item.children) {
@@ -103,7 +110,7 @@ export function Header() {
         </nav>
 
         {/* Desktop right: phone + CTA */}
-        <div className="hidden shrink-0 items-center gap-4 2xl:flex">
+        <div className="hidden shrink-0 items-center gap-4 min-[1320px]:flex">
           <a
             href={whatsappHref(settings)}
             target="_blank"
@@ -129,7 +136,7 @@ export function Header() {
         </div>
 
         {/* Mobile right: phone icon + menu */}
-        <div className="flex items-center gap-1 2xl:hidden">
+        <div className="flex items-center gap-1 min-[1320px]:hidden">
           <a
             href={tel}
             data-track="phone_click"
@@ -153,7 +160,7 @@ export function Header() {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="border-t border-white/10 bg-charcoal-950 2xl:hidden">
+        <div className="border-t border-white/10 bg-charcoal-950 min-[1320px]:hidden">
           <nav aria-label="Mobil menü" className="container-page flex flex-col py-3">
             {mainNav.map((item) => (
               <div key={item.href}>
