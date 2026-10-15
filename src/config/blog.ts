@@ -917,6 +917,48 @@ export const blogPosts: BlogPost[] = [
     ],
     sample: false,
   },
+  {
+    slug: "istanbul-kocaeli-sakarya-antalya-sel-hasarli-arac-14-ekim-2026",
+    title: "14 Ekim 2026 Seli: İstanbul, Kocaeli, Sakarya, Antalya'da Hasarlı Araç Sahipleri Ne Yapmalı?",
+    excerpt:
+      "14 Ekim 2026'da İstanbul, Kocaeli, Sakarya ve Antalya'yı vuran selde hasar gören araç sahipleri için ilk 24 saat kontrol listesi ve satış süreci.",
+    metaDescription:
+      "14 Ekim 2026'daki sel felaketinde İstanbul, Kocaeli, Sakarya ve Antalya'da hasar gören araçlar için yapılması gerekenler ve değerlendirme süreci.",
+    metaKeywords:
+      "sel hasarlı araç, sel hasarlı araç alan, İstanbul sel araç hasarı, Kocaeli sel araç, Sakarya sel araç, Antalya Demre sel araç",
+    category: "Hasarlı Araç",
+    date: "2026-10-15",
+    readingMinutes: 6,
+    image: "/images/blog/sel-hasarli-arac-deger-tespiti-kapak.webp",
+    imageAlt: "Sel sularının ulaştığı seviyeyi gösteren hasarlı bir otomobil",
+    body: [
+      { type: "p", text: "14 Ekim 2026'da etkili olan şiddetli sağanak, İstanbul başta olmak üzere Kocaeli, Sakarya ve Antalya'da yüzlerce aracın sel sularına kapılmasına veya su altında kalmasına neden oldu. Aracınız bu felaketten etkilendiyse, hasarın boyutunu doğru değerlendirmek ve doğru adımları hızlıca atmak hem güvenliğiniz hem de aracın kalan değeri için kritik." },
+      { type: "h2", text: "Hangi Bölgeler Etkilendi?" },
+      { type: "ul", items: [
+        "İstanbul: Sarıyer, Kemerburgaz, Kağıthane ve Eyüpsultan başta olmak üzere birçok ilçede dere taşkınları yaşandı; AFAD ve 112 Acil Çağrı Merkezi'ne 76 araca ilişkin hasar ihbarı ulaştı, aynı dönemde 808 konut ve 280 iş yeri için de bildirim yapıldı.",
+        "Kocaeli: Kandıra'nın Taraklı Kışla mevkii dahil birçok noktada sağanak su baskınlarına yol açtı; bazı araçlar taşkın suyuna kapılarak hareket edemez hale geldi.",
+        "Sakarya: Adapazarı-Mekece arasındaki D-650 karayolu su altında kaldı, Adatepe mevkiinde çok sayıda araç su birikintilerine takıldı.",
+        "Antalya (Demre): Sel nedeniyle araçlar su altında kaldı; AFAD, DSİ, Karayolları ve belediye ekipleri bölgede hasar tespiti yürüttü.",
+      ] },
+      { type: "h2", text: "Sel Hasarlı Aracınızla İlk 24 Saatte Ne Yapmalısınız?" },
+      { type: "ol", items: [
+        "Aracı tekrar çalıştırmayı denemeyin. Motor ve elektronik sistemlere giren su, çalıştırma denemesiyle daha büyük hasara yol açabilir.",
+        "Su seviyesinin aracın neresine kadar çıktığını gösteren fotoğraf ve video çekin.",
+        "Kasko poliçeniz varsa sigorta şirketinizi bilgilendirin ve sel/su baskını teminatının kapsamını kontrol edin.",
+        "Bağımsız bir ekspertiz yaptırın; görünen hasarın yanı sıra motor, şanzıman ve elektronik aksamdaki gizli hasar da değerlendirilmeli.",
+      ] },
+      { type: "h2", text: "Sel Hasarlı Araç Neden Farklı Değerlendirilir?" },
+      { type: "p", text: "Su baskınına giren bir araçta hasar yalnızca görünen kaporta veya döşemeyle sınırlı kalmaz. Motor yağına, şanzımana ve elektronik kontrol ünitelerine sızan su, kısa vadede çalışır görünse dahi orta-uzun vadede ciddi arızalara yol açabilir. Bu nedenle sel hasarlı araçlar, kazalı araçlardan farklı bir değerlendirme yaklaşımı gerektirir." },
+      { type: "note", text: "Sel hasarlı aracınızı olduğu durumda, ücretsiz ekspertiz sonrası değerinde satın alıyoruz. İstanbul, Kocaeli ve Antalya için şehir sayfalarımıza göz atabilir veya doğrudan [sel hasarlı araç alımı](/arac-alimi/sel-hasarli-arac-alimi) sayfamızdan başvurabilirsiniz." },
+      { type: "h2", text: "Sonuç" },
+      { type: "p", text: "Sel felaketinden etkilenen araç sahiplerinin önceliği güvenlik, ikinci önceliği ise hasarın büyümesini önlemek olmalı. Aracınızın fotoğraflarını paylaşarak ücretsiz değerlendirme talep edebilir, ücretsiz çekici ve noter devriyle eş zamanlı ödeme sürecinden yararlanabilirsiniz." },
+    ],
+    faqs: [
+      { q: "Sel hasarlı aracımı sigortaya mı, doğrudan alıcıya mı satmalıyım?", a: "Kasko poliçeniz ve sel/su baskını teminatınız varsa önce sigorta şirketinize başvurmanız gerekir. Sigorta süreci sonuçlanmadan veya sigorta kapsamı yoksa, aracı olduğu durumda doğrudan değerlendirmeye sunabilirsiniz." },
+      { q: "Sel sularında kalan araç tekrar trafiğe çıkabilir mi?", a: "Su seviyesi ve hasarın kapsamına bağlıdır. Motor ve elektronik sisteme ulaşan su varsa bağımsız ekspertiz olmadan karar vermemeniz önerilir; bazı araçlar onarılabilir, bazıları ekonomik olarak onarıma uygun olmayabilir." },
+    ],
+    sample: false,
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

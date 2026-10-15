@@ -417,6 +417,10 @@ export const serviceContent: Record<string, ServiceContent> = {
         q: "Sel mağduruyum, aracım otoparkta suyun altında kaldı; değerlendiriyor musunuz?",
         a: "Evet. Sel mağduru araç sahipleri için de aynı süreç geçerlidir; suyun ulaştığı seviye ve aracın mevcut durumu paylaştığınız bilgi ve fotoğraflara göre değerlendirilir.",
       },
+      {
+        q: "14 Ekim 2026'daki İstanbul, Kocaeli, Sakarya ve Antalya selinde aracım hasar gördü, ne yapmalıyım?",
+        a: "Öncelikle aracı tekrar çalıştırmayı denemeyin — motor ve elektronik sisteme giren su, çalıştırma denemesiyle daha büyük hasara yol açabilir. Su seviyesini gösteren fotoğraflar çekip bulunduğunuz şehirden (İstanbul, Kocaeli, Sakarya veya Antalya fark etmeksizin) başvurun; ücretsiz ekspertiz ve çekici süreci aynı gün başlatılır.",
+      },
     ],
     related: ["pert-arac-alimi", "motor-arizali-arac-alimi", "hasarli-arac-alimi"],
   },

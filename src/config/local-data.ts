@@ -76,6 +76,10 @@ export const cityContent: CityContent[] = [
         q: "İstanbul trafiğinde çekici ne kadar sürede gelir?",
         a: "Teklif kabulünden sonra çekici genellikle aynı gün içinde planlanır; yoğun saatlerde randevu saatini birlikte belirleriz. Ücret her durumda tarafımıza aittir.",
       },
+      {
+        q: "14 Ekim'deki selde aracım Sarıyer/Kemerburgaz/Kağıthane/Eyüpsultan'da hasar gördü, alıyor musunuz?",
+        a: "Alıyoruz. 14 Ekim 2026'daki sel felaketinde bu bölgelerde çok sayıda araç su altında kaldı veya sürüklendi; AFAD ve 112'ye 76 araca ilişkin hasar ihbarı ulaştı. Sel hasarlı araçlarda motor ve elektronik aksamdaki gizli hasar zamanla büyüyebilir — aracı çalıştırmayı denemeden fotoğraflarla başvurun, ücretsiz ekspertiz ve çekici süreci aynı gün planlanır.",
+      },
     ],
     heroImage: 1,
     heroAlt: "İstanbul E-5 karayolunda önden hasarlı bir otomobil",
@@ -220,6 +224,10 @@ export const cityContent: CityContent[] = [
         q: "Alanya'dan veya Kaş'tan başvursam süreç uzar mı?",
         a: "Uzamaz. Uzak ilçelerde çekici ve devir tek takvimde planlanır; çoğu başvuru birkaç iş günü içinde tamamlanır.",
       },
+      {
+        q: "Demre'deki sel felaketinde aracım hasar gördü, değerlendiriyor musunuz?",
+        a: "Değerlendiriyoruz. Ekim 2026'da Demre'yi vuran sel sonrası AFAD, DSİ, Karayolları ve belediye ekipleri bölgede hasar tespiti yaptı; birçok araç su altında kaldı. Sel hasarlı araçlarda motor ve elektronik hasar görünenden fazla olabilir — aracı çalıştırmadan fotoğraflarla başvurun, ücretsiz ekspertiz ve çekici süreci başlatılır.",
+      },
     ],
     heroImage: 5,
     heroAlt: "Antalya sahil yolunda önü hasarlı bir otomobil",
@@ -363,6 +371,10 @@ export const cityContent: CityContent[] = [
       {
         q: "Körfez veya Karamürsel gibi ilçelerden de alım var mı?",
         a: "Var. Kocaeli'nin 12 ilçesinin tamamından başvuru alıyoruz; çekici her ilçeye ücretsiz gönderilir.",
+      },
+      {
+        q: "Kandıra'da sel sularına kapılan aracımı alıyor musunuz?",
+        a: "Alıyoruz. Ekim 2026'daki sağanakta Kandıra'nın Taraklı Kışla mevkii dahil Kocaeli genelinde taşkınlar yaşandı, bazı araçlar su baskınına kapılarak hareket edemez hale geldi. Sel hasarlı aracı tekrar çalıştırmayı denemeden fotoğraflarla başvurun; ücretsiz ekspertiz ve çekici aynı gün planlanır.",
       },
     ],
     heroImage: 2,
