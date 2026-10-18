@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Camera, FileText, ListChecks } from "lucide-react";
+import Link from "next/link";
+import { Camera, FileText, ListChecks, ArrowRight } from "lucide-react";
 import { services, getService } from "@/config/services";
 import {
   getServiceContent,
@@ -201,6 +202,26 @@ export default async function ServicePage({
           <OfferExplainer />
         </div>
       </Section>
+
+      {/* Related in-depth guide */}
+      {content.relatedGuide && (
+        <Section tone="cream">
+          <Link
+            href={content.relatedGuide.href}
+            className="group flex items-center justify-between gap-4 rounded-[14px] border border-line bg-white p-5 transition-colors hover:border-burgundy-700 sm:p-6"
+          >
+            <div>
+              <p className="text-[12px] font-semibold uppercase tracking-wide text-burgundy-700">
+                Detaylı Rehber
+              </p>
+              <p className="mt-1 text-[16px] font-semibold text-ink sm:text-[18px]">
+                {content.relatedGuide.title}
+              </p>
+            </div>
+            <ArrowRight size={20} className="shrink-0 text-burgundy-700 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Section>
+      )}
 
       {/* Service FAQ */}
       {content.faqs.length > 0 && (

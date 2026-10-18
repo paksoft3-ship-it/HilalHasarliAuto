@@ -38,6 +38,8 @@ export interface ServiceContent {
   faqs: FaqItem[];
   /** Related service slugs. */
   related: string[];
+  /** Optional link to a long-form /blog guide that goes deeper than this page. */
+  relatedGuide?: { title: string; href: string };
 }
 
 export const DEFAULT_EVALUATED = [
@@ -423,6 +425,10 @@ export const serviceContent: Record<string, ServiceContent> = {
       },
     ],
     related: ["pert-arac-alimi", "motor-arizali-arac-alimi", "hasarli-arac-alimi"],
+    relatedGuide: {
+      title: "Sel Hasarlı Araç Alınır mı? Riskleri, Kontrolleri ve Satış Seçenekleri",
+      href: "/blog/sel-hasarli-arac-alinir-mi",
+    },
   },
 
   "hurda-arac-alimi": {
