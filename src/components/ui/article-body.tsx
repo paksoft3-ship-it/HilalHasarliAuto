@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Info } from "lucide-react";
+import { Info, Play, ExternalLink } from "lucide-react";
 import type { Block } from "@/config/blog";
+import { CtaGroup } from "@/components/sections/cta-buttons";
 
 const LINK_CLASS =
   "font-semibold text-burgundy-700 underline underline-offset-2 hover:text-burgundy-800";
@@ -111,6 +112,51 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            );
+          case "video_link":
+            return (
+              <a
+                key={i}
+                href={b.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group my-6 flex items-center gap-4 rounded-[12px] border border-charcoal-950 bg-charcoal-950 p-4 transition-colors hover:border-burgundy-700 sm:p-5"
+              >
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-burgundy-700 text-white transition-transform group-hover:scale-105 sm:h-16 sm:w-16">
+                  <Play size={22} fill="currentColor" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-white/60">
+                    <span>{b.source}</span>
+                    <span aria-hidden>•</span>
+                    <span>{b.date}</span>
+                  </div>
+                  <p className="mt-1 text-[15px] font-semibold leading-snug text-white sm:text-base">{b.title}</p>
+                  <p className="mt-0.5 text-[13px] text-white/50">Haber videosunu yayıncı sayfasında izleyin</p>
+                </div>
+                <ExternalLink size={18} className="shrink-0 text-white/40 transition-colors group-hover:text-white" />
+              </a>
+            );
+          case "cta_banner":
+            return (
+              <div
+                key={i}
+                className="my-8 rounded-[14px] border border-burgundy-700/20 bg-burgundy-700/5 p-5 text-center sm:p-6"
+              >
+                <p className="text-[18px] font-bold text-ink sm:text-[20px]">{b.heading}</p>
+                {b.text && (
+                  <p className="mx-auto mt-1.5 max-w-[520px] text-[14px] leading-relaxed text-ink-secondary">
+                    {b.text}
+                  </p>
+                )}
+                <div className="mt-4 flex justify-center">
+                  <CtaGroup
+                    size="md"
+                    whatsappMessage={b.whatsappMessage}
+                    location={`blog_cta_${i}`}
+                  />
+                </div>
               </div>
             );
         }

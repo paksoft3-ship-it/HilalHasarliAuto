@@ -17,6 +17,8 @@ export function blocksToText(blocks: Block[]): string {
       case "ul": parts.push(b.items.map((i) => `- ${i}`).join("\n")); break;
       case "ol": parts.push(b.items.map((i, n) => `${n + 1}. ${i}`).join("\n")); break;
       case "img": parts.push(`![${b.alt}](${b.src})`); break;
+      case "video_link": parts.push(`> ${b.source} • ${b.date}: [${b.title}](${b.href})`); break;
+      case "cta_banner": parts.push(`> ${b.heading}${b.text ? ` — ${b.text}` : ""}`); break;
       case "table":
         parts.push(
           [
@@ -84,6 +86,8 @@ export function readingMinutes(blocks: Block[]): number {
       if (b.type === "ul" || b.type === "ol") return b.items.join(" ");
       if (b.type === "img") return "";
       if (b.type === "table") return [b.header, ...b.rows].flat().join(" ");
+      if (b.type === "video_link") return b.title;
+      if (b.type === "cta_banner") return `${b.heading} ${b.text ?? ""}`;
       return b.text;
     })
     .join(" ")

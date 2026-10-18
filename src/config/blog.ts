@@ -9,7 +9,12 @@ export type Block =
   | { type: "ol"; items: string[] }
   | { type: "note"; text: string }
   | { type: "img"; src: string; alt: string; width?: number; height?: number }
-  | { type: "table"; header: string[]; rows: string[][] };
+  | { type: "table"; header: string[]; rows: string[][] }
+  /** Card linking out to a news publisher's own video page. Never rehost the
+   *  video itself — this is a styled link, not an embed of someone else's media. */
+  | { type: "video_link"; title: string; source: string; date: string; href: string }
+  /** In-article conversion banner: heading + optional subtext + CtaGroup (Ara/WhatsApp). */
+  | { type: "cta_banner"; heading: string; text?: string; whatsappMessage?: string };
 
 export interface BlogPost {
   slug: string;
@@ -1014,10 +1019,11 @@ export const blogPosts: BlogPost[] = [
       ] },
       { type: "note", text: "Not: Airbag, elektronik modül ve yüksek voltaj bileşenlerini kendiniz sökmeyin. Özellikle elektrikli ve hibrit araçta müdahaleyi yetkili ve eğitimli personele bırakın." },
       { type: "img", src: "/images/blog/sel-hasarli-arac-7-kontrol-noktasi.webp", alt: "Sel hasarlı araç alırken kontrol edilmesi gereken yedi bölüm", width: 1200, height: 1500 },
+      { type: "cta_banner", heading: "Aracınızı kendiniz kontrol etmek istemiyorsanız, biz bakalım", text: "Fotoğrafları WhatsApp'tan gönderin, 30 dakika içinde ön değerlendirme alın — bağlayıcı değildir.", whatsappMessage: "Merhaba, sel hasarlı aracım için değerlendirme almak istiyorum." },
       { type: "h2", text: "Video: İstanbul'daki selde araçlar nasıl mahsur kaldı?" },
-      { type: "note", text: "15 Ekim 2026 • GZT haber videosu: [Kağıthane–Kemerburgaz Cendere yolunda mahsur kalan araçlar (havadan görüntü)](https://www.gzt.com/gundem/istanbulda-kemerburgaz-cendere-yolunda-kalan-araclar-havadan-goruntulendi-4269772)" },
+      { type: "video_link", title: "Kağıthane–Kemerburgaz Cendere yolunda mahsur kalan araçlar (havadan görüntü)", source: "GZT", date: "15 Ekim 2026", href: "https://www.gzt.com/gundem/istanbulda-kemerburgaz-cendere-yolunda-kalan-araclar-havadan-goruntulendi-4269772" },
       { type: "p", text: "Bu görüntüler, sel sırasında yolda ilerlemeye çalışmanın ve su seviyesini olduğundan düşük tahmin etmenin neden tehlikeli olabileceğini gösteriyor. Görüntüler belirli araçların mekanik durumunun veya hasar derecesinin ekspertiz kanıtı değildir." },
-      { type: "note", text: "14 Ekim 2026 • GZT haber videosu (ilgili): [Sarıyer Ayazağa'da selde mahsur kalan otobüs ve araçlar](https://www.gzt.com/gundem/iett-otobusunde-can-pazari-selde-mahsur-kalan-yolcular-kurtarilmayi-boyle-bekledi-4269659)" },
+      { type: "video_link", title: "Sarıyer Ayazağa'da selde mahsur kalan otobüs ve araçlar", source: "GZT", date: "14 Ekim 2026", href: "https://www.gzt.com/gundem/iett-otobusunde-can-pazari-selde-mahsur-kalan-yolcular-kurtarilmayi-boyle-bekledi-4269659" },
       { type: "h2", text: "Aracım selde kaldı: Şimdi ne yapmalıyım?" },
       { type: "ol", items: [
         "Güvenli yerde kalın. Su devam ediyorsa araç almak için tehlikeli alana girmeyin; gerekiyorsa 112 ve yerel yetkililerden destek isteyin.",
@@ -1029,6 +1035,7 @@ export const blogPosts: BlogPost[] = [
       ] },
       { type: "p", text: "Kaynak: [AFAD'ın sel güvenliği rehberi](https://canakkale.afad.gov.tr/sel) ve [NHTSA'nın sel hasarlı araçlar hakkında tüketici rehberi](https://www.nhtsa.gov/hurricane-and-flood-damaged-vehicles)." },
       { type: "img", src: "/images/blog/sel-sonrasi-arac-6-adim.webp", alt: "Sel sonrası aracın güvenli şekilde belgelenmesi ve değerlendirilmesi için altı adım", width: 1200, height: 1200 },
+      { type: "cta_banner", heading: "Sigorta süreci uzun mu sürecek? Beklemeden konuşalım", text: "Sigorta kararını beklerken de ön değerlendirme başlatabilirsiniz; karar çıktığında doğrudan devir adımına geçilir.", whatsappMessage: "Merhaba, aracım selde kaldı, sigorta süreci devam ederken ön değerlendirme almak istiyorum." },
       { type: "h2", text: "Sel hasarlı araç tamir edilir mi, yoksa satmak mı mantıklı?" },
       { type: "p", text: "Tek bir doğru cevap yoktur. Onarımı etkileyen faktörler arasında suyun ulaştığı seviye, motor-elektronik hasarı, parça maliyetleri, marka-modelin piyasa değeri ve sonradan çıkabilecek sorunlar yer alır." },
       { type: "table", header: ["Karar ölçütü", "Onarımı araştırın", "Mevcut hâliyle satış teklifini karşılaştırın"], rows: [
@@ -1039,6 +1046,7 @@ export const blogPosts: BlogPost[] = [
         ["Zaman", "Onarım süresi kabul edilebilir", "Aracı mevcut hâliyle devretmek öncelikli"],
       ] },
       { type: "note", text: "Önemli: Bu tablo bir fiyat hesabı değildir. \"Sel hasarlı araç %X değer kaybeder\" gibi sabit oranlar, araç özelinde veri olmadan güvenilir değildir. Değer; model, yıl, kilometre, hasar kapsamı, kullanılabilir parçalar, kayıt durumu ve onarım riskine göre belirlenir." },
+      { type: "cta_banner", heading: "Onarım mı, satış mı net değil mi?", text: "Aracınızın marka, model ve hasar bilgilerini paylaşın; onarım ve mevcut hâliyle satış seçeneklerini birlikte değerlendirelim.", whatsappMessage: "Merhaba, sel hasarlı aracım için onarım mı satış mı daha mantıklı öğrenmek istiyorum." },
       { type: "h2", text: "Sel hasarlı araç pert midir? Ağır hasarlı olur mu?" },
       { type: "p", text: "Hayır, sel hasarı tek başına otomatik olarak \"pert\" demek değildir. Sel hasarının yoğunluğu, onarımın teknik güvenliği, maliyeti, aracın piyasa değeri, ekspertiz ve sigorta süreci birlikte değerlendirilir. Hasar kaydının nasıl oluşturulduğu da somut dosyaya bağlıdır." },
       { type: "p", text: "Bu nedenle \"aracı sel bastıysa kesin ağır hasarlı kaydı çıkar\" veya \"çalışıyorsa pert olmaz\" şeklindeki kesin ifadeler yanlıştır. Araç özelindeki resmî ve teknik belgeleri kontrol edin." },
@@ -1056,7 +1064,8 @@ export const blogPosts: BlogPost[] = [
         "Teklif ve devir koşullarını yazılı netleştirin. Anlaşma varsa noter ve Güvenli Ödeme Sistemi sürecini tamamlayın.",
       ] },
       { type: "note", text: "Ödeme güvenliği: İkinci el taşıt satışlarında Güvenli Ödeme Sistemi kullanımı zorunludur. Uygulama şartları için [Ticaret Bakanlığı açıklamasına](https://aydin.ticaret.gov.tr/yayinlar/kurum-islemleri/ikinci-el-motorlu-kara-tasiti-ticareti-yetki-belgesi-islemleri) bakın." },
-      { type: "note", text: "Sel hasarlı aracınız için ücretsiz ön değerlendirme: Aracınızın marka-model bilgilerini, bulunduğu ili ve güvenle çekilmiş hasar fotoğraflarını paylaşın. Hasarlı Araç Alan, aracınızın durumuna göre ön değerlendirme yapabilmek için sizinle iletişime geçsin. Başvuru ücretsiz ve bağlayıcı değildir. [Ücretsiz teklif formuna git](/teklif-al) · [Sel hasarlı araç alım hizmetini incele](/arac-alimi/sel-hasarli-arac-alimi)" },
+      { type: "cta_banner", heading: "Sel hasarlı araç için hemen iletişime geçin", text: "Marka-model bilgilerini, bulunduğu ili ve güvenle çekilmiş hasar fotoğraflarını paylaşın; durumuna göre ücretsiz ön değerlendirme için size dönelim. Başvuru bağlayıcı değildir.", whatsappMessage: "Merhaba, sel hasarlı aracım için ücretsiz ön değerlendirme almak istiyorum." },
+      { type: "p", text: "Hizmet detayları için [sel hasarlı araç alım sayfamızı](/arac-alimi/sel-hasarli-arac-alimi) da inceleyebilirsiniz." },
       { type: "img", src: "/images/blog/sel-hasarli-arac-onarim-mi-satis-mi.webp", alt: "Sel hasarlı araçta onarım ve satış kararını etkileyen maliyet ve güvenlik kriterleri", width: 1600, height: 900 },
     ],
     faqs: [
