@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server";
 import { SESSION_COOKIE } from "@/lib/auth/constants";
 
 const CLICK_ID_KEYS = ["gclid", "gbraid", "wbraid"] as const;
@@ -8,10 +8,10 @@ const ADV_COOKIE = "adv_sid";
 /**
  * - /admin: cheap auth gate (cookie presence; full validation server-side).
  * - public ad landings (a Google click id is in the URL): tag the request with
- *   x-adv-* headers + an `adv_sid` cookie so the server-side capture component
- *   and the client tracker share one session id. Organic traffic is untouched.
+ *   an `adv_sid` cookie and records the landing server-side in the background
+ *   (POST /api/track/ad-landing via waitUntil), so pages themselves stay cacheable.
  */
-export function middleware(req: NextRequest) {
+export function middleware(req: NextRequest, event: NextFetchEvent) {
   const { pathname, searchParams } = req.nextUrl;
 
   if (pathname.startsWith("/admin")) {
@@ -30,20 +30,30 @@ export function middleware(req: NextRequest) {
   const fresh = !sid;
   if (!sid) sid = crypto.randomUUID();
 
-  const headers = new Headers(req.headers);
-  headers.set("x-adv-capture", "1");
-  headers.set("x-adv-sid", sid);
-  headers.set("x-adv-landing", pathname);
-  for (const k of CLICK_ID_KEYS) {
-    const v = searchParams.get(k);
-    if (v) headers.set(`x-adv-${k}`, v);
-  }
-  for (const u of UTM_KEYS) {
-    const v = searchParams.get(u);
-    if (v) headers.set(`x-adv-${u}`, v);
+  // First-touch capture runs in the background (does not delay the page) and
+  // lets the pages stay cached — see app/api/track/ad-landing.
+  const secret = process.env.CRON_SECRET;
+  if (secret) {
+    const xff = req.headers.get("x-forwarded-for");
+    const payload: Record<string, string | null> = {
+      sessionId: sid,
+      ip: xff ? xff.split(",")[0]!.trim() : req.headers.get("x-real-ip"),
+      userAgent: req.headers.get("user-agent"),
+      referrer: req.headers.get("referer"),
+      landingPage: pathname,
+    };
+    for (const k of CLICK_ID_KEYS) payload[k] = searchParams.get(k);
+    for (const u of UTM_KEYS) payload[u] = searchParams.get(u);
+    event.waitUntil(
+      fetch(new URL("/api/track/ad-landing", req.url), {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-capture-secret": secret },
+        body: JSON.stringify(payload),
+      }).catch(() => undefined),
+    );
   }
 
-  const res = NextResponse.next({ request: { headers } });
+  const res = NextResponse.next();
   if (fresh) {
     res.cookies.set(ADV_COOKIE, sid, {
       path: "/",
