@@ -68,5 +68,5 @@ export function middleware(req: NextRequest, event: NextFetchEvent) {
 
 export const config = {
   // Run on admin + public page routes; skip api, _next, and static files.
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.).*)"],
+  matcher: ["/((?!api|_vercel|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.).*)"],
 };

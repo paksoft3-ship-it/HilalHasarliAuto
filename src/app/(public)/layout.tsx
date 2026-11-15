@@ -9,6 +9,7 @@ import { TrackingProvider } from "@/components/tracking/tracking-provider";
 import { ClickProtectionTracker } from "@/components/tracking/click-protection-tracker";
 import { SettingsProvider } from "@/components/providers/settings-provider";
 import { getPublicSettings } from "@/lib/settings/server";
+import { Analytics } from "@vercel/analytics/next";
 
 export default async function PublicLayout({
   children,
@@ -29,6 +30,7 @@ export default async function PublicLayout({
         <ClarityProvider />
         <TrackingProvider />
         <ClickProtectionTracker />
+        <Analytics />
       </div>
     </SettingsProvider>
   );
