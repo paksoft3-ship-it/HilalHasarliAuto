@@ -62,6 +62,199 @@ export const blogMetaKeywords =
 
 export const blogPosts: BlogPost[] = [
   {
+    "slug": "hatay-hurda-arac-alimi",
+    "title": "Hatay Hurda Araç Alımı",
+    "seoTitle": "Hatay Hurda Araç Alımı | Değerleme, Belgeler ve Satış",
+    "excerpt": "Hatay hurda araç alımı için belge durumunu, alıcı seçeneklerini ve teslim şartlarını inceleyin. Ücretsiz yerinde ekspertizle aracınıza ön teklif talep edin.",
+    "metaDescription": "Hatay hurda araç alımı için belge durumunu, alıcı seçeneklerini ve teslim şartlarını inceleyin. Ücretsiz yerinde ekspertizle aracınıza ön teklif talep edin.",
+    "metaKeywords": "hatay hurda araç alımı, hurda araç alımı, hurda araç alan, hatay hasarlı araç alımı, çekme belgeli araç alımı",
+    "category": "Hasarlı Araç",
+    "date": "2026-11-20",
+    "readingMinutes": 5,
+    "image": "/images/blog/hatay-hurda-arac-alimi-kapak.webp",
+    "imageAlt": "Kurtarma alanında bekleyen hasarlı beyaz station wagon",
+    "body": [
+      {
+        "type": "p",
+        "text": "Hatay hurda araç alımı için teklif isterken aracın fiziksel durumunu, mevcut kaydını ve güncel konumunu birlikte paylaşın. Uzun süredir kullanılmayan bir otomobille resmî olarak hurdaya çıkarılmış bir aracın teslim işlemi farklı ilerleyebilir. Hasarlı Araç Alan olarak önce elinizdeki bilgileri öğrenir, ücretsiz yerinde incelemeyi buna göre planlarız."
+      },
+      {
+        "type": "p",
+        "text": "Aracınız bir servis avlusunda veya otoparkta bekliyor olabilir. Bireysel alıcıdan, galeriden veya araç alım firmasından teklif alırken aynı güncel bilgiyi gönderin. Son bedeli, taşıma masrafını ve ödemenin hangi aşamada yapılacağını birlikte değerlendirerek karar verebilirsiniz."
+      },
+      {
+        "type": "h2",
+        "text": "Hatay hurda araç alımı hangi araçlar için değerlendirilir?"
+      },
+      {
+        "type": "p",
+        "text": "Kullanım ömrünü tamamlamış, ağır hasar nedeniyle yürümeyen veya uzun süredir çalışmayan araçları inceliyoruz. Tekerlek dönmüyorsa, anahtar bulunamıyorsa veya ana aksam eksikse ilk görüşmede belirtin. Aracın bulunduğu yerde hangi bölümlerinin görülebildiği de inceleme hazırlığı için önemlidir."
+      },
+      {
+        "type": "p",
+        "text": "Kazalı, pert, yanık, ağır hasarlı, çekme belgeli ve motor arızalı araçları da durumlarına göre değerlendiriyoruz. [Hurda araç alımı](/arac-alimi/hurda-arac-alimi) hizmetine başvururken belgenin adını ve bildiğiniz kayıt durumunu söyleyin. Fotoğraflar aracın bugünkü hâlini göstermiyorsa sonrasında hangi değişikliklerin olduğunu ekleyin."
+      },
+      {
+        "type": "p",
+        "text": "Örneğin servis incelemesinde tampon veya far sökülmüş olabilir. Bu bölümün araçla birlikte verilip verilmeyeceğini öğrenin. Aracın genel görüntüsüyle hasar yakın planını birlikte gönderin. Bir tarafı duvara dönükse erişemediğiniz bölgeyi belirtin ve yerinde incelemede kontrol edelim."
+      },
+      {
+        "type": "h3",
+        "text": "Pert, ağır hasar, çekme ve hurda ifadeleri"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Pert, tam hasarlı olarak değerlendirilen araçlar için yaygın kullanılan bir ifadedir.",
+          "Ağır hasar, zararın ilgili incelemede ağır olarak sınıflandırıldığını belirtir.",
+          "Çekme belgesi, aracın trafikten çekildiğini gösteren belge veya kayıt için kullanılan addır.",
+          "Hurda belgesi, aracın resmî olarak hurdaya çıkarıldığını gösteren belge için kullanılan addır."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Hasar raporuyla tescil kaydı ayrı bilgiler verir. Aracın uzun süredir kullanılmaması, resmî kaydını tek başına göstermez. Hangi belgeye baktığınızı belirtin. İşleme uygunluk ve teslim yolu, güncel kayıt bilgisi üzerinden teyit edilmelidir."
+      },
+      {
+        "type": "h2",
+        "text": "Tekliften belgeye uygun teslim işlemine nasıl ilerlenir?"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Ön değerlendirme isteyin. Fotoğrafları, varsa plakayı, model ve yılı, aracın bulunduğu adresi paylaşın.",
+          "Ücretsiz ekspertizi planlayın. Aracı bulunduğu yerde inceleriz. Anahtarın kimde olduğunu ve aracı hangi saatte görebileceğimizi söyleyin.",
+          "Bedeli ve teslim şartlarını netleştirin. Son teklifi, birlikte verilecek aksamı, taşıma ihtiyacını ve masrafları görüşelim.",
+          "Kayıt durumuna uygun işlemi belirleyin. Tescili süren ve devre uygun araçlarda noter satışı yapılır. Güvenli Ödeme Sistemi kapsamındaki işlemlerde bedel devirden önce sisteme aktarılır. Resmî hurda kaydında teslim yolu ayrıca teyit edilir.",
+          "Ödeme ve teslimi tamamlayın. Noter devri tamamlanan satışlarda ödeme aynı gün sonuçlanır. Farklı teslim işlemi gereken araçlarda ödeme zamanı ve teslim yeri anlaşırken belirlenir."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Aracı resmî olarak hurdaya ayırmak istiyorsanız ve araç ilgili mevzuat kapsamındaysa yetkili teslim yeri veya geçici depolama alanı ile bertaraf formu gerekir. Bu durumda aracı kimin, hangi belgeyle ve hangi adreste kabul edeceğini önceden teyit edin. Taşıma randevusunu işlem yolu belli olduktan sonra planlayın."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/hatay-hurda-arac-alimi-1.webp",
+        "alt": "Hurda araç belgelerinin incelenmesi",
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "type": "h2",
+        "text": "Teklif hangi bilgilere dayanır?"
+      },
+      {
+        "type": "p",
+        "text": "Marka, model, yıl ve kilometre başlangıç bilgilerini oluşturur. Hasarın yeri, büyüklüğü ve etkilediği aksam yerinde incelenir. Tek bir yakın fotoğrafta darbenin sınırları anlaşılamayabilir. Aracın tamamını gösteren görüntüyle hasarlı bölümün yakın planını beraber paylaşın."
+      },
+      {
+        "type": "p",
+        "text": "Motorun çalışmasıyla aracın kendi gücüyle hareket etmesi farklı bilgilerdir. Kaza sonrasında motor hiç denenmediyse bunu belirtin. Gösterge okunamıyorsa son bildiğiniz kilometreyi yaklaşık bilgi olarak aktarın. Tekerlek veya direksiyon hareketiyle ilgili bilinen kısıtı da yazın."
+      },
+      {
+        "type": "p",
+        "text": "Evrak, kayıt ve araç bütünlüğü teklifi etkiler. Örneğin ilk fotoğrafta araç üzerinde görünen bir aksam daha sonra sökülmüş olabilir. Güncel durumu tüm alıcılara aynı şekilde iletin. Ekspertiz sonrası bedel değişirse hangi yeni bulgunun teklifi etkilediğini sorun."
+      },
+      {
+        "type": "h2",
+        "text": "Hangi belgeler hazır olsun?"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Ruhsat veya mevcut tescil belgesi. Araç ve kayıt sahibi bilgilerinin teyidi için.",
+          "Kimlik. Resmî işleme katılacak kişi için.",
+          "Varsa ekspertiz veya hasar raporu. Önceki tespitlerin incelemeye eklenmesi için."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Çekme veya hurda kaydını gösteren belge bulunuyorsa adını görüşmeye ekleyin. Ruhsat sahibi başka bir yerdeyse aracı kimin göstereceğini ve resmî işlemi kimin takip edeceğini ayrı belirleyin. İlk teklif için araç bilgileri ve fotoğraflarla başlayabilirsiniz."
+      },
+      {
+        "type": "p",
+        "text": "Raporun hangi tarihte hazırlandığını biliyorsanız söyleyin. Sonrasında taşıma veya söküm yapıldıysa raporun hangi araç hâlini anlattığını açıklayın. Bu bilgi, yerinde görülen bulgularla önceki tespitleri birlikte değerlendirmemizi sağlar."
+      },
+      {
+        "type": "h2",
+        "text": "Hatay’da ekspertiz ve teslim konumunu nasıl hazırlarsınız?"
+      },
+      {
+        "type": "p",
+        "text": "Dörtyol’un Özerli Mahallesi’ndeki sanayi sitesinde bekleyen bir araç için işletmenin güncel giriş konumunu gönderin. Aracın içeride, avluda veya başka araçların arkasında olup olmadığını öğrenin. Site adıyla birlikte hangi kapının kullanılacağını söylemeniz çekici hazırlığını kolaylaştırır."
+      },
+      {
+        "type": "p",
+        "text": "Payas Küçük Sanayi Sitesi’nde araç bekliyorsa iş yeri girişini ve aracı gösterecek kişinin saatini paylaşın. Antakya veya İskenderun’daki bir otopark için de ilçe, mahalle ve açık konumu birlikte yazın. [Araç alım bölgelerimizi](/hizmet-bolgeleri) inceleyip güncel adres için hizmet uygunluğunu teyit edebilirsiniz."
+      },
+      {
+        "type": "p",
+        "text": "Örneğin kayıt sahibi Antakya’da, araç İskenderun’da bir serviste olabilir. İlk inceleme için servisle araca erişim saatini öğrenin. Resmî işleme kayıt sahibinin nasıl katılacağını ayrı konuşalım. Aracı göstermek için başka ilçeye taşımadan bulunduğu yerde inceleme imkânını değerlendirebilirsiniz."
+      },
+      {
+        "type": "p",
+        "text": "Konum eski bir fotoğrafa dayanıyorsa servise güncel yeri tekrar sorun. İşletme veya araç taşınmış olabilir. Teslim günü anahtarı verecek kişiyle giriş noktasını önceden teyit edin. Araçla birlikte verilecek aksam ayrı tutuluyorsa hazır olacağı zamanı da öğrenin."
+      },
+      {
+        "type": "h2",
+        "text": "Bireysel alıcı, galeri ve araç alım firması nasıl karşılaştırılır?"
+      },
+      {
+        "type": "table",
+        "header": [
+          "Alıcı türü",
+          "Sorulacak konu"
+        ],
+        "rows": [
+          [
+            "Bireysel alıcı",
+            "Aracı mevcut hasar ve kayıt durumuyla kabul ediyor mu? Adresten teslim alabiliyor mu?"
+          ],
+          [
+            "Galeri",
+            "Yerinde inceleme yapıyor mu? Söylediği bedel hangi aşamada kesinleşiyor?"
+          ],
+          [
+            "Araç alım firması",
+            "Ekspertiz, taşıma ve uygulanabilen noter işlemi masraflarını kim üstleniyor?"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Her alıcıya aynı fotoğraf, kayıt ve teslim adresini verin. Bedel fotoğrafa dayanıyorsa son teklifin ne zaman kesinleşeceğini sorun. Aracı farklı bir adrese götürmeniz istenirse taşıma masrafını kimin karşılayacağını öğrenin. Ödeme aşamasını da son bedelle birlikte teyit edin."
+      },
+      {
+        "type": "p",
+        "text": "Hasarlı Araç Alan ile ücretsiz ekspertizi ve çekici planını aynı görüşmede yapabilirsiniz. Alım gerçekleştiğinde gereken çekici masrafını, noter devri uygulanan satışlarda noter masrafını biz karşılıyoruz. Böylece bedeli değerlendirirken taşıma ve işlem hazırlığında hangi işleri üstlendiğimizi bilirsiniz."
+      },
+      {
+        "type": "p",
+        "text": "Aracın fotoğraflarını, varsa plakasını ve modelini WhatsApp’tan Hasarlı Araç Alan’a gönderin. Telefonla da Hatay’daki konumunu ve mevcut belgeyi anlatarak ücretsiz yerinde inceleme ve teklif isteyebilirsiniz."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Araç çalışmıyorsa yine teklif alabilir miyim?",
+        "a": "Evet. Fotoğrafları, güncel konumu ve bilinen hareket durumunu gönderin. İnceleme ve gerekiyorsa taşıma hazırlığını buna göre konuşalım."
+      },
+      {
+        "q": "Elimdeki belgenin türünü bilmiyorsam ne yapmalıyım?",
+        "a": "Belgenin adını ve üzerinde gördüğünüz kayıt bilgisini aktarın. Uygulanacak resmî işlem ve teslim yolunu kaydı teyit ederek belirleyelim."
+      },
+      {
+        "q": "Rehinli araç için görüşmeye başlayabilir miyim?",
+        "a": "Mevcut kaydı bildirerek ön değerlendirme isteyebilirsiniz. Noter ve teslim planı, kaydın devre etkisi netleşince yapılır."
+      },
+      {
+        "q": "Resmî hurda kaydında ödeme ne zaman olur?",
+        "a": "Teslim yolu, kabul koşulları ve kullanılacak belge durumu önce teyit edilir. Ödeme zamanını o araç için kararlaştırılan teslim şartlarıyla birlikte görüşün."
+      }
+    ],
+    "sample": false
+  },
+  {
     "slug": "hasarli-arac-alan-firmalar",
     "title": "Hasarlı Araç Alan Firmalar",
     "seoTitle": "Hasarlı Araç Alan Firmalar | Seçenekler ve Satış Rehberi",
