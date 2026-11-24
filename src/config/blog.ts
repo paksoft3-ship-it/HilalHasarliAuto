@@ -72,7 +72,7 @@ export const blogPosts: BlogPost[] = [
     "date": "2026-11-21",
     "readingMinutes": 5,
     "image": "/images/blog/pert-arac-alan-firmalar-kapak.webp",
-    "imageAlt": "Pert araç alan firmalar için değerlendirilen mavi-gri station wagon",
+    "imageAlt": "Pert araç alan firmalar için hasarlı crossover değerlendirmesi",
     "body": [
       {
         "type": "p",
@@ -158,6 +158,13 @@ export const blogPosts: BlogPost[] = [
       {
         "type": "p",
         "text": "Bir teklifin bedeli yüksek görünse de taşıma koşulu belirsiz olabilir. Başka bir teklif, yalnızca eski fotoğraflara dayanıyor olabilir. Son karar öncesinde aynı araç durumu ve aynı teslim noktası üzerinden cevap aldığınızdan emin olun."
+      },
+      {
+        "type": "img",
+        "src": "/images/blog/pert-arac-alan-firmalar-1.webp",
+        "alt": "Hasarlı crossover aracın uzman incelemesi",
+        "width": 1200,
+        "height": 800
       },
       {
         "type": "h2",
